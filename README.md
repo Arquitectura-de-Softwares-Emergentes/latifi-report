@@ -3,9 +3,9 @@
 <h3>Universidad Peruana de Ciencias Aplicadas</h3>
 
 <strong>Ingeniería de Software</strong><br>
-<strong>SI728 - Arquitecturas de Software Emergentes</strong><br>
+<strong>1ASI0728 - Arquitecturas De Software Emergentes - Virtual</strong><br>
+<strong>Sección: 2620-9046</strong><br>
 <strong>Ciclo académico: 202401</strong><br>
-<strong>Sección: _Pendiente de completar_</strong><br>
 <strong>Profesores: Ocampo Tello, Ernesto / Rojas Malásquez, Royer Edelwer / Velásquez Núñez, Ángel Augusto</strong><br>
 
 <br><strong>Informe del Trabajo Final</strong><br><br>
@@ -15,7 +15,9 @@
 
 ### Team Members:
 
-_Pendiente de completar — nombre, apellido y código de cada integrante._
+Angulo, Juan Carlos - u202317692
+
+_Pendiente de completar — nombre, apellido y código de los demás integrantes._
 
 <strong>16 de septiembre de 2026</strong><br>
 </div>
@@ -105,11 +107,9 @@ El alcance de LatiFi en este informe es acotado: se trata del proyecto final del
 
 | Miembro | Descripción|
 |---|---|
-| Miembro 1 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
+| **Angulo, Juan Carlos - U202317692** | Estudiante de Ingeniería de Software en séptimo ciclo. Le apasiona aprender tecnologías nuevas y construir soluciones aplicadas a problemas reales, y en este curso le entusiasma especialmente trabajar con blockchain. |
 | Miembro 2 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
 | Miembro 3 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
-| Miembro 4 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
-| Miembro 5 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
 
 ### 1.2. Solution Profile
 
