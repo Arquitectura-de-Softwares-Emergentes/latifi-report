@@ -17,7 +17,9 @@
 
 Angulo, Juan Carlos - u202317692
 
-Quiroz Zambrano, Fabrizio Javier - U202213406
+Quiroz Zambrano, Fabrizio Javier - u202213406
+
+Burga Loarte, Anaely - u202118264
 
 <strong>16 de septiembre de 2026</strong><br>
 </div>
