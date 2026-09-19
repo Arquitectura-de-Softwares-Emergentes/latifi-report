@@ -545,8 +545,44 @@ El Empathy Map fue construido en UXPressia a partir de los mismos hallazgos de l
 
 Se documentará el escenario actual ("as-is") de cada segmento, es decir, cómo un prestatario no bancarizado consigue dinero hoy sin LatiFi y cómo un prestamista coloca su capital ocioso hoy sin LatiFi, como línea base para contrastar contra el escenario futuro ("to-be") que la plataforma habilitará. Este mapeo se trabajará en sesión de equipo sobre **Miro** o **LucidChart**, en paralelo al Big Picture EventStorming del dominio.
 
-_Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo._
+El presente diagrama modela el flujo operacional actual (*AS-IS*) de una solicitud de préstamo con garantía bajo esquemas tradicionales, caracterizado por una alta dependencia de la intervención humana, transferencia física de expedientes y baja trazabilidad en tiempo real.
 
+![As-Is scenario mapping](https://raw.githubusercontent.com/Arquitectura-de-Softwares-Emergentes/latifi-report/main/resources/Cap1/As-Is%20scenario%20mapping.png)
+
+### **Carriles de Responsabilidad (Swimlanes)**
+* **USER / BORROWER**: Prestatario que inicia la petición y aporta documentación de respaldo.
+* **LOAN OFFICER / FRONT DESK**: Mesón de atención y primer filtro de recepción documental.
+* **CREDIT RISK DEPARTMENT**: Área analítica encargada de evaluar la viabilidad de riesgo del crédito.
+* **FINANCE / OPERATIONS**: Instancia final de emisión de vouchers, validación de firmas y desembolso de fondos.
+
+### **Descripción Secuencial del Flujo**
+1. **Initiate Loan Application [Manual]**: El usuario completa y entrega la solicitud inicial del crédito.
+2. **Submit Required Documents?**: Verificación de presencia de requisitos mínimos adjuntos.
+   * *No*: El proceso se detiene o retorna para la recolección de faltantes.
+   * *Yes*: Avanza a recepción formal.
+3. **Receive & Review Application Package [Manual Verification]**: El Front Desk valida preliminarmente el paquete documental.
+4. **Perform Initial Eligibility Check [Manual]**: Evaluación rápida de cumplimiento de políticas de entrada.
+5. **Application Complete & Eligible?**: Validación de pase a siguiente fase.
+   * *No* $\rightarrow$ **6. Notify Applicant of Rejection / Missing Info**.
+   * *Yes* $\rightarrow$ **7. Assign Loan Officer & Create Physical File**.
+8. **Forward File to Credit Dept**: Traslado físico o digital básico del expediente al departamento de riesgos.
+9. **Conduct Credit Risk Assessment [Manual]**: Análisis manual del perfil de riesgo y capacidad de pago.
+10. **Risk Acceptable?**:
+    * *No* $\rightarrow$ Fin del proceso por rechazo de riesgo.
+    * *Yes* $\rightarrow$ **12. Approve Loan Terms & Conditions**.
+13. **Generate Loan Agreement [Manual]**: Confección e impresión física del contrato legal.
+14. **Notify Loan Officer of Approval**: Aviso interno de viabilidad aprobada.
+15. **Schedule Loan Closing Appointment**: Coordinación de cita presencial con el cliente.
+16. **Prepare Disbursement Voucher [Manual]**: Elaboración del documento de orden de pago.
+17. **Obtain Authorized Signatures [Manual]**: Firma física gerencial/financiera requerida.
+18. **Disburse Funds [Check / Cash / Wire Transfer]**: Emisión efectiva del capital al usuario mediante medios tradicionales.
+
+### **Puntos de Dolor Identificados (Pain Points)**
+* **Latencia elevada**: Tiempos muertos significativos en los traspasos de expedientes físicos/digitales entre el *Loan Officer*, *Credit Dept* y *Finance* (pasos 7, 8, 14, 15).
+* **Fricción presencial**: Dependencia de citas presenciales obligatorias para firma de contratos y gestión de desembolsos (pasos 15-18).
+* **Riesgo operativo**: Propensión a errores de transcripción manual en la evaluación de riesgos y pérdida o degradación de expedientes en físico.
+* **Cero visibilidad en tiempo real**: El usuario no cuenta con un panel de autogestión para auditar en qué sub-paso de revisión se encuentra su expediente (bloque 9-13).
+  
 ### 2.4. Ubiquitous Language
 
 El siguiente glosario recoge los términos de negocio del dominio de microcrédito P2P descentralizado que el equipo usará de forma consistente en el resto del informe, en el modelo de dominio y en el código, siguiendo la práctica de Ubiquitous Language de Domain-Driven Design. Se excluyen términos puramente técnicos de ingeniería de software (framework, endpoint, repositorio, etc.) que no forman parte del lenguaje de negocio del dominio.
@@ -577,7 +613,45 @@ El siguiente glosario recoge los términos de negocio del dominio de microcrédi
 
 ### 3.1. To-Be Scenario Mapping
 
-_Pendiente de desarrollo: depende del As-Is Scenario Mapping, que requiere las entrevistas de validación reales._
+El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermediación mediante contratos inteligentes (*smart contracts*), autenticación non-custodial, valoración automatizada de garantías vía oráculos de precios y reputación on-chain, reduciendo drásticamente la latencia y eliminando el factor humano en la ejecución.
+
+![To-be scenario mapping](https://raw.githubusercontent.com/Arquitectura-de-Softwares-Emergentes/latifi-report/main/resources/Cap1/To-be%20scenario%20mapping.png)
+
+### **Carriles de Arquitectura / Capas (Swimlanes / Bounded Context Layers)**
+* **USER / BORROWER**: Prestatario autogestionado con wallet non-custodial.
+* **IDENTITY / WALLET CONTEXT**: Autenticación criptográfica, firma de transacciones y validación de sesión.
+* **EXCHANGE RATE CONTEXT**: Oráculo de precios en tiempo real para valoración de colateral (*Collateral Ratio*).
+* **REPUTATION CONTEXT**: Historial de comportamiento on-chain, *trust tiers* y penalizaciones automáticas.
+* **LENDING SMART CONTRACT CORE**: Lógica de depósito de colateral, emisión de deuda, liquidación y reembolso programado.
+
+### **Descripción Secuencial del Flujo (TO-BE Steps)**
+1. **Connect Non-Custodial Wallet [Action]**: El usuario vincula su wallet a través de la interfaz. $\rightarrow$ *Event: `WalletConnected`*.
+2. **Select Asset & Input Collateral/Loan Parameters [Data Input]**: El usuario define el monto del préstamo y colateral criptográfico aportado.
+3. **Fetch Real-Time Asset Pricing (Oracles) [Logic]**: Consulta de precio de mercado y cálculo de *Collateralization Ratio (LTV)* vía *Exchange Rate Context*.
+4. **Evaluate Credit Eligibility / Trust Tier [Logic]**: Consulta de score o tier de reputación del address del usuario vía *Reputation Context*.
+5. **Initiate Loan Request [Trigger]**: Envío de transacción de solicitud al smart contract de lending.
+6. **Lock Collateral in Escrow [Asset Transfer]**: Retención automática del colateral en el contrato inteligente.
+7. **Mint & Disburse Loan [Funds Transfer]**: Transferencia atómica/on-chain de los fondos solicitados directamente a la wallet del usuario $\rightarrow$ *Event: `LoanDisbursed`*.
+8. **Confirm Repayment & Update Health Factor [Logic]**: Monitoreo continuo de salud del colateral y recepción de cuotas.
+   * **9a. Liquidate Collateral (Default) [Action]**: Ejecución algorítmica de liquidación parcial ante caída de LTV $\rightarrow$ *Events: `DefaultTriggered`, `ReputationPenaltyApplied`*.
+   * **9b. Release Collateral (Paid) [Action]**: Liberación de garantía y actualización de score positivo $\rightarrow$ *Events: `LoanRepaid`, `ScoreUpdated`*.
+
+### **Ventajas Clave / Mejora frente al AS-IS (Value Proposition)**
+* **Latencia cero/instantánea**: De días/semanas a segundos/minutos por ejecución determinista de smart contracts (pasos 5-7).
+* **Desintermediación y Autogestión**: Eliminación de *Loan Officer*, mesones físicos, mesas de control de riesgos manuales y vouchers de papel.
+* **Mitigación de riesgo de contraparte**: Lógica basada en código (*code is law*), con valoración objetiva por oráculos y liquidación algorítmica de garantías.
+* **Trazabilidad total on-chain**: Auditoría pública y en tiempo real del estado de salud del préstamo (`Health Factor`), historial de pagos y reputación.
+
+---
+
+### **Tabla Comparativa Resumen: AS-IS vs. TO-BE**
+| Dimensión | Enfoque AS-IS (Tradicional) | Enfoque TO-BE (Web3 / Descentralizado) |
+| :--- | :--- | :--- |
+| **Tiempo de Procesamiento** | 3 a 10 días hábiles | Segundos a minutos (automático on-chain) |
+| **Intermediarios** | Front Desk, Oficial de Crédito, Riesgos, Finanzas | Ninguno (Smart Contracts + Oráculos) |
+| **Garantía / Colateral** | Físico / Documental / Legal tradicional | Criptoactivo bloqueado en Smart Contract Escrow |
+| **Evaluación de Riesgo** | Subjetiva / Manual / Formularios impresos | Algorítmica (LTV por Oráculos + Trust Tiers On-chain) |
+| **Disponibilidad / Canal** | Horario de oficina / Presencial en sucursal | 24/7 / Autogestión via Non-Custodial Wallet |
 
 El propósito de esta sección es contrastar, mediante un To-Be Scenario Map, la secuencia de actividades que hoy ejecuta un prestatario o prestamista no bancarizado para acceder a crédito informal (fiado, prestamistas gota a gota, préstamos familiares) contra la secuencia propuesta una vez que LatiFi Wallet media el flujo mediante Smart Contracts y reputación descentralizada. Ese contraste solo es válido si el As-Is se construye a partir de entrevistas reales a los segmentos objetivo (prestatario no bancarizado y prestamista con capital ocioso), no de supuestos del equipo. En consecuencia, esta sección queda condicionada al cierre del Capítulo II (Requirements Elicitation & Analysis), específicamente a la sección de Needfinding y al As-Is Scenario Mapping ahí documentado, y se completará en la siguiente iteración del informe una vez disponibles esos insumos.
 
