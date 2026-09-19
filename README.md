@@ -82,11 +82,12 @@ _Pendiente de desarrollo: esta sección debe expandirse en cada entrega con capt
 
 # Student Outcome
 
-El curso contribuye al cumplimiento del Student Outcome ABET:
-**ABET – EAC - Student Outcome 3**: Capacidad de comunicarse efectivamente con un rango de audiencias.
+# Student Outcome 3 — Comunicación efectiva a diferentes audiencias
 
-_Pendiente de desarrollo: cada integrante debe completar, en cada entrega, las acciones realizadas y las conclusiones que sustentan el logro de este outcome, según el Anexo A del enunciado del curso._
-
+| Criterio específico | Acciones realizadas | Conclusiones |
+|---|---|---|
+| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Contribuí a la preparación y exposición oral de la parte correspondiente del proyecto, comunicando de forma clara y objetiva los resultados obtenidos ante un público con distintos niveles de familiaridad con el tema, adaptando el lenguaje técnico según la audiencia.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*(completar)*<br><br>[Apellidos, Nombres]<br>*TB1*<br>*(completar)*<br><br>[Apellidos, Nombres]<br>*TB1*<br>*(completar)* | Quiroz Zambrano, Fabrizio Javier<br>La exposición oral me permitió reforzar mi capacidad de transmitir resultados de forma clara y objetiva a audiencias diversas, ajustando el nivel de detalle técnico según el público.<br><br>Angulo, Juan Carlos<br>*(completar)*<br><br>[Apellidos, Nombres]<br>*(completar)*<br><br>[Apellidos, Nombres]<br>*(completar)* |
+| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Participé en la redacción de secciones del informe TB1, cuidando que el contenido fuera claro, objetivo y comprensible para lectores con diferentes niveles de conocimiento técnico del proyecto.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*(completar)*<br><br>[Apellidos, Nombres]<br>*TB1*<br>*(completar)*<br><br>[Apellidos, Nombres]<br>*TB1*<br>*(completar)* | Quiroz Zambrano, Fabrizio Javier<br>La redacción de estas secciones contribuyó a fortalecer mi habilidad de comunicar resultados por escrito de manera clara y objetiva, adaptando el lenguaje a distintos tipos de lector.<br><br>Angulo, Juan Carlos<br>*(completar)*<br><br>[Apellidos, Nombres]<br>*(completar)*<br><br>[Apellidos, Nombres]<br>*(completar)* |
 ## Capítulo I: Introducción
 
 ### 1.1. Startup Profile
