@@ -533,7 +533,7 @@ _Pendiente de desarrollo: requiere entrevistas reales a representantes de los se
 |---|---|
 | Herramienta | UXPressia |
 | Basado en | Entrevistas 1-5, sección 2.2.2 |
-| Segmento | Prestatario no bancarizado/subatendido |
+| Segmento | Prestatario no bancarizado/subatendido|
 
 ![Empathy Map - Prestatario](resources/Cap1/EmpathyMap/EmpathyMapping.png)
 
