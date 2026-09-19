@@ -17,7 +17,9 @@
 
 Angulo, Juan Carlos - u202317692
 
-_Pendiente de completar: nombre, apellido y código de los demás integrantes._
+Quiroz Zambrano, Fabrizio Javier - U202213406
+
+Burga Loarte, Anaely - u202118264
 
 <strong>16 de septiembre de 2026</strong><br>
 </div>
@@ -104,8 +106,7 @@ El alcance de LatiFi en este informe es acotado: se trata del proyecto final del
 | Miembro | Descripción|
 |---|---|
 | **Angulo, Juan Carlos - U202317692** | Estudiante de Ingeniería de Software en séptimo ciclo. Le apasiona aprender tecnologías nuevas y construir soluciones aplicadas a problemas reales, y en este curso le entusiasma especialmente trabajar con blockchain. |
-| Miembro 2 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
-| Miembro 3 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
+| **Quiroz Zambrano, Fabrizio Javier - U202213406** | Estudiante de Ingeniería de Software, con interés en el desarrollo de aplicaciones móviles y en arquitectura de software. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. || Miembro 3 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
 
 ### 1.2. Solution Profile
 
@@ -409,10 +410,95 @@ Cada entrevista se orientará primero a entender la situación actual del partic
 - ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito?
 - ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato?
 
-#### 2.2.2. Registro de entrevistas
+### 2.2.2. Registro de entrevistas
 
-_Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo (prestatarios no bancarizados y prestamistas con capital ocioso)._
+#### Tabla resumen de entrevistas — Segmento Prestatario no bancarizado
 
+| # | Entrevistado | Edad | Ocupación             | Bancarización | Fecha | Video |
+|---|---|---|-----------------------|---|---|---|
+| 1 | Joseph Falcón | 21 | Ingeniero de Software | Cuenta bancaria, crédito limitado | 18/09/2026 | [Ver video](https://drive.google.com/file/d/1ukLD49CHZPHEDglgHyofh8hUxh_JOwGW/view?usp=share_link) |
+| 2 | *(pendiente)* | |                       | | | |
+| 3 | *(pendiente)* | |                       | | | |
+
+---
+
+#### Entrevista 1 — Joseph Falcón
+
+**Ficha del entrevistado**
+
+| Campo | Detalle                                                                                                |
+|---|--------------------------------------------------------------------------------------------------------|
+| Nombre | Joseph Falcón                                                                                          |
+| Edad | 21 años                                                                                                |
+| Distrito | Villa Maria del Triunfo                                                                                |
+| Ocupación | Ingeniero de Sofware                                                                                   |
+| Nivel de bancarización | Cuenta de ahorros en banco; acceso limitado a crédito formal (montos bajos, tasas altas)               |
+| Familiaridad con billeteras digitales/cripto | Baja — usa app de su banco y Yape, sin experiencia en criptomonedas                                    |
+| Video | [Ver grabación](https://drive.google.com/file/d/1ukLD49CHZPHEDglgHyofh8hUxh_JOwGW/view?usp=share_link) |
+
+**Screenshot de la entrevista**
+
+![Entrevista Joseph Falcón](resources/Cap1/Interviews-Caps/JosephInterview.png)
+
+**Resumen**
+
+Joseph financia sus gastos principalmente con ahorros propios y, cuando necesita un monto mayor, recurre a un préstamo bancario, aunque señala que el banco le otorga montos bajos y tasas altas por no contar con boletas de pago formales. Cuando el banco demora en aprobar una solicitud, recurre a préstamos familiares o a una junta con otros vendedores. Sus ingresos son variables según la temporada. Usa la app de su banco para pagar el préstamo y Yape para cobrar a sus clientes, pero tiene poca o ninguna familiaridad con criptomonedas o stablecoins. Le preocupa que una app sin banco de por medio no sea tan clara como su banco actual respecto a las condiciones del préstamo, y considera que podría demostrar ser "de fiar" mostrando que paga su préstamo bancario a tiempo o mediante referencias de su entorno de trabajo. Valoraría una solución más rápida que el banco y con montos ajustados a lo que realmente vende, pero la descartaría si la percibe menos segura o menos transparente que su banco.
+
+**Transcripción completa**
+
+| # | Pregunta | Respuesta |
+|---|---|---|
+| 1 | ¿Cómo financia hoy sus gastos o su actividad económica cuando necesita dinero que no tiene disponible? | "Si es poco, uso mis ahorros. Si necesito más, a veces saco un préstamo en mi banco, aunque no siempre me dan el monto que pido." |
+| 2 | ¿Ha intentado alguna vez acceder a un préstamo formal (banco, financiera, caja)? ¿Qué pasó? | "Sí, tengo cuenta de ahorros en el banco y una vez pedí un préstamo, pero me lo dieron con un monto bajo y una tasa alta porque no tengo boletas de pago, solo mis ventas." |
+| 3 | ¿A quién le pide dinero prestado hoy (familia, conocidos, prestamista informal, "junta")? ¿Bajo qué condiciones? | "Primero intento con el banco, pero si no me alcanza o me demoran, le pido a mi familia o entro a una junta con otras vendedoras." |
+| 4 | ¿Qué tan predecibles son sus ingresos mes a mes? | "Varían harto, hay semanas buenas y otras flojas, depende de la temporada." |
+| 5 | ¿Usa algún tipo de billetera digital o aplicación financiera hoy? ¿Cuál y para qué? | "Uso la app de mi banco para ver mis movimientos y pagar el préstamo, y Yape para cobrarles a mis clientes." |
+| 6 | ¿Qué tan familiarizado está con el concepto de criptomonedas o stablecoins? | "Casi nada, he escuchado de bitcoin en las noticias pero no sé bien cómo funciona." |
+| 7 | ¿Qué le preocuparía más de pedir un préstamo a través de una app sin un banco de por medio? | "Que las condiciones no sean tan claras como en el banco, donde ya sé cuánto pago cada mes y a quién reclamarle si hay un problema." |
+| 8 | Si pudiera demostrar que "es de fiar" sin tener historial bancario, ¿cómo cree que podría demostrarlo? | "Mostrando que pago mi préstamo del banco a tiempo, o con referencias de la gente con la que trabajo en el mercado." |
+| 9 | ¿Puede describir la última vez que tuvo un problema de dinero relacionado con esto? ¿Qué hizo? | "Una vez necesité dinero rápido y el banco se demoró en aprobarme el préstamo, así que mientras tanto le pedí prestado a una vecina." |
+| 10 | ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito? | "Que me expliquen bien cómo funciona sin palabras raras, y que sea tan clara como mi banco en mostrarme cuánto debo." |
+| 11 | ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato? | "Valoraría que sea más rápida que el banco y que me den un monto justo según lo que vendo. La descartaría si siento que es menos segura o menos clara que mi banco." |
+
+---
+
+#### Entrevista 2 — *(pendiente)*
+
+**Ficha del entrevistado**
+
+| Campo | Detalle |
+|---|---|
+| Nombre | |
+| Edad | |
+| Distrito | |
+| Ocupación | |
+| Nivel de bancarización | |
+| Familiaridad con billeteras digitales/cripto | |
+| Video | |
+
+**Screenshot de la entrevista**
+
+![Entrevista 2](ruta/a/screenshot-entrevista-2.png)
+
+**Resumen**
+
+
+
+**Transcripción completa**
+
+| # | Pregunta | Respuesta |
+|---|---|---|
+| 1 | ¿Cómo financia hoy sus gastos o su actividad económica cuando necesita dinero que no tiene disponible? | |
+| 2 | ¿Ha intentado alguna vez acceder a un préstamo formal (banco, financiera, caja)? ¿Qué pasó? | |
+| 3 | ¿A quién le pide dinero prestado hoy (familia, conocidos, prestamista informal, "junta")? ¿Bajo qué condiciones? | |
+| 4 | ¿Qué tan predecibles son sus ingresos mes a mes? | |
+| 5 | ¿Usa algún tipo de billetera digital o aplicación financiera hoy? ¿Cuál y para qué? | |
+| 6 | ¿Qué tan familiarizado está con el concepto de criptomonedas o stablecoins? | |
+| 7 | ¿Qué le preocuparía más de pedir un préstamo a través de una app sin un banco de por medio? | |
+| 8 | Si pudiera demostrar que "es de fiar" sin tener historial bancario, ¿cómo cree que podría demostrarlo? | |
+| 9 | ¿Puede describir la última vez que tuvo un problema de dinero relacionado con esto? ¿Qué hizo? | |
+| 10 | ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito? | |
+| 11 | ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato? | |
 #### 2.2.3. Análisis de entrevistas
 
 _Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo. El análisis identificará patrones y características comunes dentro de cada segmento a partir de los datos obtenidos en el registro de entrevistas de la sección 2.2.2._
@@ -423,9 +509,17 @@ El proceso de Needfinding de LatiFi se construirá a partir de los hallazgos rea
 
 #### 2.3.1. User Personas
 
-Se construirán arquetipos de usuario (User Persona) para el segmento Prestatario no bancarizado y para el segmento Prestamista con capital ocioso, usando la plantilla de **UXPressia** a partir de los datos demográficos, objetivos, frustraciones y comportamientos recogidos durante las entrevistas.
+**Persona: Prestatario no bancarizado**
 
-_Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo._
+| Campo | Detalle |
+|---|---|
+| Herramienta | UXPressia |
+| Basado en | Entrevistas 1-5, sección 2.2.2 |
+| Segmento | Prestatario no bancarizado/subatendido |
+
+![User Persona - Prestatario](resources/Cap1/UserPersona/JosephUserPersona.png)
+
+El Persona fue construido en UXPressia a partir de los datos demográficos, objetivos, frustraciones y comportamientos recogidos en las entrevistas de la sección 2.2.2, representando a un prestatario con acceso limitado a crédito formal, ingresos variables y baja familiaridad con criptoactivos.
 
 #### 2.3.2. User Task Matrix
 
@@ -435,16 +529,60 @@ _Pendiente de desarrollo: requiere entrevistas reales a representantes de los se
 
 #### 2.3.3. Empathy Mapping
 
-Se construirá un Empathy Map por segmento, también en **UXPressia**, documentando lo que cada persona dice, piensa, hace y siente frente al acceso al crédito y al ahorro/inversión informal, como puente entre las entrevistas crudas y el diseño de la solución.
+**Empathy Map: Prestatario no bancarizado**
 
-_Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo._
+| Campo | Detalle |
+|---|---|
+| Herramienta | UXPressia |
+| Basado en | Entrevistas 1-5, sección 2.2.2 |
+| Segmento | Prestatario no bancarizado/subatendido|
+
+![Empathy Map - Prestatario](resources/Cap1/EmpathyMap/EmpathyMapping.png)
+
+El Empathy Map fue construido en UXPressia a partir de los mismos hallazgos de las entrevistas de la sección 2.2.2, documentando lo que el Prestatario dice, piensa, hace y siente frente al acceso al crédito.
 
 #### 2.3.4. As-is Scenario Mapping
 
 Se documentará el escenario actual ("as-is") de cada segmento, es decir, cómo un prestatario no bancarizado consigue dinero hoy sin LatiFi y cómo un prestamista coloca su capital ocioso hoy sin LatiFi, como línea base para contrastar contra el escenario futuro ("to-be") que la plataforma habilitará. Este mapeo se trabajará en sesión de equipo sobre **Miro** o **LucidChart**, en paralelo al Big Picture EventStorming del dominio.
 
-_Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo._
+El presente diagrama modela el flujo operacional actual (*AS-IS*) de una solicitud de préstamo con garantía bajo esquemas tradicionales, caracterizado por una alta dependencia de la intervención humana, transferencia física de expedientes y baja trazabilidad en tiempo real.
 
+![As-Is scenario mapping](https://raw.githubusercontent.com/Arquitectura-de-Softwares-Emergentes/latifi-report/main/resources/Cap1/As-Is%20scenario%20mapping.png)
+
+### **Carriles de Responsabilidad (Swimlanes)**
+* **USER / BORROWER**: Prestatario que inicia la petición y aporta documentación de respaldo.
+* **LOAN OFFICER / FRONT DESK**: Mesón de atención y primer filtro de recepción documental.
+* **CREDIT RISK DEPARTMENT**: Área analítica encargada de evaluar la viabilidad de riesgo del crédito.
+* **FINANCE / OPERATIONS**: Instancia final de emisión de vouchers, validación de firmas y desembolso de fondos.
+
+### **Descripción Secuencial del Flujo**
+1. **Initiate Loan Application [Manual]**: El usuario completa y entrega la solicitud inicial del crédito.
+2. **Submit Required Documents?**: Verificación de presencia de requisitos mínimos adjuntos.
+   * *No*: El proceso se detiene o retorna para la recolección de faltantes.
+   * *Yes*: Avanza a recepción formal.
+3. **Receive & Review Application Package [Manual Verification]**: El Front Desk valida preliminarmente el paquete documental.
+4. **Perform Initial Eligibility Check [Manual]**: Evaluación rápida de cumplimiento de políticas de entrada.
+5. **Application Complete & Eligible?**: Validación de pase a siguiente fase.
+   * *No* $\rightarrow$ **6. Notify Applicant of Rejection / Missing Info**.
+   * *Yes* $\rightarrow$ **7. Assign Loan Officer & Create Physical File**.
+8. **Forward File to Credit Dept**: Traslado físico o digital básico del expediente al departamento de riesgos.
+9. **Conduct Credit Risk Assessment [Manual]**: Análisis manual del perfil de riesgo y capacidad de pago.
+10. **Risk Acceptable?**:
+    * *No* $\rightarrow$ Fin del proceso por rechazo de riesgo.
+    * *Yes* $\rightarrow$ **12. Approve Loan Terms & Conditions**.
+13. **Generate Loan Agreement [Manual]**: Confección e impresión física del contrato legal.
+14. **Notify Loan Officer of Approval**: Aviso interno de viabilidad aprobada.
+15. **Schedule Loan Closing Appointment**: Coordinación de cita presencial con el cliente.
+16. **Prepare Disbursement Voucher [Manual]**: Elaboración del documento de orden de pago.
+17. **Obtain Authorized Signatures [Manual]**: Firma física gerencial/financiera requerida.
+18. **Disburse Funds [Check / Cash / Wire Transfer]**: Emisión efectiva del capital al usuario mediante medios tradicionales.
+
+### **Puntos de Dolor Identificados (Pain Points)**
+* **Latencia elevada**: Tiempos muertos significativos en los traspasos de expedientes físicos/digitales entre el *Loan Officer*, *Credit Dept* y *Finance* (pasos 7, 8, 14, 15).
+* **Fricción presencial**: Dependencia de citas presenciales obligatorias para firma de contratos y gestión de desembolsos (pasos 15-18).
+* **Riesgo operativo**: Propensión a errores de transcripción manual en la evaluación de riesgos y pérdida o degradación de expedientes en físico.
+* **Cero visibilidad en tiempo real**: El usuario no cuenta con un panel de autogestión para auditar en qué sub-paso de revisión se encuentra su expediente (bloque 9-13).
+  
 ### 2.4. Ubiquitous Language
 
 El siguiente glosario recoge los términos de negocio del dominio de microcrédito P2P descentralizado que el equipo usará de forma consistente en el resto del informe, en el modelo de dominio y en el código, siguiendo la práctica de Ubiquitous Language de Domain-Driven Design. Se excluyen términos puramente técnicos de ingeniería de software (framework, endpoint, repositorio, etc.) que no forman parte del lenguaje de negocio del dominio.
@@ -475,7 +613,45 @@ El siguiente glosario recoge los términos de negocio del dominio de microcrédi
 
 ### 3.1. To-Be Scenario Mapping
 
-_Pendiente de desarrollo: depende del As-Is Scenario Mapping, que requiere las entrevistas de validación reales._
+El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermediación mediante contratos inteligentes (*smart contracts*), autenticación non-custodial, valoración automatizada de garantías vía oráculos de precios y reputación on-chain, reduciendo drásticamente la latencia y eliminando el factor humano en la ejecución.
+
+![To-be scenario mapping](https://raw.githubusercontent.com/Arquitectura-de-Softwares-Emergentes/latifi-report/main/resources/Cap1/To-be%20scenario%20mapping.png)
+
+### **Carriles de Arquitectura / Capas (Swimlanes / Bounded Context Layers)**
+* **USER / BORROWER**: Prestatario autogestionado con wallet non-custodial.
+* **IDENTITY / WALLET CONTEXT**: Autenticación criptográfica, firma de transacciones y validación de sesión.
+* **EXCHANGE RATE CONTEXT**: Oráculo de precios en tiempo real para valoración de colateral (*Collateral Ratio*).
+* **REPUTATION CONTEXT**: Historial de comportamiento on-chain, *trust tiers* y penalizaciones automáticas.
+* **LENDING SMART CONTRACT CORE**: Lógica de depósito de colateral, emisión de deuda, liquidación y reembolso programado.
+
+### **Descripción Secuencial del Flujo (TO-BE Steps)**
+1. **Connect Non-Custodial Wallet [Action]**: El usuario vincula su wallet a través de la interfaz. $\rightarrow$ *Event: `WalletConnected`*.
+2. **Select Asset & Input Collateral/Loan Parameters [Data Input]**: El usuario define el monto del préstamo y colateral criptográfico aportado.
+3. **Fetch Real-Time Asset Pricing (Oracles) [Logic]**: Consulta de precio de mercado y cálculo de *Collateralization Ratio (LTV)* vía *Exchange Rate Context*.
+4. **Evaluate Credit Eligibility / Trust Tier [Logic]**: Consulta de score o tier de reputación del address del usuario vía *Reputation Context*.
+5. **Initiate Loan Request [Trigger]**: Envío de transacción de solicitud al smart contract de lending.
+6. **Lock Collateral in Escrow [Asset Transfer]**: Retención automática del colateral en el contrato inteligente.
+7. **Mint & Disburse Loan [Funds Transfer]**: Transferencia atómica/on-chain de los fondos solicitados directamente a la wallet del usuario $\rightarrow$ *Event: `LoanDisbursed`*.
+8. **Confirm Repayment & Update Health Factor [Logic]**: Monitoreo continuo de salud del colateral y recepción de cuotas.
+   * **9a. Liquidate Collateral (Default) [Action]**: Ejecución algorítmica de liquidación parcial ante caída de LTV $\rightarrow$ *Events: `DefaultTriggered`, `ReputationPenaltyApplied`*.
+   * **9b. Release Collateral (Paid) [Action]**: Liberación de garantía y actualización de score positivo $\rightarrow$ *Events: `LoanRepaid`, `ScoreUpdated`*.
+
+### **Ventajas Clave / Mejora frente al AS-IS (Value Proposition)**
+* **Latencia cero/instantánea**: De días/semanas a segundos/minutos por ejecución determinista de smart contracts (pasos 5-7).
+* **Desintermediación y Autogestión**: Eliminación de *Loan Officer*, mesones físicos, mesas de control de riesgos manuales y vouchers de papel.
+* **Mitigación de riesgo de contraparte**: Lógica basada en código (*code is law*), con valoración objetiva por oráculos y liquidación algorítmica de garantías.
+* **Trazabilidad total on-chain**: Auditoría pública y en tiempo real del estado de salud del préstamo (`Health Factor`), historial de pagos y reputación.
+
+---
+
+### **Tabla Comparativa Resumen: AS-IS vs. TO-BE**
+| Dimensión | Enfoque AS-IS (Tradicional) | Enfoque TO-BE (Web3 / Descentralizado) |
+| :--- | :--- | :--- |
+| **Tiempo de Procesamiento** | 3 a 10 días hábiles | Segundos a minutos (automático on-chain) |
+| **Intermediarios** | Front Desk, Oficial de Crédito, Riesgos, Finanzas | Ninguno (Smart Contracts + Oráculos) |
+| **Garantía / Colateral** | Físico / Documental / Legal tradicional | Criptoactivo bloqueado en Smart Contract Escrow |
+| **Evaluación de Riesgo** | Subjetiva / Manual / Formularios impresos | Algorítmica (LTV por Oráculos + Trust Tiers On-chain) |
+| **Disponibilidad / Canal** | Horario de oficina / Presencial en sucursal | 24/7 / Autogestión via Non-Custodial Wallet |
 
 El propósito de esta sección es contrastar, mediante un To-Be Scenario Map, la secuencia de actividades que hoy ejecuta un prestatario o prestamista no bancarizado para acceder a crédito informal (fiado, prestamistas gota a gota, préstamos familiares) contra la secuencia propuesta una vez que LatiFi Wallet media el flujo mediante Smart Contracts y reputación descentralizada. Ese contraste solo es válido si el As-Is se construye a partir de entrevistas reales a los segmentos objetivo (prestatario no bancarizado y prestamista con capital ocioso), no de supuestos del equipo. En consecuencia, esta sección queda condicionada al cierre del Capítulo II (Requirements Elicitation & Analysis), específicamente a la sección de Needfinding y al As-Is Scenario Mapping ahí documentado, y se completará en la siguiente iteración del informe una vez disponibles esos insumos.
 
