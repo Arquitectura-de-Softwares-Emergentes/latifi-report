@@ -17,7 +17,7 @@
 
 Angulo, Juan Carlos - u202317692
 
-_Pendiente de completar: nombre, apellido y código de los demás integrantes._
+Quiroz Zambrano, Fabrizio Javier - U202213406
 
 <strong>16 de septiembre de 2026</strong><br>
 </div>
@@ -104,8 +104,7 @@ El alcance de LatiFi en este informe es acotado: se trata del proyecto final del
 | Miembro | Descripción|
 |---|---|
 | **Angulo, Juan Carlos - U202317692** | Estudiante de Ingeniería de Software en séptimo ciclo. Le apasiona aprender tecnologías nuevas y construir soluciones aplicadas a problemas reales, y en este curso le entusiasma especialmente trabajar con blockchain. |
-| Miembro 2 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
-| Miembro 3 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
+| **Quiroz Zambrano, Fabrizio Javier - U202213406** | Estudiante de Ingeniería de Software, con interés en el desarrollo de aplicaciones móviles y en arquitectura de software. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. || Miembro 3 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
 
 ### 1.2. Solution Profile
 
