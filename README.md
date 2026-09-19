@@ -408,10 +408,95 @@ Cada entrevista se orientará primero a entender la situación actual del partic
 - ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito?
 - ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato?
 
-#### 2.2.2. Registro de entrevistas
+### 2.2.2. Registro de entrevistas
 
-_Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo (prestatarios no bancarizados y prestamistas con capital ocioso)._
+#### Tabla resumen de entrevistas — Segmento Prestatario no bancarizado
 
+| # | Entrevistado | Edad | Ocupación             | Bancarización | Fecha | Video |
+|---|---|---|-----------------------|---|---|---|
+| 1 | Joseph Falcón | 21 | Ingeniero de Software | Cuenta bancaria, crédito limitado | 18/09/2026 | [Ver video](https://drive.google.com/file/d/1ukLD49CHZPHEDglgHyofh8hUxh_JOwGW/view?usp=share_link) |
+| 2 | *(pendiente)* | |                       | | | |
+| 3 | *(pendiente)* | |                       | | | |
+
+---
+
+#### Entrevista 1 — Joseph Falcón
+
+**Ficha del entrevistado**
+
+| Campo | Detalle                                                                                                |
+|---|--------------------------------------------------------------------------------------------------------|
+| Nombre | Joseph Falcón                                                                                          |
+| Edad | 21 años                                                                                                |
+| Distrito | Villa Maria del Triunfo                                                                                |
+| Ocupación | Ingeniero de Sofware                                                                                   |
+| Nivel de bancarización | Cuenta de ahorros en banco; acceso limitado a crédito formal (montos bajos, tasas altas)               |
+| Familiaridad con billeteras digitales/cripto | Baja — usa app de su banco y Yape, sin experiencia en criptomonedas                                    |
+| Video | [Ver grabación](https://drive.google.com/file/d/1ukLD49CHZPHEDglgHyofh8hUxh_JOwGW/view?usp=share_link) |
+
+**Screenshot de la entrevista**
+
+![Entrevista Joseph Falcón](resources/Cap1/Interviews-Caps/JosephInterview.png)
+
+**Resumen**
+
+Joseph financia sus gastos principalmente con ahorros propios y, cuando necesita un monto mayor, recurre a un préstamo bancario, aunque señala que el banco le otorga montos bajos y tasas altas por no contar con boletas de pago formales. Cuando el banco demora en aprobar una solicitud, recurre a préstamos familiares o a una junta con otros vendedores. Sus ingresos son variables según la temporada. Usa la app de su banco para pagar el préstamo y Yape para cobrar a sus clientes, pero tiene poca o ninguna familiaridad con criptomonedas o stablecoins. Le preocupa que una app sin banco de por medio no sea tan clara como su banco actual respecto a las condiciones del préstamo, y considera que podría demostrar ser "de fiar" mostrando que paga su préstamo bancario a tiempo o mediante referencias de su entorno de trabajo. Valoraría una solución más rápida que el banco y con montos ajustados a lo que realmente vende, pero la descartaría si la percibe menos segura o menos transparente que su banco.
+
+**Transcripción completa**
+
+| # | Pregunta | Respuesta |
+|---|---|---|
+| 1 | ¿Cómo financia hoy sus gastos o su actividad económica cuando necesita dinero que no tiene disponible? | "Si es poco, uso mis ahorros. Si necesito más, a veces saco un préstamo en mi banco, aunque no siempre me dan el monto que pido." |
+| 2 | ¿Ha intentado alguna vez acceder a un préstamo formal (banco, financiera, caja)? ¿Qué pasó? | "Sí, tengo cuenta de ahorros en el banco y una vez pedí un préstamo, pero me lo dieron con un monto bajo y una tasa alta porque no tengo boletas de pago, solo mis ventas." |
+| 3 | ¿A quién le pide dinero prestado hoy (familia, conocidos, prestamista informal, "junta")? ¿Bajo qué condiciones? | "Primero intento con el banco, pero si no me alcanza o me demoran, le pido a mi familia o entro a una junta con otras vendedoras." |
+| 4 | ¿Qué tan predecibles son sus ingresos mes a mes? | "Varían harto, hay semanas buenas y otras flojas, depende de la temporada." |
+| 5 | ¿Usa algún tipo de billetera digital o aplicación financiera hoy? ¿Cuál y para qué? | "Uso la app de mi banco para ver mis movimientos y pagar el préstamo, y Yape para cobrarles a mis clientes." |
+| 6 | ¿Qué tan familiarizado está con el concepto de criptomonedas o stablecoins? | "Casi nada, he escuchado de bitcoin en las noticias pero no sé bien cómo funciona." |
+| 7 | ¿Qué le preocuparía más de pedir un préstamo a través de una app sin un banco de por medio? | "Que las condiciones no sean tan claras como en el banco, donde ya sé cuánto pago cada mes y a quién reclamarle si hay un problema." |
+| 8 | Si pudiera demostrar que "es de fiar" sin tener historial bancario, ¿cómo cree que podría demostrarlo? | "Mostrando que pago mi préstamo del banco a tiempo, o con referencias de la gente con la que trabajo en el mercado." |
+| 9 | ¿Puede describir la última vez que tuvo un problema de dinero relacionado con esto? ¿Qué hizo? | "Una vez necesité dinero rápido y el banco se demoró en aprobarme el préstamo, así que mientras tanto le pedí prestado a una vecina." |
+| 10 | ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito? | "Que me expliquen bien cómo funciona sin palabras raras, y que sea tan clara como mi banco en mostrarme cuánto debo." |
+| 11 | ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato? | "Valoraría que sea más rápida que el banco y que me den un monto justo según lo que vendo. La descartaría si siento que es menos segura o menos clara que mi banco." |
+
+---
+
+#### Entrevista 2 — *(pendiente)*
+
+**Ficha del entrevistado**
+
+| Campo | Detalle |
+|---|---|
+| Nombre | |
+| Edad | |
+| Distrito | |
+| Ocupación | |
+| Nivel de bancarización | |
+| Familiaridad con billeteras digitales/cripto | |
+| Video | |
+
+**Screenshot de la entrevista**
+
+![Entrevista 2](ruta/a/screenshot-entrevista-2.png)
+
+**Resumen**
+
+
+
+**Transcripción completa**
+
+| # | Pregunta | Respuesta |
+|---|---|---|
+| 1 | ¿Cómo financia hoy sus gastos o su actividad económica cuando necesita dinero que no tiene disponible? | |
+| 2 | ¿Ha intentado alguna vez acceder a un préstamo formal (banco, financiera, caja)? ¿Qué pasó? | |
+| 3 | ¿A quién le pide dinero prestado hoy (familia, conocidos, prestamista informal, "junta")? ¿Bajo qué condiciones? | |
+| 4 | ¿Qué tan predecibles son sus ingresos mes a mes? | |
+| 5 | ¿Usa algún tipo de billetera digital o aplicación financiera hoy? ¿Cuál y para qué? | |
+| 6 | ¿Qué tan familiarizado está con el concepto de criptomonedas o stablecoins? | |
+| 7 | ¿Qué le preocuparía más de pedir un préstamo a través de una app sin un banco de por medio? | |
+| 8 | Si pudiera demostrar que "es de fiar" sin tener historial bancario, ¿cómo cree que podría demostrarlo? | |
+| 9 | ¿Puede describir la última vez que tuvo un problema de dinero relacionado con esto? ¿Qué hizo? | |
+| 10 | ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito? | |
+| 11 | ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato? | |
 #### 2.2.3. Análisis de entrevistas
 
 _Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo. El análisis identificará patrones y características comunes dentro de cada segmento a partir de los datos obtenidos en el registro de entrevistas de la sección 2.2.2._
@@ -422,9 +507,17 @@ El proceso de Needfinding de LatiFi se construirá a partir de los hallazgos rea
 
 #### 2.3.1. User Personas
 
-Se construirán arquetipos de usuario (User Persona) para el segmento Prestatario no bancarizado y para el segmento Prestamista con capital ocioso, usando la plantilla de **UXPressia** a partir de los datos demográficos, objetivos, frustraciones y comportamientos recogidos durante las entrevistas.
+**Persona: Prestatario no bancarizado**
 
-_Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo._
+| Campo | Detalle |
+|---|---|
+| Herramienta | UXPressia |
+| Basado en | Entrevistas 1-5, sección 2.2.2 |
+| Segmento | Prestatario no bancarizado/subatendido |
+
+![User Persona - Prestatario](resources/Cap1/UserPersona/Joseph Falcón.png)
+
+El Persona fue construido en UXPressia a partir de los datos demográficos, objetivos, frustraciones y comportamientos recogidos en las entrevistas de la sección 2.2.2, representando a un prestatario con acceso limitado a crédito formal, ingresos variables y baja familiaridad con criptoactivos.
 
 #### 2.3.2. User Task Matrix
 
@@ -434,9 +527,17 @@ _Pendiente de desarrollo: requiere entrevistas reales a representantes de los se
 
 #### 2.3.3. Empathy Mapping
 
-Se construirá un Empathy Map por segmento, también en **UXPressia**, documentando lo que cada persona dice, piensa, hace y siente frente al acceso al crédito y al ahorro/inversión informal, como puente entre las entrevistas crudas y el diseño de la solución.
+**Empathy Map: Prestatario no bancarizado**
 
-_Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo._
+| Campo | Detalle |
+|---|---|
+| Herramienta | UXPressia |
+| Basado en | Entrevistas 1-5, sección 2.2.2 |
+| Segmento | Prestatario no bancarizado/subatendido |
+
+![Empathy Map - Prestatario](resources/Cap1/EmpathyMap/EmpathyMapping.png)
+
+El Empathy Map fue construido en UXPressia a partir de los mismos hallazgos de las entrevistas de la sección 2.2.2, documentando lo que el Prestatario dice, piensa, hace y siente frente al acceso al crédito.
 
 #### 2.3.4. As-is Scenario Mapping
 
