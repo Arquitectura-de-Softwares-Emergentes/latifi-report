@@ -515,7 +515,7 @@ El proceso de Needfinding de LatiFi se construirá a partir de los hallazgos rea
 | Basado en | Entrevistas 1-5, sección 2.2.2 |
 | Segmento | Prestatario no bancarizado/subatendido |
 
-![User Persona - Prestatario](resources/Cap1/UserPersona/Joseph Falcón.png)
+![User Persona - Prestatario](resources/Cap1/UserPersona/JosephUserPersona.png)
 
 El Persona fue construido en UXPressia a partir de los datos demográficos, objetivos, frustraciones y comportamientos recogidos en las entrevistas de la sección 2.2.2, representando a un prestatario con acceso limitado a crédito formal, ingresos variables y baja familiaridad con criptoactivos.
 
