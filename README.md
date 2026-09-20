@@ -525,7 +525,7 @@ Joseph financia sus gastos principalmente con ahorros propios y, cuando necesita
 
 **Screenshot de la entrevista**
 
-![Entrevista Renso Julca]( )
+![Entrevista Renso Julca](resources/Cap1/Interviews-Caps/Renso_Interview.jpeg)
 
 **Resumen**
 
