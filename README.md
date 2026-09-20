@@ -35,7 +35,7 @@
 | 1.1 | 19/09/2026 | Fabrizio Quiroz | Registro de la entrevista 1 del segmento prestatario, User Persona y Empathy Map del prestatario, y estructura inicial de Student Outcome 3. |
 | 1.2 | 19/09/2026 | Anaely Burga | Nombres de integrantes, As-Is y To-Be Scenario Mapping, y diagramas de EventStorming, Domain Storytelling, Bounded Context Canvases y Context Map del Capítulo IV. |
 | 1.3 | 19/09/2026 | Fiorella Vilca | Entrevista 1 del segmento prestamista, User Persona, User Task Matrix y Empathy Map del prestamista, y perfil de integrante. |
-| 1.4 | 19/09/2026 | Juan Angulo | Rediseño de la carátula, revisión de estilo y de cumplimiento del enunciado, entradas de Student Outcome 3, integración de los aportes de Fiorella Vilca, Registro de Versiones, Avance de Conclusiones y Anexos. |
+| 1.4 | 19/09/2026 | Juan Angulo | Rediseño de la carátula, revisión de estilo y de cumplimiento del enunciado, entradas de Student Outcome 3, integración de los aportes de Fiorella Vilca, Registro de Versiones y Avance de Conclusiones. |
 
 # Project Report Collaboration Insights
 
@@ -44,8 +44,6 @@ URL del repositorio: https://github.com/Arquitectura-de-Softwares-Emergentes/lat
 El Project Report se redacta en Markdown, con `README.md` como archivo principal, dentro de un repositorio público de la organización del equipo en GitHub. El equipo aplica GitFlow: `develop` concentra la integración del informe, `main` recibe las versiones entregables y cada integrante avanza sus secciones en ramas propias que se integran mediante pull requests. Los mensajes de commit siguen la convención Conventional Commits, y el PDF de cada entrega se genera a partir de este repositorio.
 
 **TB1.** Juan Angulo redactó el avance de los Capítulos I a IV y mantiene el flujo de ramas. Fabrizio Quiroz registró la entrevista del segmento prestatario y elaboró su User Persona y su Empathy Map. Anaely Burga elaboró los As-Is y To-Be Scenario Mapping y los diagramas de dominio del Capítulo IV. Fiorella Vilca registró la entrevista del segmento prestamista y elaboró su User Persona, el User Task Matrix y el Empathy Map correspondiente. Cada aporte queda registrado por commit y es coherente con el Registro de Versiones.
-
-_Pendiente de desarrollo: capturas de los analíticos de colaboración y de los commits de GitHub por integrante._
 
 <div style="page-break-after: always;"></div>
 
@@ -71,7 +69,6 @@ _Pendiente de desarrollo: capturas de los analíticos de colaboración y de los 
   - [2.2. Entrevistas](#22-entrevistas)
     - [2.2.1. Diseño de entrevistas](#221-diseño-de-entrevistas)
     - [2.2.2. Registro de entrevistas](#222-registro-de-entrevistas)
-    - [2.2.3. Análisis de entrevistas](#223-análisis-de-entrevistas)
   - [2.3. Needfinding](#23-needfinding)
     - [2.3.1. User Personas](#231-user-personas)
     - [2.3.2. User Task Matrix](#232-user-task-matrix)
@@ -103,8 +100,6 @@ _Pendiente de desarrollo: capturas de los analíticos de colaboración y de los 
     - [Software Architecture](#software-architecture)
 - [Avance de Conclusiones](#avance-de-conclusiones)
 - [Bibliografía](#bibliografía)
-- [Anexos](#anexos)
-- [Anexo A. Videos de Exposiciones](#anexo-a-videos-de-exposiciones)
 
 <div style="page-break-after: always;"></div>
 
@@ -120,8 +115,8 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
 
 | Criterio específico | Acciones realizadas | Conclusiones                                                                                                                                                                                                                                                                                                                                                               |
 |---|---|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Contribuí a la preparación y exposición oral de la parte correspondiente del proyecto, comunicando de forma clara y objetiva los resultados obtenidos ante un público con distintos niveles de familiaridad con el tema, adaptando el lenguaje técnico según la audiencia.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*Expuse el problema que motiva a LatiFi y la solución que el equipo propone: la dificultad de los emprendedores no bancarizados para acceder a un microcrédito y cómo una billetera con préstamos sobre blockchain reduce esa barrera. Adapté el nivel de detalle técnico al público, usando ejemplos cotidianos con quienes no conocen blockchain y términos más precisos con quienes sí.*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Presenté y defendí de manera síncrona la arquitectura de dominios, el mapeo estratégico y los flujos asíncronos on-chain/off-chain de LatiFi frente al equipo de proyecto, traduciendo diagramas de EventStorming y acoplamientos (U/D ACL, Conformist) a lenguaje de negocio para evaluadores técnicos y de producto.*<br><br>Vilca Valverde, Fiorella Angela<br>*TB1*<br>*(completar)* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br> La exposición oral me permitió reforzar mi capacidad de transmitir resultados de forma clara y objetiva a audiencias diversas, ajustando el nivel de detalle técnico según el público.<br><br>Angulo, Juan Carlos<br>*Exponer el problema completo me obligó a explicarlo con claridad y sin rodeos, y a reconocer qué conceptos de blockchain necesitan más contexto según quién escucha. Concluyo que comunicar bien el porqué de la solución es tan importante como describir cómo funciona.*<br><br>Burga Loarte, Anaely<br>*Sustentar la topología de Bounded Contexts y los flujos cross-boundary permitió alinear la visión táctica/estratégica del equipo, validando que las restricciones Web3 (Polygon Amoy) se comuniquen sin ruido conceptual a perfiles no especializados en blockchain*<br><br>Vilca Valverde, Fiorella Angela<br>*(completar)* |
-| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Participé en la redacción de secciones del informe TB1, cuidando que el contenido fuera claro, objetivo y comprensible para lectores con diferentes niveles de conocimiento técnico del proyecto.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*Redacté las secciones del informe que me correspondieron: Startup Profile, Solution Profile con el proceso Lean UX, segmentos objetivo, análisis de competidores y diseño de entrevistas. Escribí cada apartado para que lo entienda tanto un lector técnico como uno de negocio, y mantuve el repositorio con GitFlow para que los aportes del equipo queden ordenados y trazables.*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Redacté y estructuré formalmente en Markdown los apartados del Capítulo IV (arquitectura de dominio, modelado estratégico/táctico, justificación start-with-value de los 5 bounded contexts y especificación de flujos de mensajes), integrando especificaciones técnicas rigurosas legibles por perfiles de ingeniería y stakeholders.*<br><br>Vilca Valverde, Fiorella Angela<br>*TB1*<br>*(completar)* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>La redacción de estas secciones contribuyó a fortalecer mi habilidad de comunicar resultados por escrito de manera clara y objetiva, adaptando el lenguaje a distintos tipos de lector.<br><br>Angulo, Juan Carlos<br>*Redactar mi parte del informe me mostró que un documento técnico funciona cuando cada afirmación se sustenta y el lenguaje se ajusta al lector. Concluyo que una redacción ordenada y consistente facilita que el equipo y los evaluadores sigan el razonamiento del proyecto.*<br><br>Burga Loarte, Anaely<br>*La estructuración del documento técnico con rigor formal consolidó la trazabilidad entre los drivers de arquitectura (DR-01) y la modelación de dominios, facilitando la auditoría y replicabilidad del diseño del sistema LatiFi.*<br><br>Vilca Valverde, Fiorella Angela<br>*(completar)* |
+| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Contribuí a la preparación y exposición oral de la parte correspondiente del proyecto, comunicando de forma clara y objetiva los resultados obtenidos ante un público con distintos niveles de familiaridad con el tema, adaptando el lenguaje técnico según la audiencia.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*Expuse el problema que motiva a LatiFi y la solución que el equipo propone: la dificultad de los emprendedores no bancarizados para acceder a un microcrédito y cómo una billetera con préstamos sobre blockchain reduce esa barrera. Adapté el nivel de detalle técnico al público, usando ejemplos cotidianos con quienes no conocen blockchain y términos más precisos con quienes sí.*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Presenté y defendí de manera síncrona la arquitectura de dominios, el mapeo estratégico y los flujos asíncronos on-chain/off-chain de LatiFi frente al equipo de proyecto, traduciendo diagramas de EventStorming y acoplamientos (U/D ACL, Conformist) a lenguaje de negocio para evaluadores técnicos y de producto.* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br> La exposición oral me permitió reforzar mi capacidad de transmitir resultados de forma clara y objetiva a audiencias diversas, ajustando el nivel de detalle técnico según el público.<br><br>Angulo, Juan Carlos<br>*Exponer el problema completo me obligó a explicarlo con claridad y sin rodeos, y a reconocer qué conceptos de blockchain necesitan más contexto según quién escucha. Concluyo que comunicar bien el porqué de la solución es tan importante como describir cómo funciona.*<br><br>Burga Loarte, Anaely<br>*Sustentar la topología de Bounded Contexts y los flujos cross-boundary permitió alinear la visión táctica/estratégica del equipo, validando que las restricciones Web3 (Polygon Amoy) se comuniquen sin ruido conceptual a perfiles no especializados en blockchain* |
+| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Participé en la redacción de secciones del informe TB1, cuidando que el contenido fuera claro, objetivo y comprensible para lectores con diferentes niveles de conocimiento técnico del proyecto.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*Redacté las secciones del informe que me correspondieron: Startup Profile, Solution Profile con el proceso Lean UX, segmentos objetivo, análisis de competidores y diseño de entrevistas. Escribí cada apartado para que lo entienda tanto un lector técnico como uno de negocio, y mantuve el repositorio con GitFlow para que los aportes del equipo queden ordenados y trazables.*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Redacté y estructuré formalmente en Markdown los apartados del Capítulo IV (arquitectura de dominio, modelado estratégico/táctico, justificación start-with-value de los 5 bounded contexts y especificación de flujos de mensajes), integrando especificaciones técnicas rigurosas legibles por perfiles de ingeniería y stakeholders.* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>La redacción de estas secciones contribuyó a fortalecer mi habilidad de comunicar resultados por escrito de manera clara y objetiva, adaptando el lenguaje a distintos tipos de lector.<br><br>Angulo, Juan Carlos<br>*Redactar mi parte del informe me mostró que un documento técnico funciona cuando cada afirmación se sustenta y el lenguaje se ajusta al lector. Concluyo que una redacción ordenada y consistente facilita que el equipo y los evaluadores sigan el razonamiento del proyecto.*<br><br>Burga Loarte, Anaely<br>*La estructuración del documento técnico con rigor formal consolidó la trazabilidad entre los drivers de arquitectura (DR-01) y la modelación de dominios, facilitando la auditoría y replicabilidad del diseño del sistema LatiFi.* |
 <div style="page-break-after: always;"></div>
 
 ## Capítulo I: Introducción
@@ -413,7 +408,7 @@ Frente a **Aave Credit Delegation**, la fortaleza a reconocer es la liquidez, se
 
 ### 2.2. Entrevistas
 
-El presente apartado documenta el proceso de investigación cualitativa dirigido a los segmentos objetivo de LatiFi (prestatarios no bancarizados y prestamistas con capital ocioso), con el propósito de comprender sus necesidades, comportamientos, objetivos y frustraciones frente al microcrédito y al ahorro/inversión informal, antes de diseñar cualquier artefacto de Needfinding. Dado que a la fecha de este informe el equipo aún no ha ejecutado el trabajo de campo, esta sección presenta únicamente el diseño de las entrevistas, es decir, las preguntas que se aplicarán, dejando expresamente pendientes el registro y el análisis, que requieren entrevistar a representantes reales de cada segmento.
+El presente apartado documenta el proceso de investigación cualitativa dirigido a los segmentos objetivo de LatiFi (prestatarios no bancarizados y prestamistas con capital ocioso), con el propósito de comprender sus necesidades, comportamientos, objetivos y frustraciones frente al microcrédito y al ahorro/inversión informal, antes de diseñar cualquier artefacto de Needfinding. Esta sección presenta el diseño de las entrevistas, es decir, las preguntas aplicadas, y el registro de las entrevistas realizadas a un representante de cada segmento.
 
 #### 2.2.1. Diseño de entrevistas
 
@@ -458,8 +453,6 @@ Cada entrevista se orientará primero a entender la situación actual del partic
 | # | Entrevistado | Edad | Ocupación             | Bancarización | Fecha | Video |
 |---|---|---|-----------------------|---|---|---|
 | 1 | Joseph Falcón | 21 | Ingeniero de Software | Cuenta bancaria, crédito limitado | 18/09/2026 | [Ver video](https://drive.google.com/file/d/1ukLD49CHZPHEDglgHyofh8hUxh_JOwGW/view?usp=share_link) |
-| 2 | *(pendiente)* | |                       | | | |
-| 3 | *(pendiente)* | |                       | | | |
 
 ---
 
@@ -503,17 +496,11 @@ Joseph financia sus gastos principalmente con ahorros propios y, cuando necesita
 
 ---
 
-##### Entrevista 2
-
-_Pendiente de desarrollo: requiere una entrevista real a un representante del segmento Prestatario no bancarizado._
-
 ##### Tabla resumen de entrevistas: segmento Prestamista con capital ocioso
 
-| # | Entrevistado | Edad | Ocupación             | Bancarización | Fecha | Video |
-|---|---|---|-----------------------|---|---|---|
-| 1 | Renso Julca | 21 | Ingeniero de Software | Intermedio-alto, usa stablecoins | 18/09/2026 | Pendiente |
-| 2 | *(pendiente)* | |                       | | | |
-| 3 | *(pendiente)* | |                       | | | |
+| # | Entrevistado | Edad | Ocupación | Bancarización | Fecha |
+|---|---|---|---|---|---|
+| 1 | Renso Julca | 21 | Ingeniero de Software | Intermedio-alto, usa stablecoins | 18/09/2026 |
 
 ---
 
@@ -530,7 +517,6 @@ _Pendiente de desarrollo: requiere una entrevista real a un representante del se
 | Nivel de bancarización | Intermedio-alto; maneja billeteras digitales cotidianas y posee nociones operativas en stablecoins (USDT) |
 | Familiaridad con billeteras digitales/cripto | Alta: usa billeteras móviles a diario y aplicaciones cripto sin dificultad técnica |
 | Práctica de préstamo actual | Coloca excedentes de liquidez en micropréstamos a conocidos o referidos, con una tasa base desde el 5% mensual por montos mínimos, para rotar su dinero con rapidez |
-| Video | Pendiente |
 
 **Screenshot de la entrevista**
 
@@ -556,10 +542,6 @@ Renso Julca, estudiante de 21 años e independiente en servicios digitales en Li
 | 10 | ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato? | Lo que más valoraría es ver un historial de pagos real y automatizado que me permita diversificar mi excedente en varios microcréditos de forma transparente. La descartaría de inmediato si me cobran comisiones abusivas por operar o si la plataforma permite cuentas fantasmas sin un filtro mínimo de verificación. |
 
 ---
-
-#### 2.2.3. Análisis de entrevistas
-
-_Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo. El análisis identificará patrones y características comunes dentro de cada segmento a partir de los datos obtenidos en el registro de entrevistas de la sección 2.2.2._
 
 ### 2.3. Needfinding
 
@@ -691,13 +673,13 @@ El presente diagrama modela el flujo operacional actual (*AS-IS*) de una solicit
 3. **Receive & Review Application Package [Manual Verification]**: El Front Desk valida preliminarmente el paquete documental.
 4. **Perform Initial Eligibility Check [Manual]**: Evaluación rápida de cumplimiento de políticas de entrada.
 5. **Application Complete & Eligible?**: Validación de pase a siguiente fase.
-   * *No* $\rightarrow$ **6. Notify Applicant of Rejection / Missing Info**.
-   * *Yes* $\rightarrow$ **7. Assign Loan Officer & Create Physical File**.
+   * *No* → **6. Notify Applicant of Rejection / Missing Info**.
+   * *Yes* → **7. Assign Loan Officer & Create Physical File**.
 8. **Forward File to Credit Dept**: Traslado físico o digital básico del expediente al departamento de riesgos.
 9. **Conduct Credit Risk Assessment [Manual]**: Análisis manual del perfil de riesgo y capacidad de pago.
 10. **Risk Acceptable?**:
-    * *No* $\rightarrow$ Fin del proceso por rechazo de riesgo.
-    * *Yes* $\rightarrow$ **12. Approve Loan Terms & Conditions**.
+    * *No* → Fin del proceso por rechazo de riesgo.
+    * *Yes* → **12. Approve Loan Terms & Conditions**.
 13. **Generate Loan Agreement [Manual]**: Confección e impresión física del contrato legal.
 14. **Notify Loan Officer of Approval**: Aviso interno de viabilidad aprobada.
 15. **Schedule Loan Closing Appointment**: Coordinación de cita presencial con el cliente.
@@ -755,16 +737,16 @@ El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermedia
 * **LENDING SMART CONTRACT CORE**: Lógica de depósito de colateral, emisión de deuda, liquidación y reembolso programado.
 
 #### Descripción Secuencial del Flujo (TO-BE Steps)
-1. **Connect Non-Custodial Wallet [Action]**: El usuario vincula su wallet a través de la interfaz. $\rightarrow$ *Event: `WalletConnected`*.
+1. **Connect Non-Custodial Wallet [Action]**: El usuario vincula su wallet a través de la interfaz. → *Event: `WalletConnected`*.
 2. **Select Asset & Input Collateral/Loan Parameters [Data Input]**: El usuario define el monto del préstamo y colateral criptográfico aportado.
 3. **Fetch Real-Time Asset Pricing (Oracles) [Logic]**: Consulta de precio de mercado y cálculo de *Collateralization Ratio (LTV)* vía *Exchange Rate Context*.
 4. **Evaluate Credit Eligibility / Trust Tier [Logic]**: Consulta de score o tier de reputación del address del usuario vía *Reputation Context*.
 5. **Initiate Loan Request [Trigger]**: Envío de transacción de solicitud al smart contract de lending.
 6. **Lock Collateral in Escrow [Asset Transfer]**: Retención automática del colateral en el contrato inteligente.
-7. **Mint & Disburse Loan [Funds Transfer]**: Transferencia atómica/on-chain de los fondos solicitados directamente a la wallet del usuario $\rightarrow$ *Event: `LoanDisbursed`*.
+7. **Mint & Disburse Loan [Funds Transfer]**: Transferencia atómica/on-chain de los fondos solicitados directamente a la wallet del usuario → *Event: `LoanDisbursed`*.
 8. **Confirm Repayment & Update Health Factor [Logic]**: Monitoreo continuo de salud del colateral y recepción de cuotas.
-   * **9a. Liquidate Collateral (Default) [Action]**: Ejecución algorítmica de liquidación parcial ante caída de LTV $\rightarrow$ *Events: `DefaultTriggered`, `ReputationPenaltyApplied`*.
-   * **9b. Release Collateral (Paid) [Action]**: Liberación de garantía y actualización de score positivo $\rightarrow$ *Events: `LoanRepaid`, `ScoreUpdated`*.
+   * **9a. Liquidate Collateral (Default) [Action]**: Ejecución algorítmica de liquidación parcial ante caída de LTV → *Events: `DefaultTriggered`, `ReputationPenaltyApplied`*.
+   * **9b. Release Collateral (Paid) [Action]**: Liberación de garantía y actualización de score positivo → *Events: `LoanRepaid`, `ScoreUpdated`*.
 
 #### Ventajas Clave / Mejora frente al AS-IS (Value Proposition)
 * **Latencia cero/instantánea**: De días/semanas a segundos/minutos por ejecución determinista de smart contracts (pasos 5-7).
@@ -992,8 +974,8 @@ Las siguientes decisiones, ya adoptadas por el equipo durante el diseño técnic
 - **Artifact:** El flujo de onboarding de LatiFi Wallet (pantallas previas a "Conectar billetera") y el propio flujo de conexión de wallet vía Reown WalletKit/AppKit.
 - **Response:** El usuario completa cada paso del onboarding en lenguaje simple (sin jerga cripto), entiende qué implica conectar su wallet antes de hacerlo, y logra conectar exitosamente su billetera sin abandonar el flujo por confusión.
 - **Response Measure:** Tasa de finalización del onboarding superior al 80% en una prueba de usabilidad con al menos 5 usuarios no técnicos representativos del segmento; cero abandonos atribuibles a terminología no explicada, verificado en la sesión de validación.
-- **Questions:** ¿Las entrevistas de validación del Capítulo II (aún pendientes) incluirán participantes genuinamente no bancarizados, o solo compañeros de clase con perfil técnico? ¿Qué tan realista es medir "abandono por confusión" sin una sesión moderada de usabilidad grabada?
-- **Issues:** Esta métrica depende de datos que hoy no existen (el As-Is/entrevistas de validación siguen pendientes, ver sección 3.1); el equipo debe programar al menos una ronda de prueba de usabilidad con usuarios no técnicos antes de TB2, no dejarla para después de construida la app completa.
+- **Questions:** ¿Las entrevistas de validación del Capítulo II incluirán participantes genuinamente no bancarizados, o solo compañeros de clase con perfil técnico? ¿Qué tan realista es medir "abandono por confusión" sin una sesión moderada de usabilidad grabada?
+- **Issues:** Esta métrica depende de datos de validación que hoy no existen; el equipo debe programar al menos una ronda de prueba de usabilidad con usuarios no técnicos antes de TB2, no dejarla para después de construida la app completa.
 
 ### 4.2. Strategic-Level Domain-Driven Design
 
@@ -1165,15 +1147,3 @@ Estos resultados provienen de una entrevista por segmento, por lo que no permite
 - Aave. (s.f.). *Credit Delegation*. Documentación oficial. https://aave.com/docs/aave-v3/guides/credit-delegation
 - Messari. (s.f.). *Aave announces Credit Delegation, enabling uncollateralized lending*. https://messari.io/report/aave-announces-credit-delegation-enabling-uncollateralized-lending
 - Yellow.com. (2026). *Decentralized lending 2026: Aave on-chain money markets*. https://yellow.com/research/decentralized-lending-2026-aave-on-chain-money-markets
-
-<div style="page-break-after: always;"></div>
-
-# Anexos
-
-## Anexo A. Videos de Exposiciones
-
-| Entrega | Enlace privado (Microsoft Stream) |
-|---|---|
-| TB1 | Pendiente |
-
-_Pendiente de desarrollo: el enlace se incluye una vez publicado el video de exposición de TB1 en Microsoft Stream._
