@@ -110,6 +110,7 @@ El alcance de LatiFi en este informe es acotado: se trata del proyecto final del
 | **Angulo, Juan Carlos - U202317692** | Estudiante de Ingeniería de Software en séptimo ciclo. Le apasiona aprender tecnologías nuevas y construir soluciones aplicadas a problemas reales, y en este curso le entusiasma especialmente trabajar con blockchain. |
 | **Quiroz Zambrano, Fabrizio Javier - U202213406** | Estudiante de Ingeniería de Software, con interés en el desarrollo de aplicaciones móviles y en arquitectura de software. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
 | **Burga Loarte, Anaely - U202118264** | Estudiante de Ingeniería de Software enfocado en la experiencia de usuario y la lógica de negocio en la interfaz. Contribuye en la interfaz de usuario y la coordinación general de la app. |
+| **Vilca Valverde, Fiorella Angela - U20211e417** | Estudiante de Ingeniería de Software, con interés en el análisis de datos. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
 
 ### 1.2. Solution Profile
 
@@ -469,6 +470,56 @@ Joseph financia sus gastos principalmente con ahorros propios y, cuando necesita
 
 _Pendiente de desarrollo: requiere una entrevista real a un representante del segmento Prestatario no bancarizado._
 
+##### Tabla resumen de entrevistas: segmento Prestamista con capital ocioso
+
+| # | Entrevistado | Edad | Ocupación             | Bancarización | Fecha | Video |
+|---|---|---|-----------------------|---|---|---|
+| 1 | Renso Julca | 21 | Ingeniero de Software | Intermedio-alto, usa stablecoins | 18/09/2026 | Pendiente |
+| 2 | *(pendiente)* | |                       | | | |
+| 3 | *(pendiente)* | |                       | | | |
+
+---
+
+##### Entrevista 1: Renso Julca
+
+**Ficha del entrevistado**
+
+| Campo | Detalle                                                                                                |
+|---|--------------------------------------------------------------------------------------------------------|
+| Nombre | Renso Julca                                                                                          |
+| Edad | 21 años                                                                                                |
+| Distrito | Carabayllo                                                                                |
+| Ocupación | Ingeniero de Software                                                                                   |
+| Nivel de bancarización | Intermedio-alto; maneja billeteras digitales cotidianas y posee nociones operativas en stablecoins (USDT) |
+| Familiaridad con billeteras digitales/cripto | Alta: usa billeteras móviles a diario y aplicaciones cripto sin dificultad técnica |
+| Práctica de préstamo actual | Coloca excedentes de liquidez en micropréstamos a conocidos o referidos, con una tasa base desde el 5% mensual por montos mínimos, para rotar su dinero con rapidez |
+| Video | Pendiente |
+
+**Screenshot de la entrevista**
+
+![Entrevista Renso Julca](resources/Cap1/Interviews-Caps/Renso_Interview.jpeg)
+
+**Resumen**
+
+Renso Julca, estudiante de 21 años e independiente en servicios digitales en Lima, rota activamente su excedente de capital prestando montos mínimos a conocidos con una tasa base del 5% mensual y ahorrando en stablecoins (USDT) para evitar la pérdida de valor adquisitivo frente a los bajos rendimientos bancarios. Aunque se siente cómodo con el uso de billeteras y herramientas cripto, sus principales fricciones son el desgaste de realizar cobros manuales, la falta de un historial confiable para medir el riesgo de impago sin garantías y la desconfianza hacia plataformas intermediarias centralizadas. Por ello, adoptaría una solución como LatiFi siempre que opere bajo una arquitectura no custodial, muestre un puntaje de reputación visible y transparente del prestatario, asegure la liquidación automática de capital e intereses mediante Smart Contracts y cuente con filtros de verificación mínimos que impidan la evasión mediante cuentas duplicadas.
+
+**Transcripción completa**
+
+| # | Pregunta | Respuesta |
+|---|---|---|
+| 1 | ¿Qué hace hoy con el dinero que no necesita usar de inmediato (ahorro, inversión, cripto, nada)? | Mantengo una parte pequeña como fondo de reserva en cuentas bancarias convencionales, pero la mayor parte de mi excedente la roto prestando montos chicos a personas que necesitan liquidez inmediata o compro stablecoins (USDT) en exchanges para evitar que pierda valor frente a la inflación. No lo dejo quieto en el banco porque las tasas que dan por ahorro no rinden nada. |
+| 2 | ¿Alguna vez ha prestado dinero a alguien fuera de su círculo cercano a cambio de un interés? ¿Cómo le fue? | Sí, he prestado a amigos de conocidos o personas recomendadas cobrando un 5% de interés mensual sobre montos mínimos. En la mayoría de los casos me han pagado puntual porque sabían que si fallaban no les volvía a prestar, pero en un par de ocasiones tuve que estar insistiendo bastante para que completen la cuota. El cobro manual y estar escribiendo para recordar pagos es lo más desgastante. |
+| 3 | ¿Qué tan cómodo se siente usando billeteras digitales o aplicaciones cripto? | Me siento bastante cómodo. Uso billeteras móviles a diario y también aplicaciones cripto sin problemas técnicos. Entiendo conceptos de transferencias directas y manejo de fondos, así que operar una app que se conecte con wallet no me resulta difícil. |
+| 4 | ¿Qué información necesitaría ver de un desconocido antes de decidir prestarle dinero? | Si no lo conozco de nada, necesito ver mínimamente cuántos préstamos anteriores ha pedido, si los ha pagado a tiempo y un puntaje o indicador claro de cumplimiento. También saber a qué se dedica su negocio o en qué va a usar el dinero para saber si tendrá flujo de ingresos para devolverlo. |
+| 5 | ¿Qué nivel de riesgo de no pago estaría dispuesto a aceptar a cambio de qué tasa de interés? | Por montos pequeños suelo manejar una tasa mínima del 5%. Estaría dispuesto a asumir un riesgo moderado con personas que recién empiezan a construir su reputación siempre que el monto inicial prestado sea bajo y la tasa compense ese margen. Si el riesgo percibido es muy alto o no hay ningún antecedente, no arriesgaría mi capital. |
+| 6 | ¿Qué le generaría más desconfianza en una plataforma de préstamos entre desconocidos sin banco de por medio? | Me daría mucha desconfianza que la aplicación sea la que retenga o controle el dinero, o que el solicitante pueda crearse una cuenta falsa, pedir dinero, no pagar y desaparecer sin ninguna consecuencia. Necesito saber que el sistema asegura la devolución automática de lo cobrado sin intermediarios que demoren los retiros. |
+| 7 | ¿Preferiría que existiera algún tipo de garantía o colateral, o le basta con una reputación verificable del prestatario? | En DeFi tradicional piden dejar el doble en garantía, pero entiendo que un pequeño emprendedor del día a día no tiene criptomonedas guardadas para dejar empeñadas. Para montos mínimos de microcrédito me basta con una reputación sólida y comprobable donde se vea que el usuario cuida su historial para no perder acceso a montos mayores. |
+| 8 | ¿Puede describir la última vez que tuvo un problema de dinero relacionado con esto? ¿Qué hizo? | Le presté un monto pequeño a un conocido con la condición de devolverlo en 15 días con un extra. Pasó el mes y no me respondía los mensajes de WhatsApp; tuve que buscarlo directamente para acordar un pago fraccionado. Desde ahí decidí que no presto si no hay un compromiso muy claro o un historial que respalde a la persona. |
+| 9 | ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito? | Debe quedar clarísimo que la plataforma no se queda con mis llaves ni custodia mis fondos de forma opaca. Además, la ejecución del desembolso y el cobro debe ser automática e inmediata apenas el prestatario paga, sin cobros ocultos ni retrasos manuales. |
+| 10 | ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato? | Lo que más valoraría es ver un historial de pagos real y automatizado que me permita diversificar mi excedente en varios microcréditos de forma transparente. La descartaría de inmediato si me cobran comisiones abusivas por operar o si la plataforma permite cuentas fantasmas sin un filtro mínimo de verificación. |
+
+---
+
 #### 2.2.3. Análisis de entrevistas
 
 _Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo. El análisis identificará patrones y características comunes dentro de cada segmento a partir de los datos obtenidos en el registro de entrevistas de la sección 2.2.2._
@@ -489,13 +540,42 @@ El proceso de Needfinding de LatiFi se apoya en los hallazgos reales de las entr
 
 ![User Persona - Prestatario](resources/Cap1/UserPersona/JosephUserPersona.png)
 
-El Persona fue construido en UXPressia a partir de los datos demográficos, objetivos, frustraciones y comportamientos recogidos en la entrevista 1 de la sección 2.2.2, representando a un prestatario con acceso limitado a crédito formal, ingresos variables y baja familiaridad con criptoactivos.
+El Persona del prestatario fue construido en UXPressia a partir de los datos demográficos, objetivos, frustraciones y comportamientos recogidos en la entrevista 1 del segmento, representando a un prestatario con acceso limitado a crédito formal, ingresos variables y baja familiaridad con criptoactivos.
+
+**Persona: Prestamista con capital ocioso**
+
+| Campo | Detalle |
+|---|---|
+| Herramienta | UXPressia |
+| Basado en | Entrevista 1, sección 2.2.2 |
+| Segmento | Prestamista con capital ocioso |
+
+![User Persona - Prestamista](resources/Cap2/User_Persona/Renso%20Julca.png)
+
+El Persona del prestamista fue construido en UXPressia a partir de la entrevista 1 de su segmento, representando a un prestamista con excedente de liquidez, comodidad con billeteras digitales y stablecoins, y la necesidad de una señal clara de cumplimiento antes de prestar a desconocidos.
 
 #### 2.3.2. User Task Matrix
 
-Se elaborará una matriz de tareas por segmento (User Task Matrix) que cruce los objetivos de cada User Persona con las tareas concretas que hoy realiza para conseguirlos (formal o informalmente), como insumo directo para el mapeo de historias de usuario del Capítulo III.
+La matriz cruza a los dos User Persona con las tareas que realizan hoy para cumplir sus objetivos financieros, con independencia de cualquier solución de software. Los segmentos considerados son el Prestatario no bancarizado, representado por Joseph Falcón, y el Prestamista con capital ocioso, representado por Renso Julca.
 
-_Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo._
+| Tarea | Prestatario: Frecuencia | Prestatario: Importancia | Prestamista: Frecuencia | Prestamista: Importancia |
+|---|---|---|---|---|
+| Financiar gastos o actividad con ahorros propios | Alta | Alta | No aplica | No aplica |
+| Pedir un préstamo al banco cuando el ahorro no alcanza | Ocasional | Alta | No aplica | No aplica |
+| Pedir dinero a conocidos cuando el banco demora | Ocasional | Media | No aplica | No aplica |
+| Cobrar a sus clientes por Yape | Alta | Alta | No aplica | No aplica |
+| Pagar las cuotas del préstamo y revisar movimientos en la app del banco | Mensual | Crítica | No aplica | No aplica |
+| Demostrar que es de fiar sin historial bancario (pagos puntuales, referencias) | Ocasional | Alta | No aplica | No aplica |
+| Mantener un fondo de reserva en cuenta bancaria | No aplica | No aplica | Baja | Media |
+| Prestar excedentes a conocidos o referidos con interés | No aplica | No aplica | Alta | Alta |
+| Comprar y guardar stablecoins (USDT) para conservar el valor del excedente | No aplica | No aplica | Alta | Alta |
+| Evaluar si confiar en un solicitante desconocido (préstamos previos, cumplimiento, uso del dinero) | No aplica | No aplica | Antes de cada préstamo | Crítica |
+| Fijar la tasa según el monto y el riesgo del solicitante | No aplica | No aplica | Por préstamo | Alta |
+| Cobrar cuotas vencidas y acordar pagos fraccionados | No aplica | No aplica | Ocasional | Alta |
+
+La frecuencia y la importancia se infieren de la entrevista 1 de cada segmento, por lo que se ajustarán al ampliar el registro de entrevistas.
+
+Las tareas de mayor frecuencia e importancia del prestatario giran en torno a conseguir liquidez y pagarla a tiempo: financiarse con ahorros, recurrir al banco cuando no alcanza y cobrar a sus clientes. Para el prestamista, las tareas críticas son rotar su excedente prestando y decidir en quién confiar. La diferencia principal entre ambos es que el prestatario busca acceso y condiciones claras, mientras que el prestamista busca señales verificables de cumplimiento. Coinciden en la desconfianza hacia esquemas poco transparentes y en el valor de un historial de pagos: el prestatario lo necesita para demostrar que es de fiar y el prestamista para decidir a quién prestar.
 
 #### 2.3.3. Empathy Mapping
 
@@ -509,7 +589,48 @@ _Pendiente de desarrollo: requiere entrevistas reales a representantes de los se
 
 ![Empathy Map - Prestatario](resources/Cap1/EmpathyMap/EmpathyMapping.png)
 
-El Empathy Map fue construido en UXPressia a partir de los mismos hallazgos de la entrevista 1 de la sección 2.2.2, documentando lo que el Prestatario dice, piensa, hace y siente frente al acceso al crédito.
+El Empathy Map fue construido en UXPressia a partir de los hallazgos de la entrevista 1 de la sección 2.2.2, documentando lo que el Prestatario dice, piensa, hace y siente frente al acceso al crédito.
+
+**Empathy Map: Prestamista con capital ocioso**
+
+| Campo | Detalle |
+|---|---|
+| Herramienta | UXPressia |
+| Basado en | Entrevista 1, sección 2.2.2 |
+| Segmento | Prestamista con capital ocioso |
+
+**¿Qué piensa y siente?**
+
+- **Pensamientos centrales:** "Dejar el dinero quieto en el banco hace que pierda valor frente a la inflación; prefiero rotarlo activamente prestando o comprando stablecoins". "No puedo prestar a desconocidos a ciegas si no tengo una señal clara de que la persona cuida su historial y pagará a tiempo".
+- **Sentimientos:** frustración e incomodidad ante las cobranzas manuales y ante perseguir a quien se retrasa; seguridad y confianza si el retorno de su dinero queda programado de forma automática e inmutable en código.
+
+**¿Qué ve?**
+
+- En el entorno financiero: tasas bancarias tradicionales que no rinden y protocolos DeFi que exigen un sobrecolateral que los microemprendedores peruanos no tienen.
+- En su entorno social y digital: contactos y conocidos que buscan liquidez inmediata y que pagan tasas sobre el 5% mensual para financiar compras o proyectos de corto plazo.
+- En la plataforma LatiFi: un feed estructurado con solicitudes abiertas, tasas propuestas, plazos de pago y el indicador de reputación visible de cada solicitante.
+
+**¿Qué oye?**
+
+- A amigos y colegas hablar sobre billeteras móviles, adopción de stablecoins y plataformas Web3.
+- Comentarios recurrentes sobre la falta de garantías en préstamos de confianza y el riesgo de que personas conocidas terminen incumpliendo sus pagos.
+- Discusiones sobre la necesidad de plataformas transparentes donde intermediarios centralizados no bloqueen los retiros.
+
+**¿Qué dice y hace?**
+
+- **Dice:** "Presto con una tasa mínima del 5% mensual sobre montos pequeños para que mi dinero no pierda valor". "Para prestarle a alguien que no conozco, necesito ver cuántos préstamos ya pagó a tiempo y a qué se dedica".
+- **Hace:** utiliza billeteras digitales cotidianas y mantiene ahorros en stablecoins (USDT); evalúa el perfil de riesgo antes de comprometer fondos y prioriza montos pequeños y de rápida rotación.
+
+**Esfuerzos y frustraciones (Pains)**
+
+- El desgaste de cobrar manualmente por mensajes cuando una cuota se vence.
+- El riesgo de default total o de que usuarios malintencionados creen billeteras nuevas para huir de sus deudas (ataque Sybil).
+- Plataformas que cobran comisiones abusivas o que retienen fondos sin permitir retiros directos.
+
+**Deseos y necesidades (Gains)**
+
+- Rentabilidad predecible y superior a la banca tradicional a través de micropréstamos en stablecoins.
+- Desembolso y cobro 100% automatizado mediante Smart Contracts directamente a su wallet personal.
 
 #### 2.3.4. As-is Scenario Mapping
 
