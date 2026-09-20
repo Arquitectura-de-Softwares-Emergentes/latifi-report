@@ -2,24 +2,25 @@
 
 <h3>Universidad Peruana de Ciencias Aplicadas</h3>
 
-<strong>Ingeniería de Software</strong><br>
+<img alt="upc-logo" src="docs/assets/cover/UPC-logo.png" width="100"/><br>
+
+<strong>Ingeniería de Software - 202401</strong><br>
 <strong>1ASI0728 - Arquitecturas De Software Emergentes - Virtual</strong><br>
 <strong>Sección: 2620-9046</strong><br>
-<strong>Ciclo académico: 202401</strong><br>
 <strong>Profesores: Ocampo Tello, Ernesto / Rojas Malásquez, Royer Edelwer / Velásquez Núñez, Ángel Augusto</strong><br>
 
 <br><strong>Informe del Trabajo Final</strong><br><br>
 
 <strong>Startup: LatiFi</strong><br>
-<strong>Producto: LatiFi Wallet</strong>
+<strong>Producto: LatiFi Wallet</strong><br>
 
-### Team Members:
+### Team Members
 
-Angulo, Juan Carlos - u202317692
-
-Quiroz Zambrano, Fabrizio Javier - U202213406
-
-Burga Loarte, Anaely - u202118264
+| Apellidos y Nombres | Código |
+|---|---|
+| Angulo Abud Juan Carlos | U202317692 |
+| Quiroz Zambrano Fabrizio Javier | U202213406 |
+| Burga Loarte Anaely | U202118264 |
 
 <strong>16 de septiembre de 2026</strong><br>
 </div>
