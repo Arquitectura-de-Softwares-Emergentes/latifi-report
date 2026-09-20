@@ -521,11 +521,11 @@ Joseph financia sus gastos principalmente con ahorros propios y, cuando necesita
 | Ocupación | Ingeniero de Sofware                                                                                   |
 | Nivel de bancarización | Intermedio-alto; maneja billeteras digitales cotidianas y posee nociones operativas en stablecoins (USDT)               |
 | Familiaridad con billeteras digitales/cripto | Acostumbra colocar excedentes de liquidez en micropréstamos a conocidos o contactos referidos manejando una tasa base desde el 5% mensual por montos mínimos para rotar su dinero de forma rápida.                                   |
-| Video | [Ver grabación]() |
+| Video | []() |
 
 **Screenshot de la entrevista**
 
-![Entrevista Joseph Falcón]( )
+![Entrevista Renso Julca]( )
 
 **Resumen**
 
@@ -568,11 +568,34 @@ El proceso de Needfinding de LatiFi se construirá a partir de los hallazgos rea
 
 ![User Persona - Prestatario](resources/Cap1/UserPersona/Joseph Falcón.png)
 
+| Campo | Detalle |
+|---|---|
+| Herramienta | UXPressia |
+| Basado en | Entrevistas 1-5, sección 2.2.2 |
+| Segmento | Prestamista con capital ocioso |
+
+![User Persona - Prestatario con capital ocioso](resources/Cap2/User_Persona/Renso%20Julca.png)
+
 El Persona fue construido en UXPressia a partir de los datos demográficos, objetivos, frustraciones y comportamientos recogidos en las entrevistas de la sección 2.2.2, representando a un prestatario con acceso limitado a crédito formal, ingresos variables y baja familiaridad con criptoactivos.
 
 #### 2.3.2. User Task Matrix
 
 Se elaborará una matriz de tareas por segmento (User Task Matrix) que cruce los objetivos de cada User Persona con las tareas concretas que hoy realiza para conseguirlos (formal o informalmente), como insumo directo para el mapeo de historias de usuario del Capítulo III.
+
+| Tarea / Actividad del Dominio | Prestatario no bancarizado (Usuario Principal) | Prestamista con capital ocioso (Usuario Secundario - Renso) |
+| :--- | :--- | :--- |
+| **Onboarding y conexión de wallet** | **Frecuencia:** Baja / Única vez.<br>**Importancia:** Crítica.<br>Requiere un flujo guiado en lenguaje simple, sin jerga cripto ni manipulación directa de configuraciones complejas[cite: 10, 14]. | **Frecuencia:** Baja / Única vez.<br>**Importancia:** Media-Alta.<br>Conexión directa mediante billetera no custodial estándar (WalletConnect / MetaMask SDK)[cite: 11, 15, 29]. |
+| **Registro de perfil ligero (KYC-lite)** | **Frecuencia:** Baja / Única vez.<br>**Importancia:** Crítica.<br>Registro de nombre y contacto en `LatiFi API` como base mínima de verificación de identidad anti-Sybil[cite: 1, 11, 14]. | **Frecuencia:** Baja / Opcional.<br>**Importancia:** Media.<br>Registro básico para personalización de notificaciones y seguimiento de préstamos[cite: 11]. |
+| **Publicación de solicitud de microcrédito** | **Frecuencia:** Media (por ciclo de liquidez).<br>**Importancia:** Crítica.<br>Definición de monto, plazo y tasa en stablecoins, visualizando el cálculo equivalente en soles (PEN)[cite: 1, 15, 16, 18]. | **Frecuencia:** No aplica.<br>**Importancia:** No aplica.<br>Rol pasivo frente a la creación de solicitudes de deuda[cite: 20]. |
+| **Exploración y filtrado del feed de préstamos** | **Frecuencia:** No aplica.<br>**Importancia:** No aplica.<br>El prestatario solo visualiza el avance y estado de su propia solicitud[cite: 1, 15]. | **Frecuencia:** Alta (uso regular).<br>**Importancia:** Crítica.<br>Exploración de solicitudes abiertas evaluando plazo, rentabilidad ofrecida (mínimo 5%) y reputación[cite: 14, 15, 16, 29]. |
+| **Evaluación del score de reputación** | **Frecuencia:** Baja.<br>**Importancia:** Baja.<br>Acepta las condiciones del contrato sin evaluar al fondeador[cite: 1]. | **Frecuencia:** Alta (antes de fondear).<br>**Importancia:** Crítica.<br>Inspección del historial on-chain de repago y datos off-chain para medir el riesgo crediticio[cite: 1, 15, 16, 17, 29]. |
+| **Fondeo de solicitud vía Smart Contract** | **Frecuencia:** Pasiva / Eventual.<br>**Importancia:** Crítica.<br>Recepción automática del capital fondeado en su wallet tras concretarse el acuerdo[cite: 1, 15, 17]. | **Frecuencia:** Media-Alta.<br>**Importancia:** Crítica.<br>Firma no custodial para transferir stablecoins directamente al Smart Contract de depósito[cite: 1, 11, 15, 17]. |
+| **Seguimiento de cronograma y vencimientos** | **Frecuencia:** Alta / Frecuente.<br>**Importancia:** Crítica.<br>Monitoreo de fechas de pago con montos expresados en moneda local para no caer en mora[cite: 1, 15, 17]. | **Frecuencia:** Media.<br>**Importancia:** Media.<br>Seguimiento pasivo del estado del préstamo colocado (vigente, repagado o atrasado)[cite: 1, 9]. |
+| **Ejecución de repago de cuota** | **Frecuencia:** Media (según calendario).<br>**Importancia:** Crítica.<br>Envío de stablecoins desde la aplicación hacia el Smart Contract para saldar su compromiso[cite: 1, 15, 17]. | **Frecuencia:** No aplica.<br>**Importancia:** No aplica.<br>Responsabilidad exclusiva del solicitante del crédito[cite: 15]. |
+| **Cobro automático de retorno e intereses** | **Frecuencia:** No aplica.<br>**Importancia:** No aplica.<br>Extingue su obligación financiera con el contrato[cite: 1, 15, 17]. | **Frecuencia:** Media (tras cada repago).<br>**Importancia:** Crítica.<br>Recepción directa e inmediata de capital e intereses en su wallet vía Smart Contract, sin gestiones manuales[cite: 1, 15, 17, 29]. |
+| **Consulta y actualización de reputación** | **Frecuencia:** Media-Baja (post-repago).<br>**Importancia:** Alta.<br>Verificación del aumento gradual del puntaje para optar a microcréditos de mayor volumen[cite: 9, 15, 17]. | **Frecuencia:** Ocasional.<br>**Importancia:** Media.<br>Comprobación de que el sistema actualizó fidedignamente el score del deudor tras el resultado del ciclo[cite: 9, 17]. |
+
+---
 
 _Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo._
 
@@ -587,6 +610,47 @@ _Pendiente de desarrollo: requiere entrevistas reales a representantes de los se
 | Segmento | Prestatario no bancarizado/subatendido |
 
 ![Empathy Map - Prestatario](resources/Cap1/EmpathyMap/EmpathyMapping.png)
+
+| Campo | Detalle |
+|---|---|
+| Herramienta | UXPressia |
+| Basado en | Entrevistas 1-5, sección 2.2.2 |
+| Segmento | Prestamista con capital ocioso |
+
+#### ¿Qué piensa y siente?
+* **Pensamientos centrales:**
+  * "Dejar el dinero quieto en el banco hace que pierda valor frente a la inflación; prefiero rotarlo activamente prestando o comprando stablecoins"
+  * "No puedo prestar a desconocidos a ciegas si no tengo una señal clara de que la persona cuida su historial y pagará a tiempo".
+* **Sentimientos:**
+  * Frustración e incomodidad ante la tarea de realizar cobranzas manuales y perseguir a personas que se retrasan.
+  * Seguridad y confianza si el retorno de su dinero está programado de forma automática e inmutable en código.
+
+#### ¿Qué ve?
+* En el entorno financiero: Tasas bancarias tradicionales que no rinden y protocolos DeFi que exigen un sobrecolateral que los microemprendedores peruanos no tienen.
+* En su entorno social y digital: Contactos y conocidos que buscan liquidez inmediata y que pagan tasas sobre el 5% mensual para financiar compras o proyectos de corto plazo.
+* En la plataforma LatiFi: Un feed estructurado con solicitudes abiertas, tasas propuestas, plazos de pago y el indicador de reputación visible de cada solicitante.
+
+#### ¿Qué oye?
+* A amigos y colegas hablar sobre billeteras móviles, adopción de stablecoins y plataformas Web3.
+* Comentarios recurrentes sobre la falta de garantías en préstamos de confianza y el riesgo de que personas conocidas terminen incumpliendo sus pagos.
+* Discusiones sobre la necesidad de plataformas transparentes donde intermediarios centralizados no bloqueen los retiros.
+
+#### ¿Qué dice y hace?
+* **Dice:**
+  * "Presto con una tasa mínima del 5% mensual sobre montos pequeños para que mi dinero no pierda valor".
+  * "Para prestarle a alguien que no conozco, necesito ver cuántos préstamos ya pagó a tiempo y a qué se dedica".
+* **Hace:**
+  * Utiliza billeteras digitales cotidianas y mantiene ahorros en stablecoins (USDT)
+  * Evalúa el perfil de riesgo antes de comprometer fondos y prioriza montos pequeños y de rápida rotación.
+
+#### Esfuerzos y Frustraciones (Pains)
+* El desgaste de cobrar manualmente por mensajes cuando una cuota se vence.
+* El riesgo de default total o de que usuarios malintencionados creen billeteras nuevas para huir de sus deudas (ataque Sybil).
+* Plataformas que cobran comisiones abusivas o que retienen fondos sin permitir retiros directos.
+
+#### Deseos y Necesidades (Gains)
+* Rentabilidad predecible y superior a la banca tradicional a través de micropréstamos en stablecoins.
+* Desembolso y cobro 100% automatizado mediante Smart Contracts directamente a su wallet personal.
 
 El Empathy Map fue construido en UXPressia a partir de los mismos hallazgos de las entrevistas de la sección 2.2.2, documentando lo que el Prestatario dice, piensa, hace y siente frente al acceso al crédito.
 
