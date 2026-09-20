@@ -21,6 +21,7 @@
 | Angulo Abud Juan Carlos | U202317692 |
 | Quiroz Zambrano Fabrizio Javier | U202213406 |
 | Burga Loarte Anaely | U202118264 |
+| Vilca Valverde Fiorella Angela | U20211e417 |
 
 <strong>16 de septiembre de 2026</strong><br>
 </div>
@@ -30,13 +31,23 @@
 
 | Versión | Fecha | Autor | Descripción de modificación |
 |---|---|---|---|
-| 1.0 | 2026-09-16 | Equipo LatiFi | Primera versión del informe: avance de TB1, Capítulos I a IV. |
+| 1.0 | 16/09/2026 | Juan Angulo | Creación del repositorio e inicialización del informe. Redacción del avance de TB1 con los Capítulos I a IV, datos del curso y primer perfil de integrante. |
+| 1.1 | 19/09/2026 | Fabrizio Quiroz | Registro de la entrevista 1 del segmento prestatario, User Persona y Empathy Map del prestatario, y estructura inicial de Student Outcome 3. |
+| 1.2 | 19/09/2026 | Anaely Burga | Nombres de integrantes, As-Is y To-Be Scenario Mapping, y diagramas de EventStorming, Domain Storytelling, Bounded Context Canvases y Context Map del Capítulo IV. |
+| 1.3 | 19/09/2026 | Fiorella Vilca | Entrevista 1 del segmento prestamista, User Persona, User Task Matrix y Empathy Map del prestamista, y perfil de integrante. |
+| 1.4 | 19/09/2026 | Juan Angulo | Rediseño de la carátula, revisión de estilo y de cumplimiento del enunciado, entradas de Student Outcome 3, integración de los aportes de Fiorella Vilca, Registro de Versiones, Avance de Conclusiones y Anexos. |
 
 # Project Report Collaboration Insights
 
 URL del repositorio: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-report
 
-_Pendiente de desarrollo: esta sección debe expandirse en cada entrega con capturas de los analíticos de colaboración y commits de GitHub, mostrando la participación de cada integrante del equipo en la elaboración del informe._
+El Project Report se redacta en Markdown, con `README.md` como archivo principal, dentro de un repositorio público de la organización del equipo en GitHub. El equipo aplica GitFlow: `develop` concentra la integración del informe, `main` recibe las versiones entregables y cada integrante avanza sus secciones en ramas propias que se integran mediante pull requests. Los mensajes de commit siguen la convención Conventional Commits, y el PDF de cada entrega se genera a partir de este repositorio.
+
+**TB1.** Juan Angulo redactó el avance de los Capítulos I a IV y mantiene el flujo de ramas. Fabrizio Quiroz registró la entrevista del segmento prestatario y elaboró su User Persona y su Empathy Map. Anaely Burga elaboró los As-Is y To-Be Scenario Mapping y los diagramas de dominio del Capítulo IV. Fiorella Vilca registró la entrevista del segmento prestamista y elaboró su User Persona, el User Task Matrix y el Empathy Map correspondiente. Cada aporte queda registrado por commit y es coherente con el Registro de Versiones.
+
+_Pendiente de desarrollo: capturas de los analíticos de colaboración y de los commits de GitHub por integrante._
+
+<div style="page-break-after: always;"></div>
 
 # Contenido
 
@@ -50,11 +61,9 @@ _Pendiente de desarrollo: esta sección debe expandirse en cada entrega con capt
   - [1.2. Solution Profile](#12-solution-profile)
     - [1.2.1. Antecedentes y problemática](#121-antecedentes-y-problemática)
     - [1.2.2. Lean UX Process](#122-lean-ux-process)
-      - [1.2.2.1. Lean UX Problem Statements](#1221-lean-ux-problem-statements)
-      - [1.2.2.2. Lean UX Assumptions](#1222-lean-ux-assumptions)
-      - [1.2.2.3. Lean UX Hypothesis Statements](#1223-lean-ux-hypothesis-statements)
-      - [1.2.2.4. Lean UX Canvas](#1224-lean-ux-canvas)
   - [1.3. Segmentos objetivo](#13-segmentos-objetivo)
+    - [Segmento 1: Prestatario, Emprendedor o Independiente No Bancarizado (segmento principal)](#segmento-1-prestatario-emprendedor-o-independiente-no-bancarizado-segmento-principal)
+    - [Segmento 2: Prestamista, Persona con Capital Ocioso (segmento secundario, lado de la oferta)](#segmento-2-prestamista-persona-con-capital-ocioso-segmento-secundario-lado-de-la-oferta)
 - [Capítulo II: Requirements Elicitation & Analysis](#capítulo-ii-requirements-elicitation--analysis)
   - [2.1. Competidores](#21-competidores)
     - [2.1.1. Análisis competitivo](#211-análisis-competitivo)
@@ -71,24 +80,50 @@ _Pendiente de desarrollo: esta sección debe expandirse en cada entrega con capt
   - [2.4. Ubiquitous Language](#24-ubiquitous-language)
 - [Capítulo III: Requirements Specification](#capítulo-iii-requirements-specification)
   - [3.1. To-Be Scenario Mapping](#31-to-be-scenario-mapping)
+    - [Carriles de Arquitectura / Capas (Swimlanes / Bounded Context Layers)](#carriles-de-arquitectura--capas-swimlanes--bounded-context-layers)
+    - [Descripción Secuencial del Flujo (TO-BE Steps)](#descripción-secuencial-del-flujo-to-be-steps)
+    - [Ventajas Clave / Mejora frente al AS-IS (Value Proposition)](#ventajas-clave--mejora-frente-al-as-is-value-proposition)
+    - [Tabla Comparativa Resumen: AS-IS vs. TO-BE](#tabla-comparativa-resumen-as-is-vs-to-be)
   - [3.2. User Stories](#32-user-stories)
   - [3.3. Impact Mapping](#33-impact-mapping)
   - [3.4. Product Backlog](#34-product-backlog)
 - [Capítulo IV: Strategic-Level Software Design](#capítulo-iv-strategic-level-software-design)
   - [4.1. Strategic-Level Attribute-Driven Design](#41-strategic-level-attribute-driven-design)
+    - [Design Purpose](#design-purpose)
+    - [Attribute-Driven Design Inputs](#attribute-driven-design-inputs)
+    - [Architectural Design Decisions](#architectural-design-decisions)
+    - [Quality Attribute Scenario Refinements](#quality-attribute-scenario-refinements)
   - [4.2. Strategic-Level Domain-Driven Design](#42-strategic-level-domain-driven-design)
+    - [Bounded Contexts](#bounded-contexts)
+    - [EventStorming](#eventstorming)
+    - [Candidate Context Discovery](#candidate-context-discovery)
+    - [Domain Message Flows Modeling](#domain-message-flows-modeling)
+    - [Bounded Context Canvases](#bounded-context-canvases)
+    - [Context Mapping](#context-mapping)
+    - [Software Architecture](#software-architecture)
 - [Avance de Conclusiones](#avance-de-conclusiones)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
+- [Anexo A. Videos de Exposiciones](#anexo-a-videos-de-exposiciones)
+
+<div style="page-break-after: always;"></div>
 
 # Student Outcome
 
-**Student Outcome 3**: Comunicación efectiva a diferentes audiencias.
+El curso contribuye al cumplimiento del Student Outcome ABET:
+
+**ABET – EAC - Student Outcome 3**
+
+Criterio: Capacidad de comunicarse efectivamente con un rango de audiencias.
+
+En el siguiente cuadro se describe las acciones realizadas y enunciados de conclusiones por parte del grupo, que permiten sustentar el haber alcanzado el logro del ABET – EAC - Student Outcome 3.
 
 | Criterio específico | Acciones realizadas | Conclusiones                                                                                                                                                                                                                                                                                                                                                               |
 |---|---|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Contribuí a la preparación y exposición oral de la parte correspondiente del proyecto, comunicando de forma clara y objetiva los resultados obtenidos ante un público con distintos niveles de familiaridad con el tema, adaptando el lenguaje técnico según la audiencia.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*Expuse el problema que motiva a LatiFi y la solución que el equipo propone: la dificultad de los emprendedores no bancarizados para acceder a un microcrédito y cómo una billetera con préstamos sobre blockchain reduce esa barrera. Adapté el nivel de detalle técnico al público, usando ejemplos cotidianos con quienes no conocen blockchain y términos más precisos con quienes sí.*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Presenté y defendí de manera síncrona la arquitectura de dominios, el mapeo estratégico y los flujos asíncronos on-chain/off-chain de LatiFi frente al equipo de proyecto, traduciendo diagramas de EventStorming y acoplamientos (U/D ACL, Conformist) a lenguaje de negocio para evaluadores técnicos y de producto.* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br> La exposición oral me permitió reforzar mi capacidad de transmitir resultados de forma clara y objetiva a audiencias diversas, ajustando el nivel de detalle técnico según el público.<br><br>Angulo, Juan Carlos<br>*Exponer el problema completo me obligó a explicarlo con claridad y sin rodeos, y a reconocer qué conceptos de blockchain necesitan más contexto según quién escucha. Concluyo que comunicar bien el porqué de la solución es tan importante como describir cómo funciona.*<br><br>Burga Loarte, Anaely<br>*Sustentar la topología de Bounded Contexts y los flujos cross-boundary permitió alinear la visión táctica/estratégica del equipo, validando que las restricciones Web3 (Polygon Amoy) se comuniquen sin ruido conceptual a perfiles no especializados en blockchain* |
-| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Participé en la redacción de secciones del informe TB1, cuidando que el contenido fuera claro, objetivo y comprensible para lectores con diferentes niveles de conocimiento técnico del proyecto.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*Redacté las secciones del informe que me correspondieron: Startup Profile, Solution Profile con el proceso Lean UX, segmentos objetivo, análisis de competidores y diseño de entrevistas. Escribí cada apartado para que lo entienda tanto un lector técnico como uno de negocio, y mantuve el repositorio con GitFlow para que los aportes del equipo queden ordenados y trazables.*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Redacté y estructuré formalmente en Markdown los apartados del Capítulo IV (arquitectura de dominio, modelado estratégico/táctico, justificación start-with-value de los 5 bounded contexts y especificación de flujos de mensajes), integrando especificaciones técnicas rigurosas legibles por perfiles de ingeniería y stakeholders.* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>La redacción de estas secciones contribuyó a fortalecer mi habilidad de comunicar resultados por escrito de manera clara y objetiva, adaptando el lenguaje a distintos tipos de lector.<br><br>Angulo, Juan Carlos<br>*Redactar mi parte del informe me mostró que un documento técnico funciona cuando cada afirmación se sustenta y el lenguaje se ajusta al lector. Concluyo que una redacción ordenada y consistente facilita que el equipo y los evaluadores sigan el razonamiento del proyecto.*<br><br>Burga Loarte, Anaely<br>*La estructuración del documento técnico con rigor formal consolidó la trazabilidad entre los drivers de arquitectura (DR-01) y la modelación de dominios, facilitando la auditoría y replicabilidad del diseño del sistema LatiFi.*          |
+| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Contribuí a la preparación y exposición oral de la parte correspondiente del proyecto, comunicando de forma clara y objetiva los resultados obtenidos ante un público con distintos niveles de familiaridad con el tema, adaptando el lenguaje técnico según la audiencia.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*Expuse el problema que motiva a LatiFi y la solución que el equipo propone: la dificultad de los emprendedores no bancarizados para acceder a un microcrédito y cómo una billetera con préstamos sobre blockchain reduce esa barrera. Adapté el nivel de detalle técnico al público, usando ejemplos cotidianos con quienes no conocen blockchain y términos más precisos con quienes sí.*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Presenté y defendí de manera síncrona la arquitectura de dominios, el mapeo estratégico y los flujos asíncronos on-chain/off-chain de LatiFi frente al equipo de proyecto, traduciendo diagramas de EventStorming y acoplamientos (U/D ACL, Conformist) a lenguaje de negocio para evaluadores técnicos y de producto.*<br><br>Vilca Valverde, Fiorella Angela<br>*TB1*<br>*(completar)* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br> La exposición oral me permitió reforzar mi capacidad de transmitir resultados de forma clara y objetiva a audiencias diversas, ajustando el nivel de detalle técnico según el público.<br><br>Angulo, Juan Carlos<br>*Exponer el problema completo me obligó a explicarlo con claridad y sin rodeos, y a reconocer qué conceptos de blockchain necesitan más contexto según quién escucha. Concluyo que comunicar bien el porqué de la solución es tan importante como describir cómo funciona.*<br><br>Burga Loarte, Anaely<br>*Sustentar la topología de Bounded Contexts y los flujos cross-boundary permitió alinear la visión táctica/estratégica del equipo, validando que las restricciones Web3 (Polygon Amoy) se comuniquen sin ruido conceptual a perfiles no especializados en blockchain*<br><br>Vilca Valverde, Fiorella Angela<br>*(completar)* |
+| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Participé en la redacción de secciones del informe TB1, cuidando que el contenido fuera claro, objetivo y comprensible para lectores con diferentes niveles de conocimiento técnico del proyecto.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*Redacté las secciones del informe que me correspondieron: Startup Profile, Solution Profile con el proceso Lean UX, segmentos objetivo, análisis de competidores y diseño de entrevistas. Escribí cada apartado para que lo entienda tanto un lector técnico como uno de negocio, y mantuve el repositorio con GitFlow para que los aportes del equipo queden ordenados y trazables.*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Redacté y estructuré formalmente en Markdown los apartados del Capítulo IV (arquitectura de dominio, modelado estratégico/táctico, justificación start-with-value de los 5 bounded contexts y especificación de flujos de mensajes), integrando especificaciones técnicas rigurosas legibles por perfiles de ingeniería y stakeholders.*<br><br>Vilca Valverde, Fiorella Angela<br>*TB1*<br>*(completar)* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>La redacción de estas secciones contribuyó a fortalecer mi habilidad de comunicar resultados por escrito de manera clara y objetiva, adaptando el lenguaje a distintos tipos de lector.<br><br>Angulo, Juan Carlos<br>*Redactar mi parte del informe me mostró que un documento técnico funciona cuando cada afirmación se sustenta y el lenguaje se ajusta al lector. Concluyo que una redacción ordenada y consistente facilita que el equipo y los evaluadores sigan el razonamiento del proyecto.*<br><br>Burga Loarte, Anaely<br>*La estructuración del documento técnico con rigor formal consolidó la trazabilidad entre los drivers de arquitectura (DR-01) y la modelación de dominios, facilitando la auditoría y replicabilidad del diseño del sistema LatiFi.*<br><br>Vilca Valverde, Fiorella Angela<br>*(completar)* |
+<div style="page-break-after: always;"></div>
+
 ## Capítulo I: Introducción
 
 ### 1.1. Startup Profile
@@ -110,6 +145,7 @@ El alcance de LatiFi en este informe es acotado: se trata del proyecto final del
 | **Angulo, Juan Carlos - U202317692** | Estudiante de Ingeniería de Software en séptimo ciclo. Le apasiona aprender tecnologías nuevas y construir soluciones aplicadas a problemas reales, y en este curso le entusiasma especialmente trabajar con blockchain. |
 | **Quiroz Zambrano, Fabrizio Javier - U202213406** | Estudiante de Ingeniería de Software, con interés en el desarrollo de aplicaciones móviles y en arquitectura de software. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
 | **Burga Loarte, Anaely - U202118264** | Estudiante de Ingeniería de Software enfocado en la experiencia de usuario y la lógica de negocio en la interfaz. Contribuye en la interfaz de usuario y la coordinación general de la app. |
+| **Vilca Valverde, Fiorella Angela - U20211e417** | Estudiante de Ingeniería de Software, con interés en el análisis de datos. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
 
 ### 1.2. Solution Profile
 
@@ -333,6 +369,8 @@ Los segmentos objetivo de LatiFi se derivan directamente de los User Assumptions
 
 Estos dos segmentos son la base sobre la que se construirán, en el Capítulo II, los User Persona, el User Task Matrix, los User Journey Map y los Empathy Map correspondientes.
 
+<div style="page-break-after: always;"></div>
+
 ## Capítulo II: Requirements Elicitation & Analysis
 
 ### 2.1. Competidores
@@ -469,6 +507,56 @@ Joseph financia sus gastos principalmente con ahorros propios y, cuando necesita
 
 _Pendiente de desarrollo: requiere una entrevista real a un representante del segmento Prestatario no bancarizado._
 
+##### Tabla resumen de entrevistas: segmento Prestamista con capital ocioso
+
+| # | Entrevistado | Edad | Ocupación             | Bancarización | Fecha | Video |
+|---|---|---|-----------------------|---|---|---|
+| 1 | Renso Julca | 21 | Ingeniero de Software | Intermedio-alto, usa stablecoins | 18/09/2026 | Pendiente |
+| 2 | *(pendiente)* | |                       | | | |
+| 3 | *(pendiente)* | |                       | | | |
+
+---
+
+##### Entrevista 1: Renso Julca
+
+**Ficha del entrevistado**
+
+| Campo | Detalle                                                                                                |
+|---|--------------------------------------------------------------------------------------------------------|
+| Nombre | Renso Julca                                                                                          |
+| Edad | 21 años                                                                                                |
+| Distrito | Carabayllo                                                                                |
+| Ocupación | Ingeniero de Software                                                                                   |
+| Nivel de bancarización | Intermedio-alto; maneja billeteras digitales cotidianas y posee nociones operativas en stablecoins (USDT) |
+| Familiaridad con billeteras digitales/cripto | Alta: usa billeteras móviles a diario y aplicaciones cripto sin dificultad técnica |
+| Práctica de préstamo actual | Coloca excedentes de liquidez en micropréstamos a conocidos o referidos, con una tasa base desde el 5% mensual por montos mínimos, para rotar su dinero con rapidez |
+| Video | Pendiente |
+
+**Screenshot de la entrevista**
+
+![Entrevista Renso Julca](resources/Cap1/Interviews-Caps/Renso_Interview.jpeg)
+
+**Resumen**
+
+Renso Julca, estudiante de 21 años e independiente en servicios digitales en Lima, rota activamente su excedente de capital prestando montos mínimos a conocidos con una tasa base del 5% mensual y ahorrando en stablecoins (USDT) para evitar la pérdida de valor adquisitivo frente a los bajos rendimientos bancarios. Aunque se siente cómodo con el uso de billeteras y herramientas cripto, sus principales fricciones son el desgaste de realizar cobros manuales, la falta de un historial confiable para medir el riesgo de impago sin garantías y la desconfianza hacia plataformas intermediarias centralizadas. Por ello, adoptaría una solución como LatiFi siempre que opere bajo una arquitectura no custodial, muestre un puntaje de reputación visible y transparente del prestatario, asegure la liquidación automática de capital e intereses mediante Smart Contracts y cuente con filtros de verificación mínimos que impidan la evasión mediante cuentas duplicadas.
+
+**Transcripción completa**
+
+| # | Pregunta | Respuesta |
+|---|---|---|
+| 1 | ¿Qué hace hoy con el dinero que no necesita usar de inmediato (ahorro, inversión, cripto, nada)? | Mantengo una parte pequeña como fondo de reserva en cuentas bancarias convencionales, pero la mayor parte de mi excedente la roto prestando montos chicos a personas que necesitan liquidez inmediata o compro stablecoins (USDT) en exchanges para evitar que pierda valor frente a la inflación. No lo dejo quieto en el banco porque las tasas que dan por ahorro no rinden nada. |
+| 2 | ¿Alguna vez ha prestado dinero a alguien fuera de su círculo cercano a cambio de un interés? ¿Cómo le fue? | Sí, he prestado a amigos de conocidos o personas recomendadas cobrando un 5% de interés mensual sobre montos mínimos. En la mayoría de los casos me han pagado puntual porque sabían que si fallaban no les volvía a prestar, pero en un par de ocasiones tuve que estar insistiendo bastante para que completen la cuota. El cobro manual y estar escribiendo para recordar pagos es lo más desgastante. |
+| 3 | ¿Qué tan cómodo se siente usando billeteras digitales o aplicaciones cripto? | Me siento bastante cómodo. Uso billeteras móviles a diario y también aplicaciones cripto sin problemas técnicos. Entiendo conceptos de transferencias directas y manejo de fondos, así que operar una app que se conecte con wallet no me resulta difícil. |
+| 4 | ¿Qué información necesitaría ver de un desconocido antes de decidir prestarle dinero? | Si no lo conozco de nada, necesito ver mínimamente cuántos préstamos anteriores ha pedido, si los ha pagado a tiempo y un puntaje o indicador claro de cumplimiento. También saber a qué se dedica su negocio o en qué va a usar el dinero para saber si tendrá flujo de ingresos para devolverlo. |
+| 5 | ¿Qué nivel de riesgo de no pago estaría dispuesto a aceptar a cambio de qué tasa de interés? | Por montos pequeños suelo manejar una tasa mínima del 5%. Estaría dispuesto a asumir un riesgo moderado con personas que recién empiezan a construir su reputación siempre que el monto inicial prestado sea bajo y la tasa compense ese margen. Si el riesgo percibido es muy alto o no hay ningún antecedente, no arriesgaría mi capital. |
+| 6 | ¿Qué le generaría más desconfianza en una plataforma de préstamos entre desconocidos sin banco de por medio? | Me daría mucha desconfianza que la aplicación sea la que retenga o controle el dinero, o que el solicitante pueda crearse una cuenta falsa, pedir dinero, no pagar y desaparecer sin ninguna consecuencia. Necesito saber que el sistema asegura la devolución automática de lo cobrado sin intermediarios que demoren los retiros. |
+| 7 | ¿Preferiría que existiera algún tipo de garantía o colateral, o le basta con una reputación verificable del prestatario? | En DeFi tradicional piden dejar el doble en garantía, pero entiendo que un pequeño emprendedor del día a día no tiene criptomonedas guardadas para dejar empeñadas. Para montos mínimos de microcrédito me basta con una reputación sólida y comprobable donde se vea que el usuario cuida su historial para no perder acceso a montos mayores. |
+| 8 | ¿Puede describir la última vez que tuvo un problema de dinero relacionado con esto? ¿Qué hizo? | Le presté un monto pequeño a un conocido con la condición de devolverlo en 15 días con un extra. Pasó el mes y no me respondía los mensajes de WhatsApp; tuve que buscarlo directamente para acordar un pago fraccionado. Desde ahí decidí que no presto si no hay un compromiso muy claro o un historial que respalde a la persona. |
+| 9 | ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito? | Debe quedar clarísimo que la plataforma no se queda con mis llaves ni custodia mis fondos de forma opaca. Además, la ejecución del desembolso y el cobro debe ser automática e inmediata apenas el prestatario paga, sin cobros ocultos ni retrasos manuales. |
+| 10 | ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato? | Lo que más valoraría es ver un historial de pagos real y automatizado que me permita diversificar mi excedente en varios microcréditos de forma transparente. La descartaría de inmediato si me cobran comisiones abusivas por operar o si la plataforma permite cuentas fantasmas sin un filtro mínimo de verificación. |
+
+---
+
 #### 2.2.3. Análisis de entrevistas
 
 _Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo. El análisis identificará patrones y características comunes dentro de cada segmento a partir de los datos obtenidos en el registro de entrevistas de la sección 2.2.2._
@@ -489,13 +577,42 @@ El proceso de Needfinding de LatiFi se apoya en los hallazgos reales de las entr
 
 ![User Persona - Prestatario](resources/Cap1/UserPersona/JosephUserPersona.png)
 
-El Persona fue construido en UXPressia a partir de los datos demográficos, objetivos, frustraciones y comportamientos recogidos en la entrevista 1 de la sección 2.2.2, representando a un prestatario con acceso limitado a crédito formal, ingresos variables y baja familiaridad con criptoactivos.
+El Persona del prestatario fue construido en UXPressia a partir de los datos demográficos, objetivos, frustraciones y comportamientos recogidos en la entrevista 1 del segmento, representando a un prestatario con acceso limitado a crédito formal, ingresos variables y baja familiaridad con criptoactivos.
+
+**Persona: Prestamista con capital ocioso**
+
+| Campo | Detalle |
+|---|---|
+| Herramienta | UXPressia |
+| Basado en | Entrevista 1, sección 2.2.2 |
+| Segmento | Prestamista con capital ocioso |
+
+![User Persona - Prestamista](resources/Cap2/User_Persona/Renso%20Julca.png)
+
+El Persona del prestamista fue construido en UXPressia a partir de la entrevista 1 de su segmento, representando a un prestamista con excedente de liquidez, comodidad con billeteras digitales y stablecoins, y la necesidad de una señal clara de cumplimiento antes de prestar a desconocidos.
 
 #### 2.3.2. User Task Matrix
 
-Se elaborará una matriz de tareas por segmento (User Task Matrix) que cruce los objetivos de cada User Persona con las tareas concretas que hoy realiza para conseguirlos (formal o informalmente), como insumo directo para el mapeo de historias de usuario del Capítulo III.
+La matriz cruza a los dos User Persona con las tareas que realizan hoy para cumplir sus objetivos financieros, con independencia de cualquier solución de software. Los segmentos considerados son el Prestatario no bancarizado, representado por Joseph Falcón, y el Prestamista con capital ocioso, representado por Renso Julca.
 
-_Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo._
+| Tarea | Prestatario: Frecuencia | Prestatario: Importancia | Prestamista: Frecuencia | Prestamista: Importancia |
+|---|---|---|---|---|
+| Financiar gastos o actividad con ahorros propios | Alta | Alta | No aplica | No aplica |
+| Pedir un préstamo al banco cuando el ahorro no alcanza | Ocasional | Alta | No aplica | No aplica |
+| Pedir dinero a conocidos cuando el banco demora | Ocasional | Media | No aplica | No aplica |
+| Cobrar a sus clientes por Yape | Alta | Alta | No aplica | No aplica |
+| Pagar las cuotas del préstamo y revisar movimientos en la app del banco | Mensual | Crítica | No aplica | No aplica |
+| Demostrar que es de fiar sin historial bancario (pagos puntuales, referencias) | Ocasional | Alta | No aplica | No aplica |
+| Mantener un fondo de reserva en cuenta bancaria | No aplica | No aplica | Baja | Media |
+| Prestar excedentes a conocidos o referidos con interés | No aplica | No aplica | Alta | Alta |
+| Comprar y guardar stablecoins (USDT) para conservar el valor del excedente | No aplica | No aplica | Alta | Alta |
+| Evaluar si confiar en un solicitante desconocido (préstamos previos, cumplimiento, uso del dinero) | No aplica | No aplica | Antes de cada préstamo | Crítica |
+| Fijar la tasa según el monto y el riesgo del solicitante | No aplica | No aplica | Por préstamo | Alta |
+| Cobrar cuotas vencidas y acordar pagos fraccionados | No aplica | No aplica | Ocasional | Alta |
+
+La frecuencia y la importancia se infieren de la entrevista 1 de cada segmento, por lo que se ajustarán al ampliar el registro de entrevistas.
+
+Las tareas de mayor frecuencia e importancia del prestatario giran en torno a conseguir liquidez y pagarla a tiempo: financiarse con ahorros, recurrir al banco cuando no alcanza y cobrar a sus clientes. Para el prestamista, las tareas críticas son rotar su excedente prestando y decidir en quién confiar. La diferencia principal entre ambos es que el prestatario busca acceso y condiciones claras, mientras que el prestamista busca señales verificables de cumplimiento. Coinciden en la desconfianza hacia esquemas poco transparentes y en el valor de un historial de pagos: el prestatario lo necesita para demostrar que es de fiar y el prestamista para decidir a quién prestar.
 
 #### 2.3.3. Empathy Mapping
 
@@ -509,7 +626,48 @@ _Pendiente de desarrollo: requiere entrevistas reales a representantes de los se
 
 ![Empathy Map - Prestatario](resources/Cap1/EmpathyMap/EmpathyMapping.png)
 
-El Empathy Map fue construido en UXPressia a partir de los mismos hallazgos de la entrevista 1 de la sección 2.2.2, documentando lo que el Prestatario dice, piensa, hace y siente frente al acceso al crédito.
+El Empathy Map fue construido en UXPressia a partir de los hallazgos de la entrevista 1 de la sección 2.2.2, documentando lo que el Prestatario dice, piensa, hace y siente frente al acceso al crédito.
+
+**Empathy Map: Prestamista con capital ocioso**
+
+| Campo | Detalle |
+|---|---|
+| Herramienta | UXPressia |
+| Basado en | Entrevista 1, sección 2.2.2 |
+| Segmento | Prestamista con capital ocioso |
+
+**¿Qué piensa y siente?**
+
+- **Pensamientos centrales:** "Dejar el dinero quieto en el banco hace que pierda valor frente a la inflación; prefiero rotarlo activamente prestando o comprando stablecoins". "No puedo prestar a desconocidos a ciegas si no tengo una señal clara de que la persona cuida su historial y pagará a tiempo".
+- **Sentimientos:** frustración e incomodidad ante las cobranzas manuales y ante perseguir a quien se retrasa; seguridad y confianza si el retorno de su dinero queda programado de forma automática e inmutable en código.
+
+**¿Qué ve?**
+
+- En el entorno financiero: tasas bancarias tradicionales que no rinden y protocolos DeFi que exigen un sobrecolateral que los microemprendedores peruanos no tienen.
+- En su entorno social y digital: contactos y conocidos que buscan liquidez inmediata y que pagan tasas sobre el 5% mensual para financiar compras o proyectos de corto plazo.
+- En la plataforma LatiFi: un feed estructurado con solicitudes abiertas, tasas propuestas, plazos de pago y el indicador de reputación visible de cada solicitante.
+
+**¿Qué oye?**
+
+- A amigos y colegas hablar sobre billeteras móviles, adopción de stablecoins y plataformas Web3.
+- Comentarios recurrentes sobre la falta de garantías en préstamos de confianza y el riesgo de que personas conocidas terminen incumpliendo sus pagos.
+- Discusiones sobre la necesidad de plataformas transparentes donde intermediarios centralizados no bloqueen los retiros.
+
+**¿Qué dice y hace?**
+
+- **Dice:** "Presto con una tasa mínima del 5% mensual sobre montos pequeños para que mi dinero no pierda valor". "Para prestarle a alguien que no conozco, necesito ver cuántos préstamos ya pagó a tiempo y a qué se dedica".
+- **Hace:** utiliza billeteras digitales cotidianas y mantiene ahorros en stablecoins (USDT); evalúa el perfil de riesgo antes de comprometer fondos y prioriza montos pequeños y de rápida rotación.
+
+**Esfuerzos y frustraciones (Pains)**
+
+- El desgaste de cobrar manualmente por mensajes cuando una cuota se vence.
+- El riesgo de default total o de que usuarios malintencionados creen billeteras nuevas para huir de sus deudas (ataque Sybil).
+- Plataformas que cobran comisiones abusivas o que retienen fondos sin permitir retiros directos.
+
+**Deseos y necesidades (Gains)**
+
+- Rentabilidad predecible y superior a la banca tradicional a través de micropréstamos en stablecoins.
+- Desembolso y cobro 100% automatizado mediante Smart Contracts directamente a su wallet personal.
 
 #### 2.3.4. As-is Scenario Mapping
 
@@ -519,13 +677,13 @@ El presente diagrama modela el flujo operacional actual (*AS-IS*) de una solicit
 
 ![As-Is scenario mapping](resources/Cap1/As-Is%20scenario%20mapping.png)
 
-### **Carriles de Responsabilidad (Swimlanes)**
+##### Carriles de Responsabilidad (Swimlanes)
 * **USER / BORROWER**: Prestatario que inicia la petición y aporta documentación de respaldo.
 * **LOAN OFFICER / FRONT DESK**: Mesón de atención y primer filtro de recepción documental.
 * **CREDIT RISK DEPARTMENT**: Área analítica encargada de evaluar la viabilidad de riesgo del crédito.
 * **FINANCE / OPERATIONS**: Instancia final de emisión de vouchers, validación de firmas y desembolso de fondos.
 
-### **Descripción Secuencial del Flujo**
+##### Descripción Secuencial del Flujo
 1. **Initiate Loan Application [Manual]**: El usuario completa y entrega la solicitud inicial del crédito.
 2. **Submit Required Documents?**: Verificación de presencia de requisitos mínimos adjuntos.
    * *No*: El proceso se detiene o retorna para la recolección de faltantes.
@@ -547,7 +705,7 @@ El presente diagrama modela el flujo operacional actual (*AS-IS*) de una solicit
 17. **Obtain Authorized Signatures [Manual]**: Firma física gerencial/financiera requerida.
 18. **Disburse Funds [Check / Cash / Wire Transfer]**: Emisión efectiva del capital al usuario mediante medios tradicionales.
 
-### **Puntos de Dolor Identificados (Pain Points)**
+##### Puntos de Dolor Identificados (Pain Points)
 * **Latencia elevada**: Tiempos muertos significativos en los traspasos de expedientes físicos/digitales entre el *Loan Officer*, *Credit Dept* y *Finance* (pasos 7, 8, 14, 15).
 * **Fricción presencial**: Dependencia de citas presenciales obligatorias para firma de contratos y gestión de desembolsos (pasos 15-18).
 * **Riesgo operativo**: Propensión a errores de transcripción manual en la evaluación de riesgos y pérdida o degradación de expedientes en físico.
@@ -579,6 +737,8 @@ El siguiente glosario recoge los términos de negocio del dominio de microcrédi
 | **Exchange Rate** (Tipo de cambio) | Tasa de conversión entre el valor de la stablecoin del préstamo y la moneda local del usuario, consumida por la app para mostrar montos y cuotas en la moneda que el usuario entiende. |
 | **Unbanked / Underbanked** (No bancarizado / subatendido) | Persona sin acceso a una cuenta bancaria formal o con acceso muy limitado a productos financieros formales, segmento objetivo primario de LatiFi. |
 
+<div style="page-break-after: always;"></div>
+
 ## Capítulo III: Requirements Specification
 
 ### 3.1. To-Be Scenario Mapping
@@ -587,14 +747,14 @@ El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermedia
 
 ![To-be scenario mapping](resources/Cap1/To-be%20scenario%20mapping.png)
 
-### **Carriles de Arquitectura / Capas (Swimlanes / Bounded Context Layers)**
+#### Carriles de Arquitectura / Capas (Swimlanes / Bounded Context Layers)
 * **USER / BORROWER**: Prestatario autogestionado con wallet non-custodial.
 * **IDENTITY / WALLET CONTEXT**: Autenticación criptográfica, firma de transacciones y validación de sesión.
 * **EXCHANGE RATE CONTEXT**: Oráculo de precios en tiempo real para valoración de colateral (*Collateral Ratio*).
 * **REPUTATION CONTEXT**: Historial de comportamiento on-chain, *trust tiers* y penalizaciones automáticas.
 * **LENDING SMART CONTRACT CORE**: Lógica de depósito de colateral, emisión de deuda, liquidación y reembolso programado.
 
-### **Descripción Secuencial del Flujo (TO-BE Steps)**
+#### Descripción Secuencial del Flujo (TO-BE Steps)
 1. **Connect Non-Custodial Wallet [Action]**: El usuario vincula su wallet a través de la interfaz. $\rightarrow$ *Event: `WalletConnected`*.
 2. **Select Asset & Input Collateral/Loan Parameters [Data Input]**: El usuario define el monto del préstamo y colateral criptográfico aportado.
 3. **Fetch Real-Time Asset Pricing (Oracles) [Logic]**: Consulta de precio de mercado y cálculo de *Collateralization Ratio (LTV)* vía *Exchange Rate Context*.
@@ -606,7 +766,7 @@ El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermedia
    * **9a. Liquidate Collateral (Default) [Action]**: Ejecución algorítmica de liquidación parcial ante caída de LTV $\rightarrow$ *Events: `DefaultTriggered`, `ReputationPenaltyApplied`*.
    * **9b. Release Collateral (Paid) [Action]**: Liberación de garantía y actualización de score positivo $\rightarrow$ *Events: `LoanRepaid`, `ScoreUpdated`*.
 
-### **Ventajas Clave / Mejora frente al AS-IS (Value Proposition)**
+#### Ventajas Clave / Mejora frente al AS-IS (Value Proposition)
 * **Latencia cero/instantánea**: De días/semanas a segundos/minutos por ejecución determinista de smart contracts (pasos 5-7).
 * **Desintermediación y Autogestión**: Eliminación de *Loan Officer*, mesones físicos, mesas de control de riesgos manuales y vouchers de papel.
 * **Mitigación de riesgo de contraparte**: Lógica basada en código (*code is law*), con valoración objetiva por oráculos y liquidación algorítmica de garantías.
@@ -614,7 +774,7 @@ El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermedia
 
 ---
 
-### **Tabla Comparativa Resumen: AS-IS vs. TO-BE**
+#### Tabla Comparativa Resumen: AS-IS vs. TO-BE
 | Dimensión | Enfoque AS-IS (Tradicional) | Enfoque TO-BE (Web3 / Descentralizado) |
 | :--- | :--- | :--- |
 | **Tiempo de Procesamiento** | Varios días por los traspasos manuales entre áreas | Segundos a minutos (automático on-chain) |
@@ -722,6 +882,8 @@ El backlog prioriza primero el núcleo Auth + Identity + Lending que permite dem
 | 21 | US-API-01 | Endpoint de historial de reputación | Exposición del detalle de eventos detrás del score | 3 |
 | 22 | US-REP-03 | Feed ordenado/destacado por reputación | Orden u badge de reputación sobre el feed existente | 3 |
 | 23 | US-REP-04 | Decaimiento/recuperación gradual de reputación | Ajuste proporcional de score ante pagos parciales/tardíos | 5 |
+
+<div style="page-break-after: always;"></div>
 
 ## Capítulo IV: Strategic-Level Software Design
 
@@ -972,9 +1134,17 @@ graph TD
     style FXApi fill:#999,color:#fff
 ```
 
+<div style="page-break-after: always;"></div>
+
 # Avance de Conclusiones
 
-_Pendiente de desarrollo: las conclusiones se redactan al cierre del ciclo de vida del proyecto (TF1), contrastando los Problem Statements, Assumptions e Hypothesis Statements del Capítulo I con los resultados reales obtenidos en las entrevistas de validación y en la demo final._
+Con las dos entrevistas realizadas, una por segmento, el equipo contrasta de forma preliminar los supuestos del Capítulo I. En el segmento prestatario, el entrevistado confirma que el banco le otorga montos bajos y tasas altas, y que cuando el banco demora recurre a conocidos, lo que respalda el problema de acceso al crédito formal. En el segmento prestamista, el entrevistado ya presta excedentes a conocidos con una tasa base desde el 5% mensual y ahorra en stablecoins, lo que respalda la existencia de capital ocioso dispuesto a colocarse.
+
+Ambos entrevistados coinciden en un punto que sustenta la propuesta de valor: la confianza depende de un historial de pagos verificable. El prestatario señala que podría demostrar que es de fiar mostrando pagos puntuales o referencias, y el prestamista exige ver préstamos anteriores y un indicador claro de cumplimiento antes de prestar a un desconocido. Ambos piden condiciones claras, y el prestamista rechaza que la plataforma custodie los fondos, lo que es coherente con la decisión de una wallet non-custodial.
+
+Estos resultados provienen de una entrevista por segmento, por lo que no permiten generalizar. Como siguientes pasos, el equipo completará el registro de entrevistas hasta el mínimo por segmento, elaborará el análisis con sustento estadístico y validará el modelo de reputación con prototipos, para contrastar el resto de las hipótesis del Lean UX Canvas.
+
+<div style="page-break-after: always;"></div>
 
 # Bibliografía
 
@@ -996,6 +1166,14 @@ _Pendiente de desarrollo: las conclusiones se redactan al cierre del ciclo de vi
 - Messari. (s.f.). *Aave announces Credit Delegation, enabling uncollateralized lending*. https://messari.io/report/aave-announces-credit-delegation-enabling-uncollateralized-lending
 - Yellow.com. (2026). *Decentralized lending 2026: Aave on-chain money markets*. https://yellow.com/research/decentralized-lending-2026-aave-on-chain-money-markets
 
+<div style="page-break-after: always;"></div>
+
 # Anexos
 
-_Pendiente de desarrollo: se incluirán en esta sección los anexos exigidos por el enunciado del curso (Estructura para la sección Student Outcome, Estructura para el Informe de Participación, Consideraciones sobre secciones con Videos, Formato de Evaluación de User Experience según Heurísticas) conforme el equipo avance hacia TP1 y TB2._
+## Anexo A. Videos de Exposiciones
+
+| Entrega | Enlace privado (Microsoft Stream) |
+|---|---|
+| TB1 | Pendiente |
+
+_Pendiente de desarrollo: el enlace se incluye una vez publicado el video de exposición de TB1 en Microsoft Stream._
