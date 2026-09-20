@@ -83,12 +83,12 @@ _Pendiente de desarrollo: esta sección debe expandirse en cada entrega con capt
 
 # Student Outcome
 
-# Student Outcome 3 — Comunicación efectiva a diferentes audiencias
+**Student Outcome 3**: Comunicación efectiva a diferentes audiencias.
 
 | Criterio específico | Acciones realizadas | Conclusiones                                                                                                                                                                                                                                                                                                                                                               |
 |---|---|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Contribuí a la preparación y exposición oral de la parte correspondiente del proyecto, comunicando de forma clara y objetiva los resultados obtenidos ante un público con distintos niveles de familiaridad con el tema, adaptando el lenguaje técnico según la audiencia.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*(completar)*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Presenté y defendí de manera síncrona la arquitectura de dominios, el mapeo estratégico y los flujos asíncronos on-chain/off-chain de LatiFi frente al equipo de proyecto, traduciendo diagramas de EventStorming y acoplamientos (U/D ACL, Conformist) a lenguaje de negocio para evaluadores técnicos y de producto.*<br><br>[Apellidos, Nombres]<br>*TB1*<br>*(completar)* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br> La exposición oral me permitió reforzar mi capacidad de transmitir resultados de forma clara y objetiva a audiencias diversas, ajustando el nivel de detalle técnico según el público.<br><br>Angulo, Juan Carlos<br>*(completar)*<br><br>Burga Loarte, Anaely<br>*Sustentar la topología de Bounded Contexts y los flujos cross-boundary permitió alinear la visión táctica/estratégica del equipo, validando que las restricciones Web3 (Polygon Amoy) se comuniquen sin ruido conceptual a perfiles no especializados en blockchain*<br><br>[Apellidos, Nombres]<br>*(completar)* |
-| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Participé en la redacción de secciones del informe TB1, cuidando que el contenido fuera claro, objetivo y comprensible para lectores con diferentes niveles de conocimiento técnico del proyecto.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*(completar)*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Redacté y estructuré formalmente en Markdown los apartados del Capítulo IV (arquitectura de dominio, modelado estratégico/táctico, justificación start-with-value de los 5 bounded contexts y especificación de flujos de mensajes), integrando especificaciones técnicas rigurosas legibles por perfiles de ingeniería y stakeholders.*<br><br>[Apellidos, Nombres]<br>*TB1*<br>*(completar)* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>La redacción de estas secciones contribuyó a fortalecer mi habilidad de comunicar resultados por escrito de manera clara y objetiva, adaptando el lenguaje a distintos tipos de lector.<br><br>Angulo, Juan Carlos<br>*(completar)*<br><br>Burga Loarte, Anaely<br>*La estructuración del documento técnico con rigor formal consolidó la trazabilidad entre los drivers de arquitectura (DR-01) y la modelación de dominios, facilitando la auditoría y replicabilidad del diseño del sistema LatiFi.*<br><br>[Apellidos, Nombres]<br>*(completar)*          |
+| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Contribuí a la preparación y exposición oral de la parte correspondiente del proyecto, comunicando de forma clara y objetiva los resultados obtenidos ante un público con distintos niveles de familiaridad con el tema, adaptando el lenguaje técnico según la audiencia.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*(completar)*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Presenté y defendí de manera síncrona la arquitectura de dominios, el mapeo estratégico y los flujos asíncronos on-chain/off-chain de LatiFi frente al equipo de proyecto, traduciendo diagramas de EventStorming y acoplamientos (U/D ACL, Conformist) a lenguaje de negocio para evaluadores técnicos y de producto.* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br> La exposición oral me permitió reforzar mi capacidad de transmitir resultados de forma clara y objetiva a audiencias diversas, ajustando el nivel de detalle técnico según el público.<br><br>Angulo, Juan Carlos<br>*(completar)*<br><br>Burga Loarte, Anaely<br>*Sustentar la topología de Bounded Contexts y los flujos cross-boundary permitió alinear la visión táctica/estratégica del equipo, validando que las restricciones Web3 (Polygon Amoy) se comuniquen sin ruido conceptual a perfiles no especializados en blockchain* |
+| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Participé en la redacción de secciones del informe TB1, cuidando que el contenido fuera claro, objetivo y comprensible para lectores con diferentes niveles de conocimiento técnico del proyecto.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*(completar)*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Redacté y estructuré formalmente en Markdown los apartados del Capítulo IV (arquitectura de dominio, modelado estratégico/táctico, justificación start-with-value de los 5 bounded contexts y especificación de flujos de mensajes), integrando especificaciones técnicas rigurosas legibles por perfiles de ingeniería y stakeholders.* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>La redacción de estas secciones contribuyó a fortalecer mi habilidad de comunicar resultados por escrito de manera clara y objetiva, adaptando el lenguaje a distintos tipos de lector.<br><br>Angulo, Juan Carlos<br>*(completar)*<br><br>Burga Loarte, Anaely<br>*La estructuración del documento técnico con rigor formal consolidó la trazabilidad entre los drivers de arquitectura (DR-01) y la modelación de dominios, facilitando la auditoría y replicabilidad del diseño del sistema LatiFi.*          |
 ## Capítulo I: Introducción
 
 ### 1.1. Startup Profile
@@ -108,8 +108,9 @@ El alcance de LatiFi en este informe es acotado: se trata del proyecto final del
 | Miembro | Descripción|
 |---|---|
 | **Angulo, Juan Carlos - U202317692** | Estudiante de Ingeniería de Software en séptimo ciclo. Le apasiona aprender tecnologías nuevas y construir soluciones aplicadas a problemas reales, y en este curso le entusiasma especialmente trabajar con blockchain. |
-| **Quiroz Zambrano, Fabrizio Javier - U202213406** | Estudiante de Ingeniería de Software, con interés en el desarrollo de aplicaciones móviles y en arquitectura de software. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. || Miembro 3 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
-| Burga Loarte, Anaely - U202118264 | Estudiante de Ingeniería de Software enfocado en la experiencia de usuario y la lógica de negocio en la interfaz. Contribuye en la interfaz de usuario y la coordinación general de la app. |
+| **Quiroz Zambrano, Fabrizio Javier - U202213406** | Estudiante de Ingeniería de Software, con interés en el desarrollo de aplicaciones móviles y en arquitectura de software. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
+| **Burga Loarte, Anaely - U202118264** | Estudiante de Ingeniería de Software enfocado en la experiencia de usuario y la lógica de negocio en la interfaz. Contribuye en la interfaz de usuario y la coordinación general de la app. |
+
 ### 1.2. Solution Profile
 
 #### 1.2.1. Antecedentes y problemática
@@ -412,9 +413,9 @@ Cada entrevista se orientará primero a entender la situación actual del partic
 - ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito?
 - ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato?
 
-### 2.2.2. Registro de entrevistas
+#### 2.2.2. Registro de entrevistas
 
-#### Tabla resumen de entrevistas — Segmento Prestatario no bancarizado
+##### Tabla resumen de entrevistas: segmento Prestatario no bancarizado
 
 | # | Entrevistado | Edad | Ocupación             | Bancarización | Fecha | Video |
 |---|---|---|-----------------------|---|---|---|
@@ -424,7 +425,7 @@ Cada entrevista se orientará primero a entender la situación actual del partic
 
 ---
 
-#### Entrevista 1 — Joseph Falcón
+##### Entrevista 1: Joseph Falcón
 
 **Ficha del entrevistado**
 
@@ -433,9 +434,9 @@ Cada entrevista se orientará primero a entender la situación actual del partic
 | Nombre | Joseph Falcón                                                                                          |
 | Edad | 21 años                                                                                                |
 | Distrito | Villa Maria del Triunfo                                                                                |
-| Ocupación | Ingeniero de Sofware                                                                                   |
+| Ocupación | Ingeniero de Software                                                                                   |
 | Nivel de bancarización | Cuenta de ahorros en banco; acceso limitado a crédito formal (montos bajos, tasas altas)               |
-| Familiaridad con billeteras digitales/cripto | Baja — usa app de su banco y Yape, sin experiencia en criptomonedas                                    |
+| Familiaridad con billeteras digitales/cripto | Baja: usa app de su banco y Yape, sin experiencia en criptomonedas                                    |
 | Video | [Ver grabación](https://drive.google.com/file/d/1ukLD49CHZPHEDglgHyofh8hUxh_JOwGW/view?usp=share_link) |
 
 **Screenshot de la entrevista**
@@ -464,50 +465,17 @@ Joseph financia sus gastos principalmente con ahorros propios y, cuando necesita
 
 ---
 
-#### Entrevista 2 — *(pendiente)*
+##### Entrevista 2
 
-**Ficha del entrevistado**
+_Pendiente de desarrollo: requiere una entrevista real a un representante del segmento Prestatario no bancarizado._
 
-| Campo | Detalle |
-|---|---|
-| Nombre | |
-| Edad | |
-| Distrito | |
-| Ocupación | |
-| Nivel de bancarización | |
-| Familiaridad con billeteras digitales/cripto | |
-| Video | |
-
-**Screenshot de la entrevista**
-
-![Entrevista 2](ruta/a/screenshot-entrevista-2.png)
-
-**Resumen**
-
-
-
-**Transcripción completa**
-
-| # | Pregunta | Respuesta |
-|---|---|---|
-| 1 | ¿Cómo financia hoy sus gastos o su actividad económica cuando necesita dinero que no tiene disponible? | |
-| 2 | ¿Ha intentado alguna vez acceder a un préstamo formal (banco, financiera, caja)? ¿Qué pasó? | |
-| 3 | ¿A quién le pide dinero prestado hoy (familia, conocidos, prestamista informal, "junta")? ¿Bajo qué condiciones? | |
-| 4 | ¿Qué tan predecibles son sus ingresos mes a mes? | |
-| 5 | ¿Usa algún tipo de billetera digital o aplicación financiera hoy? ¿Cuál y para qué? | |
-| 6 | ¿Qué tan familiarizado está con el concepto de criptomonedas o stablecoins? | |
-| 7 | ¿Qué le preocuparía más de pedir un préstamo a través de una app sin un banco de por medio? | |
-| 8 | Si pudiera demostrar que "es de fiar" sin tener historial bancario, ¿cómo cree que podría demostrarlo? | |
-| 9 | ¿Puede describir la última vez que tuvo un problema de dinero relacionado con esto? ¿Qué hizo? | |
-| 10 | ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito? | |
-| 11 | ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato? | |
 #### 2.2.3. Análisis de entrevistas
 
 _Pendiente de desarrollo: requiere entrevistas reales a representantes de los segmentos objetivo. El análisis identificará patrones y características comunes dentro de cada segmento a partir de los datos obtenidos en el registro de entrevistas de la sección 2.2.2._
 
 ### 2.3. Needfinding
 
-El proceso de Needfinding de LatiFi se construirá a partir de los hallazgos reales del proceso de entrevistas (sección 2.2), por lo que los artefactos de esta sección no pueden completarse todavía de forma honesta sin haber escuchado primero a representantes reales de los segmentos prestatario y prestamista. A continuación se indica, para cada artefacto, la herramienta que el equipo usará y el criterio con el que se construirá una vez disponibles los datos de campo.
+El proceso de Needfinding de LatiFi se apoya en los hallazgos reales de las entrevistas de la sección 2.2. Cada artefacto indica la herramienta empleada y los datos de campo en los que se basa.
 
 #### 2.3.1. User Personas
 
@@ -516,12 +484,12 @@ El proceso de Needfinding de LatiFi se construirá a partir de los hallazgos rea
 | Campo | Detalle |
 |---|---|
 | Herramienta | UXPressia |
-| Basado en | Entrevistas 1-5, sección 2.2.2 |
+| Basado en | Entrevista 1, sección 2.2.2 |
 | Segmento | Prestatario no bancarizado/subatendido |
 
 ![User Persona - Prestatario](resources/Cap1/UserPersona/JosephUserPersona.png)
 
-El Persona fue construido en UXPressia a partir de los datos demográficos, objetivos, frustraciones y comportamientos recogidos en las entrevistas de la sección 2.2.2, representando a un prestatario con acceso limitado a crédito formal, ingresos variables y baja familiaridad con criptoactivos.
+El Persona fue construido en UXPressia a partir de los datos demográficos, objetivos, frustraciones y comportamientos recogidos en la entrevista 1 de la sección 2.2.2, representando a un prestatario con acceso limitado a crédito formal, ingresos variables y baja familiaridad con criptoactivos.
 
 #### 2.3.2. User Task Matrix
 
@@ -536,12 +504,12 @@ _Pendiente de desarrollo: requiere entrevistas reales a representantes de los se
 | Campo | Detalle |
 |---|---|
 | Herramienta | UXPressia |
-| Basado en | Entrevistas 1-5, sección 2.2.2 |
+| Basado en | Entrevista 1, sección 2.2.2 |
 | Segmento | Prestatario no bancarizado/subatendido|
 
 ![Empathy Map - Prestatario](resources/Cap1/EmpathyMap/EmpathyMapping.png)
 
-El Empathy Map fue construido en UXPressia a partir de los mismos hallazgos de las entrevistas de la sección 2.2.2, documentando lo que el Prestatario dice, piensa, hace y siente frente al acceso al crédito.
+El Empathy Map fue construido en UXPressia a partir de los mismos hallazgos de la entrevista 1 de la sección 2.2.2, documentando lo que el Prestatario dice, piensa, hace y siente frente al acceso al crédito.
 
 #### 2.3.4. As-is Scenario Mapping
 
@@ -549,7 +517,7 @@ Se documentará el escenario actual ("as-is") de cada segmento, es decir, cómo 
 
 El presente diagrama modela el flujo operacional actual (*AS-IS*) de una solicitud de préstamo con garantía bajo esquemas tradicionales, caracterizado por una alta dependencia de la intervención humana, transferencia física de expedientes y baja trazabilidad en tiempo real.
 
-![As-Is scenario mapping](https://raw.githubusercontent.com/Arquitectura-de-Softwares-Emergentes/latifi-report/main/resources/Cap1/As-Is%20scenario%20mapping.png)
+![As-Is scenario mapping](resources/Cap1/As-Is%20scenario%20mapping.png)
 
 ### **Carriles de Responsabilidad (Swimlanes)**
 * **USER / BORROWER**: Prestatario que inicia la petición y aporta documentación de respaldo.
@@ -617,7 +585,7 @@ El siguiente glosario recoge los términos de negocio del dominio de microcrédi
 
 El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermediación mediante contratos inteligentes (*smart contracts*), autenticación non-custodial, valoración automatizada de garantías vía oráculos de precios y reputación on-chain, reduciendo drásticamente la latencia y eliminando el factor humano en la ejecución.
 
-![To-be scenario mapping](https://raw.githubusercontent.com/Arquitectura-de-Softwares-Emergentes/latifi-report/main/resources/Cap1/To-be%20scenario%20mapping.png)
+![To-be scenario mapping](resources/Cap1/To-be%20scenario%20mapping.png)
 
 ### **Carriles de Arquitectura / Capas (Swimlanes / Bounded Context Layers)**
 * **USER / BORROWER**: Prestatario autogestionado con wallet non-custodial.
@@ -649,7 +617,7 @@ El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermedia
 ### **Tabla Comparativa Resumen: AS-IS vs. TO-BE**
 | Dimensión | Enfoque AS-IS (Tradicional) | Enfoque TO-BE (Web3 / Descentralizado) |
 | :--- | :--- | :--- |
-| **Tiempo de Procesamiento** | 3 a 10 días hábiles | Segundos a minutos (automático on-chain) |
+| **Tiempo de Procesamiento** | Varios días por los traspasos manuales entre áreas | Segundos a minutos (automático on-chain) |
 | **Intermediarios** | Front Desk, Oficial de Crédito, Riesgos, Finanzas | Ninguno (Smart Contracts + Oráculos) |
 | **Garantía / Colateral** | Físico / Documental / Legal tradicional | Criptoactivo bloqueado en Smart Contract Escrow |
 | **Evaluación de Riesgo** | Subjetiva / Manual / Formularios impresos | Algorítmica (LTV por Oráculos + Trust Tiers On-chain) |
@@ -879,9 +847,9 @@ Se adoptan los cinco bounded contexts identificados durante la investigación de
 
 #### EventStorming
 
-_Pendiente de desarrollo: requiere sesión de EventStorming en vivo del equipo en Miro/LucidChart._
+![EventStorming](resources/Cap1/eventstorming.png)
 
-Sin perjuicio de lo anterior, a partir del flujo de dominio ya identificado es posible anticipar los siguientes Domain Events candidatos, como punto de partida para la sesión en vivo:
+Los Domain Events identificados a partir del flujo de dominio son los siguientes:
 
 - `ProfileCreated`: se registra un perfil ligero vinculado a una dirección on-chain (Identity/Wallet Context).
 - `LoanRequested`: un prestatario publica una solicitud de préstamo con monto, tasa y plazo (Lending Context; decisión pendiente sobre si se emite como evento on-chain o se origina off-chain, ver Domain Message Flows más abajo).
@@ -931,8 +899,6 @@ El flujo de mensajes del happy path entre bounded contexts es el siguiente. El *
 - **Exchange Rate Context: Separate Ways respecto de todos los demás.** No comparte modelo de dominio con ningún otro contexto ni depende de ellos; su única relación externa es con el proveedor de FX de terceros. Esta independencia es intencional: evita que una fluctuación o falla de la tasa de cambio contamine la lógica de negocio de Lending o Reputation.
 - **Marketing/Landing Context: Separate Ways respecto de todos los demás.** Al igual que Exchange Rate, no comparte modelo ni tiene dependencias técnicas con el resto del sistema; en términos de Context Mapping es un contexto aislado por diseño, lo que le permite desarrollarse y desplegarse de forma completamente independiente.
 - **LatiFi API como Shared Kernel interno (a nivel de infraestructura, no de dominio).** Aunque Identity/Wallet, Reputation y Exchange Rate son bounded contexts distintos a nivel de dominio, para el alcance del curso se co-despliegan dentro del mismo proceso de LatiFi API (Spring Boot/NestJS/ASP.NET Core), compartiendo infraestructura transversal (autenticación, configuración, acceso a base de datos) mediante un módulo `shared`. Este acoplamiento es explícitamente de infraestructura, no de modelo de dominio: cada contexto mantiene sus propios agregados y lenguaje ubicuo dentro de su paquete, de modo que la separación lógica exigida por la rúbrica de DDD se preserva aun cuando el despliegue físico esté unificado por restricciones de alcance académico.
-
-![EventStorming](resources/Cap1/eventstorming.png)
 
 #### Software Architecture
 
