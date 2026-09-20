@@ -105,6 +105,7 @@ El alcance de LatiFi en este informe es acotado: se trata del proyecto final del
 |---|---|
 | **Angulo, Juan Carlos - U202317692** | Estudiante de Ingeniería de Software en séptimo ciclo. Le apasiona aprender tecnologías nuevas y construir soluciones aplicadas a problemas reales, y en este curso le entusiasma especialmente trabajar con blockchain. |
 | **Quiroz Zambrano, Fabrizio Javier - U202213406** | Estudiante de Ingeniería de Software, con interés en el desarrollo de aplicaciones móviles y en arquitectura de software. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. || Miembro 3 | -Nombre y Apellido, código- <br><br> -Descripción a completar por el integrante- |
+| **Vilca Valverde, Fiorella Angela - U20211e417** | Estudiante de Ingeniería de Software, con interés en el analisis de datos. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
 
 ### 1.2. Solution Profile
 
