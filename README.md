@@ -21,6 +21,7 @@
 | Angulo Abud Juan Carlos | U202317692 |
 | Quiroz Zambrano Fabrizio Javier | U202213406 |
 | Burga Loarte Anaely | U202118264 |
+| Vilca Valverde Fiorella Angela | U20211e417 |
 
 <strong>16 de septiembre de 2026</strong><br>
 </div>
@@ -30,13 +31,23 @@
 
 | Versión | Fecha | Autor | Descripción de modificación |
 |---|---|---|---|
-| 1.0 | 2026-09-16 | Equipo LatiFi | Primera versión del informe: avance de TB1, Capítulos I a IV. |
+| 1.0 | 16/09/2026 | Juan Angulo | Creación del repositorio e inicialización del informe. Redacción del avance de TB1 con los Capítulos I a IV, datos del curso y primer perfil de integrante. |
+| 1.1 | 19/09/2026 | Fabrizio Quiroz | Registro de la entrevista 1 del segmento prestatario, User Persona y Empathy Map del prestatario, y estructura inicial de Student Outcome 3. |
+| 1.2 | 19/09/2026 | Anaely Burga | Nombres de integrantes, As-Is y To-Be Scenario Mapping, y diagramas de EventStorming, Domain Storytelling, Bounded Context Canvases y Context Map del Capítulo IV. |
+| 1.3 | 19/09/2026 | Fiorella Vilca | Entrevista 1 del segmento prestamista, User Persona, User Task Matrix y Empathy Map del prestamista, y perfil de integrante. |
+| 1.4 | 19/09/2026 | Juan Angulo | Rediseño de la carátula, revisión de estilo y de cumplimiento del enunciado, entradas de Student Outcome 3, integración de los aportes de Fiorella Vilca, Registro de Versiones, Avance de Conclusiones y Anexos. |
 
 # Project Report Collaboration Insights
 
 URL del repositorio: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-report
 
-_Pendiente de desarrollo: esta sección debe expandirse en cada entrega con capturas de los analíticos de colaboración y commits de GitHub, mostrando la participación de cada integrante del equipo en la elaboración del informe._
+El Project Report se redacta en Markdown, con `README.md` como archivo principal, dentro de un repositorio público de la organización del equipo en GitHub. El equipo aplica GitFlow: `develop` concentra la integración del informe, `main` recibe las versiones entregables y cada integrante avanza sus secciones en ramas propias que se integran mediante pull requests. Los mensajes de commit siguen la convención Conventional Commits, y el PDF de cada entrega se genera a partir de este repositorio.
+
+**TB1.** Juan Angulo redactó el avance de los Capítulos I a IV y mantiene el flujo de ramas. Fabrizio Quiroz registró la entrevista del segmento prestatario y elaboró su User Persona y su Empathy Map. Anaely Burga elaboró los As-Is y To-Be Scenario Mapping y los diagramas de dominio del Capítulo IV. Fiorella Vilca registró la entrevista del segmento prestamista y elaboró su User Persona, el User Task Matrix y el Empathy Map correspondiente. Cada aporte queda registrado por commit y es coherente con el Registro de Versiones.
+
+_Pendiente de desarrollo: capturas de los analíticos de colaboración y de los commits de GitHub por integrante._
+
+<div style="page-break-after: always;"></div>
 
 # Contenido
 
@@ -50,11 +61,9 @@ _Pendiente de desarrollo: esta sección debe expandirse en cada entrega con capt
   - [1.2. Solution Profile](#12-solution-profile)
     - [1.2.1. Antecedentes y problemática](#121-antecedentes-y-problemática)
     - [1.2.2. Lean UX Process](#122-lean-ux-process)
-      - [1.2.2.1. Lean UX Problem Statements](#1221-lean-ux-problem-statements)
-      - [1.2.2.2. Lean UX Assumptions](#1222-lean-ux-assumptions)
-      - [1.2.2.3. Lean UX Hypothesis Statements](#1223-lean-ux-hypothesis-statements)
-      - [1.2.2.4. Lean UX Canvas](#1224-lean-ux-canvas)
   - [1.3. Segmentos objetivo](#13-segmentos-objetivo)
+    - [Segmento 1: Prestatario, Emprendedor o Independiente No Bancarizado (segmento principal)](#segmento-1-prestatario-emprendedor-o-independiente-no-bancarizado-segmento-principal)
+    - [Segmento 2: Prestamista, Persona con Capital Ocioso (segmento secundario, lado de la oferta)](#segmento-2-prestamista-persona-con-capital-ocioso-segmento-secundario-lado-de-la-oferta)
 - [Capítulo II: Requirements Elicitation & Analysis](#capítulo-ii-requirements-elicitation--analysis)
   - [2.1. Competidores](#21-competidores)
     - [2.1.1. Análisis competitivo](#211-análisis-competitivo)
@@ -71,24 +80,50 @@ _Pendiente de desarrollo: esta sección debe expandirse en cada entrega con capt
   - [2.4. Ubiquitous Language](#24-ubiquitous-language)
 - [Capítulo III: Requirements Specification](#capítulo-iii-requirements-specification)
   - [3.1. To-Be Scenario Mapping](#31-to-be-scenario-mapping)
+    - [Carriles de Arquitectura / Capas (Swimlanes / Bounded Context Layers)](#carriles-de-arquitectura--capas-swimlanes--bounded-context-layers)
+    - [Descripción Secuencial del Flujo (TO-BE Steps)](#descripción-secuencial-del-flujo-to-be-steps)
+    - [Ventajas Clave / Mejora frente al AS-IS (Value Proposition)](#ventajas-clave--mejora-frente-al-as-is-value-proposition)
+    - [Tabla Comparativa Resumen: AS-IS vs. TO-BE](#tabla-comparativa-resumen-as-is-vs-to-be)
   - [3.2. User Stories](#32-user-stories)
   - [3.3. Impact Mapping](#33-impact-mapping)
   - [3.4. Product Backlog](#34-product-backlog)
 - [Capítulo IV: Strategic-Level Software Design](#capítulo-iv-strategic-level-software-design)
   - [4.1. Strategic-Level Attribute-Driven Design](#41-strategic-level-attribute-driven-design)
+    - [Design Purpose](#design-purpose)
+    - [Attribute-Driven Design Inputs](#attribute-driven-design-inputs)
+    - [Architectural Design Decisions](#architectural-design-decisions)
+    - [Quality Attribute Scenario Refinements](#quality-attribute-scenario-refinements)
   - [4.2. Strategic-Level Domain-Driven Design](#42-strategic-level-domain-driven-design)
+    - [Bounded Contexts](#bounded-contexts)
+    - [EventStorming](#eventstorming)
+    - [Candidate Context Discovery](#candidate-context-discovery)
+    - [Domain Message Flows Modeling](#domain-message-flows-modeling)
+    - [Bounded Context Canvases](#bounded-context-canvases)
+    - [Context Mapping](#context-mapping)
+    - [Software Architecture](#software-architecture)
 - [Avance de Conclusiones](#avance-de-conclusiones)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
+- [Anexo A. Videos de Exposiciones](#anexo-a-videos-de-exposiciones)
+
+<div style="page-break-after: always;"></div>
 
 # Student Outcome
 
-**Student Outcome 3**: Comunicación efectiva a diferentes audiencias.
+El curso contribuye al cumplimiento del Student Outcome ABET:
+
+**ABET – EAC - Student Outcome 3**
+
+Criterio: Capacidad de comunicarse efectivamente con un rango de audiencias.
+
+En el siguiente cuadro se describe las acciones realizadas y enunciados de conclusiones por parte del grupo, que permiten sustentar el haber alcanzado el logro del ABET – EAC - Student Outcome 3.
 
 | Criterio específico | Acciones realizadas | Conclusiones                                                                                                                                                                                                                                                                                                                                                               |
 |---|---|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Contribuí a la preparación y exposición oral de la parte correspondiente del proyecto, comunicando de forma clara y objetiva los resultados obtenidos ante un público con distintos niveles de familiaridad con el tema, adaptando el lenguaje técnico según la audiencia.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*Expuse el problema que motiva a LatiFi y la solución que el equipo propone: la dificultad de los emprendedores no bancarizados para acceder a un microcrédito y cómo una billetera con préstamos sobre blockchain reduce esa barrera. Adapté el nivel de detalle técnico al público, usando ejemplos cotidianos con quienes no conocen blockchain y términos más precisos con quienes sí.*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Presenté y defendí de manera síncrona la arquitectura de dominios, el mapeo estratégico y los flujos asíncronos on-chain/off-chain de LatiFi frente al equipo de proyecto, traduciendo diagramas de EventStorming y acoplamientos (U/D ACL, Conformist) a lenguaje de negocio para evaluadores técnicos y de producto.* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br> La exposición oral me permitió reforzar mi capacidad de transmitir resultados de forma clara y objetiva a audiencias diversas, ajustando el nivel de detalle técnico según el público.<br><br>Angulo, Juan Carlos<br>*Exponer el problema completo me obligó a explicarlo con claridad y sin rodeos, y a reconocer qué conceptos de blockchain necesitan más contexto según quién escucha. Concluyo que comunicar bien el porqué de la solución es tan importante como describir cómo funciona.*<br><br>Burga Loarte, Anaely<br>*Sustentar la topología de Bounded Contexts y los flujos cross-boundary permitió alinear la visión táctica/estratégica del equipo, validando que las restricciones Web3 (Polygon Amoy) se comuniquen sin ruido conceptual a perfiles no especializados en blockchain* |
-| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Participé en la redacción de secciones del informe TB1, cuidando que el contenido fuera claro, objetivo y comprensible para lectores con diferentes niveles de conocimiento técnico del proyecto.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*Redacté las secciones del informe que me correspondieron: Startup Profile, Solution Profile con el proceso Lean UX, segmentos objetivo, análisis de competidores y diseño de entrevistas. Escribí cada apartado para que lo entienda tanto un lector técnico como uno de negocio, y mantuve el repositorio con GitFlow para que los aportes del equipo queden ordenados y trazables.*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Redacté y estructuré formalmente en Markdown los apartados del Capítulo IV (arquitectura de dominio, modelado estratégico/táctico, justificación start-with-value de los 5 bounded contexts y especificación de flujos de mensajes), integrando especificaciones técnicas rigurosas legibles por perfiles de ingeniería y stakeholders.* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>La redacción de estas secciones contribuyó a fortalecer mi habilidad de comunicar resultados por escrito de manera clara y objetiva, adaptando el lenguaje a distintos tipos de lector.<br><br>Angulo, Juan Carlos<br>*Redactar mi parte del informe me mostró que un documento técnico funciona cuando cada afirmación se sustenta y el lenguaje se ajusta al lector. Concluyo que una redacción ordenada y consistente facilita que el equipo y los evaluadores sigan el razonamiento del proyecto.*<br><br>Burga Loarte, Anaely<br>*La estructuración del documento técnico con rigor formal consolidó la trazabilidad entre los drivers de arquitectura (DR-01) y la modelación de dominios, facilitando la auditoría y replicabilidad del diseño del sistema LatiFi.*          |
+| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Contribuí a la preparación y exposición oral de la parte correspondiente del proyecto, comunicando de forma clara y objetiva los resultados obtenidos ante un público con distintos niveles de familiaridad con el tema, adaptando el lenguaje técnico según la audiencia.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*Expuse el problema que motiva a LatiFi y la solución que el equipo propone: la dificultad de los emprendedores no bancarizados para acceder a un microcrédito y cómo una billetera con préstamos sobre blockchain reduce esa barrera. Adapté el nivel de detalle técnico al público, usando ejemplos cotidianos con quienes no conocen blockchain y términos más precisos con quienes sí.*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Presenté y defendí de manera síncrona la arquitectura de dominios, el mapeo estratégico y los flujos asíncronos on-chain/off-chain de LatiFi frente al equipo de proyecto, traduciendo diagramas de EventStorming y acoplamientos (U/D ACL, Conformist) a lenguaje de negocio para evaluadores técnicos y de producto.*<br><br>Vilca Valverde, Fiorella Angela<br>*TB1*<br>*(completar)* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br> La exposición oral me permitió reforzar mi capacidad de transmitir resultados de forma clara y objetiva a audiencias diversas, ajustando el nivel de detalle técnico según el público.<br><br>Angulo, Juan Carlos<br>*Exponer el problema completo me obligó a explicarlo con claridad y sin rodeos, y a reconocer qué conceptos de blockchain necesitan más contexto según quién escucha. Concluyo que comunicar bien el porqué de la solución es tan importante como describir cómo funciona.*<br><br>Burga Loarte, Anaely<br>*Sustentar la topología de Bounded Contexts y los flujos cross-boundary permitió alinear la visión táctica/estratégica del equipo, validando que las restricciones Web3 (Polygon Amoy) se comuniquen sin ruido conceptual a perfiles no especializados en blockchain*<br><br>Vilca Valverde, Fiorella Angela<br>*(completar)* |
+| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>Participé en la redacción de secciones del informe TB1, cuidando que el contenido fuera claro, objetivo y comprensible para lectores con diferentes niveles de conocimiento técnico del proyecto.<br><br>Angulo, Juan Carlos<br>*TB1*<br>*Redacté las secciones del informe que me correspondieron: Startup Profile, Solution Profile con el proceso Lean UX, segmentos objetivo, análisis de competidores y diseño de entrevistas. Escribí cada apartado para que lo entienda tanto un lector técnico como uno de negocio, y mantuve el repositorio con GitFlow para que los aportes del equipo queden ordenados y trazables.*<br><br>Burga Loarte, Anaely<br>*TB1*<br>*Redacté y estructuré formalmente en Markdown los apartados del Capítulo IV (arquitectura de dominio, modelado estratégico/táctico, justificación start-with-value de los 5 bounded contexts y especificación de flujos de mensajes), integrando especificaciones técnicas rigurosas legibles por perfiles de ingeniería y stakeholders.*<br><br>Vilca Valverde, Fiorella Angela<br>*TB1*<br>*(completar)* | Quiroz Zambrano, Fabrizio Javier<br>*TB1*<br>La redacción de estas secciones contribuyó a fortalecer mi habilidad de comunicar resultados por escrito de manera clara y objetiva, adaptando el lenguaje a distintos tipos de lector.<br><br>Angulo, Juan Carlos<br>*Redactar mi parte del informe me mostró que un documento técnico funciona cuando cada afirmación se sustenta y el lenguaje se ajusta al lector. Concluyo que una redacción ordenada y consistente facilita que el equipo y los evaluadores sigan el razonamiento del proyecto.*<br><br>Burga Loarte, Anaely<br>*La estructuración del documento técnico con rigor formal consolidó la trazabilidad entre los drivers de arquitectura (DR-01) y la modelación de dominios, facilitando la auditoría y replicabilidad del diseño del sistema LatiFi.*<br><br>Vilca Valverde, Fiorella Angela<br>*(completar)* |
+<div style="page-break-after: always;"></div>
+
 ## Capítulo I: Introducción
 
 ### 1.1. Startup Profile
@@ -333,6 +368,8 @@ Los segmentos objetivo de LatiFi se derivan directamente de los User Assumptions
 **Información estadística de sustento.** El universo de potenciales prestamistas se apoya en la adopción cripto ya medible en el país: Perú superó el millón de usuarios de criptomonedas y escaló al puesto 42 del ranking mundial de adopción cripto según el Global Crypto Adoption Index 2024 de Chainalysis, avanzando al puesto 34 en la edición 2025 (Infobae, 2025), y el 3.7% de los peruanos ya utiliza criptomonedas (Infobae, 2025). A nivel regional, las stablecoins concentran cerca del 90% del volumen de transacciones cripto, con los usuarios peruanos mostrando una preferencia particular por stablecoins denominadas en dólares (Forbes Perú, 2026), lo que sustenta que existe ya una base de usuarios familiarizados con este tipo de activo digital y en condiciones de operar como prestamistas dentro de un modelo P2P como el de LatiFi. No se encontró, dentro de las fuentes consultadas para este informe, una cifra pública y verificable que segmente específicamente cuántos de esos usuarios cripto peruanos tendrían capital disponible para prestar en un esquema P2P; ese dato deberá explorarse durante el proceso de Needfinding del Capítulo II mediante entrevistas directas.
 
 Estos dos segmentos son la base sobre la que se construirán, en el Capítulo II, los User Persona, el User Task Matrix, los User Journey Map y los Empathy Map correspondientes.
+
+<div style="page-break-after: always;"></div>
 
 ## Capítulo II: Requirements Elicitation & Analysis
 
@@ -640,13 +677,13 @@ El presente diagrama modela el flujo operacional actual (*AS-IS*) de una solicit
 
 ![As-Is scenario mapping](resources/Cap1/As-Is%20scenario%20mapping.png)
 
-### **Carriles de Responsabilidad (Swimlanes)**
+##### Carriles de Responsabilidad (Swimlanes)
 * **USER / BORROWER**: Prestatario que inicia la petición y aporta documentación de respaldo.
 * **LOAN OFFICER / FRONT DESK**: Mesón de atención y primer filtro de recepción documental.
 * **CREDIT RISK DEPARTMENT**: Área analítica encargada de evaluar la viabilidad de riesgo del crédito.
 * **FINANCE / OPERATIONS**: Instancia final de emisión de vouchers, validación de firmas y desembolso de fondos.
 
-### **Descripción Secuencial del Flujo**
+##### Descripción Secuencial del Flujo
 1. **Initiate Loan Application [Manual]**: El usuario completa y entrega la solicitud inicial del crédito.
 2. **Submit Required Documents?**: Verificación de presencia de requisitos mínimos adjuntos.
    * *No*: El proceso se detiene o retorna para la recolección de faltantes.
@@ -668,7 +705,7 @@ El presente diagrama modela el flujo operacional actual (*AS-IS*) de una solicit
 17. **Obtain Authorized Signatures [Manual]**: Firma física gerencial/financiera requerida.
 18. **Disburse Funds [Check / Cash / Wire Transfer]**: Emisión efectiva del capital al usuario mediante medios tradicionales.
 
-### **Puntos de Dolor Identificados (Pain Points)**
+##### Puntos de Dolor Identificados (Pain Points)
 * **Latencia elevada**: Tiempos muertos significativos en los traspasos de expedientes físicos/digitales entre el *Loan Officer*, *Credit Dept* y *Finance* (pasos 7, 8, 14, 15).
 * **Fricción presencial**: Dependencia de citas presenciales obligatorias para firma de contratos y gestión de desembolsos (pasos 15-18).
 * **Riesgo operativo**: Propensión a errores de transcripción manual en la evaluación de riesgos y pérdida o degradación de expedientes en físico.
@@ -700,6 +737,8 @@ El siguiente glosario recoge los términos de negocio del dominio de microcrédi
 | **Exchange Rate** (Tipo de cambio) | Tasa de conversión entre el valor de la stablecoin del préstamo y la moneda local del usuario, consumida por la app para mostrar montos y cuotas en la moneda que el usuario entiende. |
 | **Unbanked / Underbanked** (No bancarizado / subatendido) | Persona sin acceso a una cuenta bancaria formal o con acceso muy limitado a productos financieros formales, segmento objetivo primario de LatiFi. |
 
+<div style="page-break-after: always;"></div>
+
 ## Capítulo III: Requirements Specification
 
 ### 3.1. To-Be Scenario Mapping
@@ -708,14 +747,14 @@ El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermedia
 
 ![To-be scenario mapping](resources/Cap1/To-be%20scenario%20mapping.png)
 
-### **Carriles de Arquitectura / Capas (Swimlanes / Bounded Context Layers)**
+#### Carriles de Arquitectura / Capas (Swimlanes / Bounded Context Layers)
 * **USER / BORROWER**: Prestatario autogestionado con wallet non-custodial.
 * **IDENTITY / WALLET CONTEXT**: Autenticación criptográfica, firma de transacciones y validación de sesión.
 * **EXCHANGE RATE CONTEXT**: Oráculo de precios en tiempo real para valoración de colateral (*Collateral Ratio*).
 * **REPUTATION CONTEXT**: Historial de comportamiento on-chain, *trust tiers* y penalizaciones automáticas.
 * **LENDING SMART CONTRACT CORE**: Lógica de depósito de colateral, emisión de deuda, liquidación y reembolso programado.
 
-### **Descripción Secuencial del Flujo (TO-BE Steps)**
+#### Descripción Secuencial del Flujo (TO-BE Steps)
 1. **Connect Non-Custodial Wallet [Action]**: El usuario vincula su wallet a través de la interfaz. $\rightarrow$ *Event: `WalletConnected`*.
 2. **Select Asset & Input Collateral/Loan Parameters [Data Input]**: El usuario define el monto del préstamo y colateral criptográfico aportado.
 3. **Fetch Real-Time Asset Pricing (Oracles) [Logic]**: Consulta de precio de mercado y cálculo de *Collateralization Ratio (LTV)* vía *Exchange Rate Context*.
@@ -727,7 +766,7 @@ El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermedia
    * **9a. Liquidate Collateral (Default) [Action]**: Ejecución algorítmica de liquidación parcial ante caída de LTV $\rightarrow$ *Events: `DefaultTriggered`, `ReputationPenaltyApplied`*.
    * **9b. Release Collateral (Paid) [Action]**: Liberación de garantía y actualización de score positivo $\rightarrow$ *Events: `LoanRepaid`, `ScoreUpdated`*.
 
-### **Ventajas Clave / Mejora frente al AS-IS (Value Proposition)**
+#### Ventajas Clave / Mejora frente al AS-IS (Value Proposition)
 * **Latencia cero/instantánea**: De días/semanas a segundos/minutos por ejecución determinista de smart contracts (pasos 5-7).
 * **Desintermediación y Autogestión**: Eliminación de *Loan Officer*, mesones físicos, mesas de control de riesgos manuales y vouchers de papel.
 * **Mitigación de riesgo de contraparte**: Lógica basada en código (*code is law*), con valoración objetiva por oráculos y liquidación algorítmica de garantías.
@@ -735,7 +774,7 @@ El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermedia
 
 ---
 
-### **Tabla Comparativa Resumen: AS-IS vs. TO-BE**
+#### Tabla Comparativa Resumen: AS-IS vs. TO-BE
 | Dimensión | Enfoque AS-IS (Tradicional) | Enfoque TO-BE (Web3 / Descentralizado) |
 | :--- | :--- | :--- |
 | **Tiempo de Procesamiento** | Varios días por los traspasos manuales entre áreas | Segundos a minutos (automático on-chain) |
@@ -843,6 +882,8 @@ El backlog prioriza primero el núcleo Auth + Identity + Lending que permite dem
 | 21 | US-API-01 | Endpoint de historial de reputación | Exposición del detalle de eventos detrás del score | 3 |
 | 22 | US-REP-03 | Feed ordenado/destacado por reputación | Orden u badge de reputación sobre el feed existente | 3 |
 | 23 | US-REP-04 | Decaimiento/recuperación gradual de reputación | Ajuste proporcional de score ante pagos parciales/tardíos | 5 |
+
+<div style="page-break-after: always;"></div>
 
 ## Capítulo IV: Strategic-Level Software Design
 
@@ -1093,9 +1134,17 @@ graph TD
     style FXApi fill:#999,color:#fff
 ```
 
+<div style="page-break-after: always;"></div>
+
 # Avance de Conclusiones
 
-_Pendiente de desarrollo: las conclusiones se redactan al cierre del ciclo de vida del proyecto (TF1), contrastando los Problem Statements, Assumptions e Hypothesis Statements del Capítulo I con los resultados reales obtenidos en las entrevistas de validación y en la demo final._
+Con las dos entrevistas realizadas, una por segmento, el equipo contrasta de forma preliminar los supuestos del Capítulo I. En el segmento prestatario, el entrevistado confirma que el banco le otorga montos bajos y tasas altas, y que cuando el banco demora recurre a conocidos, lo que respalda el problema de acceso al crédito formal. En el segmento prestamista, el entrevistado ya presta excedentes a conocidos con una tasa base desde el 5% mensual y ahorra en stablecoins, lo que respalda la existencia de capital ocioso dispuesto a colocarse.
+
+Ambos entrevistados coinciden en un punto que sustenta la propuesta de valor: la confianza depende de un historial de pagos verificable. El prestatario señala que podría demostrar que es de fiar mostrando pagos puntuales o referencias, y el prestamista exige ver préstamos anteriores y un indicador claro de cumplimiento antes de prestar a un desconocido. Ambos piden condiciones claras, y el prestamista rechaza que la plataforma custodie los fondos, lo que es coherente con la decisión de una wallet non-custodial.
+
+Estos resultados provienen de una entrevista por segmento, por lo que no permiten generalizar. Como siguientes pasos, el equipo completará el registro de entrevistas hasta el mínimo por segmento, elaborará el análisis con sustento estadístico y validará el modelo de reputación con prototipos, para contrastar el resto de las hipótesis del Lean UX Canvas.
+
+<div style="page-break-after: always;"></div>
 
 # Bibliografía
 
@@ -1117,6 +1166,14 @@ _Pendiente de desarrollo: las conclusiones se redactan al cierre del ciclo de vi
 - Messari. (s.f.). *Aave announces Credit Delegation, enabling uncollateralized lending*. https://messari.io/report/aave-announces-credit-delegation-enabling-uncollateralized-lending
 - Yellow.com. (2026). *Decentralized lending 2026: Aave on-chain money markets*. https://yellow.com/research/decentralized-lending-2026-aave-on-chain-money-markets
 
+<div style="page-break-after: always;"></div>
+
 # Anexos
 
-_Pendiente de desarrollo: se incluirán en esta sección los anexos exigidos por el enunciado del curso (Estructura para la sección Student Outcome, Estructura para el Informe de Participación, Consideraciones sobre secciones con Videos, Formato de Evaluación de User Experience según Heurísticas) conforme el equipo avance hacia TP1 y TB2._
+## Anexo A. Videos de Exposiciones
+
+| Entrega | Enlace privado (Microsoft Stream) |
+|---|---|
+| TB1 | Pendiente |
+
+_Pendiente de desarrollo: el enlace se incluye una vez publicado el video de exposición de TB1 en Microsoft Stream._
