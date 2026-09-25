@@ -4,7 +4,7 @@
 
 <img alt="upc-logo" src="docs/assets/cover/UPC-logo.png" width="100"/><br>
 
-<strong>Ingeniería de Software - 202401</strong><br>
+<strong>Ingeniería de Software - 202602</strong><br>
 <strong>1ASI0728 - Arquitecturas De Software Emergentes - Virtual</strong><br>
 <strong>Sección: 2620-9046</strong><br>
 <strong>Profesores: Ocampo Tello, Ernesto / Rojas Malásquez, Royer Edelwer / Velásquez Núñez, Ángel Augusto</strong><br>
