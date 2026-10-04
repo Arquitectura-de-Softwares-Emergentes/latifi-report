@@ -450,11 +450,11 @@ Cada entrevista se orientará primero a entender la situación actual del partic
 
 ##### Tabla resumen de entrevistas: segmento Prestatario no bancarizado
 
-| # | Entrevistado | Edad | Ocupación             | Bancarización | Fecha | Video |
-|---|---|---|-----------------------|---|---|---|
+| # | Entrevistado | Edad | Ocupación             | Bancarización | Fecha     | Video |
+|---|---|---|-----------------------|---|-----------|---|
 | 1 | Joseph Falcón | 21 | Ingeniero de Software | Cuenta bancaria, crédito limitado | 18/09/2026 | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQCHK_iltITcS6NM7HjVMQ2YAbWi4_rouRZw5XHK93iajko?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=J79Rt5) |
-| 2 | Rafael Chui | 24 | Repartidor independiente (delivery) | Cuenta de ahorros en caja, crédito limitado | (fecha) | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQAV70dTUnwjTb6dBn95hr5iAXZVc30kSbCMiMb09Yx5PSQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=I2NLfL) |
-| 3 | Gonzalo Contreras | 22 | Comerciante de mercado | Sin cuenta bancaria, solo Yape | (fecha) | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQC0ybY5Ls4pQ6Qw5eC4GupXAWf9-JjDwupdcTAFsZYLOjQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=iv4HO3) |
+| 2 | Rafael Chui | 24 | Repartidor independiente (delivery) | Cuenta de ahorros en caja, crédito limitado | 4/10/2026 | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQAV70dTUnwjTb6dBn95hr5iAXZVc30kSbCMiMb09Yx5PSQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=I2NLfL) |
+| 3 | Gonzalo Contreras | 22 | Comerciante de mercado | Sin cuenta bancaria, solo Yape | 4/10/2026  | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQC0ybY5Ls4pQ6Qw5eC4GupXAWf9-JjDwupdcTAFsZYLOjQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=iv4HO3) |
 ---
 
 ##### Entrevista 1: Joseph Falcón
