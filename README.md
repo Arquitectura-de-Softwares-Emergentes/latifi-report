@@ -453,7 +453,8 @@ Cada entrevista se orientará primero a entender la situación actual del partic
 | # | Entrevistado | Edad | Ocupación             | Bancarización | Fecha | Video |
 |---|---|---|-----------------------|---|---|---|
 | 1 | Joseph Falcón | 21 | Ingeniero de Software | Cuenta bancaria, crédito limitado | 18/09/2026 | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQCHK_iltITcS6NM7HjVMQ2YAbWi4_rouRZw5XHK93iajko?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=J79Rt5) |
-
+| 2 | Rafael Chui | 24 | Repartidor independiente (delivery) | Cuenta de ahorros en caja, crédito limitado | (fecha) | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQAV70dTUnwjTb6dBn95hr5iAXZVc30kSbCMiMb09Yx5PSQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=I2NLfL) |
+| 3 | Gonzalo Contreras | 22 | Comerciante de mercado | Sin cuenta bancaria, solo Yape | (fecha) | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQC0ybY5Ls4pQ6Qw5eC4GupXAWf9-JjDwupdcTAFsZYLOjQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=iv4HO3) |
 ---
 
 ##### Entrevista 1: Joseph Falcón
@@ -493,6 +494,86 @@ Joseph financia sus gastos principalmente con ahorros propios y, cuando necesita
 | 9 | ¿Puede describir la última vez que tuvo un problema de dinero relacionado con esto? ¿Qué hizo? | "Una vez necesité dinero rápido y el banco se demoró en aprobarme el préstamo, así que mientras tanto le pedí prestado a una vecina." |
 | 10 | ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito? | "Que me expliquen bien cómo funciona sin palabras raras, y que sea tan clara como mi banco en mostrarme cuánto debo." |
 | 11 | ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato? | "Valoraría que sea más rápida que el banco y que me den un monto justo según lo que vendo. La descartaría si siento que es menos segura o menos clara que mi banco." |
+
+---
+
+##### Entrevista 2: Rafael Chui
+
+**Ficha del entrevistado**
+
+| Campo | Detalle |
+|---|---|
+| Nombre | Rafael Chui |
+| Edad | 24 años |
+| Distrito | San Borja |
+| Ocupación | Repartidor independiente (delivery) |
+| Nivel de bancarización | Cuenta de ahorros en caja municipal; acceso limitado a crédito formal (montos bajos por ingresos no fijos) |
+| Familiaridad con billeteras digitales/cripto | Baja: usa Yape, Plin y la app de su caja; conoce las criptomonedas solo por redes sociales, sin experiencia de uso |
+| Video | [Ver grabación](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQAV70dTUnwjTb6dBn95hr5iAXZVc30kSbCMiMb09Yx5PSQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=I2NLfL) |
+
+**Screenshot de la entrevista**
+
+![Entrevista Rafael Chui](resources/Cap1/Interviews-Caps/RafaelInterview.png)
+
+**Resumen**
+
+Rafael financia sus gastos con lo que gana durante la semana y, ante un gasto grande como la reparación de su moto, recurre a su familia o a amigos, y ocasionalmente a una junta. Intentó acceder a un préstamo en la caja donde tiene su cuenta, pero por no tener ingresos fijos ni boletas solo le ofrecían un monto muy bajo, por lo que no lo tomó. Sus ingresos son medianamente predecibles: mejoran los fines de semana y a fin de mes, pero bajan con la lluvia o con fallas de las aplicaciones de reparto. Usa Yape y Plin para sus pagos diarios, y tiene muy poca familiaridad con las criptomonedas, que conoce solo por videos y comentarios de amigos. Le preocupa que una app sin banco de por medio le cobre condiciones no informadas al inicio o que no haya a quién reclamar si algo falla. Considera que podría demostrar ser "de fiar" mostrando su historial de pedidos, sus calificaciones en las apps de delivery y sus movimientos de Yape. Valoraría una solución rápida y fácil de usar desde el celular, pero la descartaría si le piden mucha información personal sin explicar el motivo o si las condiciones cambian después.
+
+**Transcripción completa**
+
+| # | Pregunta | Respuesta |
+|---|---|---|
+| 1 | ¿Cómo financia hoy sus gastos o su actividad económica cuando necesita dinero que no tiene disponible? | "Con lo que gano en la semana. Si se me presenta un gasto grande, como arreglar la moto, le pido a mis papás o a un amigo." |
+| 2 | ¿Ha intentado alguna vez acceder a un préstamo formal (banco, financiera, caja)? ¿Qué pasó? | "Sí, fui a la caja donde tengo mi cuenta. Me dijeron que como mis ingresos no son fijos ni tengo boletas, solo me podían dar un monto muy chico. Al final no lo tomé porque no me servía para lo que necesitaba." |
+| 3 | ¿A quién le pide dinero prestado hoy (familia, conocidos, prestamista informal, "junta")? ¿Bajo qué condiciones? | "A mi familia sobre todo, sin interés, pero siento que no puedo abusar. A veces entro a una junta con amigos, aunque con eso no puedo escoger cuándo me toca el dinero." |
+| 4 | ¿Qué tan predecibles son sus ingresos mes a mes? | "Más o menos. Los fines de semana y a fin de mes hay más pedidos, pero si llueve o si falla la aplicación, la semana baja bastante." |
+| 5 | ¿Usa algún tipo de billetera digital o aplicación financiera hoy? ¿Cuál y para qué? | "Uso Yape y Plin para recibir pagos y pagar mis cosas del día a día. También tengo la app de la caja, pero casi solo para ver mi saldo." |
+| 6 | ¿Qué tan familiarizado está con el concepto de criptomonedas o stablecoins? | "Poquito. He visto videos en TikTok y mis amigos hablan de bitcoin, pero nunca he comprado nada y no sé cómo se usa para algo real como un préstamo." |
+| 7 | ¿Qué le preocuparía más de pedir un préstamo a través de una app sin un banco de por medio? | "Que se pierda mi plata o que me cobren cosas que no me dijeron al inicio. Y que si hay un problema no haya nadie a quien llamar." |
+| 8 | Si pudiera demostrar que "es de fiar" sin tener historial bancario, ¿cómo cree que podría demostrarlo? | "Mostrando mi historial de pedidos y mis calificaciones en las apps de delivery, que ahí se ve que trabajo constante. También con mis movimientos de Yape." |
+| 9 | ¿Puede describir la última vez que tuvo un problema de dinero relacionado con esto? ¿Qué hizo? | "Hace poco se me malogró la moto y no podía trabajar mientras tanto. Le pedí prestado a mi tío y se lo fui devolviendo en cuotas pequeñas durante dos meses." |
+| 10 | ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito? | "Que la recomienden personas que conozco, que tenga buenas opiniones y que me muestre claramente cuánto voy a pagar en total antes de aceptar." |
+| 11 | ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato? | "Valoraría que sea rápida y que sea fácil de usar desde el celular, sin tantos trámites. La descartaría si me piden mucha información personal sin explicar para qué o si veo que las condiciones cambian después." |
+
+---
+
+##### Entrevista 3: Gonzalo Contreras
+
+**Ficha del entrevistado**
+
+| Campo | Detalle |
+|---|---|
+| Nombre | Gonzalo Contreras |
+| Edad | 22 años |
+| Distrito | Villa María del Triunfo |
+| Ocupación | Comerciante de mercado (puesto propio) |
+| Nivel de bancarización | Sin cuenta bancaria; sin acceso a crédito formal (le exigieron boletas, aval y documentos que no posee) |
+| Familiaridad con billeteras digitales/cripto | Muy baja: solo usa Yape con el número de su celular; no conoce las criptomonedas |
+| Video | [Ver grabación](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQC0ybY5Ls4pQ6Qw5eC4GupXAWf9-JjDwupdcTAFsZYLOjQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ptaozv) |
+
+**Screenshot de la entrevista**
+
+![Entrevista Gonzalo Contreras](resources/Cap1/Interviews-Caps/GonzaloInterview.png)
+
+**Resumen**
+
+Gonzalo financia su actividad con lo que va juntando de las ventas de su puesto y, cuando necesita más capital para comprar mercadería, recurre a conocidos o a una junta. Intentó acceder a un préstamo en una caja, pero le exigieron boletas, un aval y otros documentos que no posee, por lo que no continuó el trámite. Pide dinero prestado a su hermana o a una amiga del mercado y, solo cuando no tiene otra salida, a un prestamista del barrio que le cobra cerca de 10% semanal. Sus ingresos no son predecibles: mejoran en fechas como Navidad o el Día de la Madre y caen en otros meses. No tiene cuenta bancaria y su único medio digital es Yape, que usa para cobrar a sus clientes y pagar a sus proveedores. No está familiarizado con las criptomonedas y las percibe como algo complejo y poco seguro. Le preocupa ser estafado o no tener a quién reclamar si algo sale mal con una app. Considera que podría demostrar ser "de fiar" mediante el testimonio de sus clientes y proveedores, que lo conocen hace años. Valoraría un préstamo con menos trámites y menor interés que el del prestamista informal, pero lo descartaría si le piden dinero por adelantado o si no entiende bien las condiciones.
+
+**Transcripción completa**
+
+| # | Pregunta | Respuesta |
+|---|---|---|
+| 1 | ¿Cómo financia hoy sus gastos o su actividad económica cuando necesita dinero que no tiene disponible? | "Casi siempre con lo que voy juntando de las ventas. Si necesito más para comprar mercadería, le pido a algún conocido o entro a una junta." |
+| 2 | ¿Ha intentado alguna vez acceder a un préstamo formal (banco, financiera, caja)? ¿Qué pasó? | "Fui una vez a una caja, pero me pidieron boletas, un aval y varios papeles que no tengo. Me dijeron que volviera cuando tuviera todo y ya no volví." |
+| 3 | ¿A quién le pide dinero prestado hoy (familia, conocidos, prestamista informal, "junta")? ¿Bajo qué condiciones? | "A mi hermana o a una amiga del mercado. Con un prestamista del barrio también he sacado, pero cobra mucho interés, como 10% por semana, y solo lo hago si no hay otra salida." |
+| 4 | ¿Qué tan predecibles son sus ingresos mes a mes? | "Nada predecibles. En fechas como Navidad o el Día de la Madre vendo bien, pero en otros meses cae bastante y a veces apenas me alcanza." |
+| 5 | ¿Usa algún tipo de billetera digital o aplicación financiera hoy? ¿Cuál y para qué? | "Solo Yape, para cobrar a mis clientes y pagar a mis proveedores. No tengo cuenta en ningún banco, solo uso el número de mi celular." |
+| 6 | ¿Qué tan familiarizado está con el concepto de criptomonedas o stablecoins? | "Nada. He escuchado que es dinero por internet, pero me suena a algo para gente que sabe de computadoras, no sé cómo funciona ni si es seguro." |
+| 7 | ¿Qué le preocuparía más de pedir un préstamo a través de una app sin un banco de por medio? | "Que me estafen o que no tenga a quién reclamar. Con alguien del barrio al menos sé dónde encontrarlo, con una app no sé quién está detrás." |
+| 8 | Si pudiera demostrar que "es de fiar" sin tener historial bancario, ¿cómo cree que podría demostrarlo? | "Con que mis clientes y mis proveedores digan que siempre pago. Llevo años en el mismo puesto y todos me conocen." |
+| 9 | ¿Puede describir la última vez que tuvo un problema de dinero relacionado con esto? ¿Qué hizo? | "Hace unos meses se me malogró el refrigerador del puesto y necesitaba dinero urgente. No me alcanzó con lo que tenía, así que le pedí al prestamista del barrio y me salió caro." |
+| 10 | ¿Qué tendría que pasar para que confiara en una aplicación nueva para este propósito? | "Que alguien de confianza ya la haya usado y me cuente que le funcionó. Y que me expliquen todo clarito, cuánto pago y cuándo, sin letras chiquitas." |
+| 11 | ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato? | "Valoraría que no me pidan tantos papeles y que me presten sin tanto interés como el prestamista. La descartaría si me piden dinero por adelantado o si no entiendo bien las condiciones." |
 
 ---
 
