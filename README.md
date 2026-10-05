@@ -1196,6 +1196,182 @@ graph TD
     style Polygon fill:#999,color:#fff
     style FXApi fill:#999,color:#fff
 ```
+## Capítulo V: Tactical-Level Software Design
+
+## Capítulo VI: Solution UX Design
+
+### 6.1. Style Guidelines
+
+Las guías de estilo de LatiFi Wallet establecen las reglas visuales y de interacción que dan coherencia a la aplicación móvil nativa (Kotlin / Swift) y a la landing page (HTML5, CSS3 y JavaScript). Se basan en Material Design 3 y en las Human Interface Guidelines de Apple, y se orientan a un público que desconfía de las plataformas financieras: la interfaz debe transmitir claridad, seguridad y transparencia, como lo expresó la persona entrevistada al comparar la experiencia con la de su banco.
+
+Los principios que guían las decisiones de diseño son:
+
+| Principio | Descripción |
+|---|---|
+| Claridad | Un objetivo por pantalla, montos y plazos siempre visibles, lenguaje sencillo. |
+| Confianza | Estados y confirmaciones explícitas, colores sobrios y trazabilidad de cada operación. |
+| Inclusión | Contraste mínimo WCAG 2.1 AA, texto escalable y estados que no dependen solo del color. |
+| Consistencia | Los mismos componentes, colores y reglas en app y web. |
+
+### 6.1.1. General Style Guidelines
+
+#### Identidad visual
+
+El logotipo representa a dos personas (los nodos del prestatario y del prestamista) unidas por una línea de pulso: “Lati” de latido y “Fi” de finanzas. Se definen versiones sobre fondo claro, oscuro y azul de marca, un ícono de aplicación (Android adaptive / iOS), un isotipo sin contenedor para favicon, tamaños mínimos (48, 32 y 20 px), un margen libre igual a la mitad de la altura del isotipo y usos incorrectos que deben evitarse (cambiar colores, deformar o usarlo con bajo contraste).
+
+![Identidad visual de LatiFi](resources/Cap6/6.1.1-identidad-visual.png)
+
+#### Paleta de colores
+
+| Color | HEX | RGB | Uso |
+|---|---|---|---|
+| Navy 900 | #0B1F3A | 11, 31, 58 | Color primario: textos, barras y botón principal |
+| Navy 700 | #14407A | 20, 64, 122 | Enlaces, estados activos e información |
+| Green 600 | #0A7D5A | 10, 125, 90 | Éxito y pagos realizados |
+| Lime 400 | #C6FF3D | 198, 255, 61 | Acento y llamadas a la acción en modo oscuro |
+| Coral 500 | #FF6B4A | 255, 107, 74 | Alertas suaves; solo como fondo o ícono sobre claro |
+
+Colores de estado: éxito #0A7D5A, advertencia #B45309, error #C62828 e información #14407A, cada uno con un fondo suave asociado. Se define también una escala de neutros (#FFFFFF, #F5F7FA, #DDE3EA, #566174, #101828) y dos superficies para modo oscuro (#0B0F14 y #171C24).
+
+Todos los pares de texto y fondo se verificaron con la fórmula de contraste de WCAG 2.1. Por ejemplo, blanco sobre Navy 900 alcanza 16.52:1 y Lime 400 sobre el fondo oscuro 16.27:1. Coral 500 sobre blanco llega solo a 2.82:1, por lo que no se usa como color de texto sobre fondos claros.
+
+![Paleta de colores](resources/Cap6/6.1.1-paleta-de-colores.png)
+
+#### Tipografía
+
+| Estilo | Fuente | Tamaño / interlineado | Uso |
+|---|---|---|---|
+| Display | Sora Bold | 32 / 40 | Saldos y montos |
+| Headline | Sora SemiBold | 24 / 32 | Título de pantalla |
+| Title | Sora SemiBold | 18 / 24 | Secciones y tarjetas |
+| Body L | Inter Regular | 16 / 24 | Texto principal |
+| Body M | Inter Regular | 14 / 20 | Listas y tarjetas |
+| Label | Inter SemiBold | 14 / 20 | Botones, tabs y chips |
+| Caption | Inter Medium | 12 / 16 | Ayudas y metadatos |
+
+Ambas familias son gratuitas (Google Fonts) y se complementan: Sora aporta personalidad a títulos y cifras, e Inter ofrece alta legibilidad en pantallas pequeñas.
+
+![Tipografía](resources/Cap6/6.1.1-tipografia.png)
+
+#### Fundamentos de diseño
+
+- **Espaciado:** escala de base 4 pt (4, 8, 12, 16, 24, 32, 48). Margen lateral de 16 dp y separación entre tarjetas de 12 a 16 dp.
+- **Formas:** radios de 8 (campos), 12 (chips), 16 (tarjetas) y 28 (hojas inferiores).
+- **Elevación:** tres niveles (borde, tarjeta y diálogo) con sombras suaves.
+- **Iconografía:** Material Symbols Rounded en Android y SF Symbols en iOS, con trazo de 2 dp. Todo ícono va acompañado de una etiqueta de texto.
+- **Accesibilidad:** áreas táctiles de 48 dp (Android) y 44 pt (iOS), compatibilidad con TalkBack y VoiceOver, y texto escalable hasta 200 %.
+- **Idioma y tema:** interfaz en español (es_419) con preparación para inglés (en_US), y modo claro y oscuro.
+
+![Fundamentos de diseño](resources/Cap6/6.1.1-fundamentos-de-diseno.png)
+
+### 6.1.2. Web, Mobile & Devices Style Guidelines
+
+#### Aplicación móvil
+
+La aplicación se desarrolla de forma nativa para Android (Kotlin) e iOS (Swift), por lo que sigue las guías de cada plataforma: Material Design 3 en Android y Human Interface Guidelines en iOS. Se diseña primero para teléfono (clase compact) y escala a tablet con un riel lateral de navegación.
+
+Los componentes base son:
+
+| Componente | Especificación |
+|---|---|
+| Botón primario | Altura de 48 dp, esquinas totalmente redondeadas. Navy 900 con texto blanco en modo claro; Lime 400 con texto oscuro en modo oscuro. |
+| Botón secundario | Contorno de 1.5 dp y texto del mismo color. |
+| Botón deshabilitado | Fondo gris neutro y texto atenuado. |
+| Campo de texto | Altura de 56 dp, etiqueta flotante, borde de 1.5 dp. En error cambia a rojo y muestra un mensaje explícito. |
+| Chips de estado | Pagado, Pendiente, En mora y En revisión. Incluyen ícono y texto además del color. |
+| Tarjeta de préstamo | Monto, plazo, tasa, estado y barra de progreso de cuotas. |
+| Barra superior | Título de pantalla y botón de regreso. |
+| Navegación inferior | Cuatro destinos por rol, con indicador de pestaña activa. |
+
+![Componentes móviles](resources/Cap6/6.1.2-componentes-moviles.png)
+
+#### Landing page
+
+La landing page se construye con HTML5, CSS3 y JavaScript, siguiendo Material Design. Usa un enfoque mobile-first con tres clases de tamaño.
+
+| Clase | Rango | Columnas | Margen / canal | Navegación | Dispositivos |
+|---|---|---|---|---|---|
+| Compact | 0 – 599 px | 4 | 16 / 16 | Menú hamburguesa | Teléfonos |
+| Medium | 600 – 1023 px | 8 | 24 / 16 | Menú compacto | Tablets |
+| Expanded | ≥ 1024 px | 12 | 24 / 24 | Menú horizontal completo | Laptops y monitores |
+
+El contenedor máximo es de 1200 px. Las imágenes son fluidas, los textos usan unidades relativas (rem) y los botones mantienen al menos 48 px de alto en todos los tamaños.
+
+![Diseño responsive](resources/Cap6/6.1.2-responsive-web.png)
+
+### 6.2. Information Architecture
+
+#### 6.2.2. Labeling Systems
+
+#### 6.2.3. Searching Systems
+
+#### 6.2.4. SEO Tags and Meta Tags
+
+#### 6.2.5. Navigation Systems
+
+El sistema de navegación define cómo el usuario se desplaza por la aplicación y la landing page. Se organiza en cuatro tipos de navegación (global, local, contextual y suplementaria), de acuerdo con los principios de arquitectura de información de Rosenfeld y Morville.
+
+##### Navegación de la aplicación móvil
+
+Después de iniciar sesión y verificar su identidad, el usuario elige su rol (prestatario o prestamista). Cada rol tiene una barra de navegación inferior propia con cuatro destinos, un número dentro del límite recomendado por Material Design.
+
+![Mapa de navegación de la app](resources/Cap6/6.2.5-mapa-navegacion-app.png)
+
+| Tipo | Elemento | Descripción |
+|---|---|---|
+| Global | Barra inferior (prestatario) | Inicio, Préstamos, Reputación y Perfil. Siempre visible en las pantallas principales. |
+| Global | Barra inferior (prestamista) | Inicio, Invertir, Portafolio y Perfil. |
+| Local | Pasos de solicitud de préstamo | Stepper de varios pasos con indicador de avance y botón “Atrás”. |
+| Local | Filtros de oportunidades | Chips de riesgo y plazo dentro de “Invertir”. |
+| Contextual | Tarjetas y avisos | Una tarjeta de préstamo lleva a su detalle; un aviso de cuota próxima lleva a “Pagar cuota”. |
+| Contextual | Botón de regreso (←) | Vuelve a la pantalla anterior en pantallas de nivel 2 y 3. |
+| Suplementaria | Notificaciones, ayuda y cerrar sesión | Accesibles desde Inicio y Perfil. |
+| Suplementaria | Enlaces profundos (deep links) | Abren directamente el detalle de un préstamo o una inversión desde una notificación. |
+
+Reglas de navegación:
+
+1. La barra inferior solo aparece en las pantallas principales y se oculta durante flujos de varios pasos (solicitud, pago, inversión) para no distraer.
+2. Cada pantalla de nivel 2 o 3 tiene un botón de regreso y el gesto de retroceso del sistema.
+3. Las operaciones críticas (pagar, invertir) terminan en una pantalla de confirmación y un comprobante.
+4. Las pantallas de autenticación y verificación de identidad no muestran la barra inferior.
+5. Al reabrir la app con sesión activa, el usuario llega directamente a Inicio de su rol.
+
+Trazabilidad con las historias de usuario:
+
+| Pantalla o sección | Historias de usuario |
+|---|---|
+| Registro, login y 2FA | US-AUTH-01 a US-AUTH-04 |
+| Verificación de identidad | US-IDEN-01, US-IDEN-02 |
+| Invertir, Portafolio y Billetera del prestamista | US-LEND-01 a US-LEND-06 |
+| Reputación | US-REP-01 a US-REP-04 |
+
+##### Navegación de la landing page
+
+La landing page es de una sola página con secciones ancladas. El encabezado fijo lleva a cada sección y el botón principal conduce a la descarga de la aplicación. En móvil el menú se colapsa en un ícono de hamburguesa.
+
+![Mapa de navegación de la landing](resources/Cap6/6.2.5-mapa-navegacion-landing.png)
+
+| Tipo | Elemento | Descripción |
+|---|---|---|
+| Global | Encabezado fijo | Logo, Cómo funciona, Beneficios, Seguridad, Preguntas y Descargar app. |
+| Local | Anclas de sección | Desplazamiento suave hacia #como-funciona, #beneficios, #seguridad, #faq y #descarga. |
+| Contextual | Botones “Empezar ahora” | Aparecen en el hero y en cada paso, y llevan a la sección de descarga. |
+| Contextual | Botón “Volver arriba” | Aparece tras dos pantallas de desplazamiento. |
+| Suplementaria | Pie de página | Términos y condiciones, política de privacidad, contacto, redes sociales y selector de idioma. |
+
+Trazabilidad: la landing responde a las historias US-LAND-01 y US-LAND-02.
+
+### 6.3. Landing Page UI Design
+
+#### 6.3.1. Landing Page Wireframe
+
+#### 6.3.2. Landing Page Mock-up
+
+### 6.4. Mobile Applications UX/UI Design
+
+#### 6.4.1. Mobile Applications Wireframes
+
+#### 6.4.2. Mobile Applications Wireflow
 
 <div style="page-break-after: always;"></div>
 
