@@ -1648,6 +1648,28 @@ Trazabilidad: la landing responde a las historias US-LAND-01 y US-LAND-02.
 ### 6.3. Landing Page UI Design
 
 #### 6.3.1. Landing Page Wireframe
+> **Trazabilidad:** La landing page responde a las historias de usuario **US-LAND-01** y **US-LAND-02**.
+
+#### 6.3.1. Landing Page Wireframe
+A continuación, se presenta el diseño estructural de baja fidelidad (Wireframe) de la landing page de la plataforma, el cual define la distribución espacial, la jerarquía de la información y la disposición de los componentes clave antes de la aplicación de la interfaz gráfica final. El diseño se ha estructurado en tres secciones para asegurar su correcta visualización y legibilidad en la documentación:
+
+* **Parte 1: Cabecera, Hero Section y Simulador de Microcrédito**
+  Muestra la barra de navegación principal (*Navbar*), el título de alto impacto con la propuesta de valor del protocolo, los botones de acción rápida (*CTAs* para prestatario y prestamista) y el simulador de microcrédito interactivo en la parte superior.
+  <div align="center">
+    <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791517699/Captura_de_pantalla_2026-10-08_a_la_s_10.48.14_p._m._whlr2d.png" alt="Landing Wireframe Parte 1 - Hero y Simulador" width="80%"/>
+  </div>
+
+* **Parte 2: Flujo de Funcionamiento y Finanzas Justas**
+  Detalla la sección explicativa *"¿Cómo Funciona LatiFi?"* mediante un diagrama de flujo en tres pasos secuenciales (Solicitud, Reputación y Desembolso), seguido de la comparativa de finanzas justas y las métricas de impacto social orientadas a bodegas y pequeños negocios locales.
+  <div align="center">
+    <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791517720/Captura_de_pantalla_2026-10-08_a_la_s_10.48.32_p._m._sspxnh.png" alt="Landing Wireframe Parte 2 - Funcionamiento e Impacto" width="80%"/>
+  </div>
+
+* **Parte 3: Seguridad Criptográfica, Preguntas Frecuentes (FAQ) y Footer**
+  Agrupa los módulos de seguridad de grado institucional (arquitectura non-custodial y scoring híbrido), el acordeón interactivo de preguntas frecuentes para resolver fricciones del usuario, y el pie de página (*Footer*) institucional con accesos a la red de pruebas (Testnet) y documentación legal.
+  <div align="center">
+    <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791517742/Captura_de_pantalla_2026-10-08_a_la_s_10.48.56_p._m._ix5cyu.png" alt="Landing Wireframe Parte 3 - Seguridad, FAQ y Footer" width="80%"/>
+  </div>
 
 #### 6.3.2. Landing Page Mock-up
 
