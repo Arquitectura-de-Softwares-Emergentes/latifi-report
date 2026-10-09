@@ -36,8 +36,11 @@
 | 1.2 | 19/09/2026 | Anaely Burga | Nombres de integrantes, As-Is y To-Be Scenario Mapping, y diagramas de EventStorming, Domain Storytelling, Bounded Context Canvases y Context Map del Capítulo IV. |
 | 1.3 | 19/09/2026 | Fiorella Vilca | Entrevista 1 del segmento prestamista, User Persona, User Task Matrix y Empathy Map del prestamista, y perfil de integrante. |
 | 1.4 | 19/09/2026 | Juan Angulo | Rediseño de la carátula, revisión de estilo y de cumplimiento del enunciado, entradas de Student Outcome 3, integración de los aportes de Fiorella Vilca, Registro de Versiones y Avance de Conclusiones. |
-| 1.5 | 08/10/2026 | Juan Angulo | Redacción de la Arquitectura de Información del Capítulo VI: Labeling Systems, Searching Systems, SEO Tags and Meta Tags y elementos ASO. |
-| 1.6 | 08/10/2026 | Juan Angulo | Redacción de Organization Systems (6.2.1) del Capítulo VI. |
+| 1.5 | 04/10/2026 | Fabrizio Quiroz | Registro de las entrevistas 2 y 3 del segmento prestatario con sus capturas. |
+| 1.6 | 08/10/2026 | Juan Angulo | Análisis de entrevistas (2.2.3), System Landscape y Deployment Diagram del Capítulo IV, ajuste a Android como única plataforma móvil, actualización del Avance de Conclusiones, capturas de Collaboration Insights y Anexo de Videos de Exposiciones. |
+| 1.7 | 04/10/2026 | Fabrizio Quiroz | Style Guidelines (6.1) y Navigation Systems (6.2.5) del Capítulo VI (avance de TP1). |
+| 1.8 | 08/10/2026 | Juan Angulo | Labeling Systems, Searching Systems y SEO Tags and Meta Tags (6.2.2 a 6.2.4) del Capítulo VI (avance de TP1). |
+| 1.9 | 08/10/2026 | Juan Angulo | Organization Systems (6.2.1) del Capítulo VI (avance de TP1). |
 
 # Project Report Collaboration Insights
 
@@ -45,7 +48,15 @@ URL del repositorio: https://github.com/Arquitectura-de-Softwares-Emergentes/lat
 
 El Project Report se redacta en Markdown, con `README.md` como archivo principal, dentro de un repositorio público de la organización del equipo en GitHub. El equipo aplica GitFlow: `develop` concentra la integración del informe, `main` recibe las versiones entregables y cada integrante avanza sus secciones en ramas propias que se integran mediante pull requests. Los mensajes de commit siguen la convención Conventional Commits, y el PDF de cada entrega se genera a partir de este repositorio.
 
-**TB1.** Juan Angulo redactó el avance de los Capítulos I a IV y mantiene el flujo de ramas. Fabrizio Quiroz registró la entrevista del segmento prestatario y elaboró su User Persona y su Empathy Map. Anaely Burga elaboró los As-Is y To-Be Scenario Mapping y los diagramas de dominio del Capítulo IV. Fiorella Vilca registró la entrevista del segmento prestamista y elaboró su User Persona, el User Task Matrix y el Empathy Map correspondiente. Cada aporte queda registrado por commit y es coherente con el Registro de Versiones.
+**TB1.** Juan Angulo redactó el avance de los Capítulos I a IV y mantiene el flujo de ramas. Fabrizio Quiroz registró las entrevistas 1, 2 y 3 del segmento prestatario y elaboró su User Persona y su Empathy Map. Anaely Burga elaboró los As-Is y To-Be Scenario Mapping y los diagramas de dominio del Capítulo IV. Fiorella Vilca registró la entrevista del segmento prestamista y elaboró su User Persona, el User Task Matrix y el Empathy Map correspondiente. Cada aporte queda registrado por commit y es coherente con el Registro de Versiones.
+
+Las capturas siguientes muestran los analíticos del repositorio del informe en GitHub al 8 de octubre de 2026. En ellas aparecen los cuatro integrantes del equipo como contribuidores: Sve-nnN (Juan Angulo), Relycloud (Fabrizio Quiroz), userxx1000 (Anaely Burga) y fiore-prac (Fiorella Vilca).
+
+![Analítico de contribuidores del repositorio del informe](resources/Annexes/collab-contributors.png)
+
+![Historial de commits de la rama main](resources/Annexes/collab-commits.png)
+
+![Network graph con las ramas main y develop](resources/Annexes/collab-network.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -71,6 +82,7 @@ El Project Report se redacta en Markdown, con `README.md` como archivo principal
   - [2.2. Entrevistas](#22-entrevistas)
     - [2.2.1. Diseño de entrevistas](#221-diseño-de-entrevistas)
     - [2.2.2. Registro de entrevistas](#222-registro-de-entrevistas)
+    - [2.2.3. Análisis de entrevistas](#223-análisis-de-entrevistas)
   - [2.3. Needfinding](#23-needfinding)
     - [2.3.1. User Personas](#231-user-personas)
     - [2.3.2. User Task Matrix](#232-user-task-matrix)
@@ -102,6 +114,8 @@ El Project Report se redacta en Markdown, con `README.md` como archivo principal
     - [Software Architecture](#software-architecture)
 - [Avance de Conclusiones](#avance-de-conclusiones)
 - [Bibliografía](#bibliografía)
+- [Anexos](#anexos)
+  - [Anexo A. Videos de Exposiciones](#anexo-a-videos-de-exposiciones)
 
 <div style="page-break-after: always;"></div>
 
@@ -390,9 +404,9 @@ El microcrédito P2P descentralizado no es un espacio vacío ni nuevo: desde 202
 | **Ventaja competitiva** | Modelo híbrido pensado para el "cold start" del usuario sin ninguna huella on-chain previa, con onboarding pensado para no nativos cripto y montos expresados en moneda local. | "Trust through consensus": due diligence humana de nivel casi-inversionista sobre negocios reales en mercados emergentes. | Score cuantitativo, automático y portable (NFT) sin depender de un comité humano; menor fricción que Goldfinch para el prestatario. | Aprovecha la liquidez y reputación ya construidas de uno de los protocolos DeFi más grandes y auditados del mercado. |
 | **Mercado objetivo** | Emprendedores e independientes no bancarizados de LATAM sin historial crediticio formal ni actividad cripto previa. | Negocios y fintechs de mercados emergentes (África, Asia, LATAM) con cierto nivel de formalización previa. | Usuarios cripto-nativos con billeteras que ya acumulan actividad on-chain suficiente para ser scoreadas. | Usuarios cripto-nativos que ya tienen una relación de confianza previa y verificable con quien les delega crédito. |
 | **Estrategias de marketing** | Proyecto académico: demo funcional sobre testnet, sin estrategia comercial real. | Posicionamiento como infraestructura de "impacto" para banking the unbanked, comunicación dirigida a inversionistas institucionales cripto. | Comunicación técnica dirigida a la comunidad DeFi y a integraciones (Chainlink Ecosystem), no al usuario final no bancarizado. | Comunicación como feature dentro del ecosistema Aave, no como producto independiente; depende de la marca ya construida del protocolo. |
-| **Productos & Servicios** | LatiFi Wallet (Kotlin/Swift), Smart Contract de préstamo en Solidity sobre Polygon Amoy, LatiFi API (perfil, reputación, tipo de cambio). | Pools de crédito on-chain, gobernanza y staking del token GFI, proceso de due diligence off-chain. | Token NFCS (ERC-721), pools de préstamo en stablecoins con colateral reducido, integración con oráculos Chainlink. | Función de delegación de crédito dentro del protocolo Aave V3/V4, sobre pools de liquidez ya existentes. |
+| **Productos & Servicios** | LatiFi Wallet (Kotlin, Android), Smart Contract de préstamo en Solidity sobre Polygon Amoy, LatiFi API (perfil, reputación, tipo de cambio). | Pools de crédito on-chain, gobernanza y staking del token GFI, proceso de due diligence off-chain. | Token NFCS (ERC-721), pools de préstamo en stablecoins con colateral reducido, integración con oráculos Chainlink. | Función de delegación de crédito dentro del protocolo Aave V3/V4, sobre pools de liquidez ya existentes. |
 | **Precios & Costos** | No aplica (demo académica sin dinero real). | Retornos e intereses variables según pool; sin tarifa pública fija reportada en las fuentes consultadas. | Colateral mínimo de 75% del monto del préstamo, más tasas de interés variables según nivel de NFCS (a menor score de riesgo, mejores condiciones) (Mad Devs, s.f.). | Costos de gas de la red más la tasa de interés variable del pool de Aave sobre el que se delega; sin tarifa adicional publicada específica para Credit Delegation. |
-| **Canales de distribución** | App móvil nativa (Android/iOS) + landing institucional. | Interfaz web del protocolo, dirigida a "backers" (inversionistas) y originadores de crédito ("Senior Pools"). | Interfaz web del protocolo, integraciones con wallets y con el ecosistema Chainlink. | Interfaz web/dApp de Aave; requiere ya ser usuario del protocolo. |
+| **Canales de distribución** | App móvil nativa (Android) + landing institucional. | Interfaz web del protocolo, dirigida a "backers" (inversionistas) y originadores de crédito ("Senior Pools"). | Interfaz web del protocolo, integraciones con wallets y con el ecosistema Chainlink. | Interfaz web/dApp de Aave; requiere ya ser usuario del protocolo. |
 | **Fortalezas** | Diseñado desde cero para el "cold start" del usuario no bancarizado; moneda local visible; alineado a un solo modelo de riesgo coherente (reputación, sin colateral). | Track record de haber colocado más de US$100M en préstamos reales a mercados emergentes (Goldfinch Foundation, Medium, s.f.). | Score automatizado y portable, sin depender de un comité humano por cada préstamo; ya integrado a Polygon y Chainlink. | Liquidez y seguridad de uno de los protocolos DeFi más auditados y grandes del mercado. |
 | **Debilidades** | Sin trayectoria, sin usuarios reales, sin dinero real (alcance académico sobre testnet). | En 2026 inició su cierre de operaciones tras un tercer default de un prestatario (Lend East), lo que evidenció el riesgo de underwriting solo con verificación humana en mercados emergentes (DL News, 2026). | Su score depende de actividad on-chain previa (Twitter, GitHub, DAOs, NFT), por lo que no resuelve el "cold start" de un usuario genuinamente nuevo en cripto, justo el perfil del no bancarizado. | Requiere una relación de confianza previa ya establecida entre delegante y delegado; no sirve para conectar a dos desconocidos, que es exactamente el escenario P2P que LatiFi busca resolver. |
 | **Oportunidades** | Ningún competidor revisado atiende bien al usuario sin ninguna huella on-chain previa ni resuelve el "cold start" combinando señales on-chain y off-chain. | Podría redirigir su infraestructura de due diligence hacia individuos en vez de solo negocios formales. | Podría añadir una capa de señales off-chain (como hace LatiFi) para atender a usuarios sin historial on-chain. | El desarrollo de infraestructura de identidad descentralizada (Worldcoin, Gitcoin Passport, Polygon ID) podría permitirle extender Credit Delegation a partes que no se conocen previamente (Yellow.com, 2026). |
@@ -625,6 +639,35 @@ Renso Julca, estudiante de 21 años e independiente en servicios digitales en Li
 | 10 | ¿Qué es lo que más valoraría de una solución así, y qué es lo que la haría descartarla de inmediato? | Lo que más valoraría es ver un historial de pagos real y automatizado que me permita diversificar mi excedente en varios microcréditos de forma transparente. La descartaría de inmediato si me cobran comisiones abusivas por operar o si la plataforma permite cuentas fantasmas sin un filtro mínimo de verificación. |
 
 ---
+
+#### 2.2.3. Análisis de entrevistas
+
+El equipo analiza las cuatro entrevistas registradas en 2.2.2: tres del segmento prestatario (Joseph Falcón, Rafael Chui y Gonzalo Contreras) y una del segmento prestamista (Renso Julca). Cada hallazgo cita a quienes lo sustentan y se traduce en una decisión de producto trazable a una historia de usuario.
+
+##### Hallazgos del segmento prestatario
+
+| # | Hallazgo | Evidencia | Decisión de producto |
+|---|---|---|---|
+| H1 | El crédito formal les ofrece montos bajos o los excluye por no tener boletas ni ingresos fijos. | Joseph recibió un monto bajo con tasa alta; Rafael recibió un monto tan chico que no lo tomó; a Gonzalo le exigieron boletas, aval y documentos y abandonó el trámite. | Evaluar al solicitante por reputación y no por documentos formales (US-REP-01, US-REP-02). |
+| H2 | Cuando necesitan dinero recurren a familiares, amigos, juntas o prestamistas informales, y el costo de este último es alto. | Los tres citan a su familia o a conocidos; Joseph y Rafael mencionan las juntas; Gonzalo cuenta que el prestamista del barrio le cobra cerca de 10% semanal. | Ofrecer una alternativa con tasa y plazo visibles desde la solicitud (US-LEND-01). |
+| H3 | Sus ingresos varían según la temporada, el clima o el día de la semana. | Joseph describe semanas buenas y flojas, Rafael habla de lluvia y fallas de las aplicaciones de reparto, y Gonzalo menciona Navidad y el Día de la Madre. | Mostrar siempre la cuota y la fecha de vencimiento, y no exigir un monto fijo mensual (US-LEND-05). |
+| H4 | Usan Yape o Plin a diario, pero casi no conocen las criptomonedas. | Los tres usan Yape; Rafael añade Plin; ninguno ha usado criptomonedas y Gonzalo dice que le suenan a algo "para gente que sabe de computadoras". | Onboarding en lenguaje simple y montos en soles junto al monto en stablecoin (US-AUTH-03, US-LEND-06). |
+| H5 | Temen la falta de claridad en las condiciones y no tener a quién reclamar. | Joseph quiere saber cuánto paga cada mes; Rafael teme cobros no informados; Gonzalo teme una estafa porque no sabe quién está detrás de la aplicación. | Mostrar el costo total antes de aceptar y confirmar cada operación con un comprobante (US-AUTH-04, US-LEND-05). |
+| H6 | Creen que pueden demostrar que son de fiar con señales ajenas al banco. | Joseph propone sus pagos puntuales y referencias del mercado; Rafael, su historial y calificaciones en las aplicaciones de reparto; Gonzalo, el testimonio de sus clientes y proveedores. | Combinar eventos on-chain con señales off-chain del perfil en la reputación (US-REP-02). |
+| H7 | La confianza en una aplicación nueva depende de recomendaciones y de una explicación sin tecnicismos. | Rafael y Gonzalo piden que alguien conocido ya la haya usado; Joseph, Rafael y Gonzalo piden que les expliquen cuánto pagan y cuándo, sin palabras raras ni letras chiquitas. | Landing y onboarding con lenguaje sencillo y una sección de seguridad visible (US-LAND-01, US-AUTH-03). |
+
+##### Hallazgos del segmento prestamista
+
+| # | Hallazgo | Evidencia | Decisión de producto |
+|---|---|---|---|
+| H8 | Presta excedentes a conocidos con una tasa base desde 5% mensual y el cobro manual lo desgasta. | Renso rota su capital en préstamos pequeños y señala que recordar los pagos es lo más desgastante. | Automatizar el desembolso y el cobro con el Smart Contract (US-LEND-03, US-LEND-04). |
+| H9 | Necesita ver el historial de pagos del solicitante antes de prestar a un desconocido. | Renso pide cuántos préstamos anteriores tiene, si los pagó a tiempo y un indicador claro de cumplimiento. | Feed con reputación visible y ordenable (US-LEND-02, US-REP-03). |
+| H10 | Rechaza que la plataforma custodie los fondos y teme las cuentas falsas. | Renso descarta una aplicación que retenga el dinero y las cuentas fantasmas sin filtro mínimo de verificación. | Modelo no custodial y registro de perfil ligero (US-AUTH-02, US-IDEN-01). |
+| H11 | Para montos pequeños le basta una reputación comprobable en lugar de un colateral. | Renso entiende que un pequeño emprendedor no tiene criptomonedas para dejar en garantía. | Descartar el colateral bloqueado en el alcance del producto. |
+
+##### Limitaciones
+
+Cuatro entrevistas no permiten generalizar y el segmento prestamista cuenta con una sola. El equipo agregará entrevistas de ese segmento y revisará estos hallazgos con cada nuevo registro.
 
 ### 2.3. Needfinding
 
@@ -1053,7 +1096,7 @@ Las siguientes decisiones, ya adoptadas por el equipo durante el diseño técnic
 - **Business Goals:** Validar, dentro del alcance académico, que el modelo "reputación en vez de colateral" es utilizable por el segmento objetivo real y no solo por usuarios cripto-nativos del propio equipo, sustentando la sección de Lean UX/UX Research de la rúbrica.
 - **Relevant Quality Attributes:** Usabilidad; secundariamente, Accesibilidad (i18n es_419/en_US aplicado también dentro de la app, no solo en la landing page).
 - **Stimulus Source:** Un usuario final representativo del segmento Prestatario (no bancarizado, primer contacto con cripto), en una sesión de prueba de usabilidad o en la demo en vivo.
-- **Environment:** Primer uso de la app, en un dispositivo Android o iOS de gama media, sin conocimiento previo de conceptos como seed phrase, gas o dirección on-chain.
+- **Environment:** Primer uso de la app, en un dispositivo Android de gama media, sin conocimiento previo de conceptos como seed phrase, gas o dirección on-chain.
 - **Artifact:** El flujo de onboarding de LatiFi Wallet (pantallas previas a "Conectar billetera") y el propio flujo de conexión de wallet vía Reown WalletKit/AppKit.
 - **Response:** El usuario completa cada paso del onboarding en lenguaje simple (sin jerga cripto), entiende qué implica conectar su wallet antes de hacerlo, y logra conectar exitosamente su billetera sin abandonar el flujo por confusión.
 - **Response Measure:** Tasa de finalización del onboarding superior al 80% en una prueba de usabilidad con al menos 5 usuarios no técnicos representativos del segmento; cero abandonos atribuibles a terminología no explicada, verificado en la sesión de validación.
@@ -1129,6 +1172,44 @@ El flujo de mensajes del happy path entre bounded contexts es el siguiente. El *
 
 #### Software Architecture
 
+**System Landscape Diagram (C4)**
+
+El panorama de sistemas reúne todo lo que el equipo construye y todo lo que LatiFi usa sin construirlo. Cuatro sistemas propios sirven a tres tipos de persona: la aplicación LatiFi Wallet para el prestatario y el prestamista, la LatiFi API que guarda perfiles y reputación, los Smart Contracts que ejecutan el préstamo y la Landing Page que atiende al visitante. Dos sistemas externos completan el panorama: la red Polygon Amoy, donde viven los contratos, y la API de tasas de cambio que alimenta la conversión a moneda local.
+
+```mermaid
+graph TD
+    Prestatario["Prestatario<br/>(no bancarizado)"]
+    Prestamista["Prestamista<br/>(capital ocioso)"]
+    Visitante["Visitante Web"]
+
+    subgraph "Sistemas de LatiFi"
+        Wallet["LatiFi Wallet<br/>[Sistema de Software]<br/>App móvil Android"]
+        API["LatiFi API<br/>[Sistema de Software]<br/>Perfil, reputación y tasas"]
+        SC["Smart Contracts<br/>[Sistema de Software]<br/>Ciclo del préstamo"]
+        Landing["Landing Page<br/>[Sistema de Software]<br/>Sitio institucional"]
+    end
+
+    Polygon["Polygon Amoy<br/>[Sistema Externo]"]
+    FXApi["API de Tasas de Cambio<br/>[Sistema Externo]"]
+
+    Prestatario --> Wallet
+    Prestamista --> Wallet
+    Visitante --> Landing
+    Wallet -->|"REST/HTTPS"| API
+    Wallet -->|"Transacciones firmadas"| SC
+    SC -->|"Se ejecuta en"| Polygon
+    API -->|"Lee eventos"| Polygon
+    API -->|"Consulta cotizaciones"| FXApi
+    Landing -.->|"Enlaza a la descarga"| Wallet
+
+    style Wallet fill:#1168bd,color:#fff
+    style API fill:#1168bd,color:#fff
+    style SC fill:#1168bd,color:#fff
+    style Landing fill:#1168bd,color:#fff
+    style Polygon fill:#999,color:#fff
+    style FXApi fill:#999,color:#fff
+```
+
 **Context Level Diagram (C4, Nivel 1)**
 
 El sistema LatiFi se representa como una única caja negra ("LatiFi Platform") rodeada de cuatro actores externos. El **Prestatario** y el **Prestamista** interactúan con el sistema a través de la app móvil LatiFi Wallet para solicitar, fondear, pagar y consultar préstamos. La **red blockchain Polygon Amoy** es un sistema externo con el que LatiFi Platform intercambia transacciones firmadas y eventos on-chain, actuando como el libro mayor inmutable del ciclo de préstamo. La **API externa de tasas de cambio** es otro sistema externo, consumido unidireccionalmente por LatiFi Platform para obtener cotizaciones de stablecoin a moneda local, sin que LatiFi le exponga nada a cambio. Un quinto actor, el **Visitante web**, interactúa únicamente con la porción pública de LatiFi Platform (la Landing Page) sin necesidad de wallet ni cuenta.
@@ -1155,7 +1236,7 @@ graph TD
 
 **Container Level Diagram (C4, Nivel 2)**
 
-Al abrir la caja negra "LatiFi Platform", se distinguen seis contenedores. **LatiFi Wallet (mobile)**, app nativa Kotlin/Swift, es el punto de entrada de Prestatario y Prestamista; se comunica directamente con los **Smart Contracts** vía JSON-RPC (para acciones que el usuario inicia: conectar, fondear, pagar) y con la **LatiFi API** vía REST/HTTPS (para perfil, reputación, feed y conversión de moneda). Los **Smart Contracts**, desplegados en Polygon Amoy, son la fuente de verdad del ciclo de préstamo y emiten eventos que el **Event Indexer** consume vía RPC. El Event Indexer traduce esos eventos y escribe en la **LatiFi DB** (PostgreSQL) a través de la propia LatiFi API, de la cual puede considerarse un proceso embebido para el alcance del curso. La **LatiFi API** (Spring Boot/NestJS/ASP.NET Core) expone los endpoints REST de perfil, reputación e historial, y de conversión de moneda (consumiendo a su vez la API externa de FX), persistiendo todo en la LatiFi DB. La **Landing Page**, contenedor estático independiente, no se comunica con ningún otro contenedor salvo, opcionalmente, un enlace de descarga hacia las tiendas de aplicaciones.
+Al abrir la caja negra "LatiFi Platform", se distinguen seis contenedores. **LatiFi Wallet (mobile)**, app nativa Kotlin para Android, es el punto de entrada de Prestatario y Prestamista; se comunica directamente con los **Smart Contracts** vía JSON-RPC (para acciones que el usuario inicia: conectar, fondear, pagar) y con la **LatiFi API** vía REST/HTTPS (para perfil, reputación, feed y conversión de moneda). Los **Smart Contracts**, desplegados en Polygon Amoy, son la fuente de verdad del ciclo de préstamo y emiten eventos que el **Event Indexer** consume vía RPC. El Event Indexer traduce esos eventos y escribe en la **LatiFi DB** (PostgreSQL) a través de la propia LatiFi API, de la cual puede considerarse un proceso embebido para el alcance del curso. La **LatiFi API** (Spring Boot/NestJS/ASP.NET Core) expone los endpoints REST de perfil, reputación e historial, y de conversión de moneda (consumiendo a su vez la API externa de FX), persistiendo todo en la LatiFi DB. La **Landing Page**, contenedor estático independiente, no se comunica con ningún otro contenedor salvo, opcionalmente, un enlace de descarga hacia las tiendas de aplicaciones.
 
 ```mermaid
 graph TD
@@ -1166,7 +1247,7 @@ graph TD
     end
 
     subgraph "LatiFi Platform"
-        Mobile["LatiFi Wallet (Mobile)<br/>[Container: Kotlin / Swift]<br/>Auth, feed, solicitud,<br/>fondeo, repago, perfil"]
+        Mobile["LatiFi Wallet (Mobile)<br/>[Container: Kotlin, Android]<br/>Auth, feed, solicitud,<br/>fondeo, repago, perfil"]
         SC["Smart Contracts<br/>[Container: Solidity]<br/>LoanFactory / LoanAgreement<br/>escrow, disbursement, repayment"]
         Indexer["Event Indexer<br/>[Container: Java/TS,<br/>embebido en LatiFi API]<br/>Traduce eventos on-chain"]
         API["LatiFi API<br/>[Container: Spring Boot /<br/>NestJS / ASP.NET Core]<br/>Profile, Reputation,<br/>Exchange Rate"]
@@ -1198,6 +1279,51 @@ graph TD
     style Polygon fill:#999,color:#fff
     style FXApi fill:#999,color:#fff
 ```
+**Deployment Diagram (C4)**
+
+El despliegue distribuye el sistema en cuatro nodos. La aplicación se instala en el teléfono Android del usuario, donde la clave de su billetera queda protegida en el Android Keystore y nunca sale del dispositivo. Los Smart Contracts viven en la red de pruebas Polygon Amoy. LatiFi API, el indexador de eventos, la base de datos PostgreSQL y la landing page corren en un servidor privado virtual (VPS) de Hetzner administrado con Dokploy, que construye y publica cada servicio desde su repositorio de GitHub. El visitante accede a la landing desde su navegador.
+
+```mermaid
+graph TD
+    subgraph "Dispositivo Android del usuario"
+        App["LatiFi Wallet<br/>[App Kotlin]"]
+        KS["Android Keystore<br/>[Clave de la billetera]"]
+    end
+
+    subgraph "Navegador del visitante"
+        Browser["Landing Page<br/>[HTML5 / CSS3 / JS]"]
+    end
+
+    subgraph "VPS Hetzner administrado con Dokploy"
+        APIsrv["LatiFi API + Event Indexer<br/>[Servicio REST]"]
+        PG[("PostgreSQL<br/>[Base de datos]")]
+        Static["Landing Page<br/>[Sitio estático]"]
+    end
+
+    subgraph "Polygon Amoy (testnet)"
+        Contracts["Smart Contracts<br/>[Solidity]<br/>Préstamo y stablecoin de prueba"]
+    end
+
+    FX["API de Tasas de Cambio<br/>[Sistema Externo]"]
+
+    App --> KS
+    App -->|"HTTPS"| APIsrv
+    App -->|"JSON-RPC: transacciones firmadas"| Contracts
+    Browser -->|"HTTPS"| Static
+    APIsrv --> PG
+    APIsrv -->|"eth_getLogs"| Contracts
+    APIsrv -->|"HTTPS"| FX
+
+    style App fill:#1168bd,color:#fff
+    style KS fill:#1168bd,color:#fff
+    style APIsrv fill:#1168bd,color:#fff
+    style PG fill:#1168bd,color:#fff
+    style Static fill:#1168bd,color:#fff
+    style Browser fill:#1168bd,color:#fff
+    style Contracts fill:#1168bd,color:#fff
+    style FX fill:#999,color:#fff
+```
+
 ## Capítulo V: Tactical-Level Software Design
 
 ## Capítulo VI: Solution UX Design
@@ -1535,11 +1661,11 @@ Trazabilidad: la landing responde a las historias US-LAND-01 y US-LAND-02.
 
 # Avance de Conclusiones
 
-Con las dos entrevistas realizadas, una por segmento, el equipo contrasta de forma preliminar los supuestos del Capítulo I. En el segmento prestatario, el entrevistado confirma que el banco le otorga montos bajos y tasas altas, y que cuando el banco demora recurre a conocidos, lo que respalda el problema de acceso al crédito formal. En el segmento prestamista, el entrevistado ya presta excedentes a conocidos con una tasa base desde el 5% mensual y ahorra en stablecoins, lo que respalda la existencia de capital ocioso dispuesto a colocarse.
+Con las cuatro entrevistas realizadas, tres del segmento prestatario y una del prestamista, el equipo contrasta de forma preliminar los supuestos del Capítulo I. Los tres prestatarios confirman que el crédito formal les ofrece montos bajos o les exige documentos que no tienen, y que en esos casos recurren a su familia, a juntas o a un prestamista del barrio que, en un caso, cobra cerca de 10% semanal. Eso respalda el problema de acceso al crédito formal. En el segmento prestamista, el entrevistado ya presta excedentes a conocidos con una tasa base desde el 5% mensual y ahorra en stablecoins, lo que respalda la existencia de capital ocioso dispuesto a colocarse.
 
-Ambos entrevistados coinciden en un punto que sustenta la propuesta de valor: la confianza depende de un historial de pagos verificable. El prestatario señala que podría demostrar que es de fiar mostrando pagos puntuales o referencias, y el prestamista exige ver préstamos anteriores y un indicador claro de cumplimiento antes de prestar a un desconocido. Ambos piden condiciones claras, y el prestamista rechaza que la plataforma custodie los fondos, lo que es coherente con la decisión de una wallet non-custodial.
+Ambos segmentos coinciden en un punto que sustenta la propuesta de valor: la confianza depende de señales verificables. Los prestatarios proponen demostrar que son de fiar con pagos puntuales, calificaciones en aplicaciones de reparto o el testimonio de sus clientes y proveedores, y el prestamista exige ver préstamos anteriores y un indicador claro de cumplimiento antes de prestar a un desconocido. Los prestatarios piden además condiciones explicadas sin tecnicismos y con el costo total a la vista, y el prestamista rechaza que la plataforma custodie los fondos, lo que es coherente con la decisión de una wallet non-custodial.
 
-Estos resultados provienen de una entrevista por segmento, por lo que no permiten generalizar. Como siguientes pasos, el equipo completará el registro de entrevistas hasta el mínimo por segmento, elaborará el análisis con sustento estadístico y validará el modelo de reputación con prototipos, para contrastar el resto de las hipótesis del Lean UX Canvas.
+Estos resultados provienen de cuatro entrevistas, por lo que no permiten generalizar. Como siguientes pasos, el equipo completará el registro de entrevistas hasta el mínimo por segmento, con prioridad en el segmento prestamista, y validará el modelo de reputación con prototipos para contrastar el resto de las hipótesis del Lean UX Canvas.
 
 <div style="page-break-after: always;"></div>
 
@@ -1562,3 +1688,13 @@ Estos resultados provienen de una entrevista por segmento, por lo que no permite
 - Aave. (s.f.). *Credit Delegation*. Documentación oficial. https://aave.com/docs/aave-v3/guides/credit-delegation
 - Messari. (s.f.). *Aave announces Credit Delegation, enabling uncollateralized lending*. https://messari.io/report/aave-announces-credit-delegation-enabling-uncollateralized-lending
 - Yellow.com. (2026). *Decentralized lending 2026: Aave on-chain money markets*. https://yellow.com/research/decentralized-lending-2026-aave-on-chain-money-markets
+
+<div style="page-break-after: always;"></div>
+
+# Anexos
+
+## Anexo A. Videos de Exposiciones
+
+| Entrega | Enlace privado en Microsoft Stream | Archivo |
+|---|---|---|
+| TB1 | _Pendiente de agregar: el enlace se obtiene al publicar el video de exposición en Microsoft Stream_ | upc-pre-202401-si728-2620-9046-latifi-expo-tb1.mp4 |
