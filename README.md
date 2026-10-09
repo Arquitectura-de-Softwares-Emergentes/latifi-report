@@ -1677,6 +1677,54 @@ Esta última sección muestra los estándares de seguridad criptográfica de gra
 
 #### 6.4.2. Mobile Applications Wireflow
 
+> **Trazabilidad:** Las interfaces móviles responden a las historias de usuario del flujo transaccional y de gestión de microcréditos de la aplicación.
+
+#### 6.4.1. Onboarding y Autenticación
+Esta primera sección comprende la pantalla de bienvenida (Splash/Onboarding), el inicio de sesión, el flujo de registro de cuenta nueva y la verificación o autorización segura.
+
+* **Pantalla de Bienvenida / Onboarding:**
+  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516018/Captura_de_pantalla_2026-10-08_a_la_s_10.19.48_p._m._nryhpc.png" alt="Onboarding LatiFi" width="40%"/></div>
+
+* **Inicio de Sesión:**
+  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516046/Captura_de_pantalla_2026-10-08_a_la_s_10.20.32_p._m._yte1du.png" alt="Inicio de Sesión" width="40%"/></div>
+
+* **Formulario de Registro:**
+  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516048/Captura_de_pantalla_2026-10-08_a_la_s_10.20.44_p._m._tgfuyt.png" alt="Registro de Cuenta" width="40%"/></div>
+
+* **Autorización Segura (WhatsApp):**
+  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516077/Captura_de_pantalla_2026-10-08_a_la_s_10.21.13_p._m._jhhduj.png" alt="Autorización Segura" width="40%"/></div>
+
+* **Firma Criptográfica:**
+  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516109/Captura_de_pantalla_2026-10-08_a_la_s_10.21.36_p._m._whhzpb.png" alt="Firma Criptográfica" width="40%"/></div>
+
+#### 6.4.2. Dashboard Principal y Solicitud de Microcréditos
+Muestra el panel de control principal del usuario con la línea de crédito aprobada, el estado de actividad y la configuración de solicitudes.
+
+* **Dashboard General / Resumen:**
+  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516188/Captura_de_pantalla_2026-10-08_a_la_s_10.22.59_p._m._pjazye.png" alt="Dashboard Principal" width="40%"/></div>
+
+* **Configuración y Solicitud de Microcrédito (Parte 1):**
+  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516208/Captura_de_pantalla_2026-10-08_a_la_s_10.23.23_p._m._pfht3q.png" alt="Configurar Solicitud Parte 1" width="40%"/></div>
+
+* **Configuración y Solicitud de Microcrédito (Parte 2):**
+  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516235/Captura_de_pantalla_2026-10-08_a_la_s_10.23.42_p._m._hoflo1.png" alt="Configurar Solicitud Parte 2" width="40%"/></div>
+
+#### 6.4.3. Reputación On-Chain, Billeteras y Perfil de Usuario
+Agrupa las vistas del puntaje de reputación on-chain, la vinculación de billeteras, la selección de rol y la configuración completa del perfil.
+
+* **Reputación Financiera On-Chain:**
+  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516238/Captura_de_pantalla_2026-10-08_a_la_s_10.23.53_p._m._et2e5b.png" alt="Reputación On-Chain" width="40%"/></div>
+
+* **Vinculación de Billetera y Perfil Ligero:**
+  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516334/Captura_de_pantalla_2026-10-08_a_la_s_10.25.29_p._m._wcqeoe.png" alt="Vinculación de Billetera" width="40%"/></div>
+
+* **Selección de Rol (Prestamista / Inversionista):**
+  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516356/Captura_de_pantalla_2026-10-08_a_la_s_10.25.43_p._m._gpkpo0.png" alt="Selección de Rol" width="40%"/></div>
+
+* **Perfil de Usuario y Configuración General (Parte 1):**
+  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516367/Captura_de_pantalla_2026-10-08_a_la_s_10.25.55_p._m._g0dx1t.png" alt="Perfil de Usuario Parte 1" width="40%"/></div>
+
+
 <div style="page-break-after: always;"></div>
 
 # Avance de Conclusiones
