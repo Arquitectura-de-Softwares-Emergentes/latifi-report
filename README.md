@@ -1525,6 +1525,26 @@ Trazabilidad: la landing responde a las historias US-LAND-01 y US-LAND-02.
 
 #### 6.3.2. Landing Page Mock-up
 
+> **Trazabilidad:** La landing page responde a las historias de usuario **US-LAND-01** y **US-LAND-02**.
+
+#### 6.3.1. Landing Page Wireframe
+*(Aquí puedes colocar el esquema o wireframe de baja fidelidad inicial)*
+
+#### 6.3.2. Landing Page Mock-up (Parte 1: Hero & Onboarding)
+Esta primera sección comprende la cabecera de la página (*Header*), el *Hero Section* con la propuesta de valor principal, el simulador de préstamos flotante y los primeros accesos directos (*CTAs*).
+
+![LatiFi Landing Page Parte 1](https://res.cloudinary.com/dx0i2vioe/image/upload/v1791515319/Captura_de_pantalla_2026-10-08_a_la_s_10.08.31_p._m._fehfgs.png)
+
+#### 6.3.3. Landing Page Mock-up (Parte 2: Funcionamiento y Propuesta de Valor)
+La segunda sección detalla el flujo de funcionamiento de la plataforma en tres pasos clave, junto con el comparativo de finanzas justas y el impacto social en bodegas y comercio local.
+
+![LatiFi Landing Page Parte 2](https://res.cloudinary.com/dx0i2vioe/image/upload/v1791515344/Captura_de_pantalla_2026-10-08_a_la_s_10.08.51_p._m._p3hotu.png)
+
+#### 6.3.4. Landing Page Mock-up (Parte 3: Seguridad, FAQ y Footer)
+Esta última sección muestra los estándares de seguridad criptográfica de grado institucional, el módulo de preguntas frecuentes (FAQ) interactivo y el pie de página institucional con sus respectivos enlaces legales.
+
+![LatiFi Landing Page Parte 3](https://res.cloudinary.com/dx0i2vioe/image/upload/v1791515348/Captura_de_pantalla_2026-10-08_a_la_s_10.09.03_p._m._csxpxk.png)
+
 ### 6.4. Mobile Applications UX/UI Design
 
 #### 6.4.1. Mobile Applications Wireframes
