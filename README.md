@@ -1696,6 +1696,73 @@ Esta última sección muestra los estándares de seguridad criptográfica de gra
 ### 6.4. Mobile Applications UX/UI Design
 
 #### 6.4.1. Mobile Applications Wireframes
+Es la pantalla de bienvenida. Aquí eliges si quieres ser Prestatario para pedir un préstamo sin banco, o Prestamista para invertir y ganar hasta 14% APR. Te puedes conectar con MetaMask, Polygon ID o solo con tu número de Yape/Plin.
+
+<div align="center"><img src="resources/Cap6/wireframe_1.jpeg" alt="Pantalla bienvenida" width="40%"/></div>
+
+Es el formulario para registrarte. Eliges tu rol, pones tu nombre, tu celular de Yape/Plin, tu correo y creas un PIN de 6 dígitos. Con eso se crea tu billetera no custodial y segura.
+
+<div align="center"><img src="resources/Cap6/wireframe_2.jpeg" alt="Pantalla de registro" width="40%"/></div>
+
+Es para entrar a tu cuenta. Puedes entrar con tu Polygon ID, con MetaMask o con tu celular y tu PIN. También tiene entrada con huella o Face ID para hacerlo más rápido y seguro.
+
+<div align="center"><img src="resources/Cap6/wireframe_3.jpeg" alt="Pantalla de tu cuenta" width="40%"/></div>
+
+Pantalla Dashboard - Hola Carlos (Izquierda):
+Es tu inicio como prestatario. Ves tu balance total de $2,450.80 USDC (S/ 9,215 en soles), tu LatiScore de 785 y tu préstamo activo. Desde aquí puedes solicitar un préstamo, explorar inversiones o depositar y enviar dinero a tu banco.
+
+<div align="center"><img src="resources/Cap6/wireframe_4.jpeg" alt="Pantalla de inicio prestario" width="40%"/></div>
+
+Pantalla Solicitar Microcrédito (Derecha):
+Es donde pides tu préstamo. Eliges cuánto quieres (ej: $800 USDC), tu score te da una tasa baja de 8.5% APR y eliges en cuánto tiempo pagas (30, 60, 90 o 180 días). Abajo te calcula en tiempo real cuánto pagarás al mes en soles y dólares.
+
+<div align="center"><img src="resources/Cap6/wireframe_5.jpeg" alt="Pantalla de solicitar microcredito" width="40%"/></div>
+
+Mis Préstamos:Préstamo en fondeo colectivo. Lleva 68% ($544 de $800). 
+7 personas lo están fondeando al 8.5% APR para pagarse en 60 días.
+
+<div align="center"><img src="resources/Cap6/wireframe_6.jpeg" alt="Pantalla de mis prestamos" width="40%"/></div>
+
+Para ese flujo de Prestamista:
+1. Oportunidades P2P:
+Marketplace de inversión. Ves el rendimiento promedio del 13.8% APY y $18,450 en bóvedas activas. Abajo están las solicitudes de pymes verificadas, ej: Carlos M. pide $500 USDC al 11.5% a 60 días, ya va 75% fondeado. Puedes filtrar por Alto Rendimiento y Score Oro y fondear desde $10.
+
+<div align="center"><img src="resources/Cap6/wireframe_7.jpeg" alt="Pantalla de oportunidades" width="40%"/></div>
+
+2. Detalle para Fondear:
+Detalle del prestatario. Carlos Mendoza de Bodega Don Carlos, con RUC Sunat activo, DID y KYC Biométrico verificado. Score híbrido 810 Oro Superior, 14 de 14 cuotas pagadas y 0 impagos en 2.4 años. Eliges monto ($25, $50, $100) y confirmas el fondeo de $125 USDC.
+
+<div align="center"><img src="resources/Cap6/wireframe_8.jpeg" alt="Pantalla de detalle" width="40%"/></div>
+
+* Dashboard Lender : 
+Es tu panel como prestamista. Ves tu capital total invertido de $3,850 USDC y que ganas 12.85% APY, 4.2 veces más que un banco. Ya ganaste $342.80 y tienes $86.40 por cobrar. Abajo ves tus 4 préstamos activos, como el de Bodega Don Carlos.
+
+<div align="center"><img src="resources/Cap6/wireframe_9.jpeg" alt="Pantalla de detalle" width="40%"/></div>
+
+* ¡Transacción Confirmada con Éxito!:
+Es el comprobante de que tu inversión se hizo. Tu contrato P2P de $500 USDC se desplegó y el dinero está asegurado en la bóveda escrow de Polygon. Muestra los términos bloqueados: Carlos Mendoza, 11.50% APR fijo, 60 días, respaldado por su LatiScore 810.
+
+<div align="center"><img src="resources/Cap6/wireframe_10.jpeg" alt="Pantalla de detalle" width="40%"/></div>
+
+Historial de Préstamos y Movimientos:
+Es tu historial financiero inmutable en blockchain. Ves tu total financiado de $4,200 USDC, 100% de cuotas a tiempo y nivel Tier A+ de bajo riesgo. Abajo están todos tus movimientos de julio: pago de cuota de -$120, desembolso de +$500 y tarifa de bóveda de $0, todo sincronizado con Polygon PoS.
+
+<div align="center"><img src="resources/Cap6/wireframe_11.jpeg" alt="Pantalla de detalle" width="40%"/></div>
+
+Historial de Inversiones:Es tu ledger de rendimientos como prestamista. Llevas $684.50 USDC ganados neto (+S/ 2,573) y $6,250 desembolsados con un ROI de 13.6% APR y 100% de cobro.Muestra 6 préstamos en total, 3 activos, 0 en mora histórica y cobertura 100% por el Fondo de Protección. Abajo ves el detalle, como Bodega Dor con $125 invertidos al 11.50% que ya generó $4.75.
+
+<div align="center"><img src="resources/Cap6/wireframe_12.jpeg" alt="Pantalla de detalle" width="40%"/></div>
+
+Perfil y Score de Reputación:
+Es tu identidad Web3 financiera. Perfil de Carlos Mendoza con wallet Polygon verificada, KYC nivel 2 y DID Soberano activo.Abajo está tu LatiScore Platino de 820/900 (Top 2.8%). Préstamo nivel Diamante que te desbloquea crédito con 0% de colateral. Se compone de 95/100 en historial on-chain sin mora, 90/100 en colateral staked de $1,200 y 85/100 en identidad SUNAT verificada.
+
+<div align="center"><img src="resources/Cap6/wireframe_13.jpeg" alt="Pantalla de detalle" width="40%"/></div>
+
+Reputación Financiera:
+Es tu credencial de crédito Web3. Carlos Mendoza, Distribuidora Textil, con Identidad ZK-Proof y auditado on-chain en Polygon.Tu LatiFi Credit Score de 810/850, Riesgo A+, estás en el Top 5% de prestatarios de la región Andina. Solvencia muy alta. Abajo valida por qué: 18/18 micropréstamos liquidados sin mora, RUC y cuenta bancaria auditados 12 meses y tasa preferencial desbloqueada al 7.5% APR anual.
+
+<div align="center"><img src="resources/Cap6/wireframe_14.jpeg" alt="Pantalla de detalle" width="40%"/></div>
+
 
 #### 6.4.2. Mobile Applications Wireflow
 
