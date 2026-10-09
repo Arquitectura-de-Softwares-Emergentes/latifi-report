@@ -36,6 +36,7 @@
 | 1.2 | 19/09/2026 | Anaely Burga | Nombres de integrantes, As-Is y To-Be Scenario Mapping, y diagramas de EventStorming, Domain Storytelling, Bounded Context Canvases y Context Map del Capítulo IV. |
 | 1.3 | 19/09/2026 | Fiorella Vilca | Entrevista 1 del segmento prestamista, User Persona, User Task Matrix y Empathy Map del prestamista, y perfil de integrante. |
 | 1.4 | 19/09/2026 | Juan Angulo | Rediseño de la carátula, revisión de estilo y de cumplimiento del enunciado, entradas de Student Outcome 3, integración de los aportes de Fiorella Vilca, Registro de Versiones y Avance de Conclusiones. |
+| 1.5 | 08/10/2026 | Juan Angulo | Redacción de la Arquitectura de Información del Capítulo VI: Labeling Systems, Searching Systems, SEO Tags and Meta Tags y elementos ASO. |
 
 # Project Report Collaboration Insights
 
@@ -1303,9 +1304,127 @@ El contenedor máximo es de 1200 px. Las imágenes son fluidas, los textos usan 
 
 #### 6.2.2. Labeling Systems
 
+Las etiquetas de LatiFi usan el menor número de palabras posible y el mismo término en la aplicación, la landing page y este informe. El equipo parte del lenguaje ubicuo del Capítulo II y evita la jerga de blockchain en toda pantalla que ve un prestatario sin experiencia previa con criptomonedas, como pide la historia US-AUTH-03. Cuando un término técnico no tiene reemplazo, la interfaz lo acompaña con una explicación breve en el momento en que aparece.
+
+Cada tipo de etiqueta sigue una regla fija:
+
+| Tipo | Regla | Ejemplos |
+|---|---|---|
+| Destinos de navegación | Un sustantivo, máximo dos palabras | Inicio, Préstamos, Reputación, Invertir, Portafolio, Perfil |
+| Acciones | Verbo en infinitivo seguido del objeto | Solicitar préstamo, Fondear, Pagar cuota, Conectar billetera, Ver detalle |
+| Estados | Un adjetivo o participio, siempre con ícono y texto | Abierta, Pendiente, Pagado, En mora, En revisión |
+| Datos del préstamo | Un sustantivo y su unidad visible | Monto, Tasa, Plazo, Cuota |
+| Secciones de la landing | Una o dos palabras, igual al texto del ancla | Cómo funciona, Beneficios, Seguridad, Preguntas, Descargar app |
+
+El equipo reemplaza el vocabulario técnico por palabras que el usuario ya conoce:
+
+| Término técnico | Etiqueta en la interfaz | Motivo |
+|---|---|---|
+| Wallet | Billetera | Remite a las billeteras digitales cotidianas que el usuario ya conoce. |
+| Gas fee | Comisión de red | Se lee como cualquier comisión financiera. |
+| Transaction hash | Comprobante | Es lo que el usuario espera recibir tras pagar o invertir. |
+| Stablecoin | Moneda digital de prueba, con su equivalente en soles | Aclara que el monto no tiene valor real y evita el término técnico en las pantallas de monto. |
+| Default | En mora | Es un término financiero que el usuario ya reconoce. |
+
+Los montos aparecen siempre en la stablecoin y en soles (S/), como exige US-LEND-06. Los estados de una transacción on-chain (pendiente, confirmando, confirmada y fallida) conservan estas mismas palabras en toda la app, de modo que el usuario no necesita consultar un explorador de bloques.
+
+La interfaz sale en español (es_419) y deja listas las equivalencias en inglés (en_US):
+
+| es_419 | en_US |
+|---|---|
+| Inicio | Home |
+| Préstamos | Loans |
+| Reputación | Reputation |
+| Invertir | Invest |
+| Portafolio | Portfolio |
+| Perfil | Profile |
+| Solicitar préstamo | Request a loan |
+| Pagar cuota | Pay installment |
+
+Ningún ícono aparece sin etiqueta de texto. Los íconos decorativos se ocultan a los lectores de pantalla, y los que activan una acción llevan una etiqueta accesible equivalente al texto visible.
+
 #### 6.2.3. Searching Systems
 
+LatiFi no ofrece un buscador global. El contenido de la app se organiza en listas acotadas (solicitudes abiertas, préstamos propios, inversiones y operaciones), y en ese contexto un campo de texto libre aporta menos que un filtro bien ubicado. El equipo prioriza tres medios de ayuda: filtros por chips, criterios de orden y una búsqueda por texto solo en la sección de ayuda, donde el volumen de contenido sí crece.
+
+| Zona | Quién la usa | Filtros | Orden | Resultado |
+|---|---|---|---|---|
+| Invertir (feed de oportunidades) | Prestamista | Riesgo, plazo y rango de monto | Reputación del solicitante (por defecto), tasa, plazo y más recientes | Tarjeta de solicitud con monto en stablecoin y en soles, tasa, plazo, chip de reputación y botón Fondear |
+| Préstamos | Prestatario | Estado: Todos, Abierta, Pendiente, Pagado y En mora | Más reciente primero | Tarjeta de préstamo con monto, plazo, tasa, estado y barra de progreso de cuotas |
+| Portafolio | Prestamista | Estado: Todos, Pendiente, Pagado y En mora | Próximo vencimiento primero | Tarjeta de inversión con monto prestado, retorno esperado, estado y fecha de la siguiente cuota |
+| Reputación | Prestatario | Resultado: A tiempo, Tardío e Incumplido | Cronológico, del más reciente al más antiguo | Lista de eventos con fecha, monto, resultado y efecto sobre la reputación |
+| Ayuda | Ambos | Búsqueda por texto y temas sugeridos | Relevancia | Lista de preguntas con la respuesta resumida y un enlace al detalle |
+
+Los filtros de riesgo se apoyan en la reputación híbrida del solicitante (US-REP-02), y el orden por reputación responde a US-REP-03: el prestamista ve primero los perfiles que le piden menos esfuerzo de revisión, pero siempre puede cambiar el criterio.
+
+Todas las listas filtrables comparten el mismo comportamiento:
+
+1. Los filtros viven en una fila de chips sobre la lista. Cada chip activo muestra una marca y se quita con un toque.
+2. Un contador indica cuántos resultados quedan, por ejemplo "12 solicitudes". El lector de pantalla anuncia ese número cada vez que cambia.
+3. El botón Limpiar filtros aparece en cuanto hay al menos un filtro activo.
+4. Si no hay coincidencias, la pantalla explica la causa y ofrece la salida: "No hay solicitudes con estos filtros. Limpia los filtros para ver todas."
+5. La app conserva los filtros elegidos mientras dura la sesión, para que el usuario no los repita al volver desde un detalle.
+6. Mientras llegan los datos, la lista muestra marcadores de carga con la forma de las tarjetas.
+
+La landing page tampoco incluye buscador. Es una página única con cinco secciones ancladas, de modo que el encabezado fijo y los enlaces internos llevan al visitante a cualquier contenido en un toque. La sección de preguntas frecuentes agrupa las respuestas por tema (cómo funciona, seguridad y descarga) en un acordeón navegable con teclado.
+
 #### 6.2.4. SEO Tags and Meta Tags
+
+Los SEO tags y los meta tags corresponden a la landing page, el único producto web de LatiFi. La aplicación es nativa y no tiene versión web, así que su visibilidad depende de las fichas de las tiendas, que esta sección cubre al final con los elementos ASO. La landing publica sus textos en español (es_419) y en inglés (en_US), de acuerdo con US-LAND-02.
+
+Los límites de longitud siguen las prácticas habituales de los buscadores: títulos de hasta 60 caracteres y descripciones de hasta 155.
+
+##### Landing page: página de inicio
+
+| Etiqueta | Valor es_419 | Valor en_US |
+|---|---|---|
+| title | LatiFi: microcréditos P2P con reputación verificable | LatiFi: P2P microloans with verifiable reputation |
+| meta description | LatiFi conecta a prestatarios y prestamistas con microcréditos P2P sobre blockchain. No custodia tu dinero y muestra la reputación de cada solicitante. | LatiFi connects borrowers and lenders through blockchain-based P2P microloans. It never holds your funds and shows each applicant's reputation. |
+| meta keywords | microcréditos, préstamos P2P, blockchain, stablecoins, reputación crediticia, billetera digital, LatiFi Wallet, Perú | microloans, P2P loans, blockchain, stablecoins, credit reputation, digital wallet, LatiFi Wallet, Peru |
+| meta author | LatiFi | LatiFi |
+
+Google ignora la etiqueta keywords para posicionar, pero el enunciado del curso la exige y otros buscadores todavía la leen, por lo que la landing la incluye con ocho términos como máximo.
+
+Etiquetas complementarias de la landing:
+
+| Etiqueta | Valor |
+|---|---|
+| html lang | es-419 en la versión en español y en-US en la versión en inglés |
+| meta viewport | width=device-width, initial-scale=1 |
+| meta robots | index, follow |
+| link rel="canonical" | La URL pública de cada página |
+| link rel="alternate" hreflang | es-419, en-US y x-default hacia la versión en español |
+| og:title, og:description | Los mismos textos del title y la meta description |
+| og:type y og:site_name | website y LatiFi |
+| og:image | Imagen de 1200 x 630 px con el logotipo sobre el azul de marca |
+| twitter:card | summary_large_image |
+
+##### Landing page: páginas legales
+
+| Página | title | meta description |
+|---|---|---|
+| Términos y condiciones | LatiFi: términos y condiciones | Condiciones de uso de LatiFi Wallet: reglas para solicitar, fondear y pagar microcréditos P2P. |
+| Política de privacidad | LatiFi: política de privacidad | Cómo LatiFi trata tus datos de perfil y por qué nunca custodia tus llaves privadas ni tus fondos. |
+
+Estas páginas heredan author, robots, viewport y las etiquetas de idioma de la página de inicio.
+
+##### Elementos ASO de las tiendas de aplicaciones
+
+| Elemento | Google Play | App Store |
+|---|---|---|
+| App Title (30 caracteres) | LatiFi Wallet | LatiFi Wallet |
+| App Subtitle (30 caracteres) | No aplica | es_419: Microcréditos entre personas. en_US: Peer-to-peer microloans |
+| Descripción corta (80 caracteres) | es_419: Pide o invierte en microcréditos P2P con reputación verificable. en_US: Borrow or lend in P2P microloans with verifiable reputation. | No aplica |
+| App Keywords (100 caracteres) | No aplica | es_419: préstamos,microcréditos,p2p,blockchain,stablecoin,billetera,inversión,reputación,crédito,Perú. en_US: loans,microloans,p2p,blockchain,stablecoin,wallet,lending,reputation,credit,Peru |
+| Categoría | Finanzas | Finanzas |
+
+Descripción completa (es_419), igual en ambas tiendas:
+
+> LatiFi Wallet conecta a personas que necesitan un microcrédito con personas que tienen capital disponible para prestarlo. Si pides un préstamo, publicas el monto, la tasa y el plazo, y los prestamistas ven tu reputación antes de decidir. Si inviertes, revisas las solicitudes abiertas, filtras por riesgo y plazo, y fondeas la que prefieras. Los acuerdos corren en un contrato automático sobre la red de pruebas Polygon Amoy: LatiFi no custodia tus fondos ni tus llaves privadas. Esta versión es una demostración académica y opera con una stablecoin de prueba sin valor monetario real.
+
+Descripción completa (en_US):
+
+> LatiFi Wallet connects people who need a microloan with people who have spare capital to lend. If you borrow, you post the amount, rate and term, and lenders see your reputation before they decide. If you lend, you review open requests, filter by risk and term, and fund the one you prefer. Agreements run on an automated contract on the Polygon Amoy test network: LatiFi never holds your funds or your private keys. This version is an academic demonstration and uses a test stablecoin with no real monetary value.
 
 #### 6.2.5. Navigation Systems
 
