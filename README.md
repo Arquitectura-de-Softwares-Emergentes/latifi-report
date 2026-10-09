@@ -37,7 +37,7 @@
 | 1.3 | 19/09/2026 | Fiorella Vilca | Entrevista 1 del segmento prestamista, User Persona, User Task Matrix y Empathy Map del prestamista, y perfil de integrante. |
 | 1.4 | 19/09/2026 | Juan Angulo | Rediseño de la carátula, revisión de estilo y de cumplimiento del enunciado, entradas de Student Outcome 3, integración de los aportes de Fiorella Vilca, Registro de Versiones y Avance de Conclusiones. |
 | 1.5 | 04/10/2026 | Fabrizio Quiroz | Registro de las entrevistas 2 y 3 del segmento prestatario con sus capturas. |
-| 1.6 | 08/10/2026 | Juan Angulo | Análisis de entrevistas (2.2.3), System Landscape y Deployment Diagram del Capítulo IV, ajuste a Android como única plataforma móvil, actualización del Avance de Conclusiones, capturas de Collaboration Insights y Anexo de Videos de Exposiciones. |
+| 1.6 | 08/10/2026 | Juan Angulo | Análisis de entrevistas (2.2.3), System Landscape y Deployment Diagram del Capítulo IV, ajuste a Android como única plataforma móvil, actualización del Avance de Conclusiones, capturas de Collaboration Insights, Anexo de Videos de Exposiciones y foto de Juan Angulo en el perfil de integrante. |
 | 1.7 | 04/10/2026 | Fabrizio Quiroz | Style Guidelines (6.1) y Navigation Systems (6.2.5) del Capítulo VI (avance de TP1). |
 | 1.8 | 08/10/2026 | Juan Angulo | Labeling Systems, Searching Systems y SEO Tags and Meta Tags (6.2.2 a 6.2.4) del Capítulo VI (avance de TP1). |
 | 1.9 | 08/10/2026 | Juan Angulo | Organization Systems (6.2.1) del Capítulo VI (avance de TP1). |
@@ -153,7 +153,7 @@ El alcance de LatiFi en este informe es acotado: se trata del proyecto final del
 
 | Miembro | Descripción|
 |---|---|
-| **Angulo, Juan Carlos - U202317692** | Estudiante de Ingeniería de Software en séptimo ciclo. Le apasiona aprender tecnologías nuevas y construir soluciones aplicadas a problemas reales, y en este curso le entusiasma especialmente trabajar con blockchain. |
+| <img src="docs/assets/members/juan-angulo.jpg" alt="Foto de Juan Carlos Angulo" width="110"/><br>**Angulo, Juan Carlos - U202317692** | Estudiante de Ingeniería de Software en séptimo ciclo. Le apasiona aprender tecnologías nuevas y construir soluciones aplicadas a problemas reales, y en este curso le entusiasma especialmente trabajar con blockchain. |
 | **Quiroz Zambrano, Fabrizio Javier - U202213406** | Estudiante de Ingeniería de Software, con interés en el desarrollo de aplicaciones móviles y en arquitectura de software. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
 | **Burga Loarte, Anaely - U202118264** | Estudiante de Ingeniería de Software enfocado en la experiencia de usuario y la lógica de negocio en la interfaz. Contribuye en la interfaz de usuario y la coordinación general de la app. |
 | **Vilca Valverde, Fiorella Angela - U20211e417** | Estudiante de Ingeniería de Software, con interés en el análisis de datos. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
@@ -1285,16 +1285,16 @@ El despliegue distribuye el sistema en cuatro nodos. La aplicación se instala e
 
 ```mermaid
 graph TD
-    subgraph "Dispositivo Android del usuario"
+    subgraph "Teléfono Android"
         App["LatiFi Wallet<br/>[App Kotlin]"]
         KS["Android Keystore<br/>[Clave de la billetera]"]
     end
 
-    subgraph "Navegador del visitante"
+    subgraph "Navegador"
         Browser["Landing Page<br/>[HTML5 / CSS3 / JS]"]
     end
 
-    subgraph "VPS Hetzner administrado con Dokploy"
+    subgraph "VPS Hetzner con Dokploy"
         APIsrv["LatiFi API + Event Indexer<br/>[Servicio REST]"]
         PG[("PostgreSQL<br/>[Base de datos]")]
         Static["Landing Page<br/>[Sitio estático]"]
