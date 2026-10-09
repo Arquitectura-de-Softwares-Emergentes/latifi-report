@@ -37,6 +37,7 @@
 | 1.3 | 19/09/2026 | Fiorella Vilca | Entrevista 1 del segmento prestamista, User Persona, User Task Matrix y Empathy Map del prestamista, y perfil de integrante. |
 | 1.4 | 19/09/2026 | Juan Angulo | Rediseño de la carátula, revisión de estilo y de cumplimiento del enunciado, entradas de Student Outcome 3, integración de los aportes de Fiorella Vilca, Registro de Versiones y Avance de Conclusiones. |
 | 1.5 | 08/10/2026 | Juan Angulo | Redacción de la Arquitectura de Información del Capítulo VI: Labeling Systems, Searching Systems, SEO Tags and Meta Tags y elementos ASO. |
+| 1.6 | 08/10/2026 | Juan Angulo | Redacción de Organization Systems (6.2.1) del Capítulo VI. |
 
 # Project Report Collaboration Insights
 
@@ -1301,6 +1302,44 @@ El contenedor máximo es de 1200 px. Las imágenes son fluidas, los textos usan 
 ![Diseño responsive](resources/Cap6/6.1.2-responsive-web.png)
 
 ### 6.2. Information Architecture
+
+La arquitectura de información de LatiFi decide cómo se agrupa, se ordena y se nombra el contenido para que un prestatario sin experiencia financiera digital y un prestamista que evalúa riesgo encuentren lo que buscan sin esfuerzo. Las cinco subsecciones siguientes recorren esas decisiones: organización, etiquetado, búsqueda, etiquetas para buscadores y navegación.
+
+#### 6.2.1. Organization Systems
+
+El equipo combina tres esquemas de organización visual y cuatro esquemas de categorización, y asigna cada uno al tipo de información que mejor sirve.
+
+##### Organización visual del contenido
+
+| Esquema | Dónde aplica | Decisión |
+|---|---|---|
+| Jerárquico (visual hierarchy) | Pantalla Inicio de cada rol, tarjetas de préstamo y feed de Invertir | El dato que decide la acción va primero y más grande: el saldo o el monto en tipografía Display, luego el plazo y la tasa, y al final los metadatos en Caption. El botón primario ocupa un solo lugar por pantalla. |
+| Secuencial (step by step) | Solicitud de préstamo, fondeo, pago de cuota, onboarding y verificación de identidad | Un objetivo por paso, con indicador de avance y botón Atrás. La barra inferior se oculta durante estos flujos y cada flujo termina en una pantalla de confirmación con comprobante. |
+| Matricial | Portafolio del prestamista, lista de préstamos y comparación de oportunidades | Filas de tarjetas con los mismos campos en la misma posición, de modo que el prestamista compare riesgo, tasa y plazo de varias solicitudes con un vistazo. En tablet las tarjetas pasan a una cuadrícula de dos columnas. |
+
+En la landing page, la jerarquía visual manda sobre las demás: el hero con la propuesta de valor y el llamado a la acción ocupa la primera pantalla, y las secciones siguientes bajan de lo general (cómo funciona) a lo específico (seguridad y preguntas). El paso a paso de Cómo funciona usa un esquema secuencial numerado con los pasos de cada segmento.
+
+##### Esquemas de categorización
+
+| Esquema | Dónde aplica | Decisión |
+|---|---|---|
+| Por audiencia | Estructura general de la app y contenido de la landing | La app ofrece dos recorridos separados, uno para el prestatario y otro para el prestamista, con su propia barra inferior. La landing presenta bloques diferenciados para cada segmento, en línea con US-LAND-01. |
+| Por tópicos | Sección de ayuda, preguntas frecuentes y perfil | Las preguntas se agrupan por tema: cómo funciona, seguridad, pagos y reputación. El perfil agrupa sus ajustes en datos personales, billetera, seguridad e idioma. |
+| Cronológico | Historial de operaciones, eventos de reputación y lista de cuotas | El orden por defecto es del más reciente al más antiguo. En cuotas pendientes, la más próxima a vencer va primero. |
+| Alfabético | Selector de idioma | Solo donde el usuario conoce el nombre exacto de lo que busca. El resto del contenido no usa orden alfabético porque el valor está en el riesgo, el plazo o la fecha y no en el nombre. |
+
+##### Agrupación de la información por pantalla
+
+| Grupo de información | Contenido | Esquema principal |
+|---|---|---|
+| Resumen financiero | Saldo, préstamos activos, próximo vencimiento | Jerárquico |
+| Oportunidades | Solicitudes abiertas con la reputación visible del solicitante | Matricial, ordenado por reputación |
+| Mis préstamos y mi portafolio | Estado, monto, plazo, tasa y progreso de cuotas | Matricial y cronológico |
+| Operaciones críticas | Solicitar, fondear, pagar | Secuencial |
+| Reputación | Nivel actual y eventos que lo modificaron | Jerárquico y cronológico |
+| Ayuda y cuenta | Preguntas frecuentes, perfil, seguridad, idioma | Por tópicos |
+
+Estas decisiones responden a lo que las entrevistas mostraron: el prestamista pide ver el historial de pagos del solicitante antes de decidir, y el prestatario desconfía de las plataformas poco claras. Por eso la reputación y las condiciones del préstamo ocupan el nivel más alto de la jerarquía en cada pantalla donde aparecen.
 
 #### 6.2.2. Labeling Systems
 
