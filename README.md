@@ -41,6 +41,9 @@
 | 1.7 | 04/10/2026 | Fabrizio Quiroz | Style Guidelines (6.1) y Navigation Systems (6.2.5) del Capítulo VI (avance de TP1). |
 | 1.8 | 08/10/2026 | Juan Angulo | Labeling Systems, Searching Systems y SEO Tags and Meta Tags (6.2.2 a 6.2.4) del Capítulo VI (avance de TP1). |
 | 1.9 | 08/10/2026 | Juan Angulo | Organization Systems (6.2.1) del Capítulo VI (avance de TP1). |
+| 2.0 | 08/10/2026 | Anaely Burga | Landing Page Mock-up (6.3.2), con las tres secciones de la landing page (avance de TP1). |
+| 2.1 | 08/10/2026 | Anaely Burga | Landing Page Wireframe (6.3.1), con la distribución de las tres secciones de la landing page (avance de TP1). |
+| 2.2 | 09/10/2026 | Juan Angulo | Capítulo V completo: diseño táctico de los cinco bounded contexts, con diccionario de clases por capa, diagramas de componentes C4, diagramas de clases y esquemas de base de datos. |
 
 # Project Report Collaboration Insights
 
@@ -49,6 +52,8 @@ URL del repositorio: https://github.com/Arquitectura-de-Softwares-Emergentes/lat
 El Project Report se redacta en Markdown, con `README.md` como archivo principal, dentro de un repositorio público de la organización del equipo en GitHub. El equipo aplica GitFlow: `develop` concentra la integración del informe, `main` recibe las versiones entregables y cada integrante avanza sus secciones en ramas propias que se integran mediante pull requests. Los mensajes de commit siguen la convención Conventional Commits, y el PDF de cada entrega se genera a partir de este repositorio.
 
 **TB1.** Juan Angulo redactó el avance de los Capítulos I a IV y mantiene el flujo de ramas. Fabrizio Quiroz registró las entrevistas 1, 2 y 3 del segmento prestatario y elaboró su User Persona y su Empathy Map. Anaely Burga elaboró los As-Is y To-Be Scenario Mapping y los diagramas de dominio del Capítulo IV. Fiorella Vilca registró la entrevista del segmento prestamista y elaboró su User Persona, el User Task Matrix y el Empathy Map correspondiente. Cada aporte queda registrado por commit y es coherente con el Registro de Versiones.
+
+**TP1.** Fabrizio Quiroz redactó las Style Guidelines (6.1) y los Navigation Systems (6.2.5). Juan Angulo elaboró el Capítulo V completo y los Organization Systems, Labeling Systems, Searching Systems y SEO Tags and Meta Tags (6.2.1 a 6.2.4). Anaely Burga elaboró el Wireframe y el Mock-up de la landing page (6.3). Cada aporte queda registrado por commit y es coherente con el Registro de Versiones.
 
 Las capturas siguientes muestran los analíticos del repositorio del informe en GitHub al 8 de octubre de 2026. En ellas aparecen los cuatro integrantes del equipo como contribuidores: Sve-nnN (Juan Angulo), Relycloud (Fabrizio Quiroz), userxx1000 (Anaely Burga) y fiore-prac (Fiorella Vilca).
 
@@ -112,6 +117,25 @@ Las capturas siguientes muestran los analíticos del repositorio del informe en 
     - [Bounded Context Canvases](#bounded-context-canvases)
     - [Context Mapping](#context-mapping)
     - [Software Architecture](#software-architecture)
+- [Capítulo V: Tactical-Level Software Design](#capítulo-v-tactical-level-software-design)
+  - [5.1. Bounded Context: Lending](#51-bounded-context-lending)
+  - [5.2. Bounded Context: Identity/Wallet](#52-bounded-context-identitywallet)
+  - [5.3. Bounded Context: Reputation](#53-bounded-context-reputation)
+  - [5.4. Bounded Context: Exchange Rate](#54-bounded-context-exchange-rate)
+  - [5.5. Bounded Context: Marketing/Landing](#55-bounded-context-marketinglanding)
+- [Capítulo VI: Solution UX Design](#capítulo-vi-solution-ux-design)
+  - [6.1. Style Guidelines](#61-style-guidelines)
+    - [6.1.1. General Style Guidelines](#611-general-style-guidelines)
+    - [6.1.2. Web, Mobile & Devices Style Guidelines](#612-web-mobile--devices-style-guidelines)
+  - [6.2. Information Architecture](#62-information-architecture)
+    - [6.2.1. Organization Systems](#621-organization-systems)
+    - [6.2.2. Labeling Systems](#622-labeling-systems)
+    - [6.2.3. Searching Systems](#623-searching-systems)
+    - [6.2.4. SEO Tags and Meta Tags](#624-seo-tags-and-meta-tags)
+    - [6.2.5. Navigation Systems](#625-navigation-systems)
+  - [6.3. Landing Page UI Design](#63-landing-page-ui-design)
+    - [6.3.1. Landing Page Wireframe](#631-landing-page-wireframe)
+    - [6.3.2. Landing Page Mock-up](#632-landing-page-mock-up)
 - [Avance de Conclusiones](#avance-de-conclusiones)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
@@ -1325,6 +1349,1341 @@ graph TD
 ```
 
 ## Capítulo V: Tactical-Level Software Design
+
+El Capítulo IV delimitó los cinco bounded contexts de LatiFi y fijó cómo se relacionan entre sí. Este capítulo baja un nivel y define, para cada contexto, las clases que lo implementan, la capa a la que pertenece cada una, los componentes de cada container y las estructuras donde persiste su información. El diseño sigue los patrones tácticos de Domain-Driven Design: Entities, Value Objects, Aggregates, Domain Services, Repositories, Command Handlers y Event Handlers.
+
+Cada contexto se organiza en cuatro capas, con una dependencia que siempre apunta hacia el dominio:
+
+| Capa | Responsabilidad | Ejemplos en LatiFi |
+|---|---|---|
+| Domain Layer | Reglas de negocio, invariantes y lenguaje ubicuo del contexto. No conoce frameworks ni bases de datos. | `Loan`, `Profile`, `ReputationProfile`, `ExchangeRate`, repositorios como interfaces |
+| Application Layer | Orquesta los casos de uso y los flujos de proceso. Recibe comandos y consultas, y reacciona a eventos. | `LoanAgreement` (comandos on-chain), `ProfileService`, `RecordLoanOutcomeHandler` |
+| Interface Layer | Puerta de entrada al contexto: controladores REST, funciones externas del contrato, pantallas móviles. | `ProfileController`, ABI de `LoanAgreement`, `LoanFeedController` |
+| Infrastructure Layer | Acceso a servicios externos: base de datos, red blockchain, proveedor de tasas, Android Keystore. | `JpaProfileRepository`, `Web3jChainEventSource`, `HttpExchangeRateProvider` |
+
+Los contextos se reparten entre los containers que definió el Capítulo IV y usan las tecnologías ya decididas:
+
+| Bounded context | Containers que lo implementan | Tecnología | Persistencia | Historias de usuario |
+|---|---|---|---|---|
+| Lending | Smart Contracts | Solidity 0.8.35, OpenZeppelin 5.x, Foundry | Almacenamiento del contrato en Polygon Amoy | US-LEND-01, US-LEND-03, US-LEND-04, US-LEND-05 |
+| Identity/Wallet | LatiFi Wallet, LatiFi API | Kotlin y web3j para Android; Spring Boot 3.5 con Java 21 | Android Keystore; PostgreSQL | US-AUTH-01 a US-AUTH-04, US-IDEN-01, US-IDEN-02 |
+| Reputation | LatiFi API, Event Indexer | Spring Boot 3.5, web3j, Spring Data JPA | PostgreSQL | US-REP-01 a US-REP-04, US-API-01, US-LEND-02, US-LEND-05 |
+| Exchange Rate | LatiFi API | Spring Boot 3.5, cliente HTTP, caché en base de datos | PostgreSQL | US-LEND-06, US-API-02 |
+| Marketing/Landing | Landing Page | HTML5, CSS3, JavaScript y Material Design | Archivos JSON versionados | US-LAND-01, US-LAND-02 |
+
+Los diagramas de componentes usan la notación del C4 Model (Container Boundary, Component, Component DB y System Ext). Los diagramas de clases usan UML con visibilidad (`+` público, `-` privado, `#` protegido), relaciones con nombre y multiplicidad. Los diagramas de base de datos muestran tablas, columnas, claves primarias (PK), claves foráneas (FK) y restricciones únicas (UK).
+
+### 5.1. Bounded Context: Lending
+
+El Lending Context es el único dueño del ciclo de vida del préstamo y vive completo en la cadena. Su diseño parte de cuatro decisiones, todas coherentes con el Capítulo IV:
+
+- **Un único contrato registro.** `LoanAgreement` guarda todos los préstamos en un mapa indexado por identificador. Se descartó una fábrica que despliegue un contrato por préstamo, porque obligaría al Event Indexer a descubrir direcciones nuevas de forma dinámica y encarece el gas de cada solicitud.
+- **La solicitud nace on-chain.** `LoanRequested` se emite desde el contrato, de modo que el feed de solicitudes se deriva solo de eventos y ningún estado del préstamo existe fuera de la cadena.
+- **Cuotas iguales con un vencimiento cada una.** El plazo total se divide en entre una y seis cuotas del mismo monto, espaciadas de forma uniforme. La última cuota absorbe el residuo del redondeo.
+- **Ningún dato de precio entra al contrato.** El contrato opera solo con la unidad de la stablecoin. La conversión a moneda local es presentacional y pertenece al Exchange Rate Context.
+
+#### 5.1.1. Domain Layer
+
+El dominio del contrato se compone de tipos de datos, una librería de cálculo y las interfaces que expresan el contrato público. No depende de ninguna librería externa salvo la interfaz estándar `IERC20`.
+
+| Clase | Tipo | Propósito | Atributos y métodos |
+|---|---|---|---|
+| `Loan` | Aggregate Root (struct) | Representa un préstamo desde la solicitud hasta su liquidación. Es la única copia del estado del préstamo. | `id`, `borrower`, `lender`, `principal`, `interestRateBps`, `termDays`, `installments`, `totalDue`, `amountRepaid`, `installmentsPaid`, `requestedAt`, `fundedAt`, `status` |
+| `LoanStatus` | Enumeración | Estados válidos de un préstamo, que alimentan la consulta de estado de US-LEND-05. | `Open`, `Active`, `Repaid`, `Defaulted` |
+| `BorrowerStats` | Value Object (struct) | Contadores de resultados de un prestatario que el contrato incrementa y nadie más puede modificar. | `onTimePayments`, `latePayments`, `defaults` |
+| `InterestMath` | Domain Service (librería) | Calcula el monto total a pagar, el monto y la fecha de cada cuota. Es pura: no lee ni escribe estado. | `totalDue(principal, rateBps)`, `installmentAmount(totalDue, count, index)`, `dueDate(fundedAt, termDays, count, index)` |
+| `ILoanAgreement` | Interfaz | Declara las operaciones, los eventos y los errores del contexto. Es el contrato público que consumen la app y el indexador. | `requestLoan`, `fundLoan`, `repay`, `markDefaulted`, `getLoan`, `getBorrowerStats`, `nextDueDate` |
+
+Las reglas de negocio que el dominio hace cumplir son estas:
+
+1. El monto, el plazo y el número de cuotas deben ser mayores que cero, y la tasa debe estar dentro del rango configurado.
+2. Un préstamo solo se fondea una vez, y nunca lo fondea su propio prestatario.
+3. Una vez fondeado, ni el monto, ni la tasa, ni el plazo, ni el vencimiento cambian.
+4. El prestatario no puede pagar más de lo que adeuda.
+5. Después del vencimiento final, cualquier cuenta puede marcar el préstamo como incumplido.
+
+Los eventos de dominio y sus parámetros son:
+
+| Evento | Parámetros | Cuándo se emite |
+|---|---|---|
+| `LoanRequested` | `loanId`, `borrower`, `principal`, `interestRateBps`, `termDays`, `installments` | El prestatario publica una solicitud válida. |
+| `LoanFunded` | `loanId`, `lender`, `borrower`, `principal`, `fundedAt`, `finalDueDate` | Un prestamista fondea y la stablecoin pasa al prestatario. |
+| `LoanRepaid` | `loanId`, `amountPaid`, `onTime` | En cada pago del prestatario, aunque el préstamo no se liquide. |
+| `LoanDefaulted` | `loanId` | Se marca como incumplido un préstamo vencido. |
+
+#### 5.1.2. Interface Layer
+
+La capa de interfaz del contrato es su ABI. Las funciones externas reciben las intenciones de los usuarios y delegan la regla de negocio en las capas inferiores.
+
+| Elemento | Tipo | Propósito | Firma |
+|---|---|---|---|
+| `requestLoan` | Función de escritura | Publica una solicitud de préstamo (US-LEND-01). | `requestLoan(uint256 principal, uint16 interestRateBps, uint16 termDays, uint8 installments) returns (uint256 loanId)` |
+| `fundLoan` | Función de escritura | Fondea una solicitud abierta (US-LEND-03). | `fundLoan(uint256 loanId)` |
+| `repay` | Función de escritura | Registra un pago del prestatario (US-LEND-04). | `repay(uint256 loanId, uint256 amount)` |
+| `markDefaulted` | Función de escritura | Marca un préstamo vencido como incumplido. | `markDefaulted(uint256 loanId)` |
+| `getLoan` | Función de lectura | Devuelve el préstamo completo (US-LEND-05). | `getLoan(uint256 loanId) returns (Loan)` |
+| `getBorrowerStats` | Función de lectura | Devuelve los contadores de un prestatario. | `getBorrowerStats(address borrower) returns (BorrowerStats)` |
+| `nextDueDate` | Función de lectura | Devuelve la fecha de la próxima cuota pendiente. | `nextDueDate(uint256 loanId) returns (uint64)` |
+
+Los errores personalizados reemplazan a los mensajes de texto para reducir el gas y facilitar las pruebas: `InvalidAmount`, `InvalidTerm`, `RateOutOfRange`, `LoanNotOpen`, `SelfFunding`, `LoanNotActive`, `Overpayment` y `NotYetDefaultable`.
+
+#### 5.1.3. Application Layer
+
+La capa de aplicación del contrato la forman los manejadores de comandos, que son las funciones de `LoanAgreement`. Cada uno valida la entrada, aplica la regla del dominio, actualiza el estado y emite el evento. En un contrato no existen manejadores de eventos entrantes: el contexto solo publica eventos, nunca los consume.
+
+| Manejador | Comando que atiende | Flujo |
+|---|---|---|
+| `requestLoan` | Publicar solicitud | Valida monto, plazo, cuotas y tasa; calcula `totalDue`; guarda el préstamo en estado `Open`; emite `LoanRequested`. |
+| `fundLoan` | Fondear solicitud | Verifica que esté `Open` y que el prestamista no sea el prestatario; cambia a `Active`; fija `fundedAt`; transfiere la stablecoin del prestamista al prestatario; emite `LoanFunded`. |
+| `repay` | Pagar | Verifica que esté `Active` y que el pago no exceda lo adeudado; determina si el pago es puntual; transfiere la stablecoin del prestatario al prestamista; actualiza contadores; emite `LoanRepaid`; si el saldo llega a cero, cambia a `Repaid`. |
+| `markDefaulted` | Marcar incumplimiento | Verifica que esté `Active` y que haya pasado el vencimiento final; cambia a `Defaulted`; incrementa `defaults`; emite `LoanDefaulted`. |
+
+Todas las funciones que mueven fondos llevan el modificador `nonReentrant` y siguen el patrón checks-effects-interactions: el estado se actualiza antes de transferir la stablecoin.
+
+#### 5.1.4. Infrastructure Layer
+
+La infraestructura del contrato la forman las dependencias externas que sostienen la ejecución. Se reutilizan componentes auditados de OpenZeppelin en lugar de escribirlos de nuevo.
+
+| Componente | Origen | Propósito |
+|---|---|---|
+| `SafeERC20` | OpenZeppelin 5.x | Transfiere la stablecoin con verificación del resultado de cada llamada. |
+| `ReentrancyGuard` | OpenZeppelin 5.x | Provee el modificador `nonReentrant`. |
+| `Pausable` y `AccessControl` | OpenZeppelin 5.x | Permiten que un rol administrador detenga las operaciones ante un incidente. |
+| `MockStablecoin` | Propio | ERC-20 de prueba con 6 decimales y emisión pública acotada, que evita depender de faucets externos durante las demostraciones. |
+| `IERC20` | Estándar ERC-20 | Puerto por el que `LoanAgreement` conoce la stablecoin sin acoplarse a una implementación. |
+
+#### 5.1.5. Bounded Context Software Architecture Component Level Diagrams
+
+El container Smart Contracts se descompone en cuatro componentes propios y tres de OpenZeppelin. La app firma las transacciones y el Event Indexer lee los eventos desde la red.
+
+```mermaid
+C4Component
+    title Diagrama de componentes: Smart Contracts (Lending Context)
+
+    Boundary(up, "Actores y clientes", "") {
+        Container(wallet, "LatiFi Wallet", "Kotlin, Android", "Firma y envía transacciones")
+    }
+
+    Container_Boundary(sc, "Smart Contracts [Solidity 0.8.35]") {
+        Component(abi, "ILoanAgreement", "Interfaz Solidity", "Funciones, eventos y errores")
+        Component(agreement, "LoanAgreement", "Contrato Solidity", "Manejadores de comandos y registro de préstamos")
+        Component(math, "InterestMath", "Librería Solidity", "Interés, cuotas y vencimientos")
+        Component(guard, "ReentrancyGuard y Pausable", "OpenZeppelin 5.x", "Protección y pausa de emergencia")
+        Component(safe, "SafeERC20", "OpenZeppelin 5.x", "Transferencias verificadas")
+        Component(token, "MockStablecoin", "ERC-20, 6 decimales", "Stablecoin de prueba")
+    }
+
+    Boundary(down, "Entorno del container", "") {
+        System_Ext(amoy, "Polygon Amoy", "Red blockchain de pruebas")
+        Container(indexer, "Event Indexer", "Java, embebido en LatiFi API", "Lee y traduce los eventos")
+    }
+
+    Rel(wallet, agreement, "requestLoan, fundLoan, repay", "JSON-RPC")
+    Rel(agreement, abi, "Implementa")
+    Rel(agreement, math, "Calcula con")
+    Rel(agreement, guard, "Hereda")
+    Rel(agreement, safe, "Transfiere con")
+    Rel(safe, token, "Mueve fondos de")
+    Rel(agreement, amoy, "Se ejecuta en")
+    Rel(indexer, amoy, "Lee eventos", "eth_getLogs")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+```
+
+#### 5.1.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 5.1.6.1. Bounded Context Domain Layer Class Diagrams
+
+El diagrama muestra las clases del Domain Layer y la interfaz que las expone. `LoanAgreement` conserva todos los préstamos y todos los contadores; `InterestMath` es una librería sin estado.
+
+```mermaid
+classDiagram
+    class ILoanAgreement {
+        <<interface>>
+        +requestLoan(principal, interestRateBps, termDays, installments) uint256
+        +fundLoan(loanId) void
+        +repay(loanId, amount) void
+        +markDefaulted(loanId) void
+        +getLoan(loanId) Loan
+        +getBorrowerStats(borrower) BorrowerStats
+        +nextDueDate(loanId) uint64
+    }
+    class LoanAgreement {
+        <<contract>>
+        -IERC20 _token
+        -uint16 _maxRateBps
+        -uint16 _minTermDays
+        -uint16 _maxTermDays
+        -uint256 _nextLoanId
+        -Map~uint256,Loan~ _loans
+        -Map~address,BorrowerStats~ _stats
+        +requestLoan(principal, interestRateBps, termDays, installments) uint256
+        +fundLoan(loanId) void
+        +repay(loanId, amount) void
+        +markDefaulted(loanId) void
+        +pause() void
+        +unpause() void
+    }
+    class Loan {
+        <<struct>>
+        +uint256 id
+        +address borrower
+        +address lender
+        +uint256 principal
+        +uint16 interestRateBps
+        +uint16 termDays
+        +uint8 installments
+        +uint256 totalDue
+        +uint256 amountRepaid
+        +uint8 installmentsPaid
+        +uint64 requestedAt
+        +uint64 fundedAt
+        +LoanStatus status
+    }
+    class LoanStatus {
+        <<enumeration>>
+        Open
+        Active
+        Repaid
+        Defaulted
+    }
+    class BorrowerStats {
+        <<struct>>
+        +uint32 onTimePayments
+        +uint32 latePayments
+        +uint32 defaults
+    }
+    class InterestMath {
+        <<library>>
+        +totalDue(principal, rateBps) uint256
+        +installmentAmount(totalDue, count, index) uint256
+        +dueDate(fundedAt, termDays, count, index) uint64
+    }
+    class IERC20 {
+        <<interface>>
+        +transferFrom(from, to, amount) bool
+        +balanceOf(account) uint256
+    }
+
+    LoanAgreement ..|> ILoanAgreement : implementa
+    LoanAgreement "1" *-- "0..*" Loan : registra
+    LoanAgreement "1" *-- "0..*" BorrowerStats : acumula por prestatario
+    Loan "1" --> "1" LoanStatus : tiene estado
+    LoanAgreement ..> InterestMath : calcula con
+    LoanAgreement --> "1" IERC20 : mueve fondos con
+```
+
+##### 5.1.6.2. Bounded Context Database Diagram
+
+El Lending Context no usa tablas. Su persistencia es el almacenamiento del contrato y el registro de eventos de la cadena. El diagrama presenta ambos con la misma notación relacional para facilitar la lectura: el préstamo se identifica por su `id`, los contadores se identifican por la dirección del prestatario y cada evento referencia al préstamo que lo originó.
+
+```mermaid
+erDiagram
+    BORROWER_STATS {
+        address borrower PK "mapping _stats"
+        uint32 onTimePayments
+        uint32 latePayments
+        uint32 defaults
+    }
+    LOAN {
+        uint256 id PK "mapping _loans"
+        address borrower FK
+        address lender
+        uint256 principal
+        uint16 interestRateBps
+        uint16 termDays
+        uint8 installments
+        uint256 totalDue
+        uint256 amountRepaid
+        uint8 installmentsPaid
+        uint64 requestedAt
+        uint64 fundedAt
+        uint8 status "Open, Active, Repaid, Defaulted"
+    }
+    LOAN_EVENT {
+        bytes32 txHash PK
+        uint32 logIndex PK
+        uint256 loanId FK
+        string eventName "LoanRequested, LoanFunded, LoanRepaid, LoanDefaulted"
+        uint64 blockNumber
+    }
+
+    BORROWER_STATS ||--o{ LOAN : "acumula resultados de"
+    LOAN ||--o{ LOAN_EVENT : "emite"
+```
+
+Restricciones del esquema:
+
+- `LOAN.id` es un contador ascendente (`_nextLoanId`) que nunca se reutiliza.
+- `LOAN.borrower` y `LOAN.lender` son distintos cuando el estado es `Active` o posterior.
+- `LOAN.amountRepaid` nunca supera `LOAN.totalDue`.
+- `LOAN.principal`, `LOAN.interestRateBps`, `LOAN.termDays`, `LOAN.installments` y `LOAN.totalDue` son inmutables desde que el estado pasa a `Active`.
+- `LOAN_EVENT` no se escribe desde el contrato: la red lo produce como registro inmutable de cada transacción, y el par `txHash` y `logIndex` lo identifica de forma única.
+
+### 5.2. Bounded Context: Identity/Wallet
+
+El Identity/Wallet Context responde a la pregunta de quién es el usuario. Se reparte en dos containers: LatiFi Wallet, que crea y custodia en el dispositivo la clave del usuario y firma, y LatiFi API, que verifica las firmas y guarda el perfil ligero. La dirección on-chain es la identidad; no existen usuario ni contraseña.
+
+Las decisiones de diseño del contexto son:
+
+- **Billetera propia y no custodial.** La app genera el par de claves en el primer arranque y lo protege con Android Keystore. Ninguna clave ni frase de recuperación sale del dispositivo (DR-08). La conexión con una billetera externa a través de Reown queda como vía opcional de importación, no como flujo principal.
+- **Autenticación por desafío y firma.** La API entrega un nonce de un solo uso; la app lo firma con el esquema de mensaje personal de Ethereum (EIP-191); la API recupera la dirección del firmante y, solo si coincide con la declarada, emite un token de sesión.
+- **Perfil ligero como barrera mínima contra Sybil.** El perfil guarda nombre y un dato de contacto. La API nunca devuelve el contacto a un usuario distinto de su dueño.
+
+#### 5.2.1. Domain Layer
+
+Dominio del container LatiFi Wallet (Android):
+
+| Clase | Tipo | Propósito | Atributos y métodos |
+|---|---|---|---|
+| `Wallet` | Entity | Billetera del usuario en el dispositivo. | `address: WalletAddress`, `createdAt: Instant`, `recoveryConfirmed: Boolean`; `confirmRecovery()` |
+| `WalletAddress` | Value Object | Dirección de 20 bytes en formato hexadecimal con suma de verificación. | `value: String`; `toChecksum(): String`; valida el prefijo `0x` y 40 caracteres hexadecimales |
+| `RecoveryPhrase` | Value Object | Frase de 12 palabras que permite restaurar la billetera. Nunca se persiste en texto plano. | `words: List<String>`; `toSeed(): ByteArray` |
+| `SignedMessage` | Value Object | Resultado de firmar un mensaje. | `message: String`, `signature: String`, `signer: WalletAddress` |
+| `TransactionStatus` | Enumeración | Estados que ve el usuario durante una operación on-chain (US-AUTH-04). | `Pending`, `Confirming`, `Confirmed`, `Failed` |
+| `WalletRepository` | Repositorio (interfaz) | Puerto de persistencia de la billetera. | `current(): Wallet?`, `save(wallet)`, `clear()` |
+| `MessageSigner` | Domain Service (interfaz) | Puerto de firma de mensajes y transacciones con la clave del usuario. | `sign(message): SignedMessage`, `signTransaction(raw): ByteArray` |
+
+Dominio del container LatiFi API:
+
+| Clase | Tipo | Propósito | Atributos y métodos |
+|---|---|---|---|
+| `Profile` | Aggregate Root | Perfil ligero vinculado a una dirección. | `address: WalletAddress`, `displayName: String`, `contact: ContactInfo`, `createdAt`, `updatedAt`; `update(displayName, contact)`, `isComplete(): Boolean` |
+| `ContactInfo` | Value Object | Dato de contacto validado. | `type: ContactType`, `value: String` |
+| `ContactType` | Enumeración | Tipo de contacto aceptado. | `EMAIL`, `PHONE` |
+| `AuthChallenge` | Entity | Desafío de un solo uso que el usuario debe firmar. | `id: UUID`, `address: WalletAddress`, `nonce: String`, `issuedAt`, `expiresAt`, `consumedAt`; `isExpired(now)`, `consume(now)` |
+| `SignatureVerifier` | Domain Service (interfaz) | Puerto que recupera la dirección de quien firmó un mensaje. | `recoverSigner(message, signature): WalletAddress` |
+| `ProfileRepository` | Repositorio (interfaz) | Puerto de persistencia de perfiles. | `findByAddress(address)`, `save(profile)` |
+| `AuthChallengeRepository` | Repositorio (interfaz) | Puerto de persistencia de desafíos. | `findById(id)`, `save(challenge)` |
+| `ProfileCreated` | Domain Event | Se emite al registrarse un perfil nuevo. | `address`, `occurredAt` |
+| `ProfileUpdated` | Domain Event | Se emite al cambiar un perfil existente. | `address`, `occurredAt` |
+
+Invariantes: un desafío solo se consume una vez y solo antes de su expiración; un perfil siempre pertenece a exactamente una dirección; el contacto solo es legible por su dueño.
+
+#### 5.2.2. Interface Layer
+
+Interfaz del container LatiFi API (REST, con prefijo `/api/v1`):
+
+| Controlador | Operación | Propósito | Acceso |
+|---|---|---|---|
+| `AuthController` | `POST /auth/challenge` | Solicita un nonce para una dirección. | Público |
+| `AuthController` | `POST /auth/verify` | Entrega dirección y firma; devuelve el token de sesión si el firmante coincide. | Público |
+| `ProfileController` | `GET /profiles/{address}` | Lee un perfil. El contacto solo se incluye cuando la dirección consultada es la del usuario autenticado. | Autenticado |
+| `ProfileController` | `PUT /profiles/{address}` | Crea o actualiza el perfil. Solo el dueño de la dirección puede escribir. | Autenticado |
+
+Los objetos de transferencia son `ChallengeRequest`, `ChallengeResponse`, `VerifyRequest`, `TokenResponse`, `ProfileResponse` y `ProfileUpdateRequest`. Los errores se devuelven con código 401 para firmas inválidas, repetidas o vencidas, y con código 403 cuando el usuario intenta escribir un perfil ajeno.
+
+Interfaz del container LatiFi Wallet (pantallas y modelos de vista):
+
+| Clase | Propósito | Historia |
+|---|---|---|
+| `OnboardingScreen` y `OnboardingViewModel` | Explica en lenguaje simple cómo se solicita, fondea y paga un préstamo antes de crear la billetera. | US-AUTH-03 |
+| `WalletSetupScreen` y `WalletSetupViewModel` | Crea la billetera, muestra la frase de recuperación y exige su confirmación. | US-AUTH-01, US-AUTH-02 |
+| `ProfileScreen` y `ProfileViewModel` | Captura y edita nombre y contacto. Bloquea publicar o fondear mientras el perfil esté incompleto. | US-IDEN-01 |
+| `TransactionStatusSheet` y `TransactionStatusViewModel` | Muestra el estado de una transacción y ofrece reintentar o reconectar si la firma nunca llega. | US-AUTH-04 |
+
+#### 5.2.3. Application Layer
+
+Aplicación del container LatiFi API:
+
+| Clase | Operaciones | Flujo |
+|---|---|---|
+| `AuthService` | `issueChallenge(address)` | Genera un nonce aleatorio, fija su vencimiento en cinco minutos y lo persiste. |
+| `AuthService` | `verify(challengeId, signature)` | Recupera el firmante, comprueba que coincida con la dirección del desafío, consume el desafío y emite el token. |
+| `ProfileService` | `getProfile(address, requester)` | Devuelve el perfil y omite el contacto si el solicitante no es el dueño. |
+| `ProfileService` | `upsertProfile(address, request, requester)` | Verifica la propiedad, valida el contacto, guarda y publica `ProfileCreated` o `ProfileUpdated`. |
+
+Aplicación del container LatiFi Wallet (casos de uso):
+
+| Caso de uso | Flujo |
+|---|---|
+| `CreateWalletUseCase` | Genera el par de claves, lo guarda a través de `WalletRepository` y devuelve la frase de recuperación para mostrarla una vez. |
+| `RestoreWalletUseCase` | Reconstruye la billetera desde una frase de recuperación y la guarda. |
+| `SignInUseCase` | Pide el desafío a la API, lo firma con `MessageSigner`, lo verifica y almacena el token de sesión. |
+| `SaveProfileUseCase` | Envía nombre y contacto a la API y actualiza el estado local del perfil. |
+| `TrackTransactionUseCase` | Consulta el recibo de la transacción hasta confirmarla y emite cada cambio de `TransactionStatus`. |
+
+#### 5.2.4. Infrastructure Layer
+
+Infraestructura del container LatiFi API:
+
+| Clase | Implementa | Tecnología |
+|---|---|---|
+| `JpaProfileRepository` | `ProfileRepository` | Spring Data JPA sobre PostgreSQL |
+| `JpaAuthChallengeRepository` | `AuthChallengeRepository` | Spring Data JPA sobre PostgreSQL |
+| `Web3jSignatureVerifier` | `SignatureVerifier` | web3j, recuperación de firma ECDSA según EIP-191 |
+| `JwtTokenProvider` | Emisión y lectura del token de sesión | Spring Security con JWT |
+| `JwtAuthenticationFilter` | Autenticación de cada petición | Filtro de Spring Security |
+| `SpringDomainEventPublisher` | Publicación de `ProfileCreated` y `ProfileUpdated` | Eventos de aplicación de Spring |
+
+Infraestructura del container LatiFi Wallet:
+
+| Clase | Implementa | Tecnología |
+|---|---|---|
+| `KeystoreWalletRepository` | `WalletRepository` | Android Keystore protege la clave que cifra el material de la billetera con AES-GCM |
+| `Web3jMessageSigner` | `MessageSigner` | web3j para Android, firma EIP-191 y de transacciones |
+| `LatiFiAuthApi` y `LatiFiProfileApi` | Clientes REST | Retrofit y OkHttp |
+| `SessionStore` | Almacén del token de sesión | Preferencias cifradas |
+| `ReceiptPoller` | Consulta de recibos | web3j sobre JSON-RPC |
+| `ReownImportAdapter` | Importación opcional de una billetera externa | SDK de Reown |
+
+#### 5.2.5. Bounded Context Software Architecture Component Level Diagrams
+
+Container LatiFi API, módulo de identidad:
+
+```mermaid
+C4Component
+    title Diagrama de componentes: LatiFi API, módulo Identity (Identity/Wallet Context)
+
+    Boundary(up, "Actores y clientes", "") {
+        Container(wallet, "LatiFi Wallet", "Kotlin, Android", "Cliente móvil")
+    }
+
+    Container_Boundary(api, "LatiFi API [Spring Boot 3.5, Java 21]") {
+        Component(authc, "AuthController", "Spring MVC RestController", "POST /auth/challenge y /auth/verify")
+        Component(profc, "ProfileController", "Spring MVC RestController", "GET y PUT /profiles/{address}")
+        Component(filter, "JwtAuthenticationFilter", "Spring Security", "Autentica cada petición")
+        Component(authsvc, "AuthService", "Spring Service", "Emite y verifica desafíos")
+        Component(profsvc, "ProfileService", "Spring Service", "Casos de uso del perfil")
+        Component(pub, "SpringDomainEventPublisher", "Spring Events", "Publica eventos de perfil")
+        Component(verifier, "Web3jSignatureVerifier", "web3j", "Recupera el firmante EIP-191")
+        Component(jwt, "JwtTokenProvider", "Spring Security JWT", "Emite y valida tokens")
+        Component(repos, "Repositorios JPA", "Spring Data JPA", "Perfiles y desafíos")
+    }
+
+    Boundary(down, "Entorno del container", "") {
+        ContainerDb(db, "LatiFi DB", "PostgreSQL", "Perfiles y desafíos")
+        Container(rep, "Módulo Reputation", "Spring Boot", "Consume ProfileCreated")
+    }
+
+    Rel(wallet, authc, "Solicita desafío y verifica", "REST, HTTPS")
+    Rel(wallet, profc, "Lee y guarda perfil", "REST, HTTPS")
+    Rel(filter, jwt, "Valida token")
+    Rel(authc, authsvc, "Usa")
+    Rel(profc, profsvc, "Usa")
+    Rel(authsvc, verifier, "Verifica firma")
+    Rel(authsvc, jwt, "Emite token")
+    Rel(authsvc, repos, "Lee y guarda desafíos")
+    Rel(profsvc, repos, "Lee y guarda perfiles")
+    Rel(profsvc, pub, "Publica eventos")
+    Rel(repos, db, "SQL", "JDBC")
+    Rel(pub, rep, "ProfileCreated")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+```
+
+Container LatiFi Wallet, módulo de identidad y billetera:
+
+```mermaid
+C4Component
+    title Diagrama de componentes: LatiFi Wallet, módulo Identity/Wallet
+
+    Boundary(up, "Actores y clientes", "") {
+        Person(user, "Prestatario o prestamista", "Usuario de la app")
+    }
+
+    Container_Boundary(app, "LatiFi Wallet [Kotlin, Android]") {
+        Component(ui, "Onboarding, WalletSetup y Profile", "Jetpack Compose y ViewModel", "Pantallas del contexto")
+        Component(tx, "TransactionStatusViewModel", "ViewModel", "Estado de la transacción")
+        Component(uc, "Casos de uso", "Kotlin", "CreateWallet, RestoreWallet, SignIn, SaveProfile, TrackTransaction")
+        Component(walletrepo, "KeystoreWalletRepository", "Android Keystore, AES-GCM", "Guarda la billetera")
+        Component(signer, "Web3jMessageSigner", "web3j, Android", "Firma mensajes y transacciones")
+        Component(client, "LatiFiAuthApi y LatiFiProfileApi", "Retrofit, OkHttp", "Cliente REST")
+        Component(poller, "ReceiptPoller", "web3j", "Consulta recibos")
+    }
+
+    Boundary(down, "Entorno del container", "") {
+        Container(api, "LatiFi API", "Spring Boot", "Autenticación y perfil")
+        System_Ext(amoy, "Polygon Amoy", "Red blockchain de pruebas")
+    }
+
+    Rel(user, ui, "Usa")
+    Rel(ui, uc, "Invoca")
+    Rel(tx, uc, "Invoca")
+    Rel(uc, walletrepo, "Guarda y lee la billetera")
+    Rel(uc, signer, "Firma")
+    Rel(uc, client, "Llama a la API")
+    Rel(uc, poller, "Sigue la transacción")
+    Rel(client, api, "REST", "HTTPS")
+    Rel(poller, amoy, "Lee recibos", "JSON-RPC")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+```
+
+#### 5.2.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 5.2.6.1. Bounded Context Domain Layer Class Diagrams
+
+Dominio del container LatiFi API:
+
+```mermaid
+classDiagram
+    class Profile {
+        <<Aggregate Root>>
+        -WalletAddress address
+        -String displayName
+        -ContactInfo contact
+        -Instant createdAt
+        -Instant updatedAt
+        +update(displayName, contact) void
+        +isComplete() boolean
+    }
+    class ContactInfo {
+        <<Value Object>>
+        -ContactType type
+        -String value
+        +validate() boolean
+    }
+    class ContactType {
+        <<enumeration>>
+        EMAIL
+        PHONE
+    }
+    class WalletAddress {
+        <<Value Object>>
+        -String value
+        +toChecksum() String
+    }
+    class AuthChallenge {
+        <<Entity>>
+        -UUID id
+        -WalletAddress address
+        -String nonce
+        -Instant issuedAt
+        -Instant expiresAt
+        -Instant consumedAt
+        +isExpired(now) boolean
+        +consume(now) void
+    }
+    class SignatureVerifier {
+        <<interface>>
+        +recoverSigner(message, signature) WalletAddress
+    }
+    class ProfileRepository {
+        <<interface>>
+        +findByAddress(address) Profile
+        +save(profile) void
+    }
+    class AuthChallengeRepository {
+        <<interface>>
+        +findById(id) AuthChallenge
+        +save(challenge) void
+    }
+    class ProfileCreated {
+        <<Domain Event>>
+        -WalletAddress address
+        -Instant occurredAt
+    }
+
+    Profile "1" *-- "1" ContactInfo : contiene
+    Profile "1" --> "1" WalletAddress : se identifica por
+    ContactInfo "1" --> "1" ContactType : es de tipo
+    AuthChallenge "0..*" --> "1" WalletAddress : se emite para
+    Profile ..> ProfileCreated : emite
+    ProfileRepository ..> Profile : persiste
+    AuthChallengeRepository ..> AuthChallenge : persiste
+    SignatureVerifier ..> WalletAddress : devuelve
+```
+
+Dominio del container LatiFi Wallet:
+
+```mermaid
+classDiagram
+    class Wallet {
+        <<Entity>>
+        -WalletAddress address
+        -Instant createdAt
+        -boolean recoveryConfirmed
+        +confirmRecovery() void
+    }
+    class WalletAddress {
+        <<Value Object>>
+        -String value
+        +toChecksum() String
+    }
+    class RecoveryPhrase {
+        <<Value Object>>
+        -List~String~ words
+        +toSeed() ByteArray
+    }
+    class SignedMessage {
+        <<Value Object>>
+        -String message
+        -String signature
+        -WalletAddress signer
+    }
+    class TransactionStatus {
+        <<enumeration>>
+        Pending
+        Confirming
+        Confirmed
+        Failed
+    }
+    class WalletRepository {
+        <<interface>>
+        +current() Wallet
+        +save(wallet) void
+        +clear() void
+    }
+    class MessageSigner {
+        <<interface>>
+        +sign(message) SignedMessage
+        +signTransaction(raw) ByteArray
+    }
+
+    Wallet "1" --> "1" WalletAddress : se identifica por
+    Wallet "1" ..> "1" RecoveryPhrase : se restaura con
+    MessageSigner ..> SignedMessage : produce
+    SignedMessage "1" --> "1" WalletAddress : firmado por
+    WalletRepository ..> Wallet : persiste
+```
+
+##### 5.2.6.2. Bounded Context Database Diagram
+
+Las tablas del contexto viven en PostgreSQL y las crea una migración versionada. El desafío no declara clave foránea hacia `profile`, porque se emite antes de que el perfil exista. En el dispositivo, la billetera no se modela como tabla: el material cifrado se guarda en almacenamiento privado de la app, protegido por una clave que nunca abandona Android Keystore.
+
+```mermaid
+erDiagram
+    PROFILE {
+        char42 address PK "dirección 0x en formato checksum"
+        varchar display_name "no nulo, hasta 80 caracteres"
+        varchar contact_type "EMAIL o PHONE"
+        varchar contact_value "no nulo"
+        timestamptz created_at
+        timestamptz updated_at
+    }
+    AUTH_CHALLENGE {
+        uuid id PK
+        char42 address "dirección que solicita el desafío"
+        varchar nonce UK "aleatorio, de un solo uso"
+        timestamptz issued_at
+        timestamptz expires_at
+        timestamptz consumed_at "nulo mientras no se use"
+    }
+
+    PROFILE ||--o{ AUTH_CHALLENGE : "se vincula por dirección, sin FK"
+```
+
+Restricciones del esquema:
+
+- `PROFILE.address` es la clave primaria natural y se guarda siempre en formato checksum.
+- `AUTH_CHALLENGE.nonce` es único; un desafío con `consumed_at` distinto de nulo se rechaza, lo que impide reutilizar una firma.
+- `AUTH_CHALLENGE.expires_at` es siempre posterior a `issued_at`, y la verificación rechaza los desafíos vencidos.
+- `PROFILE.contact_value` se valida contra el formato de `contact_type` antes de guardarse.
+
+### 5.3. Bounded Context: Reputation
+
+El Reputation Context calcula y expone la confianza que merece cada prestatario. Es el diferenciador de LatiFi: sustituye al colateral por un score híbrido que combina resultados on-chain con señales off-chain. Vive en LatiFi API y se alimenta del Event Indexer, que actúa como Anti-Corruption Layer entre la cadena y el dominio.
+
+El contexto también aloja la proyección de lectura de los préstamos. Como el contrato es la única fuente de verdad, la API mantiene una copia derivada de sus eventos para servir el feed y las listas sin consultar la cadena en cada pantalla. Esa copia nunca decide el estado de un préstamo: solo lo refleja.
+
+Las decisiones de diseño del contexto son:
+
+- **Score de 0 a 100 con niveles.** El número alimenta el orden del feed y el nivel (`NEW`, `BUILDING`, `TRUSTED`, `EXCELLENT`) alimenta la etiqueta que ve el prestamista.
+- **Cambios graduales y explicables.** Cada variación queda registrada como un `ReputationEvent` con su motivo y la transacción que la originó, de modo que la historia del score siempre puede auditarse.
+- **Idempotencia por transacción y posición del log.** Procesar dos veces el mismo evento on-chain no cambia el score, porque el par `txHash` y `logIndex` es único.
+- **Política configurable.** Los parámetros del cálculo viven en una clase de política y no en el código de los casos de uso, para ajustarlos sin tocar el flujo.
+
+La política inicial del cálculo es la siguiente:
+
+| Situación | Efecto sobre el score |
+|---|---|
+| Prestatario sin perfil completo | Score inicial de 30 |
+| Perfil con nombre y contacto | Suma 10 puntos una sola vez (score inicial de 40) |
+| Pago puntual | Suma 5 puntos; suma 7 mientras el score esté por debajo del máximo que alcanzó el prestatario (recuperación gradual) |
+| Pago tardío | Resta 2 puntos por día de atraso, con un tope de 15 |
+| Incumplimiento | Resta 30 puntos |
+
+El score siempre se mantiene entre 0 y 100. Los niveles son `NEW` de 0 a 39, `BUILDING` de 40 a 59, `TRUSTED` de 60 a 79 y `EXCELLENT` de 80 a 100.
+
+#### 5.3.1. Domain Layer
+
+| Clase | Tipo | Propósito | Atributos y métodos |
+|---|---|---|---|
+| `ReputationProfile` | Aggregate Root | Reputación vigente de un prestatario. | `address: WalletAddress`, `score: ReputationScore`, `level: ReputationLevel`, `onTimeCount`, `lateCount`, `defaultCount`, `peakScore`, `profileComplete`, `updatedAt`; `applyOutcome(outcome, policy): ReputationEvent`, `applyProfileSignal(complete, policy): ReputationEvent` |
+| `ReputationScore` | Value Object | Puntaje acotado entre 0 y 100. | `value: Int`; `plus(delta): ReputationScore`, `minus(delta): ReputationScore`, `level(): ReputationLevel` |
+| `ReputationLevel` | Enumeración | Nivel que se muestra al prestamista. | `NEW`, `BUILDING`, `TRUSTED`, `EXCELLENT` |
+| `ReputationEvent` | Entity | Registro de una variación del score y de su causa. | `id`, `address`, `loanId`, `type: ReputationEventType`, `delta`, `scoreAfter`, `daysLate`, `chainEventId`, `occurredAt` |
+| `ReputationEventType` | Enumeración | Causa de la variación. | `PROFILE_COMPLETED`, `REPAID_ON_TIME`, `REPAID_LATE`, `DEFAULTED` |
+| `LoanOutcome` | Value Object | Resultado de un préstamo ya traducido a lenguaje de dominio por el Anti-Corruption Layer. | `loanId`, `borrower`, `kind: OutcomeKind`, `amountPaid`, `daysLate`, `txHash`, `logIndex`, `occurredAt` |
+| `OutcomeKind` | Enumeración | Tipo de resultado. | `BORROWER_REPAID_ON_TIME`, `BORROWER_REPAID_LATE`, `BORROWER_DEFAULTED` |
+| `ReputationPolicy` | Domain Service | Contiene los parámetros y calcula la variación de cada situación. | `initialScore`, `profileBonus`, `onTimeGain`, `recoveryGain`, `latePenaltyPerDay`, `latePenaltyCap`, `defaultPenalty`; `deltaFor(profile, outcome): Int` |
+| `LoanSummary` | Entity (proyección) | Copia de lectura de un préstamo, derivada de eventos. | `loanId`, `borrower`, `lender`, `principal`, `interestRateBps`, `termDays`, `installments`, `status`, `amountRepaid`, `requestedAt`, `fundedAt`, `finalDueDate`; `apply(chainEvent)` |
+| `ChainEvent` | Entity | Evento on-chain recibido, con su posición exacta. | `txHash`, `logIndex`, `blockNumber`, `eventName`, `loanId`, `payload`, `processedAt` |
+| `IndexerCheckpoint` | Entity | Último bloque procesado del contrato. | `contractAddress`, `lastProcessedBlock`, `updatedAt` |
+| `ReputationRepository`, `ReputationEventRepository`, `LoanSummaryRepository`, `ChainEventRepository`, `IndexerCheckpointRepository` | Repositorios (interfaces) | Puertos de persistencia del contexto. | `findByAddress`, `save`, `existsByTxHashAndLogIndex`, `findFeed(filter, sort)` |
+| `ChainEventSource` | Domain Service (interfaz) | Puerto por el que el dominio obtiene eventos de la cadena. | `fetch(fromBlock, toBlock): List<RawLog>`, `latestBlock(): Long` |
+
+Invariantes: el score nunca sale del rango de 0 a 100; un `ChainEvent` se procesa una sola vez; cada cambio de score genera exactamente un `ReputationEvent`; la proyección `LoanSummary` solo avanza hacia estados posteriores del préstamo.
+
+#### 5.3.2. Interface Layer
+
+Interfaz REST de LatiFi API:
+
+| Controlador | Operación | Propósito | Historia |
+|---|---|---|---|
+| `ReputationController` | `GET /reputation/{address}` | Devuelve score, nivel y contadores de un prestatario. | US-REP-02, US-API-01 |
+| `ReputationController` | `GET /reputation/{address}/history` | Lista paginada de los `ReputationEvent` con la referencia de transacción de cada uno. | US-API-01 |
+| `LoanFeedController` | `GET /loans` | Lista préstamos con filtros `status`, `minAmount`, `maxAmount`, `maxTermDays`, `minLevel`, `borrower` y `lender`, y orden `sort` por `reputation`, `amount`, `term` o `rate`. Por defecto ordena por reputación. | US-LEND-02, US-REP-03, US-LEND-05 |
+| `LoanFeedController` | `GET /loans/{loanId}` | Devuelve un préstamo con su estado y su reputación. | US-LEND-05 |
+
+Consumidores internos del contexto:
+
+| Clase | Tipo | Propósito |
+|---|---|---|
+| `ChainEventPoller` | Consumer programado | Dispara un ciclo de indexación a intervalo fijo. |
+| `ProfileEventListener` | Event listener | Recibe `ProfileCreated` y `ProfileUpdated` del Identity/Wallet Context. |
+
+#### 5.3.3. Application Layer
+
+| Clase | Tipo | Flujo |
+|---|---|---|
+| `EventIndexingService` | Servicio de aplicación | Lee desde el checkpoint hasta el último bloque, traduce cada log, entrega el resultado a los manejadores y avanza el checkpoint en la misma transacción. |
+| `RecordLoanOutcomeHandler` | Event Handler | Recibe un `LoanOutcome`, descarta duplicados por `txHash` y `logIndex`, aplica la política, guarda el `ReputationEvent` y actualiza el `ReputationProfile`. |
+| `ApplyProfileSignalHandler` | Event Handler | Al recibir un perfil completo, suma la bonificación una sola vez y registra `PROFILE_COMPLETED`. |
+| `LoanMirrorProjector` | Event Handler | Aplica `LoanRequested`, `LoanFunded`, `LoanRepaid` y `LoanDefaulted` sobre la proyección de préstamos. |
+| `GetReputationQuery` y `GetReputationHistoryQuery` | Query Handlers | Devuelven la reputación y su historia. |
+| `ListLoansQuery` | Query Handler | Combina la proyección de préstamos con la reputación para el feed y las listas. |
+
+El flujo de un resultado de préstamo es este: el contrato emite el evento, el indexador lo lee y lo traduce, `RecordLoanOutcomeHandler` recalcula el score y la app lo muestra la próxima vez que consulta la API. El Reputation Context nunca decide si un préstamo está pagado o vencido; solo reacciona al resultado que la cadena ya fijó.
+
+#### 5.3.4. Infrastructure Layer
+
+| Clase | Implementa | Tecnología |
+|---|---|---|
+| `Web3jChainEventSource` | `ChainEventSource` | web3j sobre JSON-RPC, consulta `eth_getLogs` por rangos de bloques con reintentos y espera creciente |
+| `LoanAgreementEventDecoder` | Decodificación de logs | Wrapper de web3j generado desde el ABI de `LoanAgreement` |
+| `ChainEventTranslator` | Anti-Corruption Layer | Convierte logs crudos en `LoanOutcome` y en eventos de proyección |
+| `JpaReputationRepository` | `ReputationRepository` | Spring Data JPA sobre PostgreSQL |
+| `JpaReputationEventRepository` | `ReputationEventRepository` | Spring Data JPA sobre PostgreSQL |
+| `JpaLoanSummaryRepository` | `LoanSummaryRepository` | Spring Data JPA con consultas dinámicas de filtro y orden |
+| `JpaChainEventRepository` | `ChainEventRepository` | Spring Data JPA con restricción única sobre `tx_hash` y `log_index` |
+| `JpaIndexerCheckpointRepository` | `IndexerCheckpointRepository` | Spring Data JPA |
+
+#### 5.3.5. Bounded Context Software Architecture Component Level Diagrams
+
+Container LatiFi API, módulo Reputation y Loan Feed:
+
+```mermaid
+C4Component
+    title Diagrama de componentes: LatiFi API, módulo Reputation y Loan Feed (Reputation Context)
+
+    Boundary(up, "Actores y clientes", "") {
+        Container(wallet, "LatiFi Wallet", "Kotlin, Android", "Consulta feed y reputación")
+        Container(indexer, "Event Indexer", "Java, embebido en LatiFi API", "Entrega eventos traducidos")
+        Container(identity, "Módulo Identity", "Spring Boot", "Publica ProfileCreated")
+    }
+
+    Container_Boundary(api, "LatiFi API [Spring Boot 3.5, Java 21]") {
+        Component(repc, "ReputationController", "Spring MVC RestController", "GET /reputation y /history")
+        Component(feedc, "LoanFeedController", "Spring MVC RestController", "GET /loans y /loans/{id}")
+        Component(queries, "Query Handlers", "Spring Service", "GetReputation, GetHistory, ListLoans")
+        Component(outcome, "RecordLoanOutcomeHandler", "Event Handler", "Recalcula el score")
+        Component(signal, "ApplyProfileSignalHandler", "Event Handler", "Aplica la señal de perfil")
+        Component(projector, "LoanMirrorProjector", "Event Handler", "Actualiza la proyección")
+        Component(policy, "ReputationPolicy", "Domain Service", "Parámetros y cálculo")
+        Component(repos, "Repositorios JPA", "Spring Data JPA", "Reputación, eventos y préstamos")
+    }
+
+    Boundary(down, "Entorno del container", "") {
+        ContainerDb(db, "LatiFi DB", "PostgreSQL", "Reputación y préstamos")
+    }
+
+    Rel(wallet, repc, "Lee reputación", "REST, HTTPS")
+    Rel(wallet, feedc, "Lee feed y préstamos", "REST, HTTPS")
+    Rel(indexer, outcome, "LoanOutcome")
+    Rel(indexer, projector, "Evento de préstamo")
+    Rel(identity, signal, "ProfileCreated")
+    Rel(repc, queries, "Usa")
+    Rel(feedc, queries, "Usa")
+    Rel(outcome, policy, "Calcula variación")
+    Rel(signal, policy, "Calcula variación")
+    Rel(queries, repos, "Lee")
+    Rel(outcome, repos, "Guarda score y evento")
+    Rel(projector, repos, "Guarda proyección")
+    Rel(repos, db, "SQL", "JDBC")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+```
+
+Container Event Indexer:
+
+```mermaid
+C4Component
+    title Diagrama de componentes: Event Indexer (Reputation Context)
+
+    Boundary(up, "Actores y clientes", "") {
+        System_Ext(amoy, "Polygon Amoy", "Red blockchain de pruebas")
+    }
+
+    Container_Boundary(idx, "Event Indexer [Java 21, embebido en LatiFi API]") {
+        Component(poller, "ChainEventPoller", "Spring Scheduler", "Dispara cada ciclo")
+        Component(service, "EventIndexingService", "Spring Service", "Orquesta el ciclo y el checkpoint")
+        Component(source, "Web3jChainEventSource", "web3j", "Obtiene logs por rango de bloques")
+        Component(decoder, "LoanAgreementEventDecoder", "web3j, wrapper del ABI", "Decodifica topics y datos")
+        Component(acl, "ChainEventTranslator", "Anti-Corruption Layer", "Traduce a lenguaje de dominio")
+        Component(store, "Repositorios de checkpoint y eventos", "Spring Data JPA", "Garantiza idempotencia")
+    }
+
+    Boundary(down, "Entorno del container", "") {
+        Container(rep, "Módulo Reputation", "Spring Boot", "Manejadores de eventos")
+        ContainerDb(db, "LatiFi DB", "PostgreSQL", "Checkpoint y eventos")
+    }
+
+    Rel(poller, service, "Inicia ciclo")
+    Rel(service, source, "Pide logs")
+    Rel(source, amoy, "Lee eventos", "eth_getLogs")
+    Rel(source, decoder, "Entrega logs")
+    Rel(decoder, acl, "Log decodificado")
+    Rel(service, store, "Lee y avanza checkpoint")
+    Rel(acl, rep, "LoanOutcome y eventos")
+    Rel(store, db, "SQL", "JDBC")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+```
+
+#### 5.3.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 5.3.6.1. Bounded Context Domain Layer Class Diagrams
+
+```mermaid
+classDiagram
+    class ReputationProfile {
+        <<Aggregate Root>>
+        -WalletAddress address
+        -ReputationScore score
+        -ReputationLevel level
+        -int onTimeCount
+        -int lateCount
+        -int defaultCount
+        -int peakScore
+        -boolean profileComplete
+        -Instant updatedAt
+        +applyOutcome(outcome, policy) ReputationEvent
+        +applyProfileSignal(complete, policy) ReputationEvent
+    }
+    class ReputationScore {
+        <<Value Object>>
+        -int value
+        +plus(delta) ReputationScore
+        +minus(delta) ReputationScore
+        +level() ReputationLevel
+    }
+    class ReputationLevel {
+        <<enumeration>>
+        NEW
+        BUILDING
+        TRUSTED
+        EXCELLENT
+    }
+    class ReputationEvent {
+        <<Entity>>
+        -long id
+        -WalletAddress address
+        -Long loanId
+        -ReputationEventType type
+        -int delta
+        -int scoreAfter
+        -int daysLate
+        -Instant occurredAt
+    }
+    class ReputationEventType {
+        <<enumeration>>
+        PROFILE_COMPLETED
+        REPAID_ON_TIME
+        REPAID_LATE
+        DEFAULTED
+    }
+    class LoanOutcome {
+        <<Value Object>>
+        -long loanId
+        -WalletAddress borrower
+        -OutcomeKind kind
+        -BigInteger amountPaid
+        -int daysLate
+        -String txHash
+        -int logIndex
+    }
+    class ReputationPolicy {
+        <<Domain Service>>
+        -int initialScore
+        -int profileBonus
+        -int onTimeGain
+        -int recoveryGain
+        -int latePenaltyPerDay
+        -int latePenaltyCap
+        -int defaultPenalty
+        +deltaFor(profile, outcome) int
+    }
+    class LoanSummary {
+        <<Entity>>
+        -long loanId
+        -WalletAddress borrower
+        -WalletAddress lender
+        -BigInteger principal
+        -int interestRateBps
+        -int termDays
+        -int installments
+        -String status
+        -BigInteger amountRepaid
+        -Instant fundedAt
+        +apply(event) void
+    }
+    class ChainEvent {
+        <<Entity>>
+        -String txHash
+        -int logIndex
+        -long blockNumber
+        -String eventName
+        -Long loanId
+        -Instant processedAt
+    }
+    class IndexerCheckpoint {
+        <<Entity>>
+        -String contractAddress
+        -long lastProcessedBlock
+        +advanceTo(block) void
+    }
+    class ChainEventSource {
+        <<interface>>
+        +fetch(fromBlock, toBlock) List~RawLog~
+        +latestBlock() long
+    }
+
+    ReputationProfile "1" *-- "1" ReputationScore : tiene
+    ReputationProfile "1" o-- "0..*" ReputationEvent : registra
+    ReputationScore "1" --> "1" ReputationLevel : determina
+    ReputationEvent "0..*" --> "1" ReputationEventType : es de tipo
+    ReputationProfile ..> ReputationPolicy : calcula con
+    ReputationProfile ..> LoanOutcome : reacciona a
+    ChainEvent "1" --> "0..1" ReputationEvent : origina
+    ChainEvent "1" --> "0..1" LoanSummary : actualiza
+    IndexerCheckpoint ..> ChainEventSource : avanza con
+```
+
+##### 5.3.6.2. Bounded Context Database Diagram
+
+```mermaid
+erDiagram
+    REPUTATION_PROFILE {
+        char42 address PK
+        smallint score "entre 0 y 100"
+        varchar level "NEW, BUILDING, TRUSTED, EXCELLENT"
+        smallint peak_score
+        integer on_time_count
+        integer late_count
+        integer default_count
+        boolean profile_complete
+        timestamptz updated_at
+    }
+    CHAIN_EVENT {
+        bigint id PK
+        char66 tx_hash UK
+        integer log_index UK
+        bigint block_number
+        varchar event_name
+        bigint loan_id FK
+        jsonb payload
+        timestamptz processed_at
+    }
+    REPUTATION_EVENT {
+        bigint id PK
+        char42 address FK
+        bigint loan_id
+        varchar event_type
+        smallint delta
+        smallint score_after
+        smallint days_late
+        bigint chain_event_id FK
+        timestamptz occurred_at
+    }
+    LOAN_MIRROR {
+        bigint loan_id PK
+        char42 borrower_address FK
+        char42 lender_address
+        numeric principal
+        integer interest_rate_bps
+        integer term_days
+        smallint installments
+        numeric total_due
+        numeric amount_repaid
+        varchar status "OPEN, ACTIVE, REPAID, DEFAULTED"
+        timestamptz requested_at
+        timestamptz funded_at
+        timestamptz final_due_date
+        bigint last_block
+    }
+    INDEXER_CHECKPOINT {
+        char42 contract_address PK
+        bigint last_processed_block
+        timestamptz updated_at
+    }
+
+    REPUTATION_PROFILE ||--o{ REPUTATION_EVENT : "acumula"
+    REPUTATION_PROFILE ||--o{ LOAN_MIRROR : "solicita"
+    LOAN_MIRROR ||--o{ CHAIN_EVENT : "se actualiza con"
+    CHAIN_EVENT ||--o| REPUTATION_EVENT : "origina"
+```
+
+Restricciones del esquema:
+
+- `CHAIN_EVENT` tiene una restricción única sobre `tx_hash` y `log_index`, que vuelve idempotente el procesamiento de eventos.
+- `REPUTATION_PROFILE.score` y `peak_score` están acotados entre 0 y 100 mediante una restricción `CHECK`.
+- `REPUTATION_EVENT.chain_event_id` es nulo para los eventos que no provienen de la cadena, como `PROFILE_COMPLETED`.
+- `LOAN_MIRROR.borrower_address` referencia a `REPUTATION_PROFILE`, que se crea con el score inicial la primera vez que aparece un prestatario.
+- `LOAN_MIRROR.status` solo admite valores del conjunto `OPEN`, `ACTIVE`, `REPAID` y `DEFAULTED`.
+- Los índices cubren `LOAN_MIRROR(status, requested_at)` y `REPUTATION_EVENT(address, occurred_at)` para el feed y para el historial paginado.
+
+### 5.4. Bounded Context: Exchange Rate
+
+El Exchange Rate Context convierte montos de stablecoin a la moneda local del usuario para que un prestatario sin experiencia entienda cuánto debe o cuánto recibe (US-LEND-06). Es un contexto de presentación: ningún dato de precio entra al contrato ni modifica el estado de un préstamo, lo que elimina el riesgo de manipulación de oráculo que identificó el Capítulo IV.
+
+Las decisiones de diseño del contexto son:
+
+- **La app nunca llama al proveedor externo.** Solo LatiFi API consulta las tasas, las cachea y las expone con un endpoint propio (US-API-02).
+- **Refresco programado, no por petición.** Un trabajo periódico actualiza las tasas; las conversiones siempre leen de la caché, de modo que un proveedor lento o caído no afecta la respuesta al usuario.
+- **Valor vencido pero disponible.** Si el proveedor falla, la API devuelve la última tasa guardada con la marca `stale`, y la app puede avisar que el valor es aproximado.
+- **Paridad supuesta de la stablecoin.** La conversión toma la stablecoin como equivalente a un dólar estadounidense y aplica la tasa del dólar a la moneda local.
+
+#### 5.4.1. Domain Layer
+
+| Clase | Tipo | Propósito | Atributos y métodos |
+|---|---|---|---|
+| `ExchangeRate` | Aggregate Root | Tasa vigente de un par de monedas. | `pair: CurrencyPair`, `rate: BigDecimal`, `source: String`, `fetchedAt: Instant`; `isStale(now, ttl): Boolean`, `convert(amount: StablecoinAmount): LocalAmount`, `refresh(newRate, fetchedAt)` |
+| `CurrencyPair` | Value Object | Par de moneda base y moneda local. | `base: CurrencyCode`, `quote: CurrencyCode` |
+| `CurrencyCode` | Value Object | Código de moneda ISO 4217. | `value: String`; valida tres letras mayúsculas |
+| `StablecoinAmount` | Value Object | Monto de stablecoin en unidades mínimas. | `units: BigInteger`, `decimals: Int`; `toDecimal(): BigDecimal` |
+| `LocalAmount` | Value Object | Resultado de una conversión. | `value: BigDecimal`, `currency: CurrencyCode`, `rate: BigDecimal`, `asOf: Instant`, `stale: Boolean` |
+| `ExchangeRateRefreshed` | Domain Event | Se emite cuando se actualiza la caché de tasas. | `pair`, `rate`, `fetchedAt` |
+| `ExchangeRateProvider` | Domain Service (interfaz) | Puerto hacia el proveedor externo de tasas. | `fetchRates(base, quotes): List<RateQuote>` |
+| `ExchangeRateRepository` | Repositorio (interfaz) | Puerto de persistencia de tasas e historial. | `findByPair(pair)`, `findAll()`, `save(rate)` |
+
+Invariantes: la tasa es siempre mayor que cero; el par se identifica por base y moneda local, sin repeticiones; una conversión indica siempre desde qué instante proviene la tasa que usó.
+
+#### 5.4.2. Interface Layer
+
+| Controlador | Operación | Propósito | Historia |
+|---|---|---|---|
+| `ExchangeRateController` | `GET /exchange-rate/convert?amount={units}&currency={code}` | Convierte un monto de stablecoin a la moneda local. Devuelve valor, tasa, instante de la tasa y la marca `stale`. | US-API-02, US-LEND-06 |
+| `ExchangeRateController` | `GET /exchange-rate/rates` | Lista las tasas disponibles y su antigüedad. | US-API-02 |
+
+Una moneda no soportada devuelve el código 400 con un mensaje localizado según `Accept-Language`.
+
+#### 5.4.3. Application Layer
+
+| Clase | Tipo | Flujo |
+|---|---|---|
+| `ConvertAmountQuery` | Query Handler | Busca la tasa del par, construye el `StablecoinAmount`, convierte y marca el resultado como `stale` si superó el tiempo de vida configurado. |
+| `ListRatesQuery` | Query Handler | Devuelve todas las tasas guardadas con su antigüedad. |
+| `RefreshRatesHandler` | Command Handler | Pide al proveedor las tasas de las monedas configuradas, actualiza cada `ExchangeRate`, guarda el historial y publica `ExchangeRateRefreshed`. Si el proveedor falla, conserva la tasa anterior. |
+| `RateRefreshJob` | Disparador programado | Invoca a `RefreshRatesHandler` cada hora. |
+
+#### 5.4.4. Infrastructure Layer
+
+| Clase | Implementa | Tecnología |
+|---|---|---|
+| `HttpExchangeRateProvider` | `ExchangeRateProvider` | Cliente HTTP de Spring con tiempo de espera de tres segundos y dos reintentos |
+| `JpaExchangeRateRepository` | `ExchangeRateRepository` | Spring Data JPA sobre PostgreSQL |
+| `RateRefreshJob` | Planificador | `@Scheduled` de Spring |
+| `ExchangeRateProperties` | Configuración | Monedas soportadas, tiempo de vida de la caché y dirección del proveedor |
+
+#### 5.4.5. Bounded Context Software Architecture Component Level Diagrams
+
+```mermaid
+C4Component
+    title Diagrama de componentes: LatiFi API, módulo Exchange Rate (Exchange Rate Context)
+
+    Boundary(up, "Actores y clientes", "") {
+        Container(wallet, "LatiFi Wallet", "Kotlin, Android", "Pide conversiones")
+    }
+
+    Container_Boundary(api, "LatiFi API [Spring Boot 3.5, Java 21]") {
+        Component(ctrl, "ExchangeRateController", "Spring MVC RestController", "GET /exchange-rate/convert y /rates")
+        Component(query, "ConvertAmountQuery y ListRatesQuery", "Spring Service", "Conversión desde la caché")
+        Component(job, "RateRefreshJob", "Spring Scheduler", "Dispara el refresco cada hora")
+        Component(refresh, "RefreshRatesHandler", "Spring Service", "Actualiza tasas e historial")
+        Component(provider, "HttpExchangeRateProvider", "Spring HTTP client", "Consulta al proveedor con reintentos")
+        Component(repo, "JpaExchangeRateRepository", "Spring Data JPA", "Persistencia")
+    }
+
+    Boundary(down, "Entorno del container", "") {
+        ContainerDb(db, "LatiFi DB", "PostgreSQL", "Tasas e historial")
+        System_Ext(fx, "API de Tasas de Cambio", "Proveedor externo de cotizaciones")
+    }
+
+    Rel(wallet, ctrl, "Convierte montos", "REST, HTTPS")
+    Rel(ctrl, query, "Usa")
+    Rel(query, repo, "Lee tasa vigente")
+    Rel(job, refresh, "Invoca")
+    Rel(refresh, provider, "Pide tasas")
+    Rel(refresh, repo, "Guarda tasa e historial")
+    Rel(provider, fx, "Consulta cotizaciones", "HTTPS")
+    Rel(repo, db, "SQL", "JDBC")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+```
+
+#### 5.4.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 5.4.6.1. Bounded Context Domain Layer Class Diagrams
+
+```mermaid
+classDiagram
+    class ExchangeRate {
+        <<Aggregate Root>>
+        -CurrencyPair pair
+        -BigDecimal rate
+        -String source
+        -Instant fetchedAt
+        +isStale(now, ttl) boolean
+        +convert(amount) LocalAmount
+        +refresh(newRate, fetchedAt) void
+    }
+    class CurrencyPair {
+        <<Value Object>>
+        -CurrencyCode base
+        -CurrencyCode quote
+    }
+    class CurrencyCode {
+        <<Value Object>>
+        -String value
+    }
+    class StablecoinAmount {
+        <<Value Object>>
+        -BigInteger units
+        -int decimals
+        +toDecimal() BigDecimal
+    }
+    class LocalAmount {
+        <<Value Object>>
+        -BigDecimal value
+        -CurrencyCode currency
+        -BigDecimal rate
+        -Instant asOf
+        -boolean stale
+    }
+    class ExchangeRateProvider {
+        <<interface>>
+        +fetchRates(base, quotes) List~RateQuote~
+    }
+    class ExchangeRateRepository {
+        <<interface>>
+        +findByPair(pair) ExchangeRate
+        +findAll() List~ExchangeRate~
+        +save(rate) void
+    }
+    class ExchangeRateRefreshed {
+        <<Domain Event>>
+        -CurrencyPair pair
+        -BigDecimal rate
+        -Instant fetchedAt
+    }
+
+    ExchangeRate "1" *-- "1" CurrencyPair : identifica por
+    CurrencyPair "1" --> "2" CurrencyCode : usa
+    ExchangeRate ..> StablecoinAmount : convierte
+    ExchangeRate ..> LocalAmount : produce
+    ExchangeRate ..> ExchangeRateRefreshed : emite al refrescar
+    ExchangeRateRepository ..> ExchangeRate : persiste
+    ExchangeRateProvider ..> ExchangeRate : alimenta
+```
+
+##### 5.4.6.2. Bounded Context Database Diagram
+
+```mermaid
+erDiagram
+    EXCHANGE_RATE {
+        bigint id PK
+        char3 base_currency UK
+        char3 quote_currency UK
+        numeric rate "mayor que cero, 8 decimales"
+        varchar source
+        timestamptz fetched_at
+    }
+    EXCHANGE_RATE_HISTORY {
+        bigint id PK
+        bigint exchange_rate_id FK
+        numeric rate
+        timestamptz fetched_at
+    }
+
+    EXCHANGE_RATE ||--o{ EXCHANGE_RATE_HISTORY : "conserva"
+```
+
+Restricciones del esquema:
+
+- `EXCHANGE_RATE` tiene una restricción única sobre `base_currency` y `quote_currency`, de modo que cada par tiene una sola tasa vigente.
+- `rate` lleva una restricción `CHECK` que exige un valor mayor que cero.
+- `EXCHANGE_RATE_HISTORY` solo se agrega: no se actualiza ni se borra, y permite reconstruir qué tasa vio un usuario en un momento dado.
+- El índice sobre `EXCHANGE_RATE_HISTORY(exchange_rate_id, fetched_at)` acelera la consulta del historial reciente.
+
+### 5.5. Bounded Context: Marketing/Landing
+
+El Marketing/Landing Context sirve el sitio institucional. No comparte modelo, usuarios autenticados ni ciclo de despliegue con el resto del sistema, así que su diseño táctico es el más breve: no tiene agregados de negocio ni base de datos, y sus reglas son de presentación. Aun así conserva las cuatro capas para que el código de la landing mantenga la misma separación de responsabilidades que el resto de los contextos.
+
+Las decisiones de diseño del contexto son:
+
+- **Contenido separado de la estructura.** Los textos viven en diccionarios JSON por idioma, de modo que añadir un idioma no exige tocar el HTML.
+- **Idioma según el navegador, con selector manual.** La página arranca en el idioma del navegador cuando está soportado, usa `en_US` como alternativa y recuerda la elección del visitante (US-LAND-02).
+- **Sin dependencia técnica de otros contextos.** El único vínculo es un enlace de descarga hacia la app.
+
+#### 5.5.1. Domain Layer
+
+| Clase | Tipo | Propósito | Atributos y métodos |
+|---|---|---|---|
+| `Locale` | Value Object | Idioma soportado por el sitio. | `code: String` con valores `en_US` y `es_419`; `fromBrowser(languages): Locale` |
+| `TranslationDictionary` | Value Object | Conjunto de textos de un idioma, indexado por clave. | `locale: Locale`, `entries: Map<String, String>`; `get(key): String` |
+| `PageSection` | Entity | Sección anclada de la página. | `id`, `anchor`, `titleKey`, `audience` (prestatario, prestamista o ambos) |
+| `SeoMetadata` | Value Object | Etiquetas de cabecera de una página en un idioma. | `title` (hasta 60 caracteres), `description` (hasta 155), `keywords`, `canonical`, `openGraph`, `robots` |
+| `DownloadTarget` | Value Object | Destino del botón de descarga. | `url`, `label` |
+
+#### 5.5.2. Interface Layer
+
+| Elemento | Propósito | Historia |
+|---|---|---|
+| `index.html` | Página única con las secciones How it works, Benefits, Security, FAQ y Download. | US-LAND-01 |
+| `terms.html` y `privacy.html` | Términos y condiciones y política de privacidad, accesibles desde el pie de página. | US-LAND-02 |
+| `LanguageSelector` | Control visible que cambia el idioma. | US-LAND-02 |
+| `FaqAccordion` | Acordeón de preguntas frecuentes operable por teclado. | US-LAND-02 |
+| `SkipLink` y `MobileMenu` | Salto al contenido y menú compacto para teléfonos, con foco visible. | US-LAND-02 |
+
+#### 5.5.3. Application Layer
+
+| Clase | Flujo |
+|---|---|
+| `LanguageSwitcher` | Detecta el idioma, carga el diccionario, reemplaza los textos, fija el atributo `lang` y guarda la preferencia. |
+| `SeoMetadataUpdater` | Actualiza título, descripción, `hreflang` y etiquetas sociales al cambiar de idioma. |
+| `SectionNavigator` | Desplaza suavemente hacia cada ancla y marca la sección activa en el menú. |
+| `DownloadLinkResolver` | Entrega el destino de descarga vigente a cada botón de acción. |
+
+#### 5.5.4. Infrastructure Layer
+
+| Clase o recurso | Propósito | Tecnología |
+|---|---|---|
+| `i18n/en_US.json` y `i18n/es_419.json` | Diccionarios de texto versionados en el repositorio. | JSON |
+| `LocalePreferenceStore` | Guarda la elección del visitante, con respaldo si el almacenamiento no está disponible. | `localStorage` |
+| Hosting estático | Publica el sitio por HTTPS desde la rama `main`. | Servidor estático en el VPS administrado con Dokploy |
+| Hojas de estilo | Aplican la guía de estilo y el diseño responsive. | CSS3 con Material Design |
+
+#### 5.5.5. Bounded Context Software Architecture Component Level Diagrams
+
+```mermaid
+C4Component
+    title Diagrama de componentes: Landing Page (Marketing/Landing Context)
+
+    Boundary(up, "Actores y clientes", "") {
+        Person(visitor, "Visitante web", "Prestatario o prestamista potencial")
+    }
+
+    Container_Boundary(landing, "Landing Page [HTML5, CSS3, JavaScript, Material Design]") {
+        Component(page, "index.html, terms.html y privacy.html", "HTML5", "Estructura y secciones")
+        Component(lang, "LanguageSwitcher", "JavaScript", "Idioma y diccionario activo")
+        Component(seo, "SeoMetadataUpdater", "JavaScript", "Metadatos por idioma")
+        Component(nav, "SectionNavigator y FaqAccordion", "JavaScript", "Navegación y acordeón accesibles")
+        Component(dl, "DownloadLinkResolver", "JavaScript", "Destino de descarga")
+        Component(dict, "Diccionarios i18n", "JSON", "Textos en_US y es_419")
+        Component(store, "LocalePreferenceStore", "localStorage", "Preferencia de idioma")
+    }
+
+    Boundary(down, "Entorno del container", "") {
+        Container(wallet, "LatiFi Wallet", "Kotlin, Android", "Destino de la descarga")
+    }
+
+    Rel(visitor, page, "Navega", "HTTPS")
+    Rel(page, lang, "Inicia al cargar")
+    Rel(page, nav, "Usa")
+    Rel(page, dl, "Resuelve botones")
+    Rel(lang, seo, "Notifica el cambio")
+    Rel(lang, dict, "Carga textos")
+    Rel(lang, store, "Lee y guarda idioma")
+    Rel(dl, wallet, "Enlaza a la descarga")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+```
+
+#### 5.5.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 5.5.6.1. Bounded Context Domain Layer Class Diagrams
+
+```mermaid
+classDiagram
+    class Locale {
+        <<Value Object>>
+        -String code
+        +fromBrowser(languages) Locale
+    }
+    class TranslationDictionary {
+        <<Value Object>>
+        -Locale locale
+        -Map~String,String~ entries
+        +get(key) String
+    }
+    class PageSection {
+        <<Entity>>
+        -String id
+        -String anchor
+        -String titleKey
+        -String audience
+    }
+    class SeoMetadata {
+        <<Value Object>>
+        -String title
+        -String description
+        -String keywords
+        -String canonical
+        -String robots
+    }
+    class DownloadTarget {
+        <<Value Object>>
+        -String url
+        -String label
+    }
+    class LanguageSwitcher {
+        <<Application Service>>
+        +apply(locale) void
+        +detect() Locale
+    }
+
+    TranslationDictionary "1" --> "1" Locale : pertenece a
+    SeoMetadata "1" --> "1" Locale : se publica en
+    PageSection "1" --> "1" TranslationDictionary : se titula con
+    LanguageSwitcher ..> TranslationDictionary : carga
+    LanguageSwitcher ..> SeoMetadata : actualiza
+    PageSection ..> DownloadTarget : puede enlazar a
+```
+
+##### 5.5.6.2. Bounded Context Database Diagram
+
+El contexto no persiste datos de usuarios: no hay base de datos ni formularios que almacenen información. Lo único que persiste es el contenido, que vive como archivos JSON versionados junto al código. El diagrama muestra su estructura lógica, que es la que valida la integración continua para garantizar que ningún idioma quede con textos sin traducir.
+
+```mermaid
+erDiagram
+    LOCALE {
+        string code PK "en_US o es_419"
+        string language_tag "valor del atributo lang"
+    }
+    TRANSLATION_ENTRY {
+        string locale_code PK, FK
+        string key PK
+        string text "no vacío"
+    }
+    PAGE_SEO {
+        string page PK "index, terms o privacy"
+        string locale_code PK, FK
+        string title "hasta 60 caracteres"
+        string description "hasta 155 caracteres"
+        string canonical
+    }
+
+    LOCALE ||--o{ TRANSLATION_ENTRY : "contiene"
+    LOCALE ||--o{ PAGE_SEO : "define"
+```
+
+Restricciones de contenido:
+
+- Cada clave de `TRANSLATION_ENTRY` existe en ambos idiomas; la integración continua falla si falta alguna.
+- `PAGE_SEO.title` no supera los 60 caracteres y `PAGE_SEO.description` no supera los 155.
+- `LOCALE.code` solo admite `en_US` y `es_419`; añadir un idioma consiste en agregar un archivo JSON, sin cambios de estructura.
 
 ## Capítulo VI: Solution UX Design
 
