@@ -76,7 +76,7 @@ The `ci` job checks every relative link in the Markdown files with lychee in off
 lychee --offline --no-progress './**/*.md'
 ```
 
-If you do not have lychee, rely on the `ci` job. Do not edit the report text only to silence a link failure. Links that were already broken before the pipeline are listed in `.lycheeignore`, and Phase 2 repairs them.
+If you do not have lychee, rely on the `ci` job. Do not edit the report text only to silence a link failure. At the time the check was added, no relative file link was broken, so there is no `.lycheeignore`. The table of contents fragments are the known problem, and Phase 2 repairs them before fragment checking is switched on.
 
 To try the commit rules without GitHub, run `bash .github/scripts/commit-lint.test.sh`.
 
