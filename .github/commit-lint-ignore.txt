@@ -1,0 +1,25 @@
+# SHAs listed here (first token of a non-comment line, at least 7 characters) skip commit-lint.
+#
+# This list covers history that existed before the Phase 1 pipeline.
+# It must never grow for new work. New commits are always linted.
+#
+008e2e3c35e298ea323e8c5908b62eb166309e66 # update README.md
+0194b2f0053af6ddfa38c1d1aefdf7101817d50b # Update README.md
+054efd2887208682890b87e38ef29beed44a922e # Update README.md
+0d3c4a8a5221b48998b838460b659f64e1ae8a66 # docs: close TB1 gaps with interview analysis, C4 landscape and deployment, annex and collaboration evidence
+1c57bb986dda98d62adae295ca8f85665ea1ea04 # feat:movile app
+32443542be5bcf6c09c3f26ecca8d5ea775f625c # revision
+33104270eb0c017175b01f7b915fa70ec2c90b45 # update README.md
+4a29b5db30016871d02aa2dcb689bc2f1c71e760 # feat:wirefrimeslanding
+700b435a4f33b8ba44a1bcdd0cd63005f22e7d16 # update README.md
+78383bf86743ee520ae9dbcd014286823499b847 # feat:mockuo landing
+943bf39b828182bba47e0b79f09e1a1c4037a5f4 # Update README.md
+a17297d86be0177e4764ba952216926bd2c6108c # Update README.md
+a1bfd8bbc47f7cdda5f6afc9fd0aa4c4b15e7871 # Update README.md
+a60a36580918dde6b6d77c89ca7c7503f1f9d967 # Update README.md
+bedd6e55bc3647683a60435ff477248f23d97746 # Update README.md
+c1dcd26685a2e7ac5d9470f100d16084b15ab6ae # Update README.md
+cab87b124f6dd5abd54e4c2964f67133d13dc40a # Update README.md
+ec31a8ba092fa39adb1cf7d3a72cf4755ce80857 # Add files via upload
+f336a9dafcd64ceb6b42f528b0e53c9d1128a52e # Update README.md
+f7378131bb2e13e28a9ebe1b3c89fc52ae8e5dae # Add files via upload
