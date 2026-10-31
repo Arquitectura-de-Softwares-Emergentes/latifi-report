@@ -882,34 +882,75 @@ El siguiente glosario recoge los términos de negocio del dominio de microcrédi
 
 ### 3.1. To-Be Scenario Mapping
 
-El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermediación mediante contratos inteligentes (*smart contracts*), autenticación non-custodial, valoración automatizada de garantías vía oráculos de precios y reputación on-chain, reduciendo drásticamente la latencia y eliminando el factor humano en la ejecución.
+El modelo **TO-BE** rediseña el préstamo entre personas sin garantía: la reputación on-chain reemplaza al colateral y un contrato inteligente (*smart contract*) ejecuta cada paso sin intermediarios. El usuario crea o importa su propia billetera non-custodial en la app, y la moneda local aparece solo como referencia en pantalla, sin llegar nunca al contrato.
 
-![To-be scenario mapping](resources/Cap1/To-be%20scenario%20mapping.png)
+```mermaid
+flowchart LR
+    subgraph PRE["Prestatario"]
+        B3["3. Solicita el préstamo: monto, tasa, plazo y cuotas de 1 a 6"]
+        B7["7. Paga cada cuota"]
+    end
+    subgraph LEN["Prestamista"]
+        L5["5. Revisa el feed ordenado por reputación"]
+        L6["6. Firma el fondeo"]
+    end
+    subgraph WAL["Identity / Wallet"]
+        W1["1. Crea o importa su billetera y confirma la frase de recuperación"]
+        W2["2. Inicia sesión firmando un desafío y completa el perfil ligero"]
+    end
+    subgraph SC["Lending Smart Contract"]
+        C3["3. Guarda la solicitud y emite LoanRequested"]
+        C6["6. Pasa la stablecoin al prestatario, fija los términos y emite LoanFunded"]
+        C7["7. Registra la cuota y emite LoanRepaid con onTime"]
+        C9["9a. Vencido el plazo, cualquiera marca el incumplimiento y se emite LoanDefaulted"]
+    end
+    subgraph IDX["Event Indexer y Reputation"]
+        I8["8. Lee los eventos y actualiza el feed y la reputación"]
+        R9A["9a. La reputación baja de forma gradual"]
+        R9B["9b. La última cuota salda el préstamo y la reputación se recupera"]
+    end
+    subgraph FX["Exchange Rate"]
+        X4["4. Convierte los montos a moneda local solo para mostrarlos"]
+    end
+    W1 --> W2 --> B3 --> C3
+    C3 --> L5
+    C3 -.-> X4
+    X4 -.-> L5
+    L5 --> L6 --> C6 --> B7 --> C7
+    C6 -->|vence sin pago completo| C9
+    C7 --> I8
+    C9 --> I8
+    I8 -->|LoanDefaulted| R9A
+    I8 -->|última cuota de LoanRepaid| R9B
+```
+
+El diagrama sigue los nueve pasos de la lista y usa solo los cuatro eventos del ABI v0. Las líneas punteadas marcan la conversión a moneda local, que solo se muestra y nunca viaja en una transacción.
 
 #### Carriles de Arquitectura / Capas (Swimlanes / Bounded Context Layers)
-* **USER / BORROWER**: Prestatario autogestionado con wallet non-custodial.
-* **IDENTITY / WALLET CONTEXT**: Autenticación criptográfica, firma de transacciones y validación de sesión.
-* **EXCHANGE RATE CONTEXT**: Oráculo de precios en tiempo real para valoración de colateral (*Collateral Ratio*).
-* **REPUTATION CONTEXT**: Historial de comportamiento on-chain, *trust tiers* y penalizaciones automáticas.
-* **LENDING SMART CONTRACT CORE**: Lógica de depósito de colateral, emisión de deuda, liquidación y reembolso programado.
+* **PRESTATARIO**: Persona no bancarizada que solicita el préstamo y paga las cuotas desde su propia billetera.
+* **PRESTAMISTA**: Persona con capital ocioso que revisa el feed y fondea la solicitud que elige.
+* **IDENTITY / WALLET CONTEXT**: Creación o importación de la billetera, firma de un desafío para iniciar sesión y perfil ligero.
+* **LENDING SMART CONTRACT**: Guarda la solicitud, mueve la stablecoin de prueba, registra las cuotas y marca el incumplimiento. Emite `LoanRequested`, `LoanFunded`, `LoanRepaid` y `LoanDefaulted`.
+* **EVENT INDEXER Y REPUTATION CONTEXT**: Lee los eventos de la cadena, mantiene el feed y recalcula la reputación de forma gradual.
+* **EXCHANGE RATE CONTEXT**: Convierte los montos a moneda local solo para mostrarlos. La conversión ocurre en la API y ningún evento ni transacción lleva un precio.
 
 #### Descripción Secuencial del Flujo (TO-BE Steps)
-1. **Connect Non-Custodial Wallet [Action]**: El usuario vincula su wallet a través de la interfaz. → *Event: `WalletConnected`*.
-2. **Select Asset & Input Collateral/Loan Parameters [Data Input]**: El usuario define el monto del préstamo y colateral criptográfico aportado.
-3. **Fetch Real-Time Asset Pricing (Oracles) [Logic]**: Consulta de precio de mercado y cálculo de *Collateralization Ratio (LTV)* vía *Exchange Rate Context*.
-4. **Evaluate Credit Eligibility / Trust Tier [Logic]**: Consulta de score o tier de reputación del address del usuario vía *Reputation Context*.
-5. **Initiate Loan Request [Trigger]**: Envío de transacción de solicitud al smart contract de lending.
-6. **Lock Collateral in Escrow [Asset Transfer]**: Retención automática del colateral en el contrato inteligente.
-7. **Mint & Disburse Loan [Funds Transfer]**: Transferencia atómica/on-chain de los fondos solicitados directamente a la wallet del usuario → *Event: `LoanDisbursed`*.
-8. **Confirm Repayment & Update Health Factor [Logic]**: Monitoreo continuo de salud del colateral y recepción de cuotas.
-   * **9a. Liquidate Collateral (Default) [Action]**: Ejecución algorítmica de liquidación parcial ante caída de LTV → *Events: `DefaultTriggered`, `ReputationPenaltyApplied`*.
-   * **9b. Release Collateral (Paid) [Action]**: Liberación de garantía y actualización de score positivo → *Events: `LoanRepaid`, `ScoreUpdated`*.
+1. **Create or Import Non-Custodial Wallet [Action]**: El usuario crea una billetera en la app, o importa la que ya tiene con su frase de recuperación, y confirma que la guardó. La frase se muestra una sola vez y nunca sale del dispositivo.
+2. **Sign In and Complete Light Profile [Action]**: El usuario inicia sesión firmando un desafío con su billetera y completa su perfil ligero.
+3. **Request Loan [Trigger]**: El prestatario define monto, tasa, plazo y cuotas de 1 a 6. El contrato guarda la solicitud. → *Event: `LoanRequested`*.
+4. **Show Local Currency [Display]**: Prestatario y prestamista ven los montos en stablecoin y en moneda local. La conversión es solo informativa.
+5. **Review Feed by Reputation [Logic]**: El prestamista revisa el feed ordenado por la reputación de cada solicitante.
+6. **Fund Loan [Funds Transfer]**: El prestamista firma el fondeo, la stablecoin pasa al prestatario y los términos quedan fijos. → *Event: `LoanFunded`*.
+7. **Repay Installments [Funds Transfer]**: El prestatario paga cada cuota y el contrato registra si el pago llegó a tiempo. → *Event: `LoanRepaid`*, con el indicador `onTime` por pago.
+8. **Index Events and Update Reputation [Logic]**: El indexador lee los eventos y la reputación cambia de forma gradual, sin saltos a cero.
+   * **9a. Mark Default [Action]**: Vencido el plazo sin el pago completo, cualquier persona marca el préstamo como incumplido y la reputación baja. → *Event: `LoanDefaulted`*.
+   * **9b. Settle Loan [Action]**: Con la última cuota el préstamo queda saldado y la reputación se recupera. → *Event: `LoanRepaid`*.
 
 #### Ventajas Clave / Mejora frente al AS-IS (Value Proposition)
-* **Latencia cero/instantánea**: De días/semanas a segundos/minutos por ejecución determinista de smart contracts (pasos 5-7).
-* **Desintermediación y Autogestión**: Eliminación de *Loan Officer*, mesones físicos, mesas de control de riesgos manuales y vouchers de papel.
-* **Mitigación de riesgo de contraparte**: Lógica basada en código (*code is law*), con valoración objetiva por oráculos y liquidación algorítmica de garantías.
-* **Trazabilidad total on-chain**: Auditoría pública y en tiempo real del estado de salud del préstamo (`Health Factor`), historial de pagos y reputación.
+* **Latencia instantánea**: De días o semanas a segundos o minutos, porque el contrato ejecuta la solicitud, el fondeo y el pago de forma determinista (pasos 3, 6 y 7).
+* **Desintermediación y Autogestión**: Sin oficial de crédito, mesones físicos, mesas de riesgo manuales ni vouchers de papel.
+* **Reputación en lugar de garantía**: El historial de pago verificable sustituye al colateral, así que el prestatario no necesita capital previo para acceder a crédito.
+* **Trazabilidad total on-chain**: Solicitudes, fondeos, pagos e incumplimientos son eventos públicos y auditables en tiempo real, y la reputación se calcula a partir de ellos.
 
 ---
 
@@ -917,10 +958,10 @@ El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermedia
 | Dimensión | Enfoque AS-IS (Tradicional) | Enfoque TO-BE (Web3 / Descentralizado) |
 | :--- | :--- | :--- |
 | **Tiempo de Procesamiento** | Varios días por los traspasos manuales entre áreas | Segundos a minutos (automático on-chain) |
-| **Intermediarios** | Front Desk, Oficial de Crédito, Riesgos, Finanzas | Ninguno (Smart Contracts + Oráculos) |
-| **Garantía / Colateral** | Físico / Documental / Legal tradicional | Criptoactivo bloqueado en Smart Contract Escrow |
-| **Evaluación de Riesgo** | Subjetiva / Manual / Formularios impresos | Algorítmica (LTV por Oráculos + Trust Tiers On-chain) |
-| **Disponibilidad / Canal** | Horario de oficina / Presencial en sucursal | 24/7 / Autogestión via Non-Custodial Wallet |
+| **Intermediarios** | Front Desk, Oficial de Crédito, Riesgos, Finanzas | Ninguno (Smart Contract e indexador de eventos) |
+| **Garantía** | Físico / Documental / Legal tradicional | Ninguna: la reputación on-chain reemplaza a la garantía |
+| **Evaluación de Riesgo** | Subjetiva / Manual / Formularios impresos | Algorítmica (reputación on-chain y señales del perfil) |
+| **Disponibilidad / Canal** | Horario de oficina / Presencial en sucursal | 24/7 / Autogestión desde la app con billetera propia |
 
 El propósito de esta sección es contrastar, mediante un To-Be Scenario Map, la secuencia de actividades que hoy ejecuta un prestatario o prestamista no bancarizado para acceder a crédito informal (fiado, prestamistas gota a gota, préstamos familiares) contra la secuencia propuesta una vez que LatiFi Wallet media el flujo mediante Smart Contracts y reputación descentralizada. Ese contraste se apoya en el As-Is construido a partir de entrevistas reales a los segmentos objetivo (prestatario no bancarizado y prestamista con capital ocioso), documentado en la sección de Needfinding del Capítulo II.
 
