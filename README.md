@@ -48,6 +48,9 @@
 | 2.4 | 30/10/2026 | Juan Angulo | Auditoría del Capítulo V contra ADR-0001 a ADR-0006 y el ABI v0 de eventos: parámetros y tipos de eventos alineados con el ABI, rango de cuotas de 1 a 6, y tablas de la capa de interfaz REST alineadas con el borrador OpenAPI. |
 | 2.5 | 30/10/2026 | Juan Angulo | Corrección de alcance del Capítulo VI: Android como única plataforma móvil con iOS como trabajo futuro, inglés (en_US) como idioma por defecto con español (es_419) compatible, y 6.2.5 sin segundo factor ni enlaces profundos desde notificaciones. |
 | 2.6 | 30/10/2026 | Juan Angulo | Wireflows de la aplicación móvil (6.4.2) para el prestatario y el prestamista, con el objetivo del usuario, la persona, el diagrama y la explicación de cada flujo, vinculados a los wireframes de 6.4.1 y a las historias de usuario. |
+| 2.7 | 30/10/2026 | Juan Angulo | Corrección del escenario To-Be (3.1) sin colateral ni valoración por oráculo: flujo de solicitud, fondeo, pago en cuotas, indexado y reputación, con la moneda local solo como referencia, y un diagrama Mermaid que reemplaza la imagen anterior. US-AUTH-01 pasa a crear o importar una billetera (ADR-0001) y TS-API-03 incluye `LoanRequested` (ADR-0002). |
+| 2.8 | 30/10/2026 | Juan Angulo | Swift y iOS reformulados como trabajo futuro en 1.2, 4.1 y 4.2, con Android como única plataforma que construye el equipo. |
+| 2.9 | 30/10/2026 | Juan Angulo | Numeración de la arquitectura de software del Capítulo IV como 4.3, 4.3.1, 4.3.2 y 4.3.3, según el enunciado, y confirmación de 2.2.3 (análisis de entrevistas), 4.3.1 y el diagrama de despliegue agregado en la versión 1.6. |
 
 # Project Report Collaboration Insights
 
