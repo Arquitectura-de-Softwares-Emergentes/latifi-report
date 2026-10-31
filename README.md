@@ -45,6 +45,7 @@
 | 2.1 | 08/10/2026 | Anaely Burga | Landing Page Wireframe (6.3.1), con la distribución de las tres secciones de la landing page (avance de TP1). |
 | 2.2 | 09/10/2026 | Juan Angulo | Capítulo V completo: diseño táctico de los cinco bounded contexts, con diccionario de clases por capa, diagramas de componentes C4, diagramas de clases y esquemas de base de datos. |
 | 2.3 | 30/10/2026 | Juan Angulo | Numeración de las secciones 6.3 y 6.4, trazabilidad de cada wireframe y mock-up con las historias de usuario y notas de coherencia con 6.1, 6.2.3 y A11Y.md. |
+| 2.4 | 30/10/2026 | Juan Angulo | Auditoría del Capítulo V contra ADR-0001 a ADR-0006 y el ABI v0 de eventos: parámetros y tipos de eventos alineados con el ABI, rango de cuotas de 1 a 6, y tablas de la capa de interfaz REST alineadas con el borrador OpenAPI. |
 
 # Project Report Collaboration Insights
 
@@ -1400,7 +1401,7 @@ El dominio del contrato se compone de tipos de datos, una librería de cálculo 
 
 Las reglas de negocio que el dominio hace cumplir son estas:
 
-1. El monto, el plazo y el número de cuotas deben ser mayores que cero, y la tasa debe estar dentro del rango configurado.
+1. El monto y el plazo deben ser mayores que cero, el número de cuotas debe ser un entero entre 1 y 6 ([ADR-0004](docs/adr/0004-repayment-installment-model.md)) y la tasa debe estar dentro del rango configurado.
 2. Un préstamo solo se fondea una vez, y nunca lo fondea su propio prestatario.
 3. Una vez fondeado, ni el monto, ni la tasa, ni el plazo, ni el vencimiento cambian.
 4. El prestatario no puede pagar más de lo que adeuda.
@@ -1410,10 +1411,12 @@ Los eventos de dominio y sus parámetros son:
 
 | Evento | Parámetros | Cuándo se emite |
 |---|---|---|
-| `LoanRequested` | `loanId`, `borrower`, `principal`, `interestRateBps`, `termDays`, `installments` | El prestatario publica una solicitud válida. |
-| `LoanFunded` | `loanId`, `lender`, `borrower`, `principal`, `fundedAt`, `finalDueDate` | Un prestamista fondea y la stablecoin pasa al prestatario. |
+| `LoanRequested` | `loanId`, `borrower`, `amount`, `interestRateBps`, `termDays`, `installments` | El prestatario publica una solicitud válida. |
+| `LoanFunded` | `loanId`, `lender`, `borrower`, `amount`, `fundedAt`, `dueDate` | Un prestamista fondea y la stablecoin pasa al prestatario. |
 | `LoanRepaid` | `loanId`, `amountPaid`, `onTime` | En cada pago del prestatario, aunque el préstamo no se liquide. |
-| `LoanDefaulted` | `loanId` | Se marca como incumplido un préstamo vencido. |
+| `LoanDefaulted` | `loanId`, `borrower`, `outstandingAmount` | Se marca como incumplido un préstamo vencido. |
+
+Los nombres y el orden de los parámetros coinciden con `abi/loan-events.v0.json` del repositorio `latifi-contracts`. Están indexados `loanId` en los cuatro eventos, `borrower` en `LoanRequested`, `LoanFunded` y `LoanDefaulted`, y `lender` en `LoanFunded`. En los eventos, `amount` es el `principal` del préstamo, `dueDate` es el vencimiento de la última cuota y `termDays` es un `uint32`. Ningún evento lleva precio, tasa de cambio ni dato de oráculo.
 
 #### 5.1.2. Interface Layer
 
@@ -1421,7 +1424,7 @@ La capa de interfaz del contrato es su ABI. Las funciones externas reciben las i
 
 | Elemento | Tipo | Propósito | Firma |
 |---|---|---|---|
-| `requestLoan` | Función de escritura | Publica una solicitud de préstamo (US-LEND-01). | `requestLoan(uint256 principal, uint16 interestRateBps, uint16 termDays, uint8 installments) returns (uint256 loanId)` |
+| `requestLoan` | Función de escritura | Publica una solicitud de préstamo (US-LEND-01). | `requestLoan(uint256 principal, uint16 interestRateBps, uint32 termDays, uint8 installments) returns (uint256 loanId)` |
 | `fundLoan` | Función de escritura | Fondea una solicitud abierta (US-LEND-03). | `fundLoan(uint256 loanId)` |
 | `repay` | Función de escritura | Registra un pago del prestatario (US-LEND-04). | `repay(uint256 loanId, uint256 amount)` |
 | `markDefaulted` | Función de escritura | Marca un préstamo vencido como incumplido. | `markDefaulted(uint256 loanId)` |
@@ -1429,7 +1432,7 @@ La capa de interfaz del contrato es su ABI. Las funciones externas reciben las i
 | `getBorrowerStats` | Función de lectura | Devuelve los contadores de un prestatario. | `getBorrowerStats(address borrower) returns (BorrowerStats)` |
 | `nextDueDate` | Función de lectura | Devuelve la fecha de la próxima cuota pendiente. | `nextDueDate(uint256 loanId) returns (uint64)` |
 
-Los errores personalizados reemplazan a los mensajes de texto para reducir el gas y facilitar las pruebas: `InvalidAmount`, `InvalidTerm`, `RateOutOfRange`, `LoanNotOpen`, `SelfFunding`, `LoanNotActive`, `Overpayment` y `NotYetDefaultable`.
+Los errores personalizados reemplazan a los mensajes de texto para reducir el gas y facilitar las pruebas: `InvalidAmount`, `InvalidTerm`, `InvalidInstallments`, `RateOutOfRange`, `LoanNotOpen`, `SelfFunding`, `LoanNotActive`, `Overpayment` y `NotYetDefaultable`.
 
 #### 5.1.3. Application Layer
 
@@ -1516,8 +1519,8 @@ classDiagram
         <<contract>>
         -IERC20 _token
         -uint16 _maxRateBps
-        -uint16 _minTermDays
-        -uint16 _maxTermDays
+        -uint32 _minTermDays
+        -uint32 _maxTermDays
         -uint256 _nextLoanId
         -Map~uint256,Loan~ _loans
         -Map~address,BorrowerStats~ _stats
@@ -1535,7 +1538,7 @@ classDiagram
         +address lender
         +uint256 principal
         +uint16 interestRateBps
-        +uint16 termDays
+        +uint32 termDays
         +uint8 installments
         +uint256 totalDue
         +uint256 amountRepaid
@@ -1595,7 +1598,7 @@ erDiagram
         address lender
         uint256 principal
         uint16 interestRateBps
-        uint16 termDays
+        uint32 termDays
         uint8 installments
         uint256 totalDue
         uint256 amountRepaid
@@ -1671,11 +1674,13 @@ Interfaz del container LatiFi API (REST, con prefijo `/api/v1`):
 | Controlador | Operación | Propósito | Acceso |
 |---|---|---|---|
 | `AuthController` | `POST /auth/challenge` | Solicita un nonce para una dirección. | Público |
-| `AuthController` | `POST /auth/verify` | Entrega dirección y firma; devuelve el token de sesión si el firmante coincide. | Público |
+| `AuthController` | `POST /auth/verify` | Entrega `challengeId`, dirección y firma. Devuelve el token de sesión solo si el firmante coincide con la dirección declarada y con la del desafío, y el desafío está sin usar y vigente. | Público |
 | `ProfileController` | `GET /profiles/{address}` | Lee un perfil. El contacto solo se incluye cuando la dirección consultada es la del usuario autenticado. | Autenticado |
 | `ProfileController` | `PUT /profiles/{address}` | Crea o actualiza el perfil. Solo el dueño de la dirección puede escribir. | Autenticado |
 
-Los objetos de transferencia son `ChallengeRequest`, `ChallengeResponse`, `VerifyRequest`, `TokenResponse`, `ProfileResponse` y `ProfileUpdateRequest`. Los errores se devuelven con código 401 para firmas inválidas, repetidas o vencidas, y con código 403 cuando el usuario intenta escribir un perfil ajeno.
+Los objetos de transferencia son `ChallengeRequest`, `ChallengeResponse`, `VerifyRequest` (con `challengeId`, `address` y `signature`), `TokenResponse`, `ProfileResponse` y `ProfileUpdateRequest`. Los errores se devuelven con código 401 para firmas inválidas, repetidas o vencidas, y con código 403 cuando el usuario intenta escribir un perfil ajeno.
+
+Toda operación de la API, salvo `/auth/challenge` y `/auth/verify`, exige el token de sesión. `PUT /profiles/{address}` responde 201 cuando crea el perfil, 200 cuando lo actualiza y 403 cuando quien llama no es el dueño de la dirección. El contrato completo es el borrador OpenAPI del repositorio `latifi-api`: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api/blob/develop/openapi/latifi-api.v0.yaml.
 
 Interfaz del container LatiFi Wallet (pantallas y modelos de vista):
 
@@ -1693,7 +1698,7 @@ Aplicación del container LatiFi API:
 | Clase | Operaciones | Flujo |
 |---|---|---|
 | `AuthService` | `issueChallenge(address)` | Genera un nonce aleatorio, fija su vencimiento en cinco minutos y lo persiste. |
-| `AuthService` | `verify(challengeId, signature)` | Recupera el firmante, comprueba que coincida con la dirección del desafío, consume el desafío y emite el token. |
+| `AuthService` | `verify(challengeId, address, signature)` | Recupera el firmante y comprueba que coincida con la dirección declarada y con la del desafío, y que el desafío esté sin usar y vigente. Luego consume el desafío y emite el token. |
 | `ProfileService` | `getProfile(address, requester)` | Devuelve el perfil y omite el contacto si el solicitante no es el dueño. |
 | `ProfileService` | `upsertProfile(address, request, requester)` | Verifica la propiedad, valida el contacto, guarda y publica `ProfileCreated` o `ProfileUpdated`. |
 
@@ -2012,13 +2017,15 @@ El score siempre se mantiene entre 0 y 100. Los niveles son `NEW` de 0 a 39, `BU
 | `LoanOutcome` | Value Object | Resultado de un préstamo ya traducido a lenguaje de dominio por el Anti-Corruption Layer. | `loanId`, `borrower`, `kind: OutcomeKind`, `amountPaid`, `daysLate`, `txHash`, `logIndex`, `occurredAt` |
 | `OutcomeKind` | Enumeración | Tipo de resultado. | `BORROWER_REPAID_ON_TIME`, `BORROWER_REPAID_LATE`, `BORROWER_DEFAULTED` |
 | `ReputationPolicy` | Domain Service | Contiene los parámetros y calcula la variación de cada situación. | `initialScore`, `profileBonus`, `onTimeGain`, `recoveryGain`, `latePenaltyPerDay`, `latePenaltyCap`, `defaultPenalty`; `deltaFor(profile, outcome): Int` |
-| `LoanSummary` | Entity (proyección) | Copia de lectura de un préstamo, derivada de eventos. | `loanId`, `borrower`, `lender`, `principal`, `interestRateBps`, `termDays`, `installments`, `status`, `amountRepaid`, `requestedAt`, `fundedAt`, `finalDueDate`; `apply(chainEvent)` |
+| `LoanSummary` | Entity (proyección) | Copia de lectura de un préstamo, derivada de eventos. | `loanId`, `borrower`, `lender`, `principal`, `interestRateBps`, `termDays`, `installments`, `status`, `totalDue`, `amountRepaid`, `requestedAt`, `fundedAt`, `finalDueDate`; `apply(chainEvent)`, `installmentsPaid()`, `nextDueDate()` |
 | `ChainEvent` | Entity | Evento on-chain recibido, con su posición exacta. | `txHash`, `logIndex`, `blockNumber`, `eventName`, `loanId`, `payload`, `processedAt` |
 | `IndexerCheckpoint` | Entity | Último bloque procesado del contrato. | `contractAddress`, `lastProcessedBlock`, `updatedAt` |
 | `ReputationRepository`, `ReputationEventRepository`, `LoanSummaryRepository`, `ChainEventRepository`, `IndexerCheckpointRepository` | Repositorios (interfaces) | Puertos de persistencia del contexto. | `findByAddress`, `save`, `existsByTxHashAndLogIndex`, `findFeed(filter, sort)` |
 | `ChainEventSource` | Domain Service (interfaz) | Puerto por el que el dominio obtiene eventos de la cadena. | `fetch(fromBlock, toBlock): List<RawLog>`, `latestBlock(): Long` |
 
 Invariantes: el score nunca sale del rango de 0 a 100; un `ChainEvent` se procesa una sola vez; cada cambio de score genera exactamente un `ReputationEvent`; la proyección `LoanSummary` solo avanza hacia estados posteriores del préstamo.
+
+La proyección usa los nombres de la base de datos y no los de los eventos. Guarda el `amount` de `LoanRequested` como `principal` y el `dueDate` de `LoanFunded` como `finalDueDate`, y deja el `outstandingAmount` de `LoanDefaulted` solo en el `payload` del `ChainEvent`. No guarda `installmentsPaid()` ni `nextDueDate()`: los calcula a partir de `amountRepaid`, `totalDue`, `installments` y la regla de cuotas de `docs/EVENTS.md` del repositorio `latifi-contracts`. La primera devuelve el número de cuotas que `amountRepaid` ya cubre. La segunda devuelve el vencimiento de la primera cuota que falta, o nulo cuando no queda ninguna.
 
 #### 5.3.2. Interface Layer
 
@@ -2027,9 +2034,11 @@ Interfaz REST de LatiFi API:
 | Controlador | Operación | Propósito | Historia |
 |---|---|---|---|
 | `ReputationController` | `GET /reputation/{address}` | Devuelve score, nivel y contadores de un prestatario. | US-REP-02, US-API-01 |
-| `ReputationController` | `GET /reputation/{address}/history` | Lista paginada de los `ReputationEvent` con la referencia de transacción de cada uno. | US-API-01 |
-| `LoanFeedController` | `GET /loans` | Lista préstamos con filtros `status`, `minAmount`, `maxAmount`, `maxTermDays`, `minLevel`, `borrower` y `lender`, y orden `sort` por `reputation`, `amount`, `term` o `rate`. Por defecto ordena por reputación. | US-LEND-02, US-REP-03, US-LEND-05 |
-| `LoanFeedController` | `GET /loans/{loanId}` | Devuelve un préstamo con su estado y su reputación. | US-LEND-05 |
+| `ReputationController` | `GET /reputation/{address}/history` | Lista paginada (`page` y `size`) de los `ReputationEvent` con la referencia de transacción de cada uno. El filtro opcional `type` (`PROFILE_COMPLETED`, `REPAID_ON_TIME`, `REPAID_LATE` o `DEFAULTED`) alimenta los chips de resultado de 6.2.3. | US-API-01 |
+| `LoanFeedController` | `GET /loans` | Lista préstamos por páginas (`page` y `size`) con filtros `status`, `minAmount`, `maxAmount`, `maxTermDays`, `minLevel`, `borrower` y `lender`. El orden `sort` admite `reputation` (por defecto), `amount`, `term`, `rate`, `recent` y `nextDue`. La respuesta trae `items` y `totalItems`, que alimenta el contador de resultados de 6.2.3. | US-LEND-02, US-REP-03, US-LEND-05 |
+| `LoanFeedController` | `GET /loans/{loanId}` | Devuelve el mismo `LoanSummary` que la lista, con su estado y la reputación del prestatario. | US-LEND-05 |
+
+El contrato completo es el borrador OpenAPI del repositorio `latifi-api`: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api/blob/develop/openapi/latifi-api.v0.yaml.
 
 Consumidores internos del contexto:
 
@@ -2229,9 +2238,12 @@ classDiagram
         -int termDays
         -int installments
         -String status
+        -BigInteger totalDue
         -BigInteger amountRepaid
         -Instant fundedAt
         +apply(event) void
+        +installmentsPaid() int
+        +nextDueDate() Instant
     }
     class ChainEvent {
         <<Entity>>
@@ -2371,7 +2383,9 @@ Invariantes: la tasa es siempre mayor que cero; el par se identifica por base y 
 | `ExchangeRateController` | `GET /exchange-rate/convert?amount={units}&currency={code}` | Convierte un monto de stablecoin a la moneda local. Devuelve valor, tasa, instante de la tasa y la marca `stale`. | US-API-02, US-LEND-06 |
 | `ExchangeRateController` | `GET /exchange-rate/rates` | Lista las tasas disponibles y su antigüedad. | US-API-02 |
 
-Una moneda no soportada devuelve el código 400 con un mensaje localizado según `Accept-Language`.
+`GET /exchange-rate/rates` devuelve una lista con `base`, `quote`, `rate`, el instante de la tasa (`asOf`) y la marca `stale`. `GET /exchange-rate/convert` responde 200 con `stale` en verdadero cuando el proveedor está caído y la API usa la última tasa guardada. Una moneda no soportada devuelve el código 400 con un mensaje localizado según `Accept-Language`.
+
+El contrato completo es el borrador OpenAPI del repositorio `latifi-api`: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api/blob/develop/openapi/latifi-api.v0.yaml.
 
 #### 5.4.3. Application Layer
 
