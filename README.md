@@ -1400,7 +1400,7 @@ El dominio del contrato se compone de tipos de datos, una librería de cálculo 
 
 Las reglas de negocio que el dominio hace cumplir son estas:
 
-1. El monto, el plazo y el número de cuotas deben ser mayores que cero, y la tasa debe estar dentro del rango configurado.
+1. El monto y el plazo deben ser mayores que cero, el número de cuotas debe ser un entero entre 1 y 6 ([ADR-0004](docs/adr/0004-repayment-installment-model.md)) y la tasa debe estar dentro del rango configurado.
 2. Un préstamo solo se fondea una vez, y nunca lo fondea su propio prestatario.
 3. Una vez fondeado, ni el monto, ni la tasa, ni el plazo, ni el vencimiento cambian.
 4. El prestatario no puede pagar más de lo que adeuda.
@@ -1410,10 +1410,12 @@ Los eventos de dominio y sus parámetros son:
 
 | Evento | Parámetros | Cuándo se emite |
 |---|---|---|
-| `LoanRequested` | `loanId`, `borrower`, `principal`, `interestRateBps`, `termDays`, `installments` | El prestatario publica una solicitud válida. |
-| `LoanFunded` | `loanId`, `lender`, `borrower`, `principal`, `fundedAt`, `finalDueDate` | Un prestamista fondea y la stablecoin pasa al prestatario. |
+| `LoanRequested` | `loanId`, `borrower`, `amount`, `interestRateBps`, `termDays`, `installments` | El prestatario publica una solicitud válida. |
+| `LoanFunded` | `loanId`, `lender`, `borrower`, `amount`, `fundedAt`, `dueDate` | Un prestamista fondea y la stablecoin pasa al prestatario. |
 | `LoanRepaid` | `loanId`, `amountPaid`, `onTime` | En cada pago del prestatario, aunque el préstamo no se liquide. |
-| `LoanDefaulted` | `loanId` | Se marca como incumplido un préstamo vencido. |
+| `LoanDefaulted` | `loanId`, `borrower`, `outstandingAmount` | Se marca como incumplido un préstamo vencido. |
+
+Los nombres y el orden de los parámetros coinciden con `abi/loan-events.v0.json` del repositorio `latifi-contracts`. Están indexados `loanId` en los cuatro eventos, `borrower` en `LoanRequested`, `LoanFunded` y `LoanDefaulted`, y `lender` en `LoanFunded`. En los eventos, `amount` es el `principal` del préstamo, `dueDate` es el vencimiento de la última cuota y `termDays` es un `uint32`. Ningún evento lleva precio, tasa de cambio ni dato de oráculo.
 
 #### 5.1.2. Interface Layer
 
@@ -1421,7 +1423,7 @@ La capa de interfaz del contrato es su ABI. Las funciones externas reciben las i
 
 | Elemento | Tipo | Propósito | Firma |
 |---|---|---|---|
-| `requestLoan` | Función de escritura | Publica una solicitud de préstamo (US-LEND-01). | `requestLoan(uint256 principal, uint16 interestRateBps, uint16 termDays, uint8 installments) returns (uint256 loanId)` |
+| `requestLoan` | Función de escritura | Publica una solicitud de préstamo (US-LEND-01). | `requestLoan(uint256 principal, uint16 interestRateBps, uint32 termDays, uint8 installments) returns (uint256 loanId)` |
 | `fundLoan` | Función de escritura | Fondea una solicitud abierta (US-LEND-03). | `fundLoan(uint256 loanId)` |
 | `repay` | Función de escritura | Registra un pago del prestatario (US-LEND-04). | `repay(uint256 loanId, uint256 amount)` |
 | `markDefaulted` | Función de escritura | Marca un préstamo vencido como incumplido. | `markDefaulted(uint256 loanId)` |
@@ -1429,7 +1431,7 @@ La capa de interfaz del contrato es su ABI. Las funciones externas reciben las i
 | `getBorrowerStats` | Función de lectura | Devuelve los contadores de un prestatario. | `getBorrowerStats(address borrower) returns (BorrowerStats)` |
 | `nextDueDate` | Función de lectura | Devuelve la fecha de la próxima cuota pendiente. | `nextDueDate(uint256 loanId) returns (uint64)` |
 
-Los errores personalizados reemplazan a los mensajes de texto para reducir el gas y facilitar las pruebas: `InvalidAmount`, `InvalidTerm`, `RateOutOfRange`, `LoanNotOpen`, `SelfFunding`, `LoanNotActive`, `Overpayment` y `NotYetDefaultable`.
+Los errores personalizados reemplazan a los mensajes de texto para reducir el gas y facilitar las pruebas: `InvalidAmount`, `InvalidTerm`, `InvalidInstallments`, `RateOutOfRange`, `LoanNotOpen`, `SelfFunding`, `LoanNotActive`, `Overpayment` y `NotYetDefaultable`.
 
 #### 5.1.3. Application Layer
 
@@ -1516,8 +1518,8 @@ classDiagram
         <<contract>>
         -IERC20 _token
         -uint16 _maxRateBps
-        -uint16 _minTermDays
-        -uint16 _maxTermDays
+        -uint32 _minTermDays
+        -uint32 _maxTermDays
         -uint256 _nextLoanId
         -Map~uint256,Loan~ _loans
         -Map~address,BorrowerStats~ _stats
@@ -1535,7 +1537,7 @@ classDiagram
         +address lender
         +uint256 principal
         +uint16 interestRateBps
-        +uint16 termDays
+        +uint32 termDays
         +uint8 installments
         +uint256 totalDue
         +uint256 amountRepaid
@@ -1595,7 +1597,7 @@ erDiagram
         address lender
         uint256 principal
         uint16 interestRateBps
-        uint16 termDays
+        uint32 termDays
         uint8 installments
         uint256 totalDue
         uint256 amountRepaid
