@@ -136,6 +136,9 @@ Las capturas siguientes muestran los analíticos del repositorio del informe en 
   - [6.3. Landing Page UI Design](#63-landing-page-ui-design)
     - [6.3.1. Landing Page Wireframe](#631-landing-page-wireframe)
     - [6.3.2. Landing Page Mock-up](#632-landing-page-mock-up)
+  - [6.4. Mobile Applications UX/UI Design](#64-mobile-applications-uxui-design)
+    - [6.4.1. Mobile Applications Wireframes](#641-mobile-applications-wireframes)
+    - [6.4.2. Mobile Applications Wireflow](#642-mobile-applications-wireflow)
 - [Avance de Conclusiones](#avance-de-conclusiones)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
@@ -3009,7 +3012,6 @@ Trazabilidad: la landing responde a las historias US-LAND-01 y US-LAND-02.
 #### 6.3.1. Landing Page Wireframe
 > **Trazabilidad:** La landing page responde a las historias de usuario **US-LAND-01** y **US-LAND-02**.
 
-#### 6.3.1. Landing Page Wireframe
 A continuación, se presenta el diseño estructural de baja fidelidad (Wireframe) de la landing page de la plataforma, el cual define la distribución espacial, la jerarquía de la información y la disposición de los componentes clave antes de la aplicación de la interfaz gráfica final. El diseño se ha estructurado en tres secciones para asegurar su correcta visualización y legibilidad en la documentación:
 
 * **Parte 1: Cabecera, Hero Section y Simulador de Microcrédito**
@@ -3034,20 +3036,17 @@ A continuación, se presenta el diseño estructural de baja fidelidad (Wireframe
 
 > **Trazabilidad:** La landing page responde a las historias de usuario **US-LAND-01** y **US-LAND-02**.
 
-#### 6.3.1. Landing Page Wireframe
-*(Aquí puedes colocar el esquema o wireframe de baja fidelidad inicial)*
-
-#### 6.3.2. Landing Page Mock-up (Parte 1: Hero & Onboarding)
+##### Parte 1: Hero & Onboarding
 Esta primera sección comprende la cabecera de la página (*Header*), el *Hero Section* con la propuesta de valor principal, el simulador de préstamos flotante y los primeros accesos directos (*CTAs*).
 
 ![LatiFi Landing Page Parte 1](https://res.cloudinary.com/dx0i2vioe/image/upload/v1791515319/Captura_de_pantalla_2026-10-08_a_la_s_10.08.31_p._m._fehfgs.png)
 
-#### 6.3.3. Landing Page Mock-up (Parte 2: Funcionamiento y Propuesta de Valor)
+##### Parte 2: Funcionamiento y Propuesta de Valor
 La segunda sección detalla el flujo de funcionamiento de la plataforma en tres pasos clave, junto con el comparativo de finanzas justas y el impacto social en bodegas y comercio local.
 
 ![LatiFi Landing Page Parte 2](https://res.cloudinary.com/dx0i2vioe/image/upload/v1791515344/Captura_de_pantalla_2026-10-08_a_la_s_10.08.51_p._m._p3hotu.png)
 
-#### 6.3.4. Landing Page Mock-up (Parte 3: Seguridad, FAQ y Footer)
+##### Parte 3: Seguridad, FAQ y Footer
 Esta última sección muestra los estándares de seguridad criptográfica de grado institucional, el módulo de preguntas frecuentes (FAQ) interactivo y el pie de página institucional con sus respectivos enlaces legales.
 
 ![LatiFi Landing Page Parte 3](https://res.cloudinary.com/dx0i2vioe/image/upload/v1791515348/Captura_de_pantalla_2026-10-08_a_la_s_10.09.03_p._m._csxpxk.png)
@@ -3056,11 +3055,9 @@ Esta última sección muestra los estándares de seguridad criptográfica de gra
 
 #### 6.4.1. Mobile Applications Wireframes
 
-#### 6.4.2. Mobile Applications Wireflow
-
 > **Trazabilidad:** Las interfaces móviles responden a las historias de usuario del flujo transaccional y de gestión de microcréditos de la aplicación.
 
-#### 6.4.1. Onboarding y Autenticación
+##### Onboarding y autenticación
 Esta primera sección comprende la pantalla de bienvenida (Splash/Onboarding), el inicio de sesión, el flujo de registro de cuenta nueva y la verificación o autorización segura.
 
 * **Pantalla de Bienvenida / Onboarding:**
@@ -3078,7 +3075,7 @@ Esta primera sección comprende la pantalla de bienvenida (Splash/Onboarding), e
 * **Firma Criptográfica:**
   <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516109/Captura_de_pantalla_2026-10-08_a_la_s_10.21.36_p._m._whhzpb.png" alt="Firma Criptográfica" width="40%"/></div>
 
-#### 6.4.2. Dashboard Principal y Solicitud de Microcréditos
+##### Panel principal y solicitud de microcrédito
 Muestra el panel de control principal del usuario con la línea de crédito aprobada, el estado de actividad y la configuración de solicitudes.
 
 * **Dashboard General / Resumen:**
@@ -3090,7 +3087,7 @@ Muestra el panel de control principal del usuario con la línea de crédito apro
 * **Configuración y Solicitud de Microcrédito (Parte 2):**
   <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516235/Captura_de_pantalla_2026-10-08_a_la_s_10.23.42_p._m._hoflo1.png" alt="Configurar Solicitud Parte 2" width="40%"/></div>
 
-#### 6.4.3. Reputación On-Chain, Billeteras y Perfil de Usuario
+##### Reputación, billetera y perfil
 Agrupa las vistas del puntaje de reputación on-chain, la vinculación de billeteras, la selección de rol y la configuración completa del perfil.
 
 * **Reputación Financiera On-Chain:**
@@ -3104,6 +3101,10 @@ Agrupa las vistas del puntaje de reputación on-chain, la vinculación de billet
 
 * **Perfil de Usuario y Configuración General (Parte 1):**
   <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516367/Captura_de_pantalla_2026-10-08_a_la_s_10.25.55_p._m._g0dx1t.png" alt="Perfil de Usuario Parte 1" width="40%"/></div>
+
+#### 6.4.2. Mobile Applications Wireflow
+
+Los wireflows de la aplicación móvil se agregan en esta sección en el siguiente avance.
 
 
 <div style="page-break-after: always;"></div>
