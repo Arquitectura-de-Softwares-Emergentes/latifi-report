@@ -3161,7 +3161,104 @@ Agrupa las vistas del puntaje de reputación on-chain, la vinculación de billet
 
 #### 6.4.2. Mobile Applications Wireflow
 
-Los wireflows de la aplicación móvil se agregan en esta sección en el siguiente avance.
+Cada wireflow sigue el objetivo de un usuario concreto, de una persona concreta, y usa los wireframes de 6.4.1 como pasos. Cuando una pantalla cambia de estado, el diagrama añade un paso nuevo para ese estado. Los siete flujos cubren cuatro objetivos del prestatario y tres del prestamista, y cada uno cita las historias de 3.2 que cumple. Los nombres de algunas imágenes de 6.4.1 no coinciden con su contenido, así que cada explicación dice qué muestra la imagen en ese paso.
+
+Cada nodo de pantalla lleva una etiqueta de texto, y esa etiqueta, no el color, dice en qué estado está la pantalla. `Frame: NOMBRE` indica que el wireframe existe en 6.4.1 y sirve tal como está. `Ajuste: NOMBRE` indica que el wireframe existe y la tabla de 6.4.1 marca cambios. `Pendiente: TÍTULO` indica que todavía no hay imagen y que la pantalla figura en la lista de pantallas faltantes que recibe el equipo. Hoy las doce imágenes de 6.4.1 llevan al menos una diferencia con el alcance, así que ningún nodo usa Frame todavía. Los rombos son decisiones y los óvalos son acciones del usuario, y ninguno representa una pantalla. Los nodos Pendiente llevan además un borde punteado, un refuerzo visual que no sustituye al texto.
+
+##### W-B1. Crear la billetera y entrar
+
+**Objetivo del usuario:** Crear una billetera propia, entrar a LatiFi con ella y llegar al inicio del prestatario sin conocer términos de blockchain.
+
+**Persona:** Prestatario no bancarizado (sección 2.3.1, construido a partir de la entrevista con Joseph Falcón).
+
+```mermaid
+flowchart TD
+    A(["Prestatario abre la app"]) --> B["Ajuste: Onboarding LatiFi"]
+    B --> C{"¿Billetera nueva o existente?"}
+    C -->|Nueva| D["Pendiente: Creación de billetera con paso de frase de recuperación"]
+    C -->|Existente| E["Ajuste: Vinculación de Billetera"]
+    D --> F["Ajuste: Autorización Segura"]
+    E --> F
+    F --> G["Pendiente: Perfil ligero con solo nombre y contacto"]
+    G --> H["Ajuste: Selección de Rol"]
+    H --> I["Ajuste: Firma Criptográfica"]
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class D,G pendiente
+```
+
+**Explicación del flujo:** El prestatario abre la app y ve la bienvenida de tres pasos en lenguaje sencillo (Onboarding LatiFi), sin jerga de blockchain. Después elige crear una billetera, que es el camino principal, o importar una que ya tiene (Vinculación de Billetera). Al crear la billetera, la app muestra la frase de recuperación una sola vez, pide confirmarla y explica con palabras simples que sirve de respaldo. La frase y la llave nunca salen del dispositivo, y este informe no incluye ninguna de las dos como ejemplo. Luego el usuario firma el desafío de inicio de sesión en la tarjeta de firma de Autorización Segura, que no mueve fondos, y la app abre la sesión con esa firma, sin usuario ni contraseña. Completa su nombre y su contacto en el perfil ligero, elige el rol de prestatario en Selección de Rol y llega al inicio del prestatario, que es el Dashboard que muestra la imagen enlazada como Firma Criptográfica.
+
+**Historias:** US-AUTH-01, US-AUTH-02, US-AUTH-03, US-IDEN-01, TS-API-05
+
+##### W-B2. Pedir un préstamo
+
+**Objetivo del usuario:** Publicar una solicitud de préstamo con el monto, la tasa, el plazo y las cuotas que el prestatario elige, y ver que quedó abierta.
+
+**Persona:** Prestatario no bancarizado (sección 2.3.1, construido a partir de la entrevista con Joseph Falcón).
+
+```mermaid
+flowchart TD
+    A["Ajuste: Firma Criptográfica"] --> B["Ajuste: Dashboard Principal"]
+    B --> C["Ajuste: Configurar Solicitud Parte 1"]
+    C --> D["Pendiente: Solicitud de préstamo en tres pasos"]
+    D --> E["Pendiente: Hoja de estado de la transacción del prestatario"]
+    E --> F{"¿Transacción confirmada?"}
+    F -->|Falló| G(["Reintentar o reconectar la billetera"])
+    G --> D
+    F -->|Confirmada| H["Pendiente: Lista de préstamos del prestatario con chips de estado"]
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class D,E,H pendiente
+```
+
+**Explicación del flujo:** Desde el inicio (la imagen Firma Criptográfica), el prestatario toca el acceso para pedir un nuevo crédito. El primer paso (la imagen Dashboard Principal) pide el monto, el plazo y de 1 a 6 cuotas, y debe sumar el campo de la tasa que US-LEND-01 asigna al prestatario. El resumen (la imagen Configurar Solicitud Parte 1) muestra la cuota y el total a devolver con su equivalente en soles, como pide US-LEND-06, y oculta la barra inferior porque el flujo tiene varios pasos. Los pasos de destino y de firma todavía no tienen imagen. Al firmar, la hoja de estado recorre los cuatro estados de US-AUTH-04, pendiente, confirmando, confirmada y fallida, y el lector de pantalla anuncia cada cambio. Si la transacción falla, el usuario reintenta o reconecta la billetera sin perder lo que escribió, y si se confirma, la solicitud aparece como Abierta en la lista de préstamos con su chip de estado.
+
+**Historias:** US-LEND-01, US-LEND-06, US-AUTH-04, US-IDEN-01
+
+##### W-B3. Pagar una cuota
+
+**Objetivo del usuario:** Pagar la próxima cuota de un préstamo vigente y recibir el comprobante.
+
+**Persona:** Prestatario no bancarizado (sección 2.3.1, construido a partir de la entrevista con Joseph Falcón).
+
+```mermaid
+flowchart TD
+    A["Pendiente: Lista de préstamos del prestatario con chips de estado"] --> B["Pendiente: Detalle del préstamo con progreso de cuotas"]
+    B --> C["Pendiente: Pagar cuota con pantalla de confirmación"]
+    C --> D["Pendiente: Hoja de estado de la transacción del prestatario"]
+    D --> E{"¿Transacción confirmada?"}
+    E -->|Falló| F(["Reintentar o reconectar la billetera"])
+    F --> C
+    E -->|Confirmada| G["Pendiente: Comprobante de la cuota pagada"]
+    G --> H["Ajuste: Configurar Solicitud Parte 2"]
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class A,B,C,D,G pendiente
+```
+
+**Explicación del flujo:** El prestatario abre la lista de préstamos y filtra por los chips de estado, que llevan ícono y texto. En el detalle ve el progreso de cuotas y la fecha de la próxima, con los montos en dólares y en soles (US-LEND-06). Al tocar Pagar cuota, una pantalla de confirmación repite el monto y el usuario firma el pago con su billetera. La hoja de estado muestra los estados pendiente, confirmando, confirmada y fallida de US-AUTH-04. Si falla, el usuario vuelve a la confirmación para reintentar, y si se confirma, recibe el comprobante. La reputación se actualiza sola tras el pago (US-REP-01), y la imagen Configurar Solicitud Parte 2, que muestra la parte superior de Reputación, es el punto de llegada.
+
+**Historias:** US-LEND-04, US-LEND-05, US-LEND-06, US-AUTH-04, US-REP-01
+
+##### W-B4. Revisar mi reputación
+
+**Objetivo del usuario:** Entender de dónde sale su puntaje y revisar cada evento que lo compone.
+
+**Persona:** Prestatario no bancarizado (sección 2.3.1, construido a partir de la entrevista con Joseph Falcón).
+
+```mermaid
+flowchart TD
+    S(["Prestatario abre la pestaña Reputación"]) --> A["Ajuste: Configurar Solicitud Parte 2"]
+    A --> B["Ajuste: Reputación On-Chain"]
+    B --> C["Pendiente: Historial de reputación con filtro por resultado"]
+    C --> E(["Filtra por A tiempo, Tardío o Incumplido"])
+    E --> C
+    C --> D["Pendiente: Detalle del evento de reputación con su referencia de transacción"]
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class C,D pendiente
+```
+
+**Explicación del flujo:** El prestatario abre Reputación y ve el score de 0 a 100, su nivel (NEW, BUILDING, TRUSTED o EXCELLENT) y los contadores de pagos a tiempo, tardíos e incumplidos. Hoy la imagen Configurar Solicitud Parte 2 muestra esa parte superior con una escala de 0 a 1000. Debajo, la imagen Reputación On-Chain muestra los consejos para subir de nivel y los puntos que suma cada acción (US-REP-04). El historial de eventos viene de `GET /reputation/{address}/history` (US-API-01) y aún no tiene imagen. En él, el usuario filtra por resultado y ordena por fecha. Al abrir un evento ve su resultado y la referencia de la transacción que lo originó.
+
+**Historias:** US-REP-01, US-REP-02, US-REP-04, US-API-01
 
 
 <div style="page-break-after: always;"></div>
