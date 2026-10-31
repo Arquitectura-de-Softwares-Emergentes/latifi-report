@@ -2974,9 +2974,11 @@ El sistema de navegación define cómo el usuario se desplaza por la aplicación
 
 ##### Navegación de la aplicación móvil
 
-Después de iniciar sesión y verificar su identidad, el usuario elige su rol (prestatario o prestamista). Cada rol tiene una barra de navegación inferior propia con cuatro destinos, un número dentro del límite recomendado por Material Design.
+El usuario crea una billetera o importa una que ya tiene, firma el desafío de inicio de sesión, completa un perfil ligero con nombre y contacto, y después elige su rol (prestatario o prestamista). Cada rol tiene una barra de navegación inferior propia con cuatro destinos, un número dentro del límite recomendado por Material Design.
 
 ![Mapa de navegación de la app](resources/Cap6/6.2.5-mapa-navegacion-app.png)
+
+El mapa todavía muestra pasos de una versión anterior del alcance. El texto y las tablas de esta sección prevalecen hasta que el equipo rehaga la imagen.
 
 | Tipo | Elemento | Descripción |
 |---|---|---|
@@ -2984,26 +2986,26 @@ Después de iniciar sesión y verificar su identidad, el usuario elige su rol (p
 | Global | Barra inferior (prestamista) | Inicio, Invertir, Portafolio y Perfil. |
 | Local | Pasos de solicitud de préstamo | Stepper de varios pasos con indicador de avance y botón “Atrás”. |
 | Local | Filtros de oportunidades | Chips de riesgo y plazo dentro de “Invertir”. |
-| Contextual | Tarjetas y avisos | Una tarjeta de préstamo lleva a su detalle; un aviso de cuota próxima lleva a “Pagar cuota”. |
+| Contextual | Tarjetas y avisos | Una tarjeta de préstamo lleva a su detalle; el aviso de cuota próxima, que aparece dentro de Inicio, lleva a “Pagar cuota”. |
 | Contextual | Botón de regreso (←) | Vuelve a la pantalla anterior en pantallas de nivel 2 y 3. |
-| Suplementaria | Notificaciones, ayuda y cerrar sesión | Accesibles desde Inicio y Perfil. |
-| Suplementaria | Enlaces profundos (deep links) | Abren directamente el detalle de un préstamo o una inversión desde una notificación. |
+| Suplementaria | Ayuda, idioma y cerrar sesión | Accesibles desde Inicio y Perfil. El recordatorio de una cuota próxima es un aviso dentro de la app, no una notificación. |
 
 Reglas de navegación:
 
 1. La barra inferior solo aparece en las pantallas principales y se oculta durante flujos de varios pasos (solicitud, pago, inversión) para no distraer.
 2. Cada pantalla de nivel 2 o 3 tiene un botón de regreso y el gesto de retroceso del sistema.
 3. Las operaciones críticas (pagar, invertir) terminan en una pantalla de confirmación y un comprobante.
-4. Las pantallas de autenticación y verificación de identidad no muestran la barra inferior.
+4. Las pantallas de creación de billetera, inicio de sesión y perfil no muestran la barra inferior.
 5. Al reabrir la app con sesión activa, el usuario llega directamente a Inicio de su rol.
 
 Trazabilidad con las historias de usuario:
 
 | Pantalla o sección | Historias de usuario |
 |---|---|
-| Registro, login y 2FA | US-AUTH-01 a US-AUTH-04 |
-| Verificación de identidad | US-IDEN-01, US-IDEN-02 |
-| Invertir, Portafolio y Billetera del prestamista | US-LEND-01 a US-LEND-06 |
+| Creación de billetera, firma y sesión | US-AUTH-01 a US-AUTH-04 |
+| Perfil ligero | US-IDEN-01, US-IDEN-02 |
+| Préstamos (prestatario) | US-LEND-01, US-LEND-04, US-LEND-05, US-LEND-06 |
+| Invertir y Portafolio (prestamista) | US-LEND-02, US-LEND-03, US-LEND-05, US-LEND-06, US-REP-03 |
 | Reputación | US-REP-01 a US-REP-04 |
 
 ##### Navegación de la landing page
