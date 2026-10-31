@@ -1673,11 +1673,13 @@ Interfaz del container LatiFi API (REST, con prefijo `/api/v1`):
 | Controlador | Operación | Propósito | Acceso |
 |---|---|---|---|
 | `AuthController` | `POST /auth/challenge` | Solicita un nonce para una dirección. | Público |
-| `AuthController` | `POST /auth/verify` | Entrega dirección y firma; devuelve el token de sesión si el firmante coincide. | Público |
+| `AuthController` | `POST /auth/verify` | Entrega `challengeId`, dirección y firma. Devuelve el token de sesión solo si el firmante coincide con la dirección declarada y con la del desafío, y el desafío está sin usar y vigente. | Público |
 | `ProfileController` | `GET /profiles/{address}` | Lee un perfil. El contacto solo se incluye cuando la dirección consultada es la del usuario autenticado. | Autenticado |
 | `ProfileController` | `PUT /profiles/{address}` | Crea o actualiza el perfil. Solo el dueño de la dirección puede escribir. | Autenticado |
 
-Los objetos de transferencia son `ChallengeRequest`, `ChallengeResponse`, `VerifyRequest`, `TokenResponse`, `ProfileResponse` y `ProfileUpdateRequest`. Los errores se devuelven con código 401 para firmas inválidas, repetidas o vencidas, y con código 403 cuando el usuario intenta escribir un perfil ajeno.
+Los objetos de transferencia son `ChallengeRequest`, `ChallengeResponse`, `VerifyRequest` (con `challengeId`, `address` y `signature`), `TokenResponse`, `ProfileResponse` y `ProfileUpdateRequest`. Los errores se devuelven con código 401 para firmas inválidas, repetidas o vencidas, y con código 403 cuando el usuario intenta escribir un perfil ajeno.
+
+Toda operación de la API, salvo `/auth/challenge` y `/auth/verify`, exige el token de sesión. `PUT /profiles/{address}` responde 201 cuando crea el perfil, 200 cuando lo actualiza y 403 cuando quien llama no es el dueño de la dirección. El contrato completo es el borrador OpenAPI del repositorio `latifi-api`: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api/blob/develop/openapi/latifi-api.v0.yaml.
 
 Interfaz del container LatiFi Wallet (pantallas y modelos de vista):
 
@@ -1695,7 +1697,7 @@ Aplicación del container LatiFi API:
 | Clase | Operaciones | Flujo |
 |---|---|---|
 | `AuthService` | `issueChallenge(address)` | Genera un nonce aleatorio, fija su vencimiento en cinco minutos y lo persiste. |
-| `AuthService` | `verify(challengeId, signature)` | Recupera el firmante, comprueba que coincida con la dirección del desafío, consume el desafío y emite el token. |
+| `AuthService` | `verify(challengeId, address, signature)` | Recupera el firmante y comprueba que coincida con la dirección declarada y con la del desafío, y que el desafío esté sin usar y vigente. Luego consume el desafío y emite el token. |
 | `ProfileService` | `getProfile(address, requester)` | Devuelve el perfil y omite el contacto si el solicitante no es el dueño. |
 | `ProfileService` | `upsertProfile(address, request, requester)` | Verifica la propiedad, valida el contacto, guarda y publica `ProfileCreated` o `ProfileUpdated`. |
 
@@ -2014,13 +2016,15 @@ El score siempre se mantiene entre 0 y 100. Los niveles son `NEW` de 0 a 39, `BU
 | `LoanOutcome` | Value Object | Resultado de un préstamo ya traducido a lenguaje de dominio por el Anti-Corruption Layer. | `loanId`, `borrower`, `kind: OutcomeKind`, `amountPaid`, `daysLate`, `txHash`, `logIndex`, `occurredAt` |
 | `OutcomeKind` | Enumeración | Tipo de resultado. | `BORROWER_REPAID_ON_TIME`, `BORROWER_REPAID_LATE`, `BORROWER_DEFAULTED` |
 | `ReputationPolicy` | Domain Service | Contiene los parámetros y calcula la variación de cada situación. | `initialScore`, `profileBonus`, `onTimeGain`, `recoveryGain`, `latePenaltyPerDay`, `latePenaltyCap`, `defaultPenalty`; `deltaFor(profile, outcome): Int` |
-| `LoanSummary` | Entity (proyección) | Copia de lectura de un préstamo, derivada de eventos. | `loanId`, `borrower`, `lender`, `principal`, `interestRateBps`, `termDays`, `installments`, `status`, `amountRepaid`, `requestedAt`, `fundedAt`, `finalDueDate`; `apply(chainEvent)` |
+| `LoanSummary` | Entity (proyección) | Copia de lectura de un préstamo, derivada de eventos. | `loanId`, `borrower`, `lender`, `principal`, `interestRateBps`, `termDays`, `installments`, `status`, `totalDue`, `amountRepaid`, `requestedAt`, `fundedAt`, `finalDueDate`; `apply(chainEvent)`, `installmentsPaid()`, `nextDueDate()` |
 | `ChainEvent` | Entity | Evento on-chain recibido, con su posición exacta. | `txHash`, `logIndex`, `blockNumber`, `eventName`, `loanId`, `payload`, `processedAt` |
 | `IndexerCheckpoint` | Entity | Último bloque procesado del contrato. | `contractAddress`, `lastProcessedBlock`, `updatedAt` |
 | `ReputationRepository`, `ReputationEventRepository`, `LoanSummaryRepository`, `ChainEventRepository`, `IndexerCheckpointRepository` | Repositorios (interfaces) | Puertos de persistencia del contexto. | `findByAddress`, `save`, `existsByTxHashAndLogIndex`, `findFeed(filter, sort)` |
 | `ChainEventSource` | Domain Service (interfaz) | Puerto por el que el dominio obtiene eventos de la cadena. | `fetch(fromBlock, toBlock): List<RawLog>`, `latestBlock(): Long` |
 
 Invariantes: el score nunca sale del rango de 0 a 100; un `ChainEvent` se procesa una sola vez; cada cambio de score genera exactamente un `ReputationEvent`; la proyección `LoanSummary` solo avanza hacia estados posteriores del préstamo.
+
+La proyección usa los nombres de la base de datos y no los de los eventos. El `amount` de `LoanRequested` se guarda como `principal`, el `dueDate` de `LoanFunded` como `finalDueDate`, y el `outstandingAmount` de `LoanDefaulted` queda solo en el `payload` del `ChainEvent`. `installmentsPaid()` y `nextDueDate()` no se guardan: se derivan de `amountRepaid`, `totalDue`, `installments` y la regla de cuotas de `docs/EVENTS.md` del repositorio `latifi-contracts`. La primera es el número de cuotas que `amountRepaid` ya cubre. La segunda es el vencimiento de la primera cuota que falta, o nulo cuando no queda ninguna.
 
 #### 5.3.2. Interface Layer
 
@@ -2029,9 +2033,11 @@ Interfaz REST de LatiFi API:
 | Controlador | Operación | Propósito | Historia |
 |---|---|---|---|
 | `ReputationController` | `GET /reputation/{address}` | Devuelve score, nivel y contadores de un prestatario. | US-REP-02, US-API-01 |
-| `ReputationController` | `GET /reputation/{address}/history` | Lista paginada de los `ReputationEvent` con la referencia de transacción de cada uno. | US-API-01 |
-| `LoanFeedController` | `GET /loans` | Lista préstamos con filtros `status`, `minAmount`, `maxAmount`, `maxTermDays`, `minLevel`, `borrower` y `lender`, y orden `sort` por `reputation`, `amount`, `term` o `rate`. Por defecto ordena por reputación. | US-LEND-02, US-REP-03, US-LEND-05 |
-| `LoanFeedController` | `GET /loans/{loanId}` | Devuelve un préstamo con su estado y su reputación. | US-LEND-05 |
+| `ReputationController` | `GET /reputation/{address}/history` | Lista paginada (`page` y `size`) de los `ReputationEvent` con la referencia de transacción de cada uno. El filtro opcional `type` (`PROFILE_COMPLETED`, `REPAID_ON_TIME`, `REPAID_LATE` o `DEFAULTED`) alimenta los chips de resultado de 6.2.3. | US-API-01 |
+| `LoanFeedController` | `GET /loans` | Lista préstamos por páginas (`page` y `size`) con filtros `status`, `minAmount`, `maxAmount`, `maxTermDays`, `minLevel`, `borrower` y `lender`. El orden `sort` admite `reputation` (por defecto), `amount`, `term`, `rate`, `recent` y `nextDue`. La respuesta trae `items` y `totalItems`, que alimenta el contador de resultados de 6.2.3. | US-LEND-02, US-REP-03, US-LEND-05 |
+| `LoanFeedController` | `GET /loans/{loanId}` | Devuelve el mismo `LoanSummary` que la lista, con su estado y la reputación del prestatario. | US-LEND-05 |
+
+El contrato completo es el borrador OpenAPI del repositorio `latifi-api`: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api/blob/develop/openapi/latifi-api.v0.yaml.
 
 Consumidores internos del contexto:
 
@@ -2231,9 +2237,12 @@ classDiagram
         -int termDays
         -int installments
         -String status
+        -BigInteger totalDue
         -BigInteger amountRepaid
         -Instant fundedAt
         +apply(event) void
+        +installmentsPaid() int
+        +nextDueDate() Instant
     }
     class ChainEvent {
         <<Entity>>
