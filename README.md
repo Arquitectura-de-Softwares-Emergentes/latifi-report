@@ -46,6 +46,8 @@
 | 2.2 | 09/10/2026 | Juan Angulo | Capítulo V completo: diseño táctico de los cinco bounded contexts, con diccionario de clases por capa, diagramas de componentes C4, diagramas de clases y esquemas de base de datos. |
 | 2.3 | 30/10/2026 | Juan Angulo | Numeración de las secciones 6.3 y 6.4, trazabilidad de cada wireframe y mock-up con las historias de usuario y notas de coherencia con 6.1, 6.2.3 y A11Y.md. |
 | 2.4 | 30/10/2026 | Juan Angulo | Auditoría del Capítulo V contra ADR-0001 a ADR-0006 y el ABI v0 de eventos: parámetros y tipos de eventos alineados con el ABI, rango de cuotas de 1 a 6, y tablas de la capa de interfaz REST alineadas con el borrador OpenAPI. |
+| 2.5 | 30/10/2026 | Juan Angulo | Corrección de alcance del Capítulo VI: Android como única plataforma móvil con iOS como trabajo futuro, inglés (en_US) como idioma por defecto con español (es_419) compatible, y 6.2.5 sin segundo factor ni enlaces profundos desde notificaciones. |
+| 2.6 | 30/10/2026 | Juan Angulo | Wireflows de la aplicación móvil (6.4.2) para el prestatario y el prestamista, con el objetivo del usuario, la persona, el diagrama y la explicación de cada flujo, vinculados a los wireframes de 6.4.1 y a las historias de usuario. |
 
 # Project Report Collaboration Insights
 
@@ -2707,7 +2709,7 @@ Restricciones de contenido:
 
 ### 6.1. Style Guidelines
 
-Las guías de estilo de LatiFi Wallet establecen las reglas visuales y de interacción que dan coherencia a la aplicación móvil nativa (Kotlin / Swift) y a la landing page (HTML5, CSS3 y JavaScript). Se basan en Material Design 3 y en las Human Interface Guidelines de Apple, y se orientan a un público que desconfía de las plataformas financieras: la interfaz debe transmitir claridad, seguridad y transparencia, como lo expresó la persona entrevistada al comparar la experiencia con la de su banco.
+Las guías de estilo de LatiFi Wallet establecen las reglas visuales y de interacción que dan coherencia a la aplicación móvil nativa para Android (Kotlin) y a la landing page (HTML5, CSS3 y JavaScript). Se basan en Material Design 3. La versión para iOS y sus guías de diseño quedan como trabajo futuro. Las guías se orientan a un público que desconfía de las plataformas financieras: la interfaz debe transmitir claridad, seguridad y transparencia, como lo expresó la persona entrevistada al comparar la experiencia con la de su banco.
 
 Los principios que guían las decisiones de diseño son:
 
@@ -2722,7 +2724,7 @@ Los principios que guían las decisiones de diseño son:
 
 #### Identidad visual
 
-El logotipo representa a dos personas (los nodos del prestatario y del prestamista) unidas por una línea de pulso: “Lati” de latido y “Fi” de finanzas. Se definen versiones sobre fondo claro, oscuro y azul de marca, un ícono de aplicación (Android adaptive / iOS), un isotipo sin contenedor para favicon, tamaños mínimos (48, 32 y 20 px), un margen libre igual a la mitad de la altura del isotipo y usos incorrectos que deben evitarse (cambiar colores, deformar o usarlo con bajo contraste).
+El logotipo representa a dos personas (los nodos del prestatario y del prestamista) unidas por una línea de pulso: “Lati” de latido y “Fi” de finanzas. Se definen versiones sobre fondo claro, oscuro y azul de marca, un ícono de aplicación (Android adaptive), un isotipo sin contenedor para favicon, tamaños mínimos (48, 32 y 20 px), un margen libre igual a la mitad de la altura del isotipo y usos incorrectos que deben evitarse (cambiar colores, deformar o usarlo con bajo contraste).
 
 ![Identidad visual de LatiFi](resources/Cap6/6.1.1-identidad-visual.png)
 
@@ -2763,9 +2765,9 @@ Ambas familias son gratuitas (Google Fonts) y se complementan: Sora aporta perso
 - **Espaciado:** escala de base 4 pt (4, 8, 12, 16, 24, 32, 48). Margen lateral de 16 dp y separación entre tarjetas de 12 a 16 dp.
 - **Formas:** radios de 8 (campos), 12 (chips), 16 (tarjetas) y 28 (hojas inferiores).
 - **Elevación:** tres niveles (borde, tarjeta y diálogo) con sombras suaves.
-- **Iconografía:** Material Symbols Rounded en Android y SF Symbols en iOS, con trazo de 2 dp. Todo ícono va acompañado de una etiqueta de texto.
-- **Accesibilidad:** áreas táctiles de 48 dp (Android) y 44 pt (iOS), compatibilidad con TalkBack y VoiceOver, y texto escalable hasta 200 %.
-- **Idioma y tema:** interfaz en español (es_419) con preparación para inglés (en_US), y modo claro y oscuro.
+- **Iconografía:** Material Symbols Rounded, con trazo de 2 dp. Todo ícono va acompañado de una etiqueta de texto.
+- **Accesibilidad:** áreas táctiles de 48 dp, compatibilidad con TalkBack y texto escalable hasta 200 %.
+- **Idioma y tema:** la interfaz usa inglés (en_US) por defecto y ofrece español (es_419) cuando el dispositivo lo pide, con en_US como idioma de respaldo. Incluye modo claro y modo oscuro.
 
 ![Fundamentos de diseño](resources/Cap6/6.1.1-fundamentos-de-diseno.png)
 
@@ -2773,7 +2775,7 @@ Ambas familias son gratuitas (Google Fonts) y se complementan: Sora aporta perso
 
 #### Aplicación móvil
 
-La aplicación se desarrolla de forma nativa para Android (Kotlin) e iOS (Swift), por lo que sigue las guías de cada plataforma: Material Design 3 en Android y Human Interface Guidelines en iOS. Se diseña primero para teléfono (clase compact) y escala a tablet con un riel lateral de navegación.
+La aplicación se desarrolla de forma nativa para Android (Kotlin) y sigue Material Design 3. Android es la única plataforma móvil del proyecto. Se diseña primero para teléfono (clase compact) y escala a tablet con un riel lateral de navegación.
 
 Los componentes base son:
 
@@ -2870,18 +2872,18 @@ El equipo reemplaza el vocabulario técnico por palabras que el usuario ya conoc
 
 Los montos aparecen siempre en la stablecoin y en soles (S/), como exige US-LEND-06. Los estados de una transacción on-chain (pendiente, confirmando, confirmada y fallida) conservan estas mismas palabras en toda la app, de modo que el usuario no necesita consultar un explorador de bloques.
 
-La interfaz sale en español (es_419) y deja listas las equivalencias en inglés (en_US):
+La interfaz sale en inglés (en_US) por defecto y en español (es_419) cuando el dispositivo lo pide. Este informe cita los ejemplos de etiquetas en español para que el equipo los lea con facilidad. Las equivalencias son estas:
 
-| es_419 | en_US |
+| en_US | es_419 |
 |---|---|
-| Inicio | Home |
-| Préstamos | Loans |
-| Reputación | Reputation |
-| Invertir | Invest |
-| Portafolio | Portfolio |
-| Perfil | Profile |
-| Solicitar préstamo | Request a loan |
-| Pagar cuota | Pay installment |
+| Home | Inicio |
+| Loans | Préstamos |
+| Reputation | Reputación |
+| Invest | Invertir |
+| Portfolio | Portafolio |
+| Profile | Perfil |
+| Request a loan | Solicitar préstamo |
+| Pay installment | Pagar cuota |
 
 Ningún ícono aparece sin etiqueta de texto. Los íconos decorativos se ocultan a los lectores de pantalla, y los que activan una acción llevan una etiqueta accesible equivalente al texto visible.
 
@@ -2912,17 +2914,17 @@ La landing page tampoco incluye buscador. Es una página única con cinco seccio
 
 #### 6.2.4. SEO Tags and Meta Tags
 
-Los SEO tags y los meta tags corresponden a la landing page, el único producto web de LatiFi. La aplicación es nativa y no tiene versión web, así que su visibilidad depende de las fichas de las tiendas, que esta sección cubre al final con los elementos ASO. La landing publica sus textos en español (es_419) y en inglés (en_US), de acuerdo con US-LAND-02.
+Los SEO tags y los meta tags corresponden a la landing page, el único producto web de LatiFi. La aplicación es nativa y no tiene versión web, así que su visibilidad depende de las fichas de las tiendas, que esta sección cubre al final con los elementos ASO. La landing publica sus textos en inglés (en_US) por defecto y en español (es_419), de acuerdo con US-LAND-02.
 
 Los límites de longitud siguen las prácticas habituales de los buscadores: títulos de hasta 60 caracteres y descripciones de hasta 155.
 
 ##### Landing page: página de inicio
 
-| Etiqueta | Valor es_419 | Valor en_US |
+| Etiqueta | Valor en_US | Valor es_419 |
 |---|---|---|
-| title | LatiFi: microcréditos P2P con reputación verificable | LatiFi: P2P microloans with verifiable reputation |
-| meta description | LatiFi conecta a prestatarios y prestamistas con microcréditos P2P sobre blockchain. No custodia tu dinero y muestra la reputación de cada solicitante. | LatiFi connects borrowers and lenders through blockchain-based P2P microloans. It never holds your funds and shows each applicant's reputation. |
-| meta keywords | microcréditos, préstamos P2P, blockchain, stablecoins, reputación crediticia, billetera digital, LatiFi Wallet, Perú | microloans, P2P loans, blockchain, stablecoins, credit reputation, digital wallet, LatiFi Wallet, Peru |
+| title | LatiFi: P2P microloans with verifiable reputation | LatiFi: microcréditos P2P con reputación verificable |
+| meta description | LatiFi connects borrowers and lenders through blockchain-based P2P microloans. It never holds your funds and shows each applicant's reputation. | LatiFi conecta a prestatarios y prestamistas con microcréditos P2P sobre blockchain. No custodia tu dinero y muestra la reputación de cada solicitante. |
+| meta keywords | microloans, P2P loans, blockchain, stablecoins, credit reputation, digital wallet, LatiFi Wallet, Peru | microcréditos, préstamos P2P, blockchain, stablecoins, reputación crediticia, billetera digital, LatiFi Wallet, Perú |
 | meta author | LatiFi | LatiFi |
 
 Google ignora la etiqueta keywords para posicionar, pero el enunciado del curso la exige y otros buscadores todavía la leen, por lo que la landing la incluye con ocho términos como máximo.
@@ -2931,11 +2933,11 @@ Etiquetas complementarias de la landing:
 
 | Etiqueta | Valor |
 |---|---|
-| html lang | es-419 en la versión en español y en-US en la versión en inglés |
+| html lang | en-US en la versión en inglés y es-419 en la versión en español |
 | meta viewport | width=device-width, initial-scale=1 |
 | meta robots | index, follow |
 | link rel="canonical" | La URL pública de cada página |
-| link rel="alternate" hreflang | es-419, en-US y x-default hacia la versión en español |
+| link rel="alternate" hreflang | en-US, es-419 y x-default hacia la versión en inglés |
 | og:title, og:description | Los mismos textos del title y la meta description |
 | og:type y og:site_name | website y LatiFi |
 | og:image | Imagen de 1200 x 630 px con el logotipo sobre el azul de marca |
@@ -2950,23 +2952,23 @@ Etiquetas complementarias de la landing:
 
 Estas páginas heredan author, robots, viewport y las etiquetas de idioma de la página de inicio.
 
-##### Elementos ASO de las tiendas de aplicaciones
+##### Elementos ASO de la ficha de Google Play
 
-| Elemento | Google Play | App Store |
-|---|---|---|
-| App Title (30 caracteres) | LatiFi Wallet | LatiFi Wallet |
-| App Subtitle (30 caracteres) | No aplica | es_419: Microcréditos entre personas. en_US: Peer-to-peer microloans |
-| Descripción corta (80 caracteres) | es_419: Pide o invierte en microcréditos P2P con reputación verificable. en_US: Borrow or lend in P2P microloans with verifiable reputation. | No aplica |
-| App Keywords (100 caracteres) | No aplica | es_419: préstamos,microcréditos,p2p,blockchain,stablecoin,billetera,inversión,reputación,crédito,Perú. en_US: loans,microloans,p2p,blockchain,stablecoin,wallet,lending,reputation,credit,Peru |
-| Categoría | Finanzas | Finanzas |
+Android es la única plataforma móvil del proyecto, así que la ficha de Google Play es el único espacio de tienda que este capítulo define. La ficha de la tienda de Apple queda como trabajo futuro, junto con la versión para iOS.
 
-Descripción completa (es_419), igual en ambas tiendas:
+| Elemento | Google Play |
+|---|---|
+| App Title (30 caracteres) | LatiFi Wallet |
+| Descripción corta (80 caracteres) | en_US: Borrow or lend in P2P microloans with verifiable reputation. es_419: Pide o invierte en microcréditos P2P con reputación verificable. |
+| Categoría | Finanzas |
 
-> LatiFi Wallet conecta a personas que necesitan un microcrédito con personas que tienen capital disponible para prestarlo. Si pides un préstamo, publicas el monto, la tasa y el plazo, y los prestamistas ven tu reputación antes de decidir. Si inviertes, revisas las solicitudes abiertas, filtras por riesgo y plazo, y fondeas la que prefieras. Los acuerdos corren en un contrato automático sobre la red de pruebas Polygon Amoy: LatiFi no custodia tus fondos ni tus llaves privadas. Esta versión es una demostración académica y opera con una stablecoin de prueba sin valor monetario real.
-
-Descripción completa (en_US):
+Descripción completa de la ficha de Google Play (en_US):
 
 > LatiFi Wallet connects people who need a microloan with people who have spare capital to lend. If you borrow, you post the amount, rate and term, and lenders see your reputation before they decide. If you lend, you review open requests, filter by risk and term, and fund the one you prefer. Agreements run on an automated contract on the Polygon Amoy test network: LatiFi never holds your funds or your private keys. This version is an academic demonstration and uses a test stablecoin with no real monetary value.
+
+Descripción completa de la ficha de Google Play (es_419):
+
+> LatiFi Wallet conecta a personas que necesitan un microcrédito con personas que tienen capital disponible para prestarlo. Si pides un préstamo, publicas el monto, la tasa y el plazo, y los prestamistas ven tu reputación antes de decidir. Si inviertes, revisas las solicitudes abiertas, filtras por riesgo y plazo, y fondeas la que prefieras. Los acuerdos corren en un contrato automático sobre la red de pruebas Polygon Amoy: LatiFi no custodia tus fondos ni tus llaves privadas. Esta versión es una demostración académica y opera con una stablecoin de prueba sin valor monetario real.
 
 #### 6.2.5. Navigation Systems
 
@@ -2974,9 +2976,11 @@ El sistema de navegación define cómo el usuario se desplaza por la aplicación
 
 ##### Navegación de la aplicación móvil
 
-Después de iniciar sesión y verificar su identidad, el usuario elige su rol (prestatario o prestamista). Cada rol tiene una barra de navegación inferior propia con cuatro destinos, un número dentro del límite recomendado por Material Design.
+El usuario crea una billetera o importa una que ya tiene, firma el desafío de inicio de sesión, completa un perfil ligero con nombre y contacto, y después elige su rol (prestatario o prestamista). Cada rol tiene una barra de navegación inferior propia con cuatro destinos, un número dentro del límite recomendado por Material Design.
 
 ![Mapa de navegación de la app](resources/Cap6/6.2.5-mapa-navegacion-app.png)
+
+El mapa todavía muestra pasos de una versión anterior del alcance. El texto y las tablas de esta sección prevalecen hasta que el equipo rehaga la imagen.
 
 | Tipo | Elemento | Descripción |
 |---|---|---|
@@ -2984,26 +2988,26 @@ Después de iniciar sesión y verificar su identidad, el usuario elige su rol (p
 | Global | Barra inferior (prestamista) | Inicio, Invertir, Portafolio y Perfil. |
 | Local | Pasos de solicitud de préstamo | Stepper de varios pasos con indicador de avance y botón “Atrás”. |
 | Local | Filtros de oportunidades | Chips de riesgo y plazo dentro de “Invertir”. |
-| Contextual | Tarjetas y avisos | Una tarjeta de préstamo lleva a su detalle; un aviso de cuota próxima lleva a “Pagar cuota”. |
+| Contextual | Tarjetas y avisos | Una tarjeta de préstamo lleva a su detalle; el aviso de cuota próxima, que aparece dentro de Inicio, lleva a “Pagar cuota”. |
 | Contextual | Botón de regreso (←) | Vuelve a la pantalla anterior en pantallas de nivel 2 y 3. |
-| Suplementaria | Notificaciones, ayuda y cerrar sesión | Accesibles desde Inicio y Perfil. |
-| Suplementaria | Enlaces profundos (deep links) | Abren directamente el detalle de un préstamo o una inversión desde una notificación. |
+| Suplementaria | Ayuda, idioma y cerrar sesión | Accesibles desde Inicio y Perfil. El recordatorio de una cuota próxima es un aviso dentro de la app, no una notificación. |
 
 Reglas de navegación:
 
 1. La barra inferior solo aparece en las pantallas principales y se oculta durante flujos de varios pasos (solicitud, pago, inversión) para no distraer.
 2. Cada pantalla de nivel 2 o 3 tiene un botón de regreso y el gesto de retroceso del sistema.
 3. Las operaciones críticas (pagar, invertir) terminan en una pantalla de confirmación y un comprobante.
-4. Las pantallas de autenticación y verificación de identidad no muestran la barra inferior.
+4. Las pantallas de creación de billetera, inicio de sesión y perfil no muestran la barra inferior.
 5. Al reabrir la app con sesión activa, el usuario llega directamente a Inicio de su rol.
 
 Trazabilidad con las historias de usuario:
 
 | Pantalla o sección | Historias de usuario |
 |---|---|
-| Registro, login y 2FA | US-AUTH-01 a US-AUTH-04 |
-| Verificación de identidad | US-IDEN-01, US-IDEN-02 |
-| Invertir, Portafolio y Billetera del prestamista | US-LEND-01 a US-LEND-06 |
+| Creación de billetera, firma y sesión | US-AUTH-01 a US-AUTH-04 |
+| Perfil ligero | US-IDEN-01, US-IDEN-02 |
+| Préstamos (prestatario) | US-LEND-01, US-LEND-04, US-LEND-05, US-LEND-06 |
+| Invertir y Portafolio (prestamista) | US-LEND-02, US-LEND-03, US-LEND-05, US-LEND-06, US-REP-03 |
 | Reputación | US-REP-01 a US-REP-04 |
 
 ##### Navegación de la landing page
@@ -3158,7 +3162,176 @@ Agrupa las vistas del puntaje de reputación on-chain, la vinculación de billet
 
 #### 6.4.2. Mobile Applications Wireflow
 
-Los wireflows de la aplicación móvil se agregan en esta sección en el siguiente avance.
+Cada wireflow sigue el objetivo de un usuario concreto, de una persona concreta, y usa los wireframes de 6.4.1 como pasos. Cuando una pantalla cambia de estado, el diagrama añade un paso nuevo para ese estado. Los siete flujos cubren cuatro objetivos del prestatario y tres del prestamista, y cada uno cita las historias de 3.2 que cumple. Los nombres de algunas imágenes de 6.4.1 no coinciden con su contenido, así que cada explicación dice qué muestra la imagen en ese paso.
+
+Cada nodo de pantalla lleva una etiqueta de texto, y esa etiqueta, no el color, dice en qué estado está la pantalla. `Frame: NOMBRE` indica que el wireframe existe en 6.4.1 y sirve tal como está. `Ajuste: NOMBRE` indica que el wireframe existe y la tabla de 6.4.1 marca cambios. `Pendiente: TÍTULO` indica que todavía no hay imagen y que la pantalla figura en la lista de pantallas faltantes que recibe el equipo. Hoy las doce imágenes de 6.4.1 llevan al menos una diferencia con el alcance, así que ningún nodo usa Frame todavía. Los rombos son decisiones y los óvalos son acciones del usuario, y ninguno representa una pantalla. Los nodos Pendiente llevan además un borde punteado, un refuerzo visual que no sustituye al texto.
+
+##### W-B1. Crear la billetera y entrar
+
+**Objetivo del usuario:** Crear una billetera propia, entrar a LatiFi con ella y llegar al inicio del prestatario sin conocer términos de blockchain.
+
+**Persona:** Prestatario no bancarizado (sección 2.3.1, construido a partir de la entrevista con Joseph Falcón).
+
+```mermaid
+flowchart TD
+    A(["Prestatario abre la app"]) --> B["Ajuste: Onboarding LatiFi"]
+    B --> C{"¿Billetera nueva o existente?"}
+    C -->|Nueva| D["Pendiente: Creación de billetera con paso de frase de recuperación"]
+    C -->|Existente| E["Ajuste: Vinculación de Billetera"]
+    D --> F["Ajuste: Autorización Segura"]
+    E --> F
+    F --> G["Pendiente: Perfil ligero con solo nombre y contacto"]
+    G --> H["Ajuste: Selección de Rol"]
+    H --> I["Ajuste: Firma Criptográfica"]
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class D,G pendiente
+```
+
+**Explicación del flujo:** El prestatario abre la app y ve la bienvenida de tres pasos en lenguaje sencillo (Onboarding LatiFi), sin jerga de blockchain. Después elige crear una billetera, que es el camino principal, o importar una que ya tiene (Vinculación de Billetera). Al crear la billetera, la app muestra la frase de recuperación una sola vez, pide confirmarla y explica con palabras simples que sirve de respaldo. La frase y la llave nunca salen del dispositivo, y este informe no incluye ninguna de las dos como ejemplo. Luego el usuario firma el desafío de inicio de sesión en la tarjeta de firma de Autorización Segura, que no mueve fondos, y la app abre la sesión con esa firma, sin usuario ni contraseña. Completa su nombre y su contacto en el perfil ligero, elige el rol de prestatario en Selección de Rol y llega al inicio del prestatario, que es el Dashboard que muestra la imagen enlazada como Firma Criptográfica.
+
+**Historias:** US-AUTH-01, US-AUTH-02, US-AUTH-03, US-IDEN-01, TS-API-05
+
+##### W-B2. Pedir un préstamo
+
+**Objetivo del usuario:** Publicar una solicitud de préstamo con el monto, la tasa, el plazo y las cuotas que el prestatario elige, y ver que quedó abierta.
+
+**Persona:** Prestatario no bancarizado (sección 2.3.1, construido a partir de la entrevista con Joseph Falcón).
+
+```mermaid
+flowchart TD
+    A["Ajuste: Firma Criptográfica"] --> B["Ajuste: Dashboard Principal"]
+    B --> C["Ajuste: Configurar Solicitud Parte 1"]
+    C --> D["Pendiente: Solicitud de préstamo en tres pasos"]
+    D --> E["Pendiente: Hoja de estado de la transacción del prestatario"]
+    E --> F{"¿Transacción confirmada?"}
+    F -->|Falló| G(["Reintentar o reconectar la billetera"])
+    G --> D
+    F -->|Confirmada| H["Pendiente: Lista de préstamos del prestatario con chips de estado"]
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class D,E,H pendiente
+```
+
+**Explicación del flujo:** Desde el inicio (la imagen Firma Criptográfica), el prestatario toca el acceso para pedir un nuevo crédito. El primer paso (la imagen Dashboard Principal) pide el monto, el plazo y de 1 a 6 cuotas, y debe sumar el campo de la tasa que US-LEND-01 asigna al prestatario. El resumen (la imagen Configurar Solicitud Parte 1) muestra la cuota y el total a devolver con su equivalente en soles, como pide US-LEND-06, y oculta la barra inferior porque el flujo tiene varios pasos. Los pasos de destino y de firma todavía no tienen imagen. Al firmar, la hoja de estado recorre los cuatro estados de US-AUTH-04, pendiente, confirmando, confirmada y fallida, y el lector de pantalla anuncia cada cambio. Si la transacción falla, el usuario reintenta o reconecta la billetera sin perder lo que escribió, y si se confirma, la solicitud aparece como Abierta en la lista de préstamos con su chip de estado.
+
+**Historias:** US-LEND-01, US-LEND-06, US-AUTH-04, US-IDEN-01
+
+##### W-B3. Pagar una cuota
+
+**Objetivo del usuario:** Pagar la próxima cuota de un préstamo vigente y recibir el comprobante.
+
+**Persona:** Prestatario no bancarizado (sección 2.3.1, construido a partir de la entrevista con Joseph Falcón).
+
+```mermaid
+flowchart TD
+    A["Pendiente: Lista de préstamos del prestatario con chips de estado"] --> B["Pendiente: Detalle del préstamo con progreso de cuotas"]
+    B --> C["Pendiente: Pagar cuota con pantalla de confirmación"]
+    C --> D["Pendiente: Hoja de estado de la transacción del prestatario"]
+    D --> E{"¿Transacción confirmada?"}
+    E -->|Falló| F(["Reintentar o reconectar la billetera"])
+    F --> C
+    E -->|Confirmada| G["Pendiente: Comprobante de la cuota pagada"]
+    G --> H["Ajuste: Configurar Solicitud Parte 2"]
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class A,B,C,D,G pendiente
+```
+
+**Explicación del flujo:** El prestatario abre la lista de préstamos y filtra por los chips de estado, que llevan ícono y texto. En el detalle ve el progreso de cuotas y la fecha de la próxima, con los montos en dólares y en soles (US-LEND-06). Al tocar Pagar cuota, una pantalla de confirmación repite el monto y el usuario firma el pago con su billetera. La hoja de estado muestra los estados pendiente, confirmando, confirmada y fallida de US-AUTH-04. Si falla, el usuario vuelve a la confirmación para reintentar, y si se confirma, recibe el comprobante. La reputación se actualiza sola tras el pago (US-REP-01), y la imagen Configurar Solicitud Parte 2, que muestra la parte superior de Reputación, es el punto de llegada.
+
+**Historias:** US-LEND-04, US-LEND-05, US-LEND-06, US-AUTH-04, US-REP-01
+
+##### W-B4. Revisar mi reputación
+
+**Objetivo del usuario:** Entender de dónde sale su puntaje y revisar cada evento que lo compone.
+
+**Persona:** Prestatario no bancarizado (sección 2.3.1, construido a partir de la entrevista con Joseph Falcón).
+
+```mermaid
+flowchart TD
+    S(["Prestatario abre la pestaña Reputación"]) --> A["Ajuste: Configurar Solicitud Parte 2"]
+    A --> B["Ajuste: Reputación On-Chain"]
+    B --> C["Pendiente: Historial de reputación con filtro por resultado"]
+    C --> E(["Filtra por A tiempo, Tardío o Incumplido"])
+    E --> C
+    C --> D["Pendiente: Detalle del evento de reputación con su referencia de transacción"]
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class C,D pendiente
+```
+
+**Explicación del flujo:** El prestatario abre Reputación y ve el score de 0 a 100, su nivel (NEW, BUILDING, TRUSTED o EXCELLENT) y los contadores de pagos a tiempo, tardíos e incumplidos. Hoy la imagen Configurar Solicitud Parte 2 muestra esa parte superior con una escala de 0 a 1000. Debajo, la imagen Reputación On-Chain muestra los consejos para subir de nivel y los puntos que suma cada acción (US-REP-04). El historial de eventos viene de `GET /reputation/{address}/history` (US-API-01) y aún no tiene imagen. En él, el usuario filtra por resultado y ordena por fecha. Al abrir un evento ve su resultado y la referencia de la transacción que lo originó.
+
+**Historias:** US-REP-01, US-REP-02, US-REP-04, US-API-01
+
+##### W-L1. Encontrar una solicitud para fondear
+
+**Objetivo del usuario:** Encontrar entre las solicitudes abiertas una que encaje con su riesgo, plazo y monto, y revisar la reputación del solicitante antes de decidir.
+
+**Persona:** Prestamista con capital ocioso (sección 2.3.1, construido a partir de la entrevista con Renso Julca).
+
+```mermaid
+flowchart TD
+    S(["Prestamista elige invertir"]) --> A["Ajuste: Selección de Rol"]
+    A --> B["Pendiente: Feed Invertir con chips de riesgo, plazo y monto"]
+    B --> C{"¿Hay resultados?"}
+    C -->|No| D["Pendiente: Feed Invertir en estado vacío con Limpiar filtros"]
+    D --> B
+    C -->|Sí| E["Pendiente: Detalle de la solicitud con el historial de reputación del prestatario"]
+    E --> F(["Decide fondear: sigue W-L2"])
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class B,D,E pendiente
+```
+
+**Explicación del flujo:** El prestamista elige su rol en Selección de Rol y llega a Invertir. El feed muestra las solicitudes abiertas con la reputación de cada solicitante (US-LEND-02), y los montos aparecen en la stablecoin y en soles (US-LEND-06). Arriba hay chips de riesgo, plazo y monto, y un orden por reputación, tasa, plazo o más recientes (US-REP-03). Cada cambio de filtro actualiza el contador de resultados y el lector de pantalla lo anuncia. Si ninguna solicitud cumple los filtros, el estado vacío ofrece el botón Limpiar filtros. Con resultados, el prestamista abre el detalle y revisa el historial de eventos del prestatario (US-API-01) antes de decidir.
+
+**Historias:** US-LEND-02, US-REP-03, US-API-01, US-LEND-06
+
+##### W-L2. Fondear una solicitud
+
+**Objetivo del usuario:** Fondear una solicitud conociendo las condiciones que quedan fijas y ver la inversión en su portafolio.
+
+**Persona:** Prestamista con capital ocioso (sección 2.3.1, construido a partir de la entrevista con Renso Julca).
+
+```mermaid
+flowchart TD
+    A["Pendiente: Detalle de la solicitud con el historial de reputación del prestatario"] --> B{"¿Perfil completo?"}
+    B -->|No| C["Pendiente: Aviso de perfil incompleto antes de fondear"]
+    C --> D["Pendiente: Perfil ligero con solo nombre y contacto"]
+    D --> A
+    B -->|Sí| E["Pendiente: Confirmación de fondeo"]
+    E --> F["Pendiente: Hoja de estado de la transacción"]
+    F --> G{"¿Transacción confirmada?"}
+    G -->|Falló| H(["Reintentar o reconectar la billetera"])
+    H --> E
+    G -->|Confirmada| I["Pendiente: Portafolio del prestamista con chips de estado"]
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class A,C,D,E,F,I pendiente
+```
+
+**Explicación del flujo:** En el detalle de la solicitud, el prestamista toca Fondear. Si su perfil está incompleto (US-IDEN-01), un aviso lo lleva al perfil ligero y lo devuelve al detalle cuando termina. Con el perfil completo, la pantalla de confirmación repite el monto en la stablecoin y en soles (US-LEND-06), la tasa, el plazo y las cuotas que quedan fijas al firmar. La hoja de estado recorre los cuatro estados de US-AUTH-04, pendiente, confirmando, confirmada y fallida, y el lector de pantalla anuncia cada uno. Si la transacción falla, el usuario reintenta o reconecta la billetera, y si se confirma, la inversión aparece en el portafolio con el estado Pendiente.
+
+**Historias:** US-LEND-03, US-AUTH-04, US-LEND-06, US-IDEN-01
+
+##### W-L3. Seguir mi portafolio
+
+**Objetivo del usuario:** Saber qué inversiones tiene, cuál vence primero y si cada una recibe sus cuotas.
+
+**Persona:** Prestamista con capital ocioso (sección 2.3.1, construido a partir de la entrevista con Renso Julca).
+
+```mermaid
+flowchart TD
+    S(["Prestamista abre Portafolio"]) --> A["Pendiente: Portafolio del prestamista con chips de estado"]
+    A --> B(["Elige Todos, Pendiente, Pagado o En mora"])
+    B --> A
+    A --> C["Pendiente: Detalle de la inversión con cuotas recibidas y estado"]
+    C --> D{"¿Estado de la inversión?"}
+    D -->|Pendiente| A
+    D -->|Pagado o En mora| E(["El chip del portafolio refleja el estado final"])
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class A,C pendiente
+```
+
+**Explicación del flujo:** El prestamista abre Portafolio y ve sus inversiones con el próximo vencimiento primero. Los chips Todos, Pendiente, Pagado y En mora filtran la lista, y cada chip lleva ícono y texto. Al abrir una inversión, el detalle muestra las cuotas recibidas y el estado actual. Si la inversión sigue Pendiente, el prestamista vuelve al portafolio a esperar la siguiente cuota. Cuando pasa a Pagado o a En mora, el chip del portafolio lo refleja sin que el usuario tenga que buscarlo.
+
+**Historias:** US-LEND-05
 
 
 <div style="page-break-after: always;"></div>
