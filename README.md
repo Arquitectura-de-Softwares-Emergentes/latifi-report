@@ -123,7 +123,10 @@ Las capturas siguientes muestran los analíticos del repositorio del informe en 
     - [Domain Message Flows Modeling](#domain-message-flows-modeling)
     - [Bounded Context Canvases](#bounded-context-canvases)
     - [Context Mapping](#context-mapping)
-    - [Software Architecture](#software-architecture)
+  - [4.3. Software Architecture](#43-software-architecture)
+    - [4.3.1. Software Architecture System Landscape and Context Level Diagrams](#431-software-architecture-system-landscape-and-context-level-diagrams)
+    - [4.3.2. Software Architecture Container Level Diagrams](#432-software-architecture-container-level-diagrams)
+    - [4.3.3. Software Architecture Deployment Diagrams](#433-software-architecture-deployment-diagrams)
 - [Capítulo V: Tactical-Level Software Design](#capítulo-v-tactical-level-software-design)
   - [5.1. Bounded Context: Lending](#51-bounded-context-lending)
   - [5.2. Bounded Context: Identity/Wallet](#52-bounded-context-identitywallet)
@@ -2771,15 +2774,15 @@ Los principios que guían las decisiones de diseño son:
 | Inclusión | Contraste mínimo WCAG 2.1 AA, texto escalable y estados que no dependen solo del color. |
 | Consistencia | Los mismos componentes, colores y reglas en app y web. |
 
-### 6.1.1. General Style Guidelines
+#### 6.1.1. General Style Guidelines
 
-#### Identidad visual
+##### Identidad visual
 
 El logotipo representa a dos personas (los nodos del prestatario y del prestamista) unidas por una línea de pulso: “Lati” de latido y “Fi” de finanzas. Se definen versiones sobre fondo claro, oscuro y azul de marca, un ícono de aplicación (Android adaptive), un isotipo sin contenedor para favicon, tamaños mínimos (48, 32 y 20 px), un margen libre igual a la mitad de la altura del isotipo y usos incorrectos que deben evitarse (cambiar colores, deformar o usarlo con bajo contraste).
 
 ![Identidad visual de LatiFi](resources/Cap6/6.1.1-identidad-visual.png)
 
-#### Paleta de colores
+##### Paleta de colores
 
 | Color | HEX | RGB | Uso |
 |---|---|---|---|
@@ -2795,7 +2798,7 @@ Todos los pares de texto y fondo se verificaron con la fórmula de contraste de 
 
 ![Paleta de colores](resources/Cap6/6.1.1-paleta-de-colores.png)
 
-#### Tipografía
+##### Tipografía
 
 | Estilo | Fuente | Tamaño / interlineado | Uso |
 |---|---|---|---|
@@ -2811,7 +2814,7 @@ Ambas familias son gratuitas (Google Fonts) y se complementan: Sora aporta perso
 
 ![Tipografía](resources/Cap6/6.1.1-tipografia.png)
 
-#### Fundamentos de diseño
+##### Fundamentos de diseño
 
 - **Espaciado:** escala de base 4 pt (4, 8, 12, 16, 24, 32, 48). Margen lateral de 16 dp y separación entre tarjetas de 12 a 16 dp.
 - **Formas:** radios de 8 (campos), 12 (chips), 16 (tarjetas) y 28 (hojas inferiores).
@@ -2822,9 +2825,9 @@ Ambas familias son gratuitas (Google Fonts) y se complementan: Sora aporta perso
 
 ![Fundamentos de diseño](resources/Cap6/6.1.1-fundamentos-de-diseno.png)
 
-### 6.1.2. Web, Mobile & Devices Style Guidelines
+#### 6.1.2. Web, Mobile & Devices Style Guidelines
 
-#### Aplicación móvil
+##### Aplicación móvil
 
 La aplicación se desarrolla de forma nativa para Android (Kotlin) y sigue Material Design 3. Android es la única plataforma móvil del proyecto. Se diseña primero para teléfono (clase compact) y escala a tablet con un riel lateral de navegación.
 
@@ -2843,7 +2846,7 @@ Los componentes base son:
 
 ![Componentes móviles](resources/Cap6/6.1.2-componentes-moviles.png)
 
-#### Landing page
+##### Landing page
 
 La landing page se construye con HTML5, CSS3 y JavaScript, siguiendo Material Design. Usa un enfoque mobile-first con tres clases de tamaño.
 
