@@ -44,6 +44,7 @@
 | 2.0 | 08/10/2026 | Anaely Burga | Landing Page Mock-up (6.3.2), con las tres secciones de la landing page (avance de TP1). |
 | 2.1 | 08/10/2026 | Anaely Burga | Landing Page Wireframe (6.3.1), con la distribución de las tres secciones de la landing page (avance de TP1). |
 | 2.2 | 09/10/2026 | Juan Angulo | Capítulo V completo: diseño táctico de los cinco bounded contexts, con diccionario de clases por capa, diagramas de componentes C4, diagramas de clases y esquemas de base de datos. |
+| 2.3 | 30/10/2026 | Juan Angulo | Numeración de las secciones 6.3 y 6.4, trazabilidad de cada wireframe y mock-up con las historias de usuario y notas de coherencia con 6.1, 6.2.3 y A11Y.md. |
 
 # Project Report Collaboration Insights
 
@@ -136,6 +137,9 @@ Las capturas siguientes muestran los analíticos del repositorio del informe en 
   - [6.3. Landing Page UI Design](#63-landing-page-ui-design)
     - [6.3.1. Landing Page Wireframe](#631-landing-page-wireframe)
     - [6.3.2. Landing Page Mock-up](#632-landing-page-mock-up)
+  - [6.4. Mobile Applications UX/UI Design](#64-mobile-applications-uxui-design)
+    - [6.4.1. Mobile Applications Wireframes](#641-mobile-applications-wireframes)
+    - [6.4.2. Mobile Applications Wireflow](#642-mobile-applications-wireflow)
 - [Avance de Conclusiones](#avance-de-conclusiones)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
@@ -3006,10 +3010,11 @@ Trazabilidad: la landing responde a las historias US-LAND-01 y US-LAND-02.
 
 ### 6.3. Landing Page UI Design
 
+El equipo traduce las decisiones de diseño y de arquitectura de información en dos entregables para la landing page: un wireframe de baja fidelidad que fija la estructura y un mock-up que aplica la guía de estilo de 6.1. Las secciones siguen los cinco anclajes de 6.2.5 (#como-funciona, #beneficios, #seguridad, #faq y #descarga) y la jerarquía de lo general a lo específico que define 6.2.1. El diseño inclusivo parte de A11Y.md: contraste de texto de al menos 4.5:1, estados que no dependen solo del color, etiquetas visibles en los controles, texto que se amplía hasta 200 % y un enlace para saltar al contenido. Las tablas de trazabilidad de 6.3.1 y 6.3.2 unen cada fotograma con las historias US-LAND-01 y US-LAND-02 y anotan qué cumple y qué falta. El enunciado pide una versión para Desktop Web Browser y otra para Mobile Web Browser, y hoy el informe muestra solo la primera.
+
 #### 6.3.1. Landing Page Wireframe
 > **Trazabilidad:** La landing page responde a las historias de usuario **US-LAND-01** y **US-LAND-02**.
 
-#### 6.3.1. Landing Page Wireframe
 A continuación, se presenta el diseño estructural de baja fidelidad (Wireframe) de la landing page de la plataforma, el cual define la distribución espacial, la jerarquía de la información y la disposición de los componentes clave antes de la aplicación de la interfaz gráfica final. El diseño se ha estructurado en tres secciones para asegurar su correcta visualización y legibilidad en la documentación:
 
 * **Parte 1: Cabecera, Hero Section y Simulador de Microcrédito**
@@ -3030,37 +3035,69 @@ A continuación, se presenta el diseño estructural de baja fidelidad (Wireframe
     <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791517742/Captura_de_pantalla_2026-10-08_a_la_s_10.48.56_p._m._ix5cyu.png" alt="Landing Wireframe Parte 3 - Seguridad, FAQ y Footer" width="80%"/>
   </div>
 
+**Trazabilidad y coherencia de los wireframes.** Los tres fotogramas corresponden a Desktop Web Browser. No existe todavía un wireframe de Mobile Web Browser, que el enunciado exige, y 6.1.2 pide para esa clase (compact) un menú hamburguesa. Los wireframes son de baja fidelidad y no usan la paleta de 6.1, así que la columna de coherencia revisa estructura, anclas, textos y reglas de A11Y.md que la imagen permite juzgar. Lo que solo el código puede cumplir (contraste medido, tamaño de los objetivos, enlace para saltar al contenido, foco visible, idioma declarado) se verifica al implementar.
+
+| Frame | Dispositivo | Sección de la landing | Historias | Ancla de 6.2.5 | Coherencia |
+|---|---|---|---|---|---|
+| Landing Wireframe Parte 1 - Hero y Simulador | Desktop Web Browser | Encabezado, hero con los dos botones de segmento y simulador de microcrédito | US-LAND-01, US-LAND-02 | El encabezado ofrece Cómo funciona, Beneficios, Seguridad y Preguntas frecuentes. Falta el destino Descargar app (#descarga): el botón principal dice "Acceder a la web app". | Cumple: botones "Soy prestatario" y "Soy prestamista" que diferencian los segmentos, menú horizontal completo de la clase Expanded y selector de idioma en el encabezado. Difiere: el selector dice "ES (PE)" y 6.2.4 publica es_419 y en_US. El simulador usa un TrustScore de 840 sobre 1000, y el score del informe va de 0 a 100. Muestra el monto en soles con su equivalente en USDC, y la moneda local es solo de referencia según US-LEND-06. No muestra enlace para saltar al contenido. |
+| Landing Wireframe Parte 2 - Funcionamiento e Impacto | Desktop Web Browser | Cómo funciona con selector Para prestatarios y Para prestamistas, tres pasos numerados, propuesta de valor y bloque de impacto | US-LAND-01 | Las secciones "¿Cómo funciona LatiFi?" (#como-funciona) y "Finanzas justas" (#beneficios) aparecen con su título. La imagen no dibuja los identificadores de ancla. | Cumple: el selector de segmento da contenido diferenciado, como pide US-LAND-01, y los pasos llevan número y texto. Difiere: el bloque de impacto muestra cifras de ejemplo (microcréditos simulados, tasa de cumplimiento, tiempo de aprobación). Una de ellas habla de aprobación, y en LatiFi un prestamista fondea la solicitud y no hay aprobación. El hueco de la fotografía está marcado como marcador de posición. |
+| Landing Wireframe Parte 3 - Seguridad, FAQ y Footer | Desktop Web Browser | Seguridad, preguntas frecuentes, llamado final y pie de página | US-LAND-01, US-LAND-02 | Las secciones Seguridad (#seguridad) y Preguntas frecuentes (#faq) aparecen con su título. No hay sección Descargar (#descarga): el llamado final dice "Conectar wallet Web3". | Cumple: el acordeón de cinco preguntas marca el estado con un símbolo, el pie incluye Términos y condiciones y Política de privacidad, y el módulo de seguridad destaca la custodia por el usuario. Difiere: 6.2.3 agrupa las preguntas por tema (cómo funciona, seguridad y descarga) y el wireframe las lista sin agrupar. El selector de idioma que 6.2.5 ubica en el pie vive en el encabezado. Los botones de redes sociales llevan solo texto entre corchetes. |
+
 #### 6.3.2. Landing Page Mock-up
 
 > **Trazabilidad:** La landing page responde a las historias de usuario **US-LAND-01** y **US-LAND-02**.
 
-#### 6.3.1. Landing Page Wireframe
-*(Aquí puedes colocar el esquema o wireframe de baja fidelidad inicial)*
-
-#### 6.3.2. Landing Page Mock-up (Parte 1: Hero & Onboarding)
+##### Parte 1: Hero & Onboarding
 Esta primera sección comprende la cabecera de la página (*Header*), el *Hero Section* con la propuesta de valor principal, el simulador de préstamos flotante y los primeros accesos directos (*CTAs*).
 
 ![LatiFi Landing Page Parte 1](https://res.cloudinary.com/dx0i2vioe/image/upload/v1791515319/Captura_de_pantalla_2026-10-08_a_la_s_10.08.31_p._m._fehfgs.png)
 
-#### 6.3.3. Landing Page Mock-up (Parte 2: Funcionamiento y Propuesta de Valor)
+##### Parte 2: Funcionamiento y Propuesta de Valor
 La segunda sección detalla el flujo de funcionamiento de la plataforma en tres pasos clave, junto con el comparativo de finanzas justas y el impacto social en bodegas y comercio local.
 
 ![LatiFi Landing Page Parte 2](https://res.cloudinary.com/dx0i2vioe/image/upload/v1791515344/Captura_de_pantalla_2026-10-08_a_la_s_10.08.51_p._m._p3hotu.png)
 
-#### 6.3.4. Landing Page Mock-up (Parte 3: Seguridad, FAQ y Footer)
+##### Parte 3: Seguridad, FAQ y Footer
 Esta última sección muestra los estándares de seguridad criptográfica de grado institucional, el módulo de preguntas frecuentes (FAQ) interactivo y el pie de página institucional con sus respectivos enlaces legales.
 
 ![LatiFi Landing Page Parte 3](https://res.cloudinary.com/dx0i2vioe/image/upload/v1791515348/Captura_de_pantalla_2026-10-08_a_la_s_10.09.03_p._m._csxpxk.png)
 
+**Trazabilidad y coherencia de los mock-ups.** Los tres fotogramas también corresponden a Desktop Web Browser, y falta el mock-up de Mobile Web Browser que el enunciado pide. En la paleta, el mock-up usa Navy 900 para títulos y superficies oscuras y un verde cercano a Green 600 para énfasis, como define 6.1. También usa el lima de los botones principales sobre fondo claro, y 6.1 reserva Lime 400 para el modo oscuro y fija Navy 900 con texto blanco como botón principal en modo claro.
+
+| Frame | Dispositivo | Sección de la landing | Historias | Ancla de 6.2.5 | Coherencia |
+|---|---|---|---|---|---|
+| LatiFi Landing Page Parte 1 | Desktop Web Browser | Encabezado, hero con botones de segmento, cuatro garantías y simulador de microcrédito, seguido del inicio de Cómo funciona | US-LAND-01, US-LAND-02 | Encabezado con Cómo funciona, Beneficios, Seguridad y Preguntas frecuentes, sin Descargar app. El botón "Acceder a la Web App" ocupa el lugar de #descarga. | Cumple: los botones y los chips llevan ícono y texto, el selector de idioma está a la vista y el titular tiene jerarquía clara. Difiere: el simulador anuncia una "tasa fija comunitaria de 2.4 % al mes" y un "desembolso instantáneo", y en LatiFi el prestatario fija la tasa y un prestamista fondea la solicitud. Muestra un TrustScore de 840 sobre 1000, y el score del informe va de 0 a 100. El paso 1 de Cómo funciona menciona Account Abstraction y sin frases semilla, y ADR-0001 usa una frase de recuperación y ADR-0005 descarta account abstraction. |
+| LatiFi Landing Page Parte 2 | Desktop Web Browser | Cómo funciona (tres pasos por segmento), Finanzas justas con cuatro tarjetas y bloque de impacto con fotografía | US-LAND-01 | Muestra los títulos de #como-funciona y #beneficios. | Cumple: las tarjetas combinan ícono, título y texto, y el bloque de impacto mantiene la jerarquía. Difiere: la tarjeta de doble denominación habla de "respaldadas 1:1 en USDC", y la conversión a soles es solo de referencia (US-LEND-06). La cifra "menos de 3 min de aprobación" no corresponde al modelo de fondeo. La fotografía necesita texto alternativo, que se verifica al implementar. |
+| LatiFi Landing Page Parte 3 | Desktop Web Browser | Seguridad, preguntas frecuentes, llamado final y pie de página | US-LAND-01, US-LAND-02 | Muestra los títulos de #seguridad y #faq. El llamado final dice "Conectar Wallet Web3" y no lleva a una descarga (#descarga). | Cumple: el pie reúne Términos y condiciones y Política de privacidad, y el acordeón usa un chevron junto al texto. Difiere: la tarjeta de protección menciona oráculos de tasa auditados y el alcance no usa oráculos. Los íconos de redes sociales no llevan texto visible, por lo que necesitan un nombre accesible (se verifica al implementar). El selector de idioma no aparece en el pie. |
+
 ### 6.4. Mobile Applications UX/UI Design
+
+Las pantallas móviles traducen el modelo de información de 6.2 en dos barras de navegación por rol, filtros por chips y flujos de varios pasos sin barra inferior. La guía de 6.1 fija la paleta Navy 900 y Green 600, las fuentes Sora e Inter, los objetivos táctiles de 48 dp y los chips con ícono y texto. A11Y.md añade el contraste mínimo, las etiquetas visibles en los campos y el anuncio de los cambios de estado. La tabla de 6.4.1 relaciona cada imagen con las historias que atiende, con su zona de 6.2.3 o su destino de 6.2.5 y con una nota de coherencia. Cuando una imagen contradice el alcance vigente, por ejemplo porque ADR-0001 define la firma con la billetera como forma de entrar, la nota lo dice y la pantalla pasa a la lista de pantallas por rehacer que recibe el equipo.
 
 #### 6.4.1. Mobile Applications Wireframes
 
-#### 6.4.2. Mobile Applications Wireflow
-
 > **Trazabilidad:** Las interfaces móviles responden a las historias de usuario del flujo transaccional y de gestión de microcréditos de la aplicación.
 
-#### 6.4.1. Onboarding y Autenticación
+La tabla describe lo que muestra cada imagen. Los nombres de las imágenes Firma Criptográfica, Dashboard Principal, Configurar Solicitud Parte 1, Configurar Solicitud Parte 2 y Reputación On-Chain están desplazados un lugar respecto de su contenido, y las filas lo indican. Lo que solo el código puede cumplir (contraste medido, tamaño de los objetivos táctiles, nombres accesibles de los íconos, anuncio de los estados y escalado al 200 %) se verifica al implementar.
+
+| Frame | Pantalla | Historias | Zona de 6.2.3 o destino de 6.2.5 | Coherencia con 6.1, 6.2.3 y A11Y.md |
+|---|---|---|---|---|
+| Onboarding LatiFi | Bienvenida, paso 1 de 3: titular, tres beneficios, aviso de contratos auditados, tasa "desde 2.8 % APR", botón Empezar ahora y enlace Recuperar sesión | US-AUTH-03 | Autenticación y bienvenida, sin barra inferior, como pide la regla 4 de 6.2.5 | Cumple: el avance "Paso 1 de 3" va en texto, los beneficios llevan ícono y texto y el botón ocupa todo el ancho. Difiere: el botón principal es verde menta y 6.1 define Navy 900 con texto blanco en modo claro. El contenido contradice el alcance en tres puntos. Cita Polygon zkEVM y la red es Polygon Amoy. Presenta la tasa como APR cuando el prestatario la fija (US-LEND-01). Promete desembolso en soles por transferencia local. La pantalla queda en la lista por rehacer. |
+| Inicio de Sesión | Inicio de sesión con correo o teléfono, contraseña o PIN, Face ID, acceso alternativo con billetera externa y aviso de procesamiento | US-AUTH-01 | Autenticación, sin barra inferior, como pide la regla 4 de 6.2.5 | Cumple: cada campo tiene etiqueta visible y el placeholder solo da un ejemplo (SC 3.3.2). Difiere: US-AUTH-01 pide conectar la billetera sin usuario ni contraseña, y ADR-0001 hace de la firma con la billetera el inicio de sesión, por lo que la pantalla se rehace. Menciona Base Network y usa el término "Gas", mientras 6.2.2 pide "Comisión de red". El aviso "Procesando solicitud" tapa el enlace Regístrate gratis aquí y un texto aparece cortado, lo que afecta a SC 1.4.4 y 1.4.10. El botón es lima sobre fondo claro, y 6.1 reserva el lima para el modo oscuro. |
+| Registro de Cuenta | Registro, paso 1 de 2: nombre o negocio, celular de WhatsApp, correo, contraseña con confirmación, medidor de fuerza y aceptación de términos | US-IDEN-01 | Autenticación, sin barra inferior | Cumple: etiquetas visibles, marca "Requerido" en texto y casilla con enlaces a Términos y Privacidad. Difiere: US-IDEN-01 pide solo nombre y contacto después de conectar la billetera, y la pantalla agrega contraseña, correo y verificación por mensajería. Promete "aprobación en minutos" y la cifra "18k emprendedores ya financiados" no tiene respaldo en el informe. El medidor de fuerza usa tres tramos y su significado debe ir también en texto (se verifica al implementar). |
+| Autorización Segura | Autorización de ingreso con dos métodos: código de 6 dígitos enviado por WhatsApp y firma criptográfica de un desafío (nonce, marca de tiempo, Sign-In With Ethereum) | US-AUTH-01, US-AUTH-02 | Autenticación, sin barra inferior | Cumple: la tarjeta de firma describe un desafío que no mueve fondos, como en el flujo challenge y verify de la API (ADR-0001). Difiere: el código por WhatsApp y la mención de "2FA" quedan fuera del alcance, y la pantalla conserva solo la firma al rehacerse. El temporizador "00:00" y el botón Reenviar código van en texto. La tarjeta dice "Sin costo de gas" y 6.2.2 pide "Comisión de red". |
+| Firma Criptográfica | La imagen muestra el Dashboard del prestatario (pantalla 1.4): línea de crédito con equivalente en soles, préstamo #LND-4381 con 2 de 4 cuotas pagadas, próxima cuota con botón Pagar, acceso a pedir un nuevo crédito, score y actividad reciente. La firma aparece en la imagen Autorización Segura. | US-LEND-04, US-LEND-05, US-LEND-06, US-REP-01 | Inicio del prestatario, con la barra inferior Inicio, Préstamos, Reputación y Perfil. Zona Préstamos de 6.2.3 | Cumple: la barra trae los cuatro destinos de 6.2.5, el estado "Vigente al día" lleva punto y texto, la barra de cuotas suma el texto "2 de 4 cuotas pagadas" y las cuotas aparecen en dólares y en soles (US-LEND-06). Difiere: ofrece una "línea de crédito aprobada" y un oráculo de tipo de cambio, y el alcance usa solicitudes publicadas y una conversión de referencia de la API. El score marca 785 puntos y la escala va de 0 a 100. "Vigente al día" no está entre los estados de 6.2.2 (Abierta, Pendiente, Pagado, En mora). Usa el término "Gas". |
+| Dashboard Principal | La imagen muestra el paso 1 de 3 de la solicitud (pantalla 1.5): monto con atajos, plazo de 30, 45 o 60 días en 2, 3 o 4 cuotas quincenales y equivalente en soles | US-LEND-01, US-LEND-06 | Préstamos, pasos de solicitud de 6.2.5 (Monto y plazo, Destino, Firma) | Cumple: el avance "Paso 1 de 3" lleva porcentaje y las etiquetas de paso llevan ícono y texto, y las cuotas respetan el rango de 1 a 6 de ADR-0004. Difiere: pide monto y plazo pero no la tasa que US-LEND-01 asigna al prestatario. Habla de "línea pre-aprobada" y "aprobación algorítmica", y el monto usa una tipografía monoespaciada en vez de Sora. |
+| Configurar Solicitud Parte 1 | La imagen muestra la proyección de la solicitud (continúa el paso 1): cuota quincenal con su equivalente en soles, TEA estimada, interés total, comisión de protocolo, total a devolver y botón Continuar al paso 2 | US-LEND-01, US-LEND-06 | Préstamos, pasos de solicitud de 6.2.5 | Cumple: muestra el costo total antes de continuar y las cuotas en dos monedas. Difiere: la barra inferior aparece dentro de un flujo de varios pasos y la regla 1 de 6.2.5 la oculta. Expresa el costo como TEA anual. Incluye una comisión de protocolo de 4.50 que el total a devolver (456.84) no suma. Habla de un pool P2P, y US-LEND-03 define el fondeo de una solicitud por un prestamista. |
+| Configurar Solicitud Parte 2 | La imagen muestra la parte superior de Reputación (pantalla 1.8): score 785 sobre 1000 en un anillo, nivel, cupo máximo, tasa preferente y cuatro pilares con su peso (pagos 40 %, antigüedad de billetera 25 %, verificación de negocio 20 %, avales 15 %) | US-REP-01, US-REP-02 | Reputación del prestatario, zona de 6.2.3. No muestra el filtro por resultado ni la lista de eventos | Cumple: cada pilar muestra su valor, su peso y una barra, así que el dato no depende del color, y mezcla señales on-chain y de perfil (US-REP-02). Difiere: usa una escala de 0 a 1000 y niveles numéricos, mientras el informe usa 0 a 100 con NEW, BUILDING, TRUSTED y EXCELLENT. El cupo máximo y la tasa preferente sugieren un crédito preaprobado. Los avales comunitarios y la verificación con foto quedan fuera del alcance. |
+| Reputación On-Chain | La imagen muestra la parte inferior de Reputación: pasaporte financiero Soulbound con enlace a la credencial, consejos para subir de nivel con botones Pagar e Invitar y marca del último bloque sincronizado | US-REP-01, US-REP-02, US-REP-04 | Reputación del prestatario, con la barra inferior Reputación activa. Zona de 6.2.3 sin filtro por resultado | Cumple: la barra marca la pestaña activa y los consejos muestran los puntos que suma cada acción (US-REP-04). Difiere: no muestra el historial de eventos de GET /reputation/{address}/history (US-API-01). El pasaporte Soulbound y el aval de un colega no figuran en el alcance ni en las ADR. "Faltan 65 pts" usa la escala de 1000. |
+| Vinculación de Billetera | Paso 2 de 3 del onboarding (pantalla 1.2): elección de proveedor (MetaMask, WalletConnect, Coinbase, Phantom), billetera detectada en la app, perfil ligero con nombre, WhatsApp con código OTP y documento DNI o RUC opcional, y botón Firmar y continuar | US-AUTH-01, US-IDEN-01 | Autenticación e identidad, antes de elegir el rol | Cumple: los campos tienen etiqueta visible y el documento lleva la marca "Opcional" en texto. Difiere: ADR-0001 hace de la billetera creada en la app, con frase de recuperación, el camino principal y deja las billeteras externas como importación opcional. Pide código OTP y documento, y ofrece más cupo por verificar identidad, mientras US-IDEN-01 pide nombre y contacto. Muestra la barra inferior, que la regla 4 de 6.2.5 omite en autenticación. El teléfono aparece recortado. La pantalla se rehace. |
+| Selección de Rol | Paso 3 de 3 del onboarding (pantalla 1.3): dos tarjetas, Quiero pedir un microcrédito y Quiero invertir mi capital, cada una con beneficios y botón | US-LEND-01, US-LEND-02 | Elección de rol de 6.2.5, tras la autenticación. No existe una historia propia para esta pantalla | Cumple: la tarjeta elegida muestra marca de verificación junto al texto, y el aviso explica que el rol se cambia desde Perfil. Difiere: anuncia un "rendimiento estimado de 14 % a 22 % APY" y cifras de actividad que el informe no respalda. Muestra la barra inferior del prestatario antes de elegir el rol. Menciona el pasaporte Soulbound. |
+| Perfil de Usuario Parte 1 | Perfil (pantalla 1.9): foto, nombre y negocio, score, dirección acortada con botón Copiar, KYC nivel 2, RUC, teléfono, credencial SBT y seguridad (Face ID, 2FA, sesión SIWE de 24 horas, tope de aprobación) | US-IDEN-01, US-IDEN-02, US-REP-02 | Perfil del prestatario, con barra inferior. Navegación suplementaria de 6.2.5 (ayuda y cerrar sesión) sin mostrar en esta parte | Cumple: la dirección se acorta y el botón Copiar lleva texto, y los estados "Activo" y "Activado" van en texto. Difiere: KYC nivel 2 con vigencia, verificación SUNAT, doble factor y Face ID quedan fuera del alcance, porque US-IDEN-01 pide nombre y contacto. La sesión por firma (SIWE) sí corresponde al desafío de la API. El score vuelve a usar 785 puntos. |
+
+Los filtros de 6.2.3 (chips de riesgo, plazo y monto en Invertir, estados en Préstamos y Portafolio, resultado en Reputación) todavía no tienen una imagen que los muestre. Las pantallas faltantes y las que se rehacen figuran en la lista que recibe el equipo.
+
+##### Onboarding y autenticación
 Esta primera sección comprende la pantalla de bienvenida (Splash/Onboarding), el inicio de sesión, el flujo de registro de cuenta nueva y la verificación o autorización segura.
 
 * **Pantalla de Bienvenida / Onboarding:**
@@ -3078,7 +3115,7 @@ Esta primera sección comprende la pantalla de bienvenida (Splash/Onboarding), e
 * **Firma Criptográfica:**
   <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516109/Captura_de_pantalla_2026-10-08_a_la_s_10.21.36_p._m._whhzpb.png" alt="Firma Criptográfica" width="40%"/></div>
 
-#### 6.4.2. Dashboard Principal y Solicitud de Microcréditos
+##### Panel principal y solicitud de microcrédito
 Muestra el panel de control principal del usuario con la línea de crédito aprobada, el estado de actividad y la configuración de solicitudes.
 
 * **Dashboard General / Resumen:**
@@ -3090,7 +3127,7 @@ Muestra el panel de control principal del usuario con la línea de crédito apro
 * **Configuración y Solicitud de Microcrédito (Parte 2):**
   <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516235/Captura_de_pantalla_2026-10-08_a_la_s_10.23.42_p._m._hoflo1.png" alt="Configurar Solicitud Parte 2" width="40%"/></div>
 
-#### 6.4.3. Reputación On-Chain, Billeteras y Perfil de Usuario
+##### Reputación, billetera y perfil
 Agrupa las vistas del puntaje de reputación on-chain, la vinculación de billeteras, la selección de rol y la configuración completa del perfil.
 
 * **Reputación Financiera On-Chain:**
@@ -3104,6 +3141,10 @@ Agrupa las vistas del puntaje de reputación on-chain, la vinculación de billet
 
 * **Perfil de Usuario y Configuración General (Parte 1):**
   <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516367/Captura_de_pantalla_2026-10-08_a_la_s_10.25.55_p._m._g0dx1t.png" alt="Perfil de Usuario Parte 1" width="40%"/></div>
+
+#### 6.4.2. Mobile Applications Wireflow
+
+Los wireflows de la aplicación móvil se agregan en esta sección en el siguiente avance.
 
 
 <div style="page-break-after: always;"></div>
