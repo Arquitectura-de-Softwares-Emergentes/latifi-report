@@ -3260,6 +3260,78 @@ flowchart TD
 
 **Historias:** US-REP-01, US-REP-02, US-REP-04, US-API-01
 
+##### W-L1. Encontrar una solicitud para fondear
+
+**Objetivo del usuario:** Encontrar entre las solicitudes abiertas una que encaje con su riesgo, plazo y monto, y revisar la reputación del solicitante antes de decidir.
+
+**Persona:** Prestamista con capital ocioso (sección 2.3.1, construido a partir de la entrevista con Renso Julca).
+
+```mermaid
+flowchart TD
+    S(["Prestamista elige invertir"]) --> A["Ajuste: Selección de Rol"]
+    A --> B["Pendiente: Feed Invertir con chips de riesgo, plazo y monto"]
+    B --> C{"¿Hay resultados?"}
+    C -->|No| D["Pendiente: Feed Invertir en estado vacío con Limpiar filtros"]
+    D --> B
+    C -->|Sí| E["Pendiente: Detalle de la solicitud con el historial de reputación del prestatario"]
+    E --> F(["Decide fondear: sigue W-L2"])
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class B,D,E pendiente
+```
+
+**Explicación del flujo:** El prestamista elige su rol en Selección de Rol y llega a Invertir. El feed muestra las solicitudes abiertas con la reputación de cada solicitante (US-LEND-02), y los montos aparecen en la stablecoin y en soles (US-LEND-06). Arriba hay chips de riesgo, plazo y monto, y un orden por reputación, tasa, plazo o más recientes (US-REP-03). Cada cambio de filtro actualiza el contador de resultados y el lector de pantalla lo anuncia. Si ninguna solicitud cumple los filtros, el estado vacío ofrece el botón Limpiar filtros. Con resultados, el prestamista abre el detalle y revisa el historial de eventos del prestatario (US-API-01) antes de decidir.
+
+**Historias:** US-LEND-02, US-REP-03, US-API-01, US-LEND-06
+
+##### W-L2. Fondear una solicitud
+
+**Objetivo del usuario:** Fondear una solicitud conociendo las condiciones que quedan fijas y ver la inversión en su portafolio.
+
+**Persona:** Prestamista con capital ocioso (sección 2.3.1, construido a partir de la entrevista con Renso Julca).
+
+```mermaid
+flowchart TD
+    A["Pendiente: Detalle de la solicitud con el historial de reputación del prestatario"] --> B{"¿Perfil completo?"}
+    B -->|No| C["Pendiente: Aviso de perfil incompleto antes de fondear"]
+    C --> D["Pendiente: Perfil ligero con solo nombre y contacto"]
+    D --> A
+    B -->|Sí| E["Pendiente: Confirmación de fondeo"]
+    E --> F["Pendiente: Hoja de estado de la transacción"]
+    F --> G{"¿Transacción confirmada?"}
+    G -->|Falló| H(["Reintentar o reconectar la billetera"])
+    H --> E
+    G -->|Confirmada| I["Pendiente: Portafolio del prestamista con chips de estado"]
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class A,C,D,E,F,I pendiente
+```
+
+**Explicación del flujo:** En el detalle de la solicitud, el prestamista toca Fondear. Si su perfil está incompleto (US-IDEN-01), un aviso lo lleva al perfil ligero y lo devuelve al detalle cuando termina. Con el perfil completo, la pantalla de confirmación repite el monto en la stablecoin y en soles (US-LEND-06), la tasa, el plazo y las cuotas que quedan fijas al firmar. La hoja de estado recorre los cuatro estados de US-AUTH-04, pendiente, confirmando, confirmada y fallida, y el lector de pantalla anuncia cada uno. Si la transacción falla, el usuario reintenta o reconecta la billetera, y si se confirma, la inversión aparece en el portafolio con el estado Pendiente.
+
+**Historias:** US-LEND-03, US-AUTH-04, US-LEND-06, US-IDEN-01
+
+##### W-L3. Seguir mi portafolio
+
+**Objetivo del usuario:** Saber qué inversiones tiene, cuál vence primero y si cada una recibe sus cuotas.
+
+**Persona:** Prestamista con capital ocioso (sección 2.3.1, construido a partir de la entrevista con Renso Julca).
+
+```mermaid
+flowchart TD
+    S(["Prestamista abre Portafolio"]) --> A["Pendiente: Portafolio del prestamista con chips de estado"]
+    A --> B(["Elige Todos, Pendiente, Pagado o En mora"])
+    B --> A
+    A --> C["Pendiente: Detalle de la inversión con cuotas recibidas y estado"]
+    C --> D{"¿Estado de la inversión?"}
+    D -->|Pendiente| A
+    D -->|Pagado o En mora| E(["El chip del portafolio refleja el estado final"])
+    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
+    class A,C pendiente
+```
+
+**Explicación del flujo:** El prestamista abre Portafolio y ve sus inversiones con el próximo vencimiento primero. Los chips Todos, Pendiente, Pagado y En mora filtran la lista, y cada chip lleva ícono y texto. Al abrir una inversión, el detalle muestra las cuotas recibidas y el estado actual. Si la inversión sigue Pendiente, el prestamista vuelve al portafolio a esperar la siguiente cuota. Cuando pasa a Pagado o a En mora, el chip del portafolio lo refleja sin que el usuario tenga que buscarlo.
+
+**Historias:** US-LEND-05
+
 
 <div style="page-break-after: always;"></div>
 
