@@ -48,6 +48,10 @@
 | 2.4 | 30/10/2026 | Juan Angulo | Auditoría del Capítulo V contra ADR-0001 a ADR-0006 y el ABI v0 de eventos: parámetros y tipos de eventos alineados con el ABI, rango de cuotas de 1 a 6, y tablas de la capa de interfaz REST alineadas con el borrador OpenAPI. |
 | 2.5 | 30/10/2026 | Juan Angulo | Corrección de alcance del Capítulo VI: Android como única plataforma móvil con iOS como trabajo futuro, inglés (en_US) como idioma por defecto con español (es_419) compatible, y 6.2.5 sin segundo factor ni enlaces profundos desde notificaciones. |
 | 2.6 | 30/10/2026 | Juan Angulo | Wireflows de la aplicación móvil (6.4.2) para el prestatario y el prestamista, con el objetivo del usuario, la persona, el diagrama y la explicación de cada flujo, vinculados a los wireframes de 6.4.1 y a las historias de usuario. |
+| 2.7 | 30/10/2026 | Juan Angulo | Corrección del escenario To-Be (3.1) sin colateral ni valoración por oráculo: flujo de solicitud, fondeo, pago en cuotas, indexado y reputación, con la moneda local solo como referencia, y un diagrama Mermaid que reemplaza la imagen anterior. US-AUTH-01 pasa a crear o importar una billetera (ADR-0001) y TS-API-03 incluye `LoanRequested` (ADR-0002). |
+| 2.8 | 30/10/2026 | Juan Angulo | Swift y iOS reformulados como trabajo futuro en 1.2, 4.1 y 4.2, con Android como única plataforma que construye el equipo. |
+| 2.9 | 30/10/2026 | Juan Angulo | Numeración de la arquitectura de software del Capítulo IV como 4.3, 4.3.1, 4.3.2 y 4.3.3, según el enunciado, y confirmación de 2.2.3 (análisis de entrevistas), 4.3.1 y el diagrama de despliegue agregado en la versión 1.6. |
+| 3.0 | 30/10/2026 | Juan Angulo | Reparación de la tabla de contenido: sección 4.3 y sus subsecciones agregadas, todas las secciones numeradas listadas hasta tres niveles (Capítulo V hasta 5.X) y niveles de encabezado de 6.1.1 y 6.1.2 normalizados. Versión del avance TP1. |
 
 # Project Report Collaboration Insights
 
@@ -120,7 +124,10 @@ Las capturas siguientes muestran los analíticos del repositorio del informe en 
     - [Domain Message Flows Modeling](#domain-message-flows-modeling)
     - [Bounded Context Canvases](#bounded-context-canvases)
     - [Context Mapping](#context-mapping)
-    - [Software Architecture](#software-architecture)
+  - [4.3. Software Architecture](#43-software-architecture)
+    - [4.3.1. Software Architecture System Landscape and Context Level Diagrams](#431-software-architecture-system-landscape-and-context-level-diagrams)
+    - [4.3.2. Software Architecture Container Level Diagrams](#432-software-architecture-container-level-diagrams)
+    - [4.3.3. Software Architecture Deployment Diagrams](#433-software-architecture-deployment-diagrams)
 - [Capítulo V: Tactical-Level Software Design](#capítulo-v-tactical-level-software-design)
   - [5.1. Bounded Context: Lending](#51-bounded-context-lending)
   - [5.2. Bounded Context: Identity/Wallet](#52-bounded-context-identitywallet)
@@ -246,7 +253,7 @@ Los emprendedores e independientes no bancarizados del Perú, un segmento que re
 - El desarrollo se limita a un despliegue sobre la testnet Polygon Amoy; queda fuera de alcance cualquier manejo de dinero real o despliegue en mainnet.
 - El modelo de riesgo del MVP se basa exclusivamente en reputación on-chain/off-chain; no se implementa colateral ni garantías bloqueadas, para no diluir la tesis diferenciadora del proyecto ni duplicar la complejidad del Smart Contract.
 - LatiFi no ejerce custodia de las llaves privadas de sus usuarios; la autenticación y firma de transacciones se realiza mediante una billetera no custodial (WalletConnect/Metamask SDK equivalente) integrada a la app.
-- La aplicación móvil se desarrolla en tecnología nativa (Kotlin para Android o Swift para iOS); el enunciado del curso prohíbe explícitamente el uso de frameworks híbridos.
+- La aplicación móvil se desarrolla en tecnología nativa y el equipo la construye solo para Android con Kotlin; Swift para iOS queda como trabajo futuro. El enunciado del curso prohíbe explícitamente el uso de frameworks híbridos.
 - La lógica de negocio del préstamo (matching, fondeo, repago, default) vive exclusivamente en el Smart Contract; LatiFi API se limita a exponer perfil de usuario, historial de reputación y tasas de cambio, sin duplicar ni re-decidir el estado del préstamo.
 - El proceso de verificación de identidad se limita a un registro de perfil ligero (KYC-lite: nombre y contacto) como base mínima de resistencia a ataques Sybil; queda fuera de alcance el KYC documental basado en escaneo de identidad y verificación de vida, por ser desproporcionado para una demo académica y contradictorio con la premisa de servir a usuarios sin documentación formal.
 - El backend REST se construye únicamente con los frameworks permitidos por el curso (Spring Boot, ASP.NET Core o NestJS), y el desarrollo debe seguir GitFlow y Conventional Commits para su calificación.
@@ -882,34 +889,75 @@ El siguiente glosario recoge los términos de negocio del dominio de microcrédi
 
 ### 3.1. To-Be Scenario Mapping
 
-El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermediación mediante contratos inteligentes (*smart contracts*), autenticación non-custodial, valoración automatizada de garantías vía oráculos de precios y reputación on-chain, reduciendo drásticamente la latencia y eliminando el factor humano en la ejecución.
+El modelo **TO-BE** rediseña el préstamo entre personas sin garantía: la reputación on-chain reemplaza al colateral y un contrato inteligente (*smart contract*) ejecuta cada paso sin intermediarios. El usuario crea o importa su propia billetera non-custodial en la app, y la moneda local aparece solo como referencia en pantalla, sin llegar nunca al contrato.
 
-![To-be scenario mapping](resources/Cap1/To-be%20scenario%20mapping.png)
+```mermaid
+flowchart LR
+    subgraph PRE["Prestatario"]
+        B3["3. Solicita el préstamo: monto, tasa, plazo y cuotas de 1 a 6"]
+        B7["7. Paga cada cuota"]
+    end
+    subgraph LEN["Prestamista"]
+        L5["5. Revisa el feed ordenado por reputación"]
+        L6["6. Firma el fondeo"]
+    end
+    subgraph WAL["Identity / Wallet"]
+        W1["1. Crea o importa su billetera y confirma la frase de recuperación"]
+        W2["2. Inicia sesión firmando un desafío y completa el perfil ligero"]
+    end
+    subgraph SC["Lending Smart Contract"]
+        C3["3. Guarda la solicitud y emite LoanRequested"]
+        C6["6. Pasa la stablecoin al prestatario, fija los términos y emite LoanFunded"]
+        C7["7. Registra la cuota y emite LoanRepaid con onTime"]
+        C9["9a. Vencido el plazo, cualquiera marca el incumplimiento y se emite LoanDefaulted"]
+    end
+    subgraph IDX["Event Indexer y Reputation"]
+        I8["8. Lee los eventos y actualiza el feed y la reputación"]
+        R9A["9a. La reputación baja de forma gradual"]
+        R9B["9b. La última cuota salda el préstamo y la reputación se recupera"]
+    end
+    subgraph FX["Exchange Rate"]
+        X4["4. Convierte los montos a moneda local solo para mostrarlos"]
+    end
+    W1 --> W2 --> B3 --> C3
+    C3 --> L5
+    C3 -.-> X4
+    X4 -.-> L5
+    L5 --> L6 --> C6 --> B7 --> C7
+    C6 -->|vence sin pago completo| C9
+    C7 --> I8
+    C9 --> I8
+    I8 -->|LoanDefaulted| R9A
+    I8 -->|última cuota de LoanRepaid| R9B
+```
+
+El diagrama sigue los nueve pasos de la lista y usa solo los cuatro eventos del ABI v0. Las líneas punteadas marcan la conversión a moneda local, que solo se muestra y nunca viaja en una transacción.
 
 #### Carriles de Arquitectura / Capas (Swimlanes / Bounded Context Layers)
-* **USER / BORROWER**: Prestatario autogestionado con wallet non-custodial.
-* **IDENTITY / WALLET CONTEXT**: Autenticación criptográfica, firma de transacciones y validación de sesión.
-* **EXCHANGE RATE CONTEXT**: Oráculo de precios en tiempo real para valoración de colateral (*Collateral Ratio*).
-* **REPUTATION CONTEXT**: Historial de comportamiento on-chain, *trust tiers* y penalizaciones automáticas.
-* **LENDING SMART CONTRACT CORE**: Lógica de depósito de colateral, emisión de deuda, liquidación y reembolso programado.
+* **PRESTATARIO**: Persona no bancarizada que solicita el préstamo y paga las cuotas desde su propia billetera.
+* **PRESTAMISTA**: Persona con capital ocioso que revisa el feed y fondea la solicitud que elige.
+* **IDENTITY / WALLET CONTEXT**: Creación o importación de la billetera, firma de un desafío para iniciar sesión y perfil ligero.
+* **LENDING SMART CONTRACT**: Guarda la solicitud, mueve la stablecoin de prueba, registra las cuotas y marca el incumplimiento. Emite `LoanRequested`, `LoanFunded`, `LoanRepaid` y `LoanDefaulted`.
+* **EVENT INDEXER Y REPUTATION CONTEXT**: Lee los eventos de la cadena, mantiene el feed y recalcula la reputación de forma gradual.
+* **EXCHANGE RATE CONTEXT**: Convierte los montos a moneda local solo para mostrarlos. La conversión ocurre en la API y ningún evento ni transacción lleva un precio.
 
 #### Descripción Secuencial del Flujo (TO-BE Steps)
-1. **Connect Non-Custodial Wallet [Action]**: El usuario vincula su wallet a través de la interfaz. → *Event: `WalletConnected`*.
-2. **Select Asset & Input Collateral/Loan Parameters [Data Input]**: El usuario define el monto del préstamo y colateral criptográfico aportado.
-3. **Fetch Real-Time Asset Pricing (Oracles) [Logic]**: Consulta de precio de mercado y cálculo de *Collateralization Ratio (LTV)* vía *Exchange Rate Context*.
-4. **Evaluate Credit Eligibility / Trust Tier [Logic]**: Consulta de score o tier de reputación del address del usuario vía *Reputation Context*.
-5. **Initiate Loan Request [Trigger]**: Envío de transacción de solicitud al smart contract de lending.
-6. **Lock Collateral in Escrow [Asset Transfer]**: Retención automática del colateral en el contrato inteligente.
-7. **Mint & Disburse Loan [Funds Transfer]**: Transferencia atómica/on-chain de los fondos solicitados directamente a la wallet del usuario → *Event: `LoanDisbursed`*.
-8. **Confirm Repayment & Update Health Factor [Logic]**: Monitoreo continuo de salud del colateral y recepción de cuotas.
-   * **9a. Liquidate Collateral (Default) [Action]**: Ejecución algorítmica de liquidación parcial ante caída de LTV → *Events: `DefaultTriggered`, `ReputationPenaltyApplied`*.
-   * **9b. Release Collateral (Paid) [Action]**: Liberación de garantía y actualización de score positivo → *Events: `LoanRepaid`, `ScoreUpdated`*.
+1. **Create or Import Non-Custodial Wallet [Action]**: El usuario crea una billetera en la app, o importa la que ya tiene con su frase de recuperación, y confirma que la guardó. La frase se muestra una sola vez y nunca sale del dispositivo.
+2. **Sign In and Complete Light Profile [Action]**: El usuario inicia sesión firmando un desafío con su billetera y completa su perfil ligero.
+3. **Request Loan [Trigger]**: El prestatario define monto, tasa, plazo y cuotas de 1 a 6. El contrato guarda la solicitud. → *Event: `LoanRequested`*.
+4. **Show Local Currency [Display]**: Prestatario y prestamista ven los montos en stablecoin y en moneda local. La conversión es solo informativa.
+5. **Review Feed by Reputation [Logic]**: El prestamista revisa el feed ordenado por la reputación de cada solicitante.
+6. **Fund Loan [Funds Transfer]**: El prestamista firma el fondeo, la stablecoin pasa al prestatario y los términos quedan fijos. → *Event: `LoanFunded`*.
+7. **Repay Installments [Funds Transfer]**: El prestatario paga cada cuota y el contrato registra si el pago llegó a tiempo. → *Event: `LoanRepaid`*, con el indicador `onTime` por pago.
+8. **Index Events and Update Reputation [Logic]**: El indexador lee los eventos y la reputación cambia de forma gradual, sin saltos a cero.
+   * **9a. Mark Default [Action]**: Vencido el plazo sin el pago completo, cualquier persona marca el préstamo como incumplido y la reputación baja. → *Event: `LoanDefaulted`*.
+   * **9b. Settle Loan [Action]**: Con la última cuota el préstamo queda saldado y la reputación se recupera. → *Event: `LoanRepaid`*.
 
 #### Ventajas Clave / Mejora frente al AS-IS (Value Proposition)
-* **Latencia cero/instantánea**: De días/semanas a segundos/minutos por ejecución determinista de smart contracts (pasos 5-7).
-* **Desintermediación y Autogestión**: Eliminación de *Loan Officer*, mesones físicos, mesas de control de riesgos manuales y vouchers de papel.
-* **Mitigación de riesgo de contraparte**: Lógica basada en código (*code is law*), con valoración objetiva por oráculos y liquidación algorítmica de garantías.
-* **Trazabilidad total on-chain**: Auditoría pública y en tiempo real del estado de salud del préstamo (`Health Factor`), historial de pagos y reputación.
+* **Latencia instantánea**: De días o semanas a segundos o minutos, porque el contrato ejecuta la solicitud, el fondeo y el pago de forma determinista (pasos 3, 6 y 7).
+* **Desintermediación y Autogestión**: Sin oficial de crédito, mesones físicos, mesas de riesgo manuales ni vouchers de papel.
+* **Reputación en lugar de garantía**: El historial de pago verificable sustituye al colateral, así que el prestatario no necesita capital previo para acceder a crédito.
+* **Trazabilidad total on-chain**: Solicitudes, fondeos, pagos e incumplimientos son eventos públicos y auditables en tiempo real, y la reputación se calcula a partir de ellos.
 
 ---
 
@@ -917,10 +965,10 @@ El modelo **TO-BE** rediseña el proceso de préstamo incorporando desintermedia
 | Dimensión | Enfoque AS-IS (Tradicional) | Enfoque TO-BE (Web3 / Descentralizado) |
 | :--- | :--- | :--- |
 | **Tiempo de Procesamiento** | Varios días por los traspasos manuales entre áreas | Segundos a minutos (automático on-chain) |
-| **Intermediarios** | Front Desk, Oficial de Crédito, Riesgos, Finanzas | Ninguno (Smart Contracts + Oráculos) |
-| **Garantía / Colateral** | Físico / Documental / Legal tradicional | Criptoactivo bloqueado en Smart Contract Escrow |
-| **Evaluación de Riesgo** | Subjetiva / Manual / Formularios impresos | Algorítmica (LTV por Oráculos + Trust Tiers On-chain) |
-| **Disponibilidad / Canal** | Horario de oficina / Presencial en sucursal | 24/7 / Autogestión via Non-Custodial Wallet |
+| **Intermediarios** | Front Desk, Oficial de Crédito, Riesgos, Finanzas | Ninguno (Smart Contract e indexador de eventos) |
+| **Garantía** | Físico / Documental / Legal tradicional | Ninguna: la reputación on-chain reemplaza a la garantía |
+| **Evaluación de Riesgo** | Subjetiva / Manual / Formularios impresos | Algorítmica (reputación on-chain y señales del perfil) |
+| **Disponibilidad / Canal** | Horario de oficina / Presencial en sucursal | 24/7 / Autogestión desde la app con billetera propia |
 
 El propósito de esta sección es contrastar, mediante un To-Be Scenario Map, la secuencia de actividades que hoy ejecuta un prestatario o prestamista no bancarizado para acceder a crédito informal (fiado, prestamistas gota a gota, préstamos familiares) contra la secuencia propuesta una vez que LatiFi Wallet media el flujo mediante Smart Contracts y reputación descentralizada. Ese contraste se apoya en el As-Is construido a partir de entrevistas reales a los segmentos objetivo (prestatario no bancarizado y prestamista con capital ocioso), documentado en la sección de Needfinding del Capítulo II.
 
@@ -931,7 +979,7 @@ Los 21 requisitos v1 definidos para el proyecto se traducen a continuación en U
 | Epic/User Story ID | Título | Descripción | Criterios de Aceptación (Gherkin) | Relacionado con (Epic ID) |
 |---|---|---|---|---|
 | **EPIC-AUTH** | Autenticación con billetera | - | - | - |
-| US-AUTH-01 | Conexión de billetera digital | Como prestatario o prestamista, deseo conectar mi billetera digital (WalletConnect/Metamask SDK) desde la app móvil, para autenticarme sin crear usuario y contraseña. | **Given** que soy un usuario nuevo o recurrente de LatiFi Wallet, **When** selecciono "Conectar billetera" y apruebo la solicitud de conexión desde mi wallet, **Then** la app reconoce mi dirección on-chain como mi identidad y me redirige a la pantalla principal según mi rol. | EPIC-AUTH |
+| US-AUTH-01 | Creación o importación de billetera digital | Como prestatario o prestamista, deseo crear una billetera non-custodial en la app móvil, o importar una que ya tengo con mi frase de recuperación, para autenticarme sin crear usuario y contraseña. | **Given** que soy un usuario nuevo o recurrente de LatiFi Wallet, **When** selecciono "Crear billetera" y confirmo que guardé mi frase de recuperación, o selecciono "Importar billetera" e ingreso mi frase, **Then** la app reconoce mi dirección on-chain como mi identidad y me redirige a la pantalla principal según mi rol. | EPIC-AUTH |
 | US-AUTH-02 | Firma no custodial de transacciones | Como usuario de LatiFi Wallet, deseo firmar mis transacciones desde mi propia billetera sin que LatiFi gestione mi llave privada, para conservar control total de mis fondos. | **Given** que inicio una acción que requiere una transacción on-chain (fondear, pagar), **When** la app construye la transacción y la envía a mi wallet para firma, **Then** la llave privada nunca sale de mi dispositivo ni es almacenada por LatiFi, y la transacción solo se envía a la red tras mi aprobación explícita. | EPIC-AUTH |
 | US-AUTH-03 | Onboarding progresivo en lenguaje simple | Como usuario no familiarizado con criptomonedas, deseo completar un onboarding progresivo en lenguaje simple antes de conectar mi billetera por primera vez, para entender el flujo sin necesitar conocimiento técnico previo. | **Given** que abro LatiFi Wallet por primera vez, **When** avanzo por las pantallas de onboarding, **Then** cada paso explica el flujo de préstamo (solicitar, fondear, pagar, reputación) sin jerga cripto, y solo al final se me solicita conectar la billetera. | EPIC-AUTH |
 | US-AUTH-04 | Retroalimentación de estado de transacción | Como usuario de LatiFi Wallet, deseo ver el estado de mi transacción (pendiente, confirmando, confirmada, fallida), para saber si mi acción se ejecutó sin necesidad de consultar un explorador de bloques. | **Given** que envié una transacción (fondeo o pago), **When** la transacción está en la mempool o siendo minada, **Then** la app muestra un estado "pendiente/confirmando" y actualiza a "confirmada" o "fallida" apenas la red Polygon Amoy confirma o rechaza el bloque correspondiente. | EPIC-AUTH |
@@ -953,7 +1001,7 @@ Los 21 requisitos v1 definidos para el proyecto se traducen a continuación en U
 | **EPIC-API** | RESTful API propia (LatiFi API) | - | - | - |
 | US-API-01 | Endpoint de historial de reputación | Como prestamista, deseo consultar el historial de reputación de un prestatario desde la app, para revisar el detalle detrás de su score antes de fondear. | **Given** que estoy en el detalle de una solicitud, **When** solicito ver el historial de reputación del prestatario, **Then** la app consume `GET /reputation/{address}/history` de LatiFi API y muestra los eventos que compusieron el score actual. | EPIC-API, EPIC-REP |
 | US-API-02 | Conversión a moneda local vía API propia | Como usuario de LatiFi Wallet, deseo que la app obtenga la conversión a moneda local desde un endpoint propio de LatiFi API, para ver montos coherentes sin que la app dependa directamente de una API externa de terceros. | **Given** que la app necesita mostrar un monto en moneda local, **When** invoca `GET /exchange-rate/convert`, **Then** LatiFi API responde con el valor convertido usando su caché de tasas oficiales, sin exponer la API externa directamente al cliente móvil. | EPIC-API |
-| TS-API-03 (Technical Story) | Indexado de eventos on-chain del Smart Contract | Como Developer, deseo que un servicio indexador escuche los eventos `LoanFunded`, `LoanRepaid` y `LoanDefaulted` emitidos por el Smart Contract vía RPC, para que LatiFi API disponga de un espejo consultable del estado on-chain sin que la app consulte la blockchain en cada pantalla. | **Given** que el Smart Contract emite un evento de ciclo de vida de préstamo, **When** el indexador procesa el bloque correspondiente vía `eth_getLogs`/`ethLogFlowable`, **Then** el evento se traduce a un registro en la base de datos de LatiFi API dentro de una ventana de segundos, de forma idempotente (sin duplicar eventos ya procesados). | EPIC-API |
+| TS-API-03 (Technical Story) | Indexado de eventos on-chain del Smart Contract | Como Developer, deseo que un servicio indexador escuche los eventos `LoanRequested`, `LoanFunded`, `LoanRepaid` y `LoanDefaulted` emitidos por el Smart Contract vía RPC, para que LatiFi API disponga de un espejo consultable del estado on-chain sin que la app consulte la blockchain en cada pantalla. | **Given** que el Smart Contract emite un evento de ciclo de vida de préstamo, **When** el indexador procesa el bloque correspondiente vía `eth_getLogs`/`ethLogFlowable`, **Then** el evento se traduce a un registro en la base de datos de LatiFi API dentro de una ventana de segundos, de forma idempotente (sin duplicar eventos ya procesados). | EPIC-API |
 | TS-API-04 (Technical Story) | Checkpoint de último bloque procesado | Como Developer, deseo que el indexador mantenga un checkpoint del último bloque procesado, para reanudar la indexación tras una caída sin perder ni duplicar eventos. | **Given** que el proceso indexador se reinicia tras una falla, **When** vuelve a arrancar, **Then** retoma la lectura de eventos desde el último bloque confirmado como procesado, sin reprocesar el historial completo ni omitir bloques intermedios. | EPIC-API |
 | TS-API-05 (Technical Story) | Autenticación de solicitudes REST por firma de wallet | Como Developer, deseo validar en LatiFi API que cada solicitud autenticada proviene de quien controla la dirección declarada, mediante verificación de firma sobre un desafío (nonce), para evitar suplantación de dirección en los endpoints REST. | **Given** que un cliente solicita un token de sesión, **When** firma el nonce entregado por la API con su wallet, **Then** la API verifica la firma contra la dirección declarada antes de emitir el JWT de sesión, rechazando cualquier firma inválida. | EPIC-API, EPIC-AUTH |
 | **EPIC-LAND** | Landing Page institucional | - | - | - |
@@ -998,7 +1046,7 @@ El backlog prioriza primero el núcleo Auth + Identity + Lending que permite dem
 
 | # Orden | User Story ID | Título | Descripción | Story Points |
 |---|---|---|---|---|
-| 1 | US-AUTH-01 | Conexión de billetera digital | Autenticación no-custodial vía WalletConnect/Metamask SDK equivalente | 5 |
+| 1 | US-AUTH-01 | Creación o importación de billetera digital | Billetera non-custodial creada en la app o importada con la frase de recuperación; la dirección es la identidad | 5 |
 | 2 | US-AUTH-02 | Firma no custodial de transacciones | Firma de transacciones desde la wallet del usuario, sin custodia de llaves | 5 |
 | 3 | TS-API-05 | Autenticación de solicitudes REST por firma de wallet | Verificación de firma sobre nonce para autenticar llamadas REST | 5 |
 | 4 | US-IDEN-01 | Registro de perfil ligero | Captura de nombre/contacto como base de resistencia a Sybil | 2 |
@@ -1008,7 +1056,7 @@ El backlog prioriza primero el núcleo Auth + Identity + Lending que permite dem
 | 8 | US-LEND-01 | Publicación de solicitud de préstamo | Registro de monto, tasa e interés de una solicitud | 5 |
 | 9 | US-LEND-03 | Fondeo de solicitud vía Smart Contract | Transacción de fondeo, escrow y transferencia al prestatario | 8 |
 | 10 | US-AUTH-04 | Retroalimentación de estado de transacción | Estados pendiente/confirmando/confirmada/fallida en UI | 3 |
-| 11 | TS-API-03 | Indexado de eventos on-chain del Smart Contract | Servicio indexador de `LoanFunded`/`LoanRepaid`/`LoanDefaulted` | 8 |
+| 11 | TS-API-03 | Indexado de eventos on-chain del Smart Contract | Servicio indexador de `LoanRequested`/`LoanFunded`/`LoanRepaid`/`LoanDefaulted` | 8 |
 | 12 | TS-API-04 | Checkpoint de último bloque procesado | Reanudación idempotente del indexador tras una caída | 3 |
 | 13 | US-LEND-02 | Feed de solicitudes con reputación visible | Listado de solicitudes abiertas con score del solicitante | 5 |
 | 14 | US-LEND-04 | Pago de préstamo desde la app | Repago de capital + interés vía Smart Contract | 8 |
@@ -1050,7 +1098,7 @@ Las siguientes User Stories de la sección 3.2 concentran el mayor impacto arqui
 |---|---|---|---|---|---|---|
 | Seguridad | Usuario malicioso (contrato atacante) | Intenta explotar una función de repago/fondeo mediante un patrón de reentrancy (callback recursivo antes de actualizar el estado) | Smart Contract `LoanAgreement` | Producción de demo en Polygon Amoy testnet | El contrato revierte la transacción de reentrada y preserva el estado consistente del préstamo | 0 fondos drenados en pruebas de reentrancy (Foundry); función protegida con `nonReentrant` de OpenZeppelin verificada en el 100% de las funciones que mueven fondos |
 | Disponibilidad | Proveedor de RPC (Alchemy/Infura/público) | El endpoint RPC de Polygon Amoy utilizado por el indexador y la app deja de responder o excede el rate limit durante la demo | Event Indexer, LatiFi Wallet | Demo en vivo ante el jurado | El sistema reintenta con backoff y, si el indexador queda desactualizado, la app puede reconciliar el estado leyendo directamente del contrato ante una acción crítica (fondeo/pago) | Tiempo de recuperación del indexador menor a 60 segundos tras restablecerse el RPC; 0 pantallas de "loan feed" bloqueadas indefinidamente durante la demo |
-| Usabilidad | Prestatario no bancarizado, no-cripto-nativo | Abre la app por primera vez sin haber usado nunca una wallet | LatiFi Wallet (flujo de onboarding) | Primer uso, dispositivo Android/iOS de gama media | El usuario completa el onboarding y conecta su wallet exitosamente sin abandonar el flujo por confusión con jerga cripto | Tasa de finalización del onboarding superior al 80% en pruebas de usabilidad con usuarios no técnicos (n≥5); cero términos técnicos sin explicación en pantalla (seed phrase, gas, nonce) |
+| Usabilidad | Prestatario no bancarizado, no-cripto-nativo | Abre la app por primera vez sin haber usado nunca una wallet | LatiFi Wallet (flujo de onboarding) | Primer uso, dispositivo Android de gama media (iOS queda como trabajo futuro) | El usuario completa el onboarding y conecta su wallet exitosamente sin abandonar el flujo por confusión con jerga cripto | Tasa de finalización del onboarding superior al 80% en pruebas de usabilidad con usuarios no técnicos (n≥5); cero términos técnicos sin explicación en pantalla (seed phrase, gas, nonce) |
 | Rendimiento (tiempo de confirmación de transacción) | Prestamista o prestatario | Envía una transacción de fondeo o repago desde la app | Smart Contract + red Polygon Amoy | Testnet Polygon Amoy, condiciones normales de red | La app refleja el estado "confirmada" apenas el bloque que contiene la transacción alcanza el número de confirmaciones definido como seguro para la demo | Confirmación visible en la UI en menos de 15 segundos desde el envío, bajo condiciones normales de la testnet (chain ID 80002) |
 | Integridad de datos (consistencia on-chain/off-chain) | Evento emitido por el Smart Contract | El contrato emite `LoanRepaid` tras un pago exitoso | Event Indexer, LatiFi API/DB | Operación normal, sin caída de RPC | El indexador procesa el evento de forma idempotente y actualiza el estado reflejado en LatiFi API sin duplicar ni perder el evento | Job de indexado con checkpoint de último bloque procesado; 0 eventos duplicados o perdidos en pruebas de reinicio forzado del indexador |
 
@@ -1060,7 +1108,7 @@ Las siguientes User Stories de la sección 3.2 concentran el mayor impacto arqui
 |---|---|---|
 | TC-01 | El despliegue de los Smart Contracts se realiza exclusivamente sobre Polygon Amoy (testnet, chain ID 80002); no se contempla mainnet ni dinero real en ningún momento del proyecto. | Restricciones y alcance definidos para el proyecto |
 | TC-02 | LatiFi no debe custodiar llaves privadas de los usuarios bajo ninguna circunstancia; el modelo de autenticación es estrictamente no-custodial (wallet-based). | Restricciones y alcance definidos para el proyecto |
-| TC-03 | La aplicación móvil debe construirse en tecnología nativa (Kotlin para Android o Swift para iOS); están explícitamente prohibidos los frameworks híbridos (React Native, Flutter, Ionic). | Restricciones de stack tecnológico móvil definidas para el proyecto |
+| TC-03 | La aplicación móvil debe construirse en tecnología nativa y están explícitamente prohibidos los frameworks híbridos (React Native, Flutter, Ionic). El equipo construye solo la versión Android con Kotlin; Swift para iOS queda como trabajo futuro. | Restricciones de stack tecnológico móvil definidas para el proyecto |
 | TC-04 | El backend REST propio debe implementarse en Spring Boot, ASP.NET Core o NestJS (Java/C#/TypeScript), sin excepción a esas tres opciones. | Restricciones de stack tecnológico backend definidas para el proyecto |
 | TC-05 | Toda la lógica de matching, fondeo, repago y determinación de default debe vivir en el Smart Contract; queda prohibido un backend centralizado que re-decida el estado del préstamo. | Alcance definido para el proyecto; identificado como anti-patrón durante el análisis de arquitectura |
 | TC-06 | El control de versiones debe seguir GitFlow con Conventional Commits sobre GitHub, requisito de calificación del curso. | Restricciones definidas para el proyecto |
@@ -1166,7 +1214,7 @@ Los Domain Events identificados a partir del flujo de dominio son los siguientes
 
 Aplicando el razonamiento start-with-value a la problemática de LatiFi, los cinco bounded contexts anteriores se justifican de la siguiente manera:
 
-El **Lending Context** se aísla primero porque concentra el valor central del negocio (el Core Value del proyecto depende exclusivamente de que este ciclo funcione) y porque, al vivir on-chain, tiene un ciclo de vida de desarrollo y despliegue completamente distinto (Solidity/Foundry, deploy a Polygon Amoy) del resto del sistema (REST/Kotlin/Swift). Separarlo temprano evita que su lógica se filtre o duplique hacia otros contextos, riesgo que la investigación de arquitectura señala explícitamente como anti-patrón.
+El **Lending Context** se aísla primero porque concentra el valor central del negocio (el Core Value del proyecto depende exclusivamente de que este ciclo funcione) y porque, al vivir on-chain, tiene un ciclo de vida de desarrollo y despliegue completamente distinto (Solidity/Foundry, deploy a Polygon Amoy) del resto del sistema (REST y Kotlin, con Swift para iOS como trabajo futuro). Separarlo temprano evita que su lógica se filtre o duplique hacia otros contextos, riesgo que la investigación de arquitectura señala explícitamente como anti-patrón.
 
 El **Identity/Wallet Context** se separa porque resuelve un problema de negocio distinto (quién es el usuario) del que resuelve Lending (qué puede hacer ese usuario con dinero). Aunque físicamente es delgado (una porción vive en el cliente, otra en la API), su valor de negocio es autónomo: sin identidad verificable no hay resistencia a Sybil, precondición de todo el modelo de reputación.
 
@@ -1201,7 +1249,9 @@ El flujo de mensajes del happy path entre bounded contexts es el siguiente. El *
 - **Marketing/Landing Context: Separate Ways respecto de todos los demás.** Al igual que Exchange Rate, no comparte modelo ni tiene dependencias técnicas con el resto del sistema; en términos de Context Mapping es un contexto aislado por diseño, lo que le permite desarrollarse y desplegarse de forma completamente independiente.
 - **LatiFi API como Shared Kernel interno (a nivel de infraestructura, no de dominio).** Aunque Identity/Wallet, Reputation y Exchange Rate son bounded contexts distintos a nivel de dominio, para el alcance del curso se co-despliegan dentro del mismo proceso de LatiFi API (Spring Boot/NestJS/ASP.NET Core), compartiendo infraestructura transversal (autenticación, configuración, acceso a base de datos) mediante un módulo `shared`. Este acoplamiento es explícitamente de infraestructura, no de modelo de dominio: cada contexto mantiene sus propios agregados y lenguaje ubicuo dentro de su paquete, de modo que la separación lógica exigida por la rúbrica de DDD se preserva aun cuando el despliegue físico esté unificado por restricciones de alcance académico.
 
-#### Software Architecture
+### 4.3. Software Architecture
+
+#### 4.3.1. Software Architecture System Landscape and Context Level Diagrams
 
 **System Landscape Diagram (C4)**
 
@@ -1265,6 +1315,8 @@ graph TD
     style FXApi fill:#999,color:#fff
 ```
 
+#### 4.3.2. Software Architecture Container Level Diagrams
+
 **Container Level Diagram (C4, Nivel 2)**
 
 Al abrir la caja negra "LatiFi Platform", se distinguen seis contenedores. **LatiFi Wallet (mobile)**, app nativa Kotlin para Android, es el punto de entrada de Prestatario y Prestamista; se comunica directamente con los **Smart Contracts** vía JSON-RPC (para acciones que el usuario inicia: conectar, fondear, pagar) y con la **LatiFi API** vía REST/HTTPS (para perfil, reputación, feed y conversión de moneda). Los **Smart Contracts**, desplegados en Polygon Amoy, son la fuente de verdad del ciclo de préstamo y emiten eventos que el **Event Indexer** consume vía RPC. El Event Indexer traduce esos eventos y escribe en la **LatiFi DB** (PostgreSQL) a través de la propia LatiFi API, de la cual puede considerarse un proceso embebido para el alcance del curso. La **LatiFi API** (Spring Boot/NestJS/ASP.NET Core) expone los endpoints REST de perfil, reputación e historial, y de conversión de moneda (consumiendo a su vez la API externa de FX), persistiendo todo en la LatiFi DB. La **Landing Page**, contenedor estático independiente, no se comunica con ningún otro contenedor salvo, opcionalmente, un enlace de descarga hacia las tiendas de aplicaciones.
@@ -1310,6 +1362,9 @@ graph TD
     style Polygon fill:#999,color:#fff
     style FXApi fill:#999,color:#fff
 ```
+
+#### 4.3.3. Software Architecture Deployment Diagrams
+
 **Deployment Diagram (C4)**
 
 El despliegue distribuye el sistema en cuatro nodos. La aplicación se instala en el teléfono Android del usuario, donde la clave de su billetera queda protegida en el Android Keystore y nunca sale del dispositivo. Los Smart Contracts viven en la red de pruebas Polygon Amoy. LatiFi API, el indexador de eventos, la base de datos PostgreSQL y la landing page corren en un servidor privado virtual (VPS) de Hetzner administrado con Dokploy, que construye y publica cada servicio desde su repositorio de GitHub. El visitante accede a la landing desde su navegador.
@@ -2720,15 +2775,15 @@ Los principios que guían las decisiones de diseño son:
 | Inclusión | Contraste mínimo WCAG 2.1 AA, texto escalable y estados que no dependen solo del color. |
 | Consistencia | Los mismos componentes, colores y reglas en app y web. |
 
-### 6.1.1. General Style Guidelines
+#### 6.1.1. General Style Guidelines
 
-#### Identidad visual
+##### Identidad visual
 
 El logotipo representa a dos personas (los nodos del prestatario y del prestamista) unidas por una línea de pulso: “Lati” de latido y “Fi” de finanzas. Se definen versiones sobre fondo claro, oscuro y azul de marca, un ícono de aplicación (Android adaptive), un isotipo sin contenedor para favicon, tamaños mínimos (48, 32 y 20 px), un margen libre igual a la mitad de la altura del isotipo y usos incorrectos que deben evitarse (cambiar colores, deformar o usarlo con bajo contraste).
 
 ![Identidad visual de LatiFi](resources/Cap6/6.1.1-identidad-visual.png)
 
-#### Paleta de colores
+##### Paleta de colores
 
 | Color | HEX | RGB | Uso |
 |---|---|---|---|
@@ -2744,7 +2799,7 @@ Todos los pares de texto y fondo se verificaron con la fórmula de contraste de 
 
 ![Paleta de colores](resources/Cap6/6.1.1-paleta-de-colores.png)
 
-#### Tipografía
+##### Tipografía
 
 | Estilo | Fuente | Tamaño / interlineado | Uso |
 |---|---|---|---|
@@ -2760,7 +2815,7 @@ Ambas familias son gratuitas (Google Fonts) y se complementan: Sora aporta perso
 
 ![Tipografía](resources/Cap6/6.1.1-tipografia.png)
 
-#### Fundamentos de diseño
+##### Fundamentos de diseño
 
 - **Espaciado:** escala de base 4 pt (4, 8, 12, 16, 24, 32, 48). Margen lateral de 16 dp y separación entre tarjetas de 12 a 16 dp.
 - **Formas:** radios de 8 (campos), 12 (chips), 16 (tarjetas) y 28 (hojas inferiores).
@@ -2771,9 +2826,9 @@ Ambas familias son gratuitas (Google Fonts) y se complementan: Sora aporta perso
 
 ![Fundamentos de diseño](resources/Cap6/6.1.1-fundamentos-de-diseno.png)
 
-### 6.1.2. Web, Mobile & Devices Style Guidelines
+#### 6.1.2. Web, Mobile & Devices Style Guidelines
 
-#### Aplicación móvil
+##### Aplicación móvil
 
 La aplicación se desarrolla de forma nativa para Android (Kotlin) y sigue Material Design 3. Android es la única plataforma móvil del proyecto. Se diseña primero para teléfono (clase compact) y escala a tablet con un riel lateral de navegación.
 
@@ -2792,7 +2847,7 @@ Los componentes base son:
 
 ![Componentes móviles](resources/Cap6/6.1.2-componentes-moviles.png)
 
-#### Landing page
+##### Landing page
 
 La landing page se construye con HTML5, CSS3 y JavaScript, siguiendo Material Design. Usa un enfoque mobile-first con tres clases de tamaño.
 
