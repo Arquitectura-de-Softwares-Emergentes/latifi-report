@@ -46,6 +46,7 @@
 | 2.2 | 09/10/2026 | Juan Angulo | Capítulo V completo: diseño táctico de los cinco bounded contexts, con diccionario de clases por capa, diagramas de componentes C4, diagramas de clases y esquemas de base de datos. |
 | 2.3 | 30/10/2026 | Juan Angulo | Numeración de las secciones 6.3 y 6.4, trazabilidad de cada wireframe y mock-up con las historias de usuario y notas de coherencia con 6.1, 6.2.3 y A11Y.md. |
 | 2.4 | 30/10/2026 | Juan Angulo | Auditoría del Capítulo V contra ADR-0001 a ADR-0006 y el ABI v0 de eventos: parámetros y tipos de eventos alineados con el ABI, rango de cuotas de 1 a 6, y tablas de la capa de interfaz REST alineadas con el borrador OpenAPI. |
+| 2.5 | 30/10/2026 | Juan Angulo | Corrección de alcance del Capítulo VI: Android como única plataforma móvil con iOS como trabajo futuro, inglés (en_US) como idioma por defecto con español (es_419) compatible, y 6.2.5 sin segundo factor ni enlaces profundos desde notificaciones. |
 
 # Project Report Collaboration Insights
 
