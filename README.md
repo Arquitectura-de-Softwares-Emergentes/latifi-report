@@ -2382,7 +2382,9 @@ Invariantes: la tasa es siempre mayor que cero; el par se identifica por base y 
 | `ExchangeRateController` | `GET /exchange-rate/convert?amount={units}&currency={code}` | Convierte un monto de stablecoin a la moneda local. Devuelve valor, tasa, instante de la tasa y la marca `stale`. | US-API-02, US-LEND-06 |
 | `ExchangeRateController` | `GET /exchange-rate/rates` | Lista las tasas disponibles y su antigüedad. | US-API-02 |
 
-Una moneda no soportada devuelve el código 400 con un mensaje localizado según `Accept-Language`.
+`GET /exchange-rate/rates` devuelve una lista con `base`, `quote`, `rate`, el instante de la tasa (`asOf`) y la marca `stale`. `GET /exchange-rate/convert` responde 200 con `stale` en verdadero cuando el proveedor está caído y se usa la última tasa guardada. Una moneda no soportada devuelve el código 400 con un mensaje localizado según `Accept-Language`.
+
+El contrato completo es el borrador OpenAPI del repositorio `latifi-api`: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api/blob/develop/openapi/latifi-api.v0.yaml.
 
 #### 5.4.3. Application Layer
 
