@@ -51,6 +51,7 @@
 | 2.7 | 30/10/2026 | Juan Angulo | Corrección del escenario To-Be (3.1) sin colateral ni valoración por oráculo: flujo de solicitud, fondeo, pago en cuotas, indexado y reputación, con la moneda local solo como referencia, y un diagrama Mermaid que reemplaza la imagen anterior. US-AUTH-01 pasa a crear o importar una billetera (ADR-0001) y TS-API-03 incluye `LoanRequested` (ADR-0002). |
 | 2.8 | 30/10/2026 | Juan Angulo | Swift y iOS reformulados como trabajo futuro en 1.2, 4.1 y 4.2, con Android como única plataforma que construye el equipo. |
 | 2.9 | 30/10/2026 | Juan Angulo | Numeración de la arquitectura de software del Capítulo IV como 4.3, 4.3.1, 4.3.2 y 4.3.3, según el enunciado, y confirmación de 2.2.3 (análisis de entrevistas), 4.3.1 y el diagrama de despliegue agregado en la versión 1.6. |
+| 3.0 | 30/10/2026 | Juan Angulo | Reparación de la tabla de contenido: sección 4.3 y sus subsecciones agregadas, todas las secciones numeradas listadas hasta tres niveles (Capítulo V hasta 5.X) y niveles de encabezado de 6.1.1 y 6.1.2 normalizados. Versión del avance TP1. |
 
 # Project Report Collaboration Insights
 
