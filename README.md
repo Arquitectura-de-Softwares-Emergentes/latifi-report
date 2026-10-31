@@ -44,6 +44,7 @@
 | 2.0 | 08/10/2026 | Anaely Burga | Landing Page Mock-up (6.3.2), con las tres secciones de la landing page (avance de TP1). |
 | 2.1 | 08/10/2026 | Anaely Burga | Landing Page Wireframe (6.3.1), con la distribución de las tres secciones de la landing page (avance de TP1). |
 | 2.2 | 09/10/2026 | Juan Angulo | Capítulo V completo: diseño táctico de los cinco bounded contexts, con diccionario de clases por capa, diagramas de componentes C4, diagramas de clases y esquemas de base de datos. |
+| 2.3 | 30/10/2026 | Juan Angulo | Numeración de las secciones 6.3 y 6.4, trazabilidad de cada wireframe y mock-up con las historias de usuario y notas de coherencia con 6.1, 6.2.3 y A11Y.md. |
 
 # Project Report Collaboration Insights
 
