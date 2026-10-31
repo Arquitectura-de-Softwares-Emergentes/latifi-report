@@ -2765,7 +2765,7 @@ Ambas familias son gratuitas (Google Fonts) y se complementan: Sora aporta perso
 - **Elevación:** tres niveles (borde, tarjeta y diálogo) con sombras suaves.
 - **Iconografía:** Material Symbols Rounded, con trazo de 2 dp. Todo ícono va acompañado de una etiqueta de texto.
 - **Accesibilidad:** áreas táctiles de 48 dp, compatibilidad con TalkBack y texto escalable hasta 200 %.
-- **Idioma y tema:** interfaz en español (es_419) con preparación para inglés (en_US), y modo claro y oscuro.
+- **Idioma y tema:** la interfaz usa inglés (en_US) por defecto y ofrece español (es_419) cuando el dispositivo lo pide, con en_US como idioma de respaldo. Incluye modo claro y modo oscuro.
 
 ![Fundamentos de diseño](resources/Cap6/6.1.1-fundamentos-de-diseno.png)
 
@@ -2870,18 +2870,18 @@ El equipo reemplaza el vocabulario técnico por palabras que el usuario ya conoc
 
 Los montos aparecen siempre en la stablecoin y en soles (S/), como exige US-LEND-06. Los estados de una transacción on-chain (pendiente, confirmando, confirmada y fallida) conservan estas mismas palabras en toda la app, de modo que el usuario no necesita consultar un explorador de bloques.
 
-La interfaz sale en español (es_419) y deja listas las equivalencias en inglés (en_US):
+La interfaz sale en inglés (en_US) por defecto y en español (es_419) cuando el dispositivo lo pide. Este informe cita los ejemplos de etiquetas en español para que el equipo los lea con facilidad. Las equivalencias son estas:
 
-| es_419 | en_US |
+| en_US | es_419 |
 |---|---|
-| Inicio | Home |
-| Préstamos | Loans |
-| Reputación | Reputation |
-| Invertir | Invest |
-| Portafolio | Portfolio |
-| Perfil | Profile |
-| Solicitar préstamo | Request a loan |
-| Pagar cuota | Pay installment |
+| Home | Inicio |
+| Loans | Préstamos |
+| Reputation | Reputación |
+| Invest | Invertir |
+| Portfolio | Portafolio |
+| Profile | Perfil |
+| Request a loan | Solicitar préstamo |
+| Pay installment | Pagar cuota |
 
 Ningún ícono aparece sin etiqueta de texto. Los íconos decorativos se ocultan a los lectores de pantalla, y los que activan una acción llevan una etiqueta accesible equivalente al texto visible.
 
@@ -2912,17 +2912,17 @@ La landing page tampoco incluye buscador. Es una página única con cinco seccio
 
 #### 6.2.4. SEO Tags and Meta Tags
 
-Los SEO tags y los meta tags corresponden a la landing page, el único producto web de LatiFi. La aplicación es nativa y no tiene versión web, así que su visibilidad depende de las fichas de las tiendas, que esta sección cubre al final con los elementos ASO. La landing publica sus textos en español (es_419) y en inglés (en_US), de acuerdo con US-LAND-02.
+Los SEO tags y los meta tags corresponden a la landing page, el único producto web de LatiFi. La aplicación es nativa y no tiene versión web, así que su visibilidad depende de las fichas de las tiendas, que esta sección cubre al final con los elementos ASO. La landing publica sus textos en inglés (en_US) por defecto y en español (es_419), de acuerdo con US-LAND-02.
 
 Los límites de longitud siguen las prácticas habituales de los buscadores: títulos de hasta 60 caracteres y descripciones de hasta 155.
 
 ##### Landing page: página de inicio
 
-| Etiqueta | Valor es_419 | Valor en_US |
+| Etiqueta | Valor en_US | Valor es_419 |
 |---|---|---|
-| title | LatiFi: microcréditos P2P con reputación verificable | LatiFi: P2P microloans with verifiable reputation |
-| meta description | LatiFi conecta a prestatarios y prestamistas con microcréditos P2P sobre blockchain. No custodia tu dinero y muestra la reputación de cada solicitante. | LatiFi connects borrowers and lenders through blockchain-based P2P microloans. It never holds your funds and shows each applicant's reputation. |
-| meta keywords | microcréditos, préstamos P2P, blockchain, stablecoins, reputación crediticia, billetera digital, LatiFi Wallet, Perú | microloans, P2P loans, blockchain, stablecoins, credit reputation, digital wallet, LatiFi Wallet, Peru |
+| title | LatiFi: P2P microloans with verifiable reputation | LatiFi: microcréditos P2P con reputación verificable |
+| meta description | LatiFi connects borrowers and lenders through blockchain-based P2P microloans. It never holds your funds and shows each applicant's reputation. | LatiFi conecta a prestatarios y prestamistas con microcréditos P2P sobre blockchain. No custodia tu dinero y muestra la reputación de cada solicitante. |
+| meta keywords | microloans, P2P loans, blockchain, stablecoins, credit reputation, digital wallet, LatiFi Wallet, Peru | microcréditos, préstamos P2P, blockchain, stablecoins, reputación crediticia, billetera digital, LatiFi Wallet, Perú |
 | meta author | LatiFi | LatiFi |
 
 Google ignora la etiqueta keywords para posicionar, pero el enunciado del curso la exige y otros buscadores todavía la leen, por lo que la landing la incluye con ocho términos como máximo.
@@ -2931,11 +2931,11 @@ Etiquetas complementarias de la landing:
 
 | Etiqueta | Valor |
 |---|---|
-| html lang | es-419 en la versión en español y en-US en la versión en inglés |
+| html lang | en-US en la versión en inglés y es-419 en la versión en español |
 | meta viewport | width=device-width, initial-scale=1 |
 | meta robots | index, follow |
 | link rel="canonical" | La URL pública de cada página |
-| link rel="alternate" hreflang | es-419, en-US y x-default hacia la versión en español |
+| link rel="alternate" hreflang | en-US, es-419 y x-default hacia la versión en inglés |
 | og:title, og:description | Los mismos textos del title y la meta description |
 | og:type y og:site_name | website y LatiFi |
 | og:image | Imagen de 1200 x 630 px con el logotipo sobre el azul de marca |
@@ -2950,23 +2950,23 @@ Etiquetas complementarias de la landing:
 
 Estas páginas heredan author, robots, viewport y las etiquetas de idioma de la página de inicio.
 
-##### Elementos ASO de las tiendas de aplicaciones
+##### Elementos ASO de la ficha de Google Play
 
-| Elemento | Google Play | App Store |
-|---|---|---|
-| App Title (30 caracteres) | LatiFi Wallet | LatiFi Wallet |
-| App Subtitle (30 caracteres) | No aplica | es_419: Microcréditos entre personas. en_US: Peer-to-peer microloans |
-| Descripción corta (80 caracteres) | es_419: Pide o invierte en microcréditos P2P con reputación verificable. en_US: Borrow or lend in P2P microloans with verifiable reputation. | No aplica |
-| App Keywords (100 caracteres) | No aplica | es_419: préstamos,microcréditos,p2p,blockchain,stablecoin,billetera,inversión,reputación,crédito,Perú. en_US: loans,microloans,p2p,blockchain,stablecoin,wallet,lending,reputation,credit,Peru |
-| Categoría | Finanzas | Finanzas |
+Android es la única plataforma móvil del proyecto, así que la ficha de Google Play es el único espacio de tienda que este capítulo define. La ficha de la tienda de Apple queda como trabajo futuro, junto con la versión para iOS.
 
-Descripción completa (es_419), igual en ambas tiendas:
+| Elemento | Google Play |
+|---|---|
+| App Title (30 caracteres) | LatiFi Wallet |
+| Descripción corta (80 caracteres) | en_US: Borrow or lend in P2P microloans with verifiable reputation. es_419: Pide o invierte en microcréditos P2P con reputación verificable. |
+| Categoría | Finanzas |
 
-> LatiFi Wallet conecta a personas que necesitan un microcrédito con personas que tienen capital disponible para prestarlo. Si pides un préstamo, publicas el monto, la tasa y el plazo, y los prestamistas ven tu reputación antes de decidir. Si inviertes, revisas las solicitudes abiertas, filtras por riesgo y plazo, y fondeas la que prefieras. Los acuerdos corren en un contrato automático sobre la red de pruebas Polygon Amoy: LatiFi no custodia tus fondos ni tus llaves privadas. Esta versión es una demostración académica y opera con una stablecoin de prueba sin valor monetario real.
-
-Descripción completa (en_US):
+Descripción completa de la ficha de Google Play (en_US):
 
 > LatiFi Wallet connects people who need a microloan with people who have spare capital to lend. If you borrow, you post the amount, rate and term, and lenders see your reputation before they decide. If you lend, you review open requests, filter by risk and term, and fund the one you prefer. Agreements run on an automated contract on the Polygon Amoy test network: LatiFi never holds your funds or your private keys. This version is an academic demonstration and uses a test stablecoin with no real monetary value.
+
+Descripción completa de la ficha de Google Play (es_419):
+
+> LatiFi Wallet conecta a personas que necesitan un microcrédito con personas que tienen capital disponible para prestarlo. Si pides un préstamo, publicas el monto, la tasa y el plazo, y los prestamistas ven tu reputación antes de decidir. Si inviertes, revisas las solicitudes abiertas, filtras por riesgo y plazo, y fondeas la que prefieras. Los acuerdos corren en un contrato automático sobre la red de pruebas Polygon Amoy: LatiFi no custodia tus fondos ni tus llaves privadas. Esta versión es una demostración académica y opera con una stablecoin de prueba sin valor monetario real.
 
 #### 6.2.5. Navigation Systems
 
