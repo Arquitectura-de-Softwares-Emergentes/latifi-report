@@ -2727,7 +2727,7 @@ Los principios que guían las decisiones de diseño son:
 | Inclusión | Contraste mínimo WCAG 2.1 AA, texto escalable y estados que no dependen solo del color. |
 | Consistencia | Los mismos componentes, colores y reglas en app y web. |
 
-### 6.1.1. General Style Guidelines
+#### 6.1.1. General Style Guidelines
 
 #### Identidad visual
 
@@ -2778,7 +2778,7 @@ Ambas familias son gratuitas (Google Fonts) y se complementan: Sora aporta perso
 
 ![Fundamentos de diseño](resources/Cap6/6.1.1-fundamentos-de-diseno.png)
 
-### 6.1.2. Web, Mobile & Devices Style Guidelines
+#### 6.1.2. Web, Mobile & Devices Style Guidelines
 
 #### Aplicación móvil
 
@@ -3033,10 +3033,10 @@ Trazabilidad: la landing responde a las historias US-LAND-01 y US-LAND-02.
 
 ### 6.3. Landing Page UI Design
 
-#### 6.3.1. Landing Page Wireframe
 > **Trazabilidad:** La landing page responde a las historias de usuario **US-LAND-01** y **US-LAND-02**.
 
 #### 6.3.1. Landing Page Wireframe
+
 A continuación, se presenta el diseño estructural de baja fidelidad (Wireframe) de la landing page de la plataforma, el cual define la distribución espacial, la jerarquía de la información y la disposición de los componentes clave antes de la aplicación de la interfaz gráfica final. El diseño se ha estructurado en tres secciones para asegurar su correcta visualización y legibilidad en la documentación:
 
 * **Parte 1: Cabecera, Hero Section y Simulador de Microcrédito**
@@ -3059,35 +3059,36 @@ A continuación, se presenta el diseño estructural de baja fidelidad (Wireframe
 
 #### 6.3.2. Landing Page Mock-up
 
-> **Trazabilidad:** La landing page responde a las historias de usuario **US-LAND-01** y **US-LAND-02**.
-
-#### 6.3.1. Landing Page Wireframe
-*(Aquí puedes colocar el esquema o wireframe de baja fidelidad inicial)*
-
-#### 6.3.2. Landing Page Mock-up (Parte 1: Hero & Onboarding)
+##### Parte 1: Hero & Onboarding
 Esta primera sección comprende la cabecera de la página (*Header*), el *Hero Section* con la propuesta de valor principal, el simulador de préstamos flotante y los primeros accesos directos (*CTAs*).
 
 ![LatiFi Landing Page Parte 1](https://res.cloudinary.com/dx0i2vioe/image/upload/v1791515319/Captura_de_pantalla_2026-10-08_a_la_s_10.08.31_p._m._fehfgs.png)
 
-#### 6.3.3. Landing Page Mock-up (Parte 2: Funcionamiento y Propuesta de Valor)
+##### Parte 2: Funcionamiento y Propuesta de Valor
 La segunda sección detalla el flujo de funcionamiento de la plataforma en tres pasos clave, junto con el comparativo de finanzas justas y el impacto social en bodegas y comercio local.
 
 ![LatiFi Landing Page Parte 2](https://res.cloudinary.com/dx0i2vioe/image/upload/v1791515344/Captura_de_pantalla_2026-10-08_a_la_s_10.08.51_p._m._p3hotu.png)
 
-#### 6.3.4. Landing Page Mock-up (Parte 3: Seguridad, FAQ y Footer)
+##### Parte 3: Seguridad, FAQ y Footer
 Esta última sección muestra los estándares de seguridad criptográfica de grado institucional, el módulo de preguntas frecuentes (FAQ) interactivo y el pie de página institucional con sus respectivos enlaces legales.
 
 ![LatiFi Landing Page Parte 3](https://res.cloudinary.com/dx0i2vioe/image/upload/v1791515348/Captura_de_pantalla_2026-10-08_a_la_s_10.09.03_p._m._csxpxk.png)
 
-### 6.4. Mobile Applications UX/UI Design
-
-#### 6.4.1. Mobile Applications Wireframes
-
-#### 6.4.2. Mobile Applications Wireflow
+### 6.4. Applications UX/UI Design
 
 > **Trazabilidad:** Las interfaces móviles responden a las historias de usuario del flujo transaccional y de gestión de microcréditos de la aplicación.
 
-#### 6.4.1. Onboarding y Autenticación
+#### 6.4.1. Applications Wireframes
+
+_[Por completar: wireframes de baja fidelidad de las pantallas principales de la app, agrupados por rol (prestatario y prestamista). Una imagen por flujo con su descripción.]_
+
+#### 6.4.2. Applications Wireflow Diagrams
+
+_[Por completar: wireflows que conectan los wireframes con flechas según la acción del usuario, para las user goals principales.]_
+
+#### 6.4.3. Applications Mock-ups
+
+##### Onboarding y Autenticación
 Esta primera sección comprende la pantalla de bienvenida (Splash/Onboarding), el inicio de sesión, el flujo de registro de cuenta nueva y la verificación o autorización segura.
 
 * **Pantalla de Bienvenida / Onboarding:**
@@ -3105,7 +3106,7 @@ Esta primera sección comprende la pantalla de bienvenida (Splash/Onboarding), e
 * **Firma Criptográfica:**
   <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516109/Captura_de_pantalla_2026-10-08_a_la_s_10.21.36_p._m._whhzpb.png" alt="Firma Criptográfica" width="40%"/></div>
 
-#### 6.4.2. Dashboard Principal y Solicitud de Microcréditos
+##### Dashboard Principal y Solicitud de Microcréditos
 Muestra el panel de control principal del usuario con la línea de crédito aprobada, el estado de actividad y la configuración de solicitudes.
 
 * **Dashboard General / Resumen:**
@@ -3117,7 +3118,7 @@ Muestra el panel de control principal del usuario con la línea de crédito apro
 * **Configuración y Solicitud de Microcrédito (Parte 2):**
   <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516235/Captura_de_pantalla_2026-10-08_a_la_s_10.23.42_p._m._hoflo1.png" alt="Configurar Solicitud Parte 2" width="40%"/></div>
 
-#### 6.4.3. Reputación On-Chain, Billeteras y Perfil de Usuario
+##### Reputación On-Chain, Billeteras y Perfil de Usuario
 Agrupa las vistas del puntaje de reputación on-chain, la vinculación de billeteras, la selección de rol y la configuración completa del perfil.
 
 * **Reputación Financiera On-Chain:**
@@ -3132,8 +3133,367 @@ Agrupa las vistas del puntaje de reputación on-chain, la vinculación de billet
 * **Perfil de Usuario y Configuración General (Parte 1):**
   <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516367/Captura_de_pantalla_2026-10-08_a_la_s_10.25.55_p._m._g0dx1t.png" alt="Perfil de Usuario Parte 1" width="40%"/></div>
 
+#### 6.4.4. Applications User Flow Diagrams
+
+_[Por completar: introducción. Se elabora un user flow por cada user goal, considerando los User Persona de cada aplicación. Cada user flow es consistente con el wireflow del que se deriva e incluye los mock-ups de las vistas, la ruta esperada (happy path) y las rutas alternativas (unhappy paths). Indicar la herramienta utilizada.]_
+
+##### User Flow 1: _[Nombre del user goal]_
+
+**User goal:** _[Como [User Persona], quiero ... para ...]_
+
+_[Imagen del user flow]_
+
+**Explicación de los flujos y condiciones:**
+
+- **Happy path:** _[...]_
+- **Unhappy paths:** _[...]_
+
+##### User Flow 2: _[Nombre del user goal]_
+
+**User goal:** _[...]_
+
+_[Imagen del user flow]_
+
+**Explicación de los flujos y condiciones:**
+
+- **Happy path:** _[...]_
+- **Unhappy paths:** _[...]_
+
+### 6.5. Applications Prototyping
+
+_[Por completar: introducción con los principales criterios de las decisiones de interacción, y su relación con la arquitectura de información, en particular con el sistema de navegación (6.2.5) y los tipos de interacción seleccionados.]_
+
+##### Prototipo: LatiFi Wallet (aplicación móvil)
+
+_[Descripción de los flujos de interacción que cubre el prototipo, según los paths de los User Flow Diagrams (6.4.4).]_
+
+_[Screenshot del video del prototipo]_
+
+| Elemento | Detalle |
+|---|---|
+| Herramienta | _[...]_ |
+| Enlace al prototipo | _[URL]_ |
+| Video en Microsoft Stream | _[URL]_ |
+| Duración del video | _[mm:ss]_ |
 
 <div style="page-break-after: always;"></div>
+
+## Capítulo VII: Product Implementation, Validation & Deployment
+
+_[Por completar: introducción. Explicar el proceso de implementar, probar, desplegar y validar los productos digitales de la solución y cómo se distribuyen entre ellos los procesos core y de soporte del negocio.]_
+
+### 7.1. Software Configuration Management
+
+_[Por completar: introducción. Decisiones y convenciones que mantienen la consistencia durante el ciclo de vida del software.]_
+
+#### 7.1.1. Software Development Environment Configuration
+
+_[Por completar: productos de software que usan los integrantes en cada actividad del ciclo de vida. Indicar la ruta de referencia para productos SaaS o la ruta de descarga para productos instalados en el computador.]_
+
+| Actividad | Producto | Propósito de uso en el proyecto | Ruta de referencia / descarga |
+|---|---|---|---|
+| Project Management | _[...]_ | _[...]_ | _[URL]_ |
+| Requirements Management | _[...]_ | _[...]_ | _[URL]_ |
+| Product UX/UI Design | _[...]_ | _[...]_ | _[URL]_ |
+| Software Development | _[...]_ | _[...]_ | _[URL]_ |
+| Software Testing | _[...]_ | _[...]_ | _[URL]_ |
+| Software Deployment | _[...]_ | _[...]_ | _[URL]_ |
+| Software Documentation | _[...]_ | _[...]_ | _[URL]_ |
+
+#### 7.1.2. Source Code Management
+
+_[Por completar: introducción. Medios y esquema de organización para el seguimiento de modificaciones, con GitHub como plataforma y sistema de control de versiones.]_
+
+**Repositorios por producto digital**
+
+| Producto digital | Repositorio en GitHub |
+|---|---|
+| Landing Page | _[URL]_ |
+| Web Services (incluye los archivos .feature) | _[URL]_ |
+| Mobile Application | _[URL]_ |
+| _[Otro producto]_ | _[URL]_ |
+
+**GitFlow**
+
+_[Explicar cómo se implementa GitFlow (Vincent Driessen, "A successful Git branching model").]_
+
+| Rama | Propósito | Convención de nombre |
+|---|---|---|
+| main | _[...]_ | `main` |
+| develop | _[...]_ | `develop` |
+| Feature branches | _[...]_ | _[Ej.: `feature/<nombre-del-feature>`]_ |
+| Release branches | _[...]_ | _[Ej.: `release/<version>`]_ |
+| Hotfix branches | _[...]_ | _[Ej.: `hotfix/<version>`]_ |
+
+**Semantic Versioning:** _[Explicar cómo se nombran los releases según Semantic Versioning 2.0.0 (MAJOR.MINOR.PATCH).]_
+
+**Conventional Commits:** _[Explicar el formato de los mensajes de commit y los tipos usados, por ejemplo feat, fix, docs, test, build, ci, refactor o chore.]_
+
+#### 7.1.3. Source Code Style Guide & Conventions
+
+_[Por completar: referencias adoptadas para nombrar elementos y programar en cada lenguaje de la solución, incluido Gherkin para los archivos .feature. Para todos los lenguajes se aplica nomenclatura en inglés.]_
+
+| Lenguaje / tecnología | Guía de estilo de referencia | Convenciones principales |
+|---|---|---|
+| _[Ej.: Kotlin]_ | _[Referencia + URL]_ | _[...]_ |
+| _[Ej.: Java]_ | _[Referencia + URL]_ | _[...]_ |
+| _[Ej.: Solidity]_ | _[Referencia + URL]_ | _[...]_ |
+| _[Ej.: HTML / CSS / JavaScript]_ | _[Referencia + URL]_ | _[...]_ |
+| Gherkin | _[Ej.: Gherkin Conventions for Readable Specifications + URL]_ | _[...]_ |
+
+#### 7.1.4. Software Deployment Configuration
+
+_[Por completar: configuración del despliegue y pasos necesarios para que, a partir de los repositorios de código fuente, se logre el despliegue o publicación de cada producto digital.]_
+
+##### Landing Page
+
+_[Pasos de despliegue.]_
+
+##### Web Services
+
+_[Pasos de despliegue.]_
+
+##### Mobile Application
+
+_[Pasos de despliegue.]_
+
+##### _[Otro producto]_
+
+_[Pasos de despliegue.]_
+
+##### Deployment Diagram (C4 Model)
+
+_[Imagen del Deployment Diagram de C4 Model y su explicación.]_
+
+### 7.2. Solution Implementation
+
+_[Por completar: introducción. Proceso de implementación, pruebas, documentación y despliegue de los productos digitales de la solución, organizado por sprint.]_
+
+#### 7.2.1. Sprint 1
+
+_[Por completar: introducción. Avance del Sprint 1 en términos de producto y trabajo colaborativo.]_
+
+##### 7.2.1.1. Sprint Planning 1.
+
+_[Por completar: introducción con los aspectos principales del Sprint Planning Meeting.]_
+
+| Sprint # | Sprint 1 |
+|---|---|
+| **Sprint Planning Background** | |
+| Date | _[YYYY-MM-DD]_ |
+| Time | _[HH:MM AM/PM]_ |
+| Location | _[Descripción de la ubicación de la reunión, física o virtual]_ |
+| Prepared By | _[Apellidos, Nombres]_ |
+| Attendees (to planning meeting) | _[Apellidos, Nombres / Apellidos, Nombres / ...]_ |
+| Sprint 0 Review Summary | _[Resumen del sprint anterior: resultados en productos de software, opiniones de los integrantes y feedback del product owner]_ |
+| Sprint 0 Retrospective Summary | _[Resumen del sprint anterior: aciertos y oportunidades de mejora en la forma de trabajo]_ |
+| **Sprint Goal & User Stories** | |
+| Sprint 1 Goal | _[Goal del sprint y su métrica de cumplimiento]_ |
+| Sprint 1 Velocity | _[Story points que el equipo puede aceptar en este sprint]_ |
+| Sum of Story Points | _[Suma de los story points de las user stories incluidas]_ |
+
+##### 7.2.1.2. Sprint Backlog 1.
+
+_[Por completar: introducción que resume el objetivo principal del sprint.]_
+
+_[Screenshot del board del sprint (por ejemplo, Trello)]_
+
+**URL pública del board:** _[URL]_
+
+| Sprint # | Sprint 1 | | | | | | |
+|---|---|---|---|---|---|---|---|
+| **User Story Id** | **User Story Title** | **Work-Item / Task Id** | **Title** | **Description** | **Estimation (Hours)** | **Assigned To** | **Status (To-do / In-Process / To-Review / Done)** |
+| _[US-...]_ | _[...]_ | _[T-...]_ | _[...]_ | _[...]_ | _[...]_ | _[...]_ | _[...]_ |
+
+##### 7.2.1.3. Development Evidence for Sprint Review.
+
+_[Por completar: introducción que resume los principales avances de implementación de los productos del sprint: Landing Page, Web Services, Mobile Application y otros.]_
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
+|---|---|---|---|---|---|
+| _[user/repositoryname]_ | _[feature/...]_ | _[...]_ | _[feat: ...]_ | _[...]_ | _[DD/MM/YYYY]_ |
+
+##### 7.2.1.4. Testing Suite Evidence for Sprint Review.
+
+_[Por completar: introducción. Explicar los Unit Tests, Integration Tests y Acceptance Tests automatizados relacionados con las user stories del sprint.]_
+
+**Unit Tests**
+
+| Test | Clase relacionada | Comportamiento probado |
+|---|---|---|
+| _[...]_ | _[...]_ | _[...]_ |
+
+**Integration Tests y Acceptance Tests (BDD)**
+
+_[Código de los archivos .feature en Gherkin, indicando la user story con que se relaciona cada uno.]_
+
+**Repositorio de testing:** _[URL]_
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
+|---|---|---|---|---|---|
+| _[user/repositoryname]_ | _[feature/...]_ | _[...]_ | _[test: ...]_ | _[...]_ | _[DD/MM/YYYY]_ |
+
+##### 7.2.1.5. Execution Evidence for Sprint Review.
+
+_[Por completar: resumen de lo alcanzado en el sprint.]_
+
+_[Screenshots de las principales vistas implementadas, con su descripción.]_
+
+**Video de ejecución:** _[URL del video que ilustra y explica la visualización y navegación logradas en el sprint]_
+
+##### 7.2.1.6. Services Documentation Evidence for Sprint Review.
+
+_[Por completar: introducción que resume los logros en documentación de los Web Services en este sprint (OpenAPI).]_
+
+| Endpoint | Acción implementada | Verbo HTTP | Sintaxis de llamada | Parámetros | Ejemplo de response y explicación | Enlace a la documentación |
+|---|---|---|---|---|---|---|
+| _[...]_ | _[...]_ | _[GET / POST / PUT / DELETE / PATCH]_ | _[...]_ | _[...]_ | _[...]_ | _[URL desplegada o local]_ |
+
+_[Capturas de la interacción con la documentación usando datos de muestra, con su explicación.]_
+
+**Repositorio de Web Services:** _[URL]_
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
+|---|---|---|---|---|---|
+| _[user/repositoryname]_ | _[...]_ | _[...]_ | _[docs: ...]_ | _[...]_ | _[DD/MM/YYYY]_ |
+
+##### 7.2.1.7. Software Deployment Evidence for Sprint Review.
+
+_[Por completar: introducción sobre lo realizado en despliegue durante el sprint: creación de cuentas, configuración de recursos en proveedores cloud y configuración de proyectos para integración o automatización del despliegue, para todos los productos digitales.]_
+
+##### Landing Page
+
+_[Capturas y explicación de los pasos realizados.]_
+
+##### Web Services
+
+_[Capturas y explicación de los pasos realizados.]_
+
+##### Mobile Application
+
+_[Capturas y explicación de los pasos realizados.]_
+
+##### _[Otro producto]_
+
+_[Capturas y explicación de los pasos realizados.]_
+
+##### 7.2.1.8. Team Collaboration Insights during Sprint.
+
+_[Por completar: explicación de cómo se desarrollaron las actividades de implementación. Todos los integrantes deben participar en la implementación de cada producto del sprint.]_
+
+_[Capturas de los analíticos de colaboración y commits en GitHub de cada repositorio (Landing Page, Web Services, Mobile Application y otros).]_
+
+### 7.3. Validation Interviews
+
+_[Por completar: introducción. Actividades de entrevistas de validación, en las que usuarios de los segmentos objetivo interactúan con la landing page y con las aplicaciones.]_
+
+#### 7.3.1. Diseño de Entrevistas
+
+_[Por completar: por cada segmento objetivo, los elementos de la sesión de validación (landing page y aplicaciones) y los user flows que formarán parte de la validación.]_
+
+##### Segmento 1: _[Nombre del segmento]_
+
+- **Landing page:** _[Elementos a validar]_
+- **Aplicación:** _[Elementos a validar]_
+- **User flows a validar:** _[...]_
+- **Preguntas:** _[...]_
+
+##### Segmento 2: _[Nombre del segmento]_
+
+- **Landing page:** _[Elementos a validar]_
+- **Aplicación:** _[Elementos a validar]_
+- **User flows a validar:** _[...]_
+- **Preguntas:** _[...]_
+
+#### 7.3.2. Registro de Entrevistas
+
+_[Por completar: de 3 a 5 entrevistas por segmento, registradas en video.]_
+
+##### Segmento 1: _[Nombre del segmento]_
+
+###### Entrevista 1
+
+| Nombres y apellidos | Edad | Distrito | Video (Microsoft Stream) | Inicio | Duración |
+|---|---|---|---|---|---|
+| _[...]_ | _[...]_ | _[...]_ | _[URL]_ | _[mm:ss]_ | _[mm:ss]_ |
+
+_[Screenshot de un cuadro del video]_
+
+**Resumen:** _[Principales apreciaciones del entrevistado sobre las tareas asignadas.]_
+
+##### Segmento 2: _[Nombre del segmento]_
+
+###### Entrevista 1
+
+| Nombres y apellidos | Edad | Distrito | Video (Microsoft Stream) | Inicio | Duración |
+|---|---|---|---|---|---|
+| _[...]_ | _[...]_ | _[...]_ | _[URL]_ | _[mm:ss]_ | _[mm:ss]_ |
+
+_[Screenshot de un cuadro del video]_
+
+**Resumen:** _[Principales apreciaciones del entrevistado sobre las tareas asignadas.]_
+
+#### 7.3.3. Evaluaciones según heurísticas
+
+**UX Heuristics & Principles Evaluation**
+**Usability – Inclusive Design – Information Architecture**
+
+| Campo | Detalle |
+|---|---|
+| Carrera | Ingeniería de Software |
+| Curso | Arquitecturas de Software Emergentes |
+| Sección | _[Código de la sección]_ |
+| Profesores | _[...]_ |
+| Auditor | _[Nombre del grupo que ejecuta la sesión de evaluación]_ |
+| Cliente(s) | _[Nombres de las personas que participan en la sesión]_ |
+
+**SITE o APP A EVALUAR:** _[Nombre de la app]_
+
+**TAREAS A EVALUAR:** el alcance de esta evaluación incluye la revisión de la usabilidad de las siguientes tareas:
+
+1. _[...]_
+2. _[...]_
+
+No están incluidas en esta versión de la evaluación las siguientes tareas:
+
+1. _[...]_
+2. _[...]_
+
+**ESCALA DE SEVERIDAD:**
+
+| Nivel | Descripción |
+|---|---|
+| 1 | Problema superficial: puede ser fácilmente superado por el usuario u ocurre con muy poca frecuencia. No necesita ser arreglado a no ser que exista disponibilidad de tiempo. |
+| 2 | Problema menor: puede ocurrir un poco más frecuentemente o es un poco más difícil de superar para el usuario. Se le debería asignar una prioridad baja de cara al siguiente release. |
+| 3 | Problema mayor: ocurre frecuentemente o los usuarios no son capaces de resolverlo. Es importante que sea corregido y se le debe asignar una prioridad alta. |
+| 4 | Problema muy grave: un error de gran impacto que impide al usuario continuar con el uso de la herramienta. Es imperativo que sea corregido antes del lanzamiento. |
+
+**TABLA RESUMEN:**
+
+| # | Problema | Escala de severidad | Heurística / Principio violado(a) |
+|---|---|---|---|
+| 1 | _[...]_ | _[1-4]_ | _[Usability / Inclusive Design / Information Architecture: ...]_ |
+
+**DESCRIPCIÓN DE PROBLEMAS:**
+
+**PROBLEMA #1:** _[Título del problema]_
+
+- **Severidad:** _[1-4]_
+- **Heurística violada:** _[...]_
+- **Problema:** _[Descripción, con captura de pantalla que ilustre el problema.]_
+- **Recomendación:** _[...]_
+
+### 7.4. Video About-the-Product
+
+_[Por completar: introducción y descripción del contenido del video, dirigido a los visitantes de la landing page y a los usuarios de las aplicaciones. El tono debe ser consistente con el del producto e incluir al menos un testimonio positivo de un usuario de las entrevistas de validación.]_
+
+_[Screenshot del video]_
+
+| Elemento | Detalle |
+|---|---|
+| Video en Microsoft Stream | _[URL]_ |
+| Video en YouTube (incrustado en la landing page) | _[URL]_ |
+| Duración | _[mm:ss]_ |
 
 # Avance de Conclusiones
 
