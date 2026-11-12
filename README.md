@@ -3563,7 +3563,6 @@ El Sprint Planning Meeting del Sprint 1 se realizó de forma virtual con los cua
 
 ##### 7.2.1.2. Sprint Backlog 1.
 
-_[Por completar: introducción que resume el objetivo principal del sprint.]_
 
 _[Screenshot del board del sprint (por ejemplo, Trello)]_
 
