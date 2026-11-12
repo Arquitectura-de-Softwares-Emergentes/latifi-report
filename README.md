@@ -3180,12 +3180,12 @@ _[Screenshot del video del prototipo]_
 
 ## Capítulo VII: Product Implementation, Validation & Deployment
 
-_[Por completar: introducción. Explicar el proceso de implementar, probar, desplegar y validar los productos digitales de la solución y cómo se distribuyen entre ellos los procesos core y de soporte del negocio.]_
+En este capítulo el equipo explica y evidencia el proceso de implementación, pruebas, despliegue y validación de LatiFi. La solución se compone de cuatro productos digitales, cada uno en su propio repositorio de GitHub: la landing page (HTML5, CSS3 y JavaScript), los smart contracts (Solidity sobre Polygon Amoy), LatiFi API (Spring Boot, con su indexador de eventos on-chain) y la aplicación móvil LatiFi Wallet (Kotlin con Jetpack Compose para Android).
 
+El proceso core del negocio, el ciclo del microcrédito (solicitud, fondeo, pago en cuotas e incumplimiento), se ejecuta en el smart contract `LoanBook`. LatiFi API soporta los procesos de autenticación por firma de billetera, perfil ligero, reputación híbrida y conversión a moneda local, y la aplicación móvil integra ambos para los segmentos prestatario y prestamista.
 ### 7.1. Software Configuration Management
 
-_[Por completar: introducción. Decisiones y convenciones que mantienen la consistencia durante el ciclo de vida del software.]_
-
+El equipo mantiene la consistencia de los cuatro productos durante el ciclo de vida aplicando las mismas convenciones en todos los repositorios: GitFlow como modelo de ramas, Conventional Commits para los mensajes, Semantic Versioning para los releases y dos verificaciones automáticas en GitHub Actions (`ci` y `commit-lint`) que deben pasar antes de integrar un pull request. Cada repositorio documenta estas reglas en su archivo `CONTRIBUTING.md`.
 #### 7.1.1. Software Development Environment Configuration
 
 _[Por completar: productos de software que usan los integrantes en cada actividad del ciclo de vida. Indicar la ruta de referencia para productos SaaS o la ruta de descarga para productos instalados en el computador.]_
@@ -3202,45 +3202,81 @@ _[Por completar: productos de software que usan los integrantes en cada activida
 
 #### 7.1.2. Source Code Management
 
-_[Por completar: introducción. Medios y esquema de organización para el seguimiento de modificaciones, con GitHub como plataforma y sistema de control de versiones.]_
+El equipo utiliza GitHub como plataforma y sistema de control de versiones. Cada producto digital tiene su propio repositorio dentro de la organización **Arquitectura-de-Softwares-Emergentes**, y el informe del proyecto se mantiene en un repositorio adicional.
 
 **Repositorios por producto digital**
 
-| Producto digital | Repositorio en GitHub |
-|---|---|
-| Landing Page | _[URL]_ |
-| Web Services (incluye los archivos .feature) | _[URL]_ |
-| Mobile Application | _[URL]_ |
-| _[Otro producto]_ | _[URL]_ |
+| Producto digital | Repositorio en GitHub | Contenido |
+|---|---|---|
+| Landing Page | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-landing | Sitio estático bilingüe (en_US / es_419), scripts de verificación y workflow de publicación en GitHub Pages. |
+| Smart Contracts | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-contracts | Contratos `LoanBook` y `MockStablecoin` en Solidity, pruebas con Foundry, ABI y registro del despliegue en Polygon Amoy. |
+| Web Services (LatiFi API) | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api | Proyecto Spring Boot, contrato OpenAPI y pruebas, incluidos los archivos `.feature` en `src/test/resources/features`. |
+| Mobile Application (LatiFi Wallet) | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-android | Aplicación nativa en Kotlin con Jetpack Compose, pruebas unitarias e instrumentadas. |
+| Project Report | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-report | Informe del proyecto en Markdown y registros de decisiones de arquitectura (ADR). |
 
 **GitFlow**
 
-_[Explicar cómo se implementa GitFlow (Vincent Driessen, "A successful Git branching model").]_
+El equipo implementa GitFlow según el modelo de Vincent Driessen ("A successful Git branching model"). La rama `main` contiene solo versiones liberadas y la rama `develop` concentra la integración diaria. El trabajo se realiza en ramas de soporte que nacen de `develop` o de `main` según su tipo:
 
-| Rama | Propósito | Convención de nombre |
-|---|---|---|
-| main | _[...]_ | `main` |
-| develop | _[...]_ | `develop` |
-| Feature branches | _[...]_ | _[Ej.: `feature/<nombre-del-feature>`]_ |
-| Release branches | _[...]_ | _[Ej.: `release/<version>`]_ |
-| Hotfix branches | _[...]_ | _[Ej.: `hotfix/<version>`]_ |
+| Rama | Propósito | Nace de | Se integra en | Método de merge | Convención de nombre |
+|---|---|---|---|---|---|
+| `main` | Versiones liberadas. Cada commit es un release o un hotfix. | — | — | — | `main` |
+| `develop` | Integración del trabajo diario. | `main` | — | — | `develop` |
+| Feature branches | Desarrollo de una funcionalidad. | `develop` | `develop` | Squash | `feature/<slug>` |
+| Release branches | Preparación de una versión. | `develop` | `main` | Merge commit | `release/<versión>` |
+| Hotfix branches | Corrección urgente de una versión liberada. | `main` | `main` y luego `develop` | Merge commit | `hotfix/<versión>` |
 
-**Semantic Versioning:** _[Explicar cómo se nombran los releases según Semantic Versioning 2.0.0 (MAJOR.MINOR.PATCH).]_
+El slug va en minúsculas y solo admite letras, dígitos, puntos, guiones bajos y guiones. Ejemplos válidos son `feature/loan-request-form`, `feature/amoy-smoke-workflow`, `release/0.2.0` y `hotfix/1.0.1`; nombres como `fix/typo` o `Feature/Login` son rechazados. La verificación `commit-lint` aplica estas reglas en cada pull request: hacia `develop` solo se aceptan ramas `feature/*`, `release/*` o `hotfix/*`, y hacia `main` solo `release/*` o `hotfix/*`.
 
-**Conventional Commits:** _[Explicar el formato de los mensajes de commit y los tipos usados, por ejemplo feat, fix, docs, test, build, ci, refactor o chore.]_
+**Semantic Versioning**
+
+Los releases siguen Semantic Versioning 2.0.0 con el formato `MAJOR.MINOR.PATCH`. Después de integrar un release o un hotfix en `main`, se crea un tag anotado con el formato `vMAJOR.MINOR.PATCH`. Mientras el producto no tenga su primera versión pública, las versiones se mantienen en `0.y.z`.
+
+| Repositorio | Tags publicados |
+|---|---|
+| latifi-landing | `v0.1.0`, `v0.2.0` |
+| latifi-contracts | `v0.1.0`, `v0.2.0` |
+| latifi-api | `v0.1.0` |
+| latifi-android | `v0.1.0` |
+
+**Conventional Commits**
+
+Cada mensaje de commit y cada título de pull request sigue el formato de Conventional Commits:
+
+```
+type(scope): short description
+```
+
+El scope es opcional y va en minúsculas, un signo de exclamación antes de los dos puntos marca un cambio incompatible, y el asunto no supera los 100 caracteres. Como los feature branches se integran por squash, el título del pull request se convierte en el mensaje del commit en `develop`.
+
+| Tipo | Uso |
+|---|---|
+| `feat` | Nueva funcionalidad |
+| `fix` | Corrección de un error |
+| `docs` | Documentación |
+| `style` | Formato del código sin cambio de comportamiento |
+| `refactor` | Reestructuración del código sin cambio de comportamiento |
+| `perf` | Mejora de rendimiento |
+| `test` | Pruebas |
+| `build` | Sistema de construcción o dependencias |
+| `ci` | Integración continua |
+| `chore` | Tareas de mantenimiento |
+| `revert` | Reversión de un commit |
+
+Ejemplos del repositorio: `feat(loans): add the borrower loan list, loan details and local currency values`, `test: add reentrancy, fuzz and invariant suites for the loan book` y `fix: apply the phase 5 code review findings`.
 
 #### 7.1.3. Source Code Style Guide & Conventions
 
-_[Por completar: referencias adoptadas para nombrar elementos y programar en cada lenguaje de la solución, incluido Gherkin para los archivos .feature. Para todos los lenguajes se aplica nomenclatura en inglés.]_
+El equipo aplica nomenclatura en inglés para todos los elementos del código (paquetes, clases, métodos, variables, eventos, endpoints y escenarios de prueba) en todos los lenguajes de la solución. Las convenciones se verifican de forma automática en la integración continua de cada repositorio.
 
-| Lenguaje / tecnología | Guía de estilo de referencia | Convenciones principales |
-|---|---|---|
-| _[Ej.: Kotlin]_ | _[Referencia + URL]_ | _[...]_ |
-| _[Ej.: Java]_ | _[Referencia + URL]_ | _[...]_ |
-| _[Ej.: Solidity]_ | _[Referencia + URL]_ | _[...]_ |
-| _[Ej.: HTML / CSS / JavaScript]_ | _[Referencia + URL]_ | _[...]_ |
-| Gherkin | _[Ej.: Gherkin Conventions for Readable Specifications + URL]_ | _[...]_ |
-
+| Lenguaje / tecnología | Guía de referencia | Convenciones aplicadas | Verificación automática |
+|---|---|---|---|
+| Kotlin (Android) | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) y [Android Kotlin Style Guide](https://developer.android.com/kotlin/style-guide) | Estilo oficial de Kotlin (`kotlin.code.style=official`), clases y composables en UpperCamelCase, funciones y variables en lowerCamelCase, paquete base `com.latifi.wallet` organizado por funcionalidad (`ui/home`, `ui/feed`, `ui/loans`, `data`, `core`). | Android Lint en el job `ci` (falla ante errores). |
+| Java (LatiFi API) | [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) | Formato con google-java-format 1.36.1, paquete base `com.latifi.api` organizado por bounded context (`identity`, `ledger`, `reputation`, `exchangerate`) y por capas (`domain`, `application`, `interfaces`, `infrastructure`). | Spotless en `./mvnw verify`. |
+| Solidity (Smart Contracts) | [Solidity Style Guide](https://docs.soliditylang.org/en/latest/style-guide.html) | Contratos y eventos en UpperCamelCase (`LoanBook`, `LoanRequested`), funciones en lowerCamelCase, compilador fijado en 0.8.35, errores personalizados en lugar de mensajes de texto, `nonReentrant` en toda función que mueve fondos, líneas de máximo 100 caracteres. | `forge fmt --check`, `forge lint` y reglas propias del repositorio (`check-lint.sh`). |
+| HTML5 / CSS3 / JavaScript (Landing Page) | [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html) y [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html) | HTML semántico con atributo `lang`, skip link, un solo landmark `main` y alternativas `hreflang` en cada página; sin scripts, estilos ni eventos en línea; contraste según WCAG 2.1 AA. | Nu HTML Checker, guardas de i18n/a11y y de CSP, verificación de contraste y Lighthouse (Accessibility y SEO de 90 o más). |
+| OpenAPI | [OpenAPI Specification 3.0.3](https://spec.openapis.org/oas/v3.0.3) | Rutas bajo `/api/v1` en minúsculas, `operationId` en lowerCamelCase (`issueChallenge`, `getReputation`, `listLoans`) y códigos de error en UPPER_SNAKE_CASE (`INVALID_ADDRESS`). | Pruebas que comparan el código con el contrato `openapi/latifi-api.v0.yaml`. |
+| Gherkin (archivos `.feature`) | [Gherkin Conventions for Readable Specifications](https://specflow.org/gherkin/gherkin-conventions-for-readable-specifications/) y [Gherkin Reference](https://cucumber.io/docs/gherkin/reference/) | Un archivo `.feature` por funcionalidad con una descripción breve, escenarios redactados como comportamiento observable, pasos `Given`/`When`/`Then` en tercera persona y tags `@op-<operationId>` que vinculan cada escenario con la operación del contrato OpenAPI que prueba. | `FeatureCoverageTest` falla si una operación no tiene escenario o si un tag nombra una operación inexistente. |
 #### 7.1.4. Software Deployment Configuration
 
 _[Por completar: configuración del despliegue y pasos necesarios para que, a partir de los repositorios de código fuente, se logre el despliegue o publicación de cada producto digital.]_
@@ -3267,12 +3303,10 @@ _[Imagen del Deployment Diagram de C4 Model y su explicación.]_
 
 ### 7.2. Solution Implementation
 
-_[Por completar: introducción. Proceso de implementación, pruebas, documentación y despliegue de los productos digitales de la solución, organizado por sprint.]_
-
+Esta sección registra la implementación de los productos digitales de LatiFi organizada por sprint. Para cada sprint se presentan la planificación, el backlog y las evidencias de desarrollo, pruebas, ejecución, documentación de servicios, despliegue y colaboración del equipo.
 #### 7.2.1. Sprint 1
 
-_[Por completar: introducción. Avance del Sprint 1 en términos de producto y trabajo colaborativo.]_
-
+El Sprint 1 abarcó la primera versión funcional de los cuatro productos digitales, registrada en los repositorios entre el 29 de octubre y el 11 de noviembre de 2026. En este sprint se implementó el ciclo completo del microcrédito en el smart contract `LoanBook`, desplegado y verificado en Polygon Amoy (release `v0.2.0`); LatiFi API con sus diez endpoints, el indexador de eventos y el cálculo de reputación; la aplicación móvil con los flujos de prestatario y prestamista; y la landing page bilingüe.
 ##### 7.2.1.1. Sprint Planning 1.
 
 _[Por completar: introducción con los aspectos principales del Sprint Planning Meeting.]_
@@ -3307,31 +3341,239 @@ _[Screenshot del board del sprint (por ejemplo, Trello)]_
 
 ##### 7.2.1.3. Development Evidence for Sprint Review.
 
-_[Por completar: introducción que resume los principales avances de implementación de los productos del sprint: Landing Page, Web Services, Mobile Application y otros.]_
+##### 7.2.1.3. Development Evidence for Sprint Review.
+
+Durante el Sprint 1 se implementó la primera versión funcional de los cuatro productos digitales:
+
+- **Smart Contracts:** interfaz de eventos del préstamo, contrato `LoanBook` con el ciclo de solicitud, fondeo, pago en cuotas e incumplimiento, stablecoin de prueba `MockStablecoin` y despliegue verificado en Polygon Amoy (release `v0.2.0`).
+- **LatiFi API:** autenticación por firma de billetera con tokens de sesión, perfil ligero, indexador de eventos resiliente a reorganizaciones de la cadena, réplica de préstamos, reputación híbrida con su historial, conversión a moneda local y documentación Swagger.
+- **Mobile Application:** tema visual de marca, onboarding, conexión de billetera e inicio de sesión, selección de rol, perfil, préstamos del prestatario, feed de inversión del prestamista, coordinador de transacciones y flujos de solicitud, pago y fondeo, con capa de datos conectada a la API y a la red.
+- **Landing Page:** sitio bilingüe en inglés y español con verificaciones de accesibilidad, SEO y seguridad.
+
+Los feature branches se integran en `develop` por squash, por lo que cada commit de la tabla corresponde a un pull request integrado en esa rama.
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
 |---|---|---|---|---|---|
-| _[user/repositoryname]_ | _[feature/...]_ | _[...]_ | _[feat: ...]_ | _[...]_ | _[DD/MM/YYYY]_ |
+| Arquitectura-de-Softwares-Emergentes/latifi-landing | develop | 7881351 | Initial commit | — | 08/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-landing | develop | 10b368e | build: add bilingual html skeleton, ci and gitflow kit (#1) | feat: add bilingual html skeleton with i18n and aria guard | 29/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-landing | develop | 0e60d14 | feat(landing): bilingual landing page (#4) | feat(landing): add bilingual tracer slice with language persistence | 11/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | cf9f019 | Initial commit | — | 08/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | f55041a | ci: add foundry skeleton, ci workflow and commit-lint (#1) | build: add foundry skeleton with solc 0.8.35 pinned | 29/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | e41a887 | docs: add contributing guide, pr template and commit-lint fixtures (#2) | docs: add contributing guide and pull request template | 29/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | 5940d03 | ci: add testnet-only and secret guard (#3) | check-testnet-only.sh rejects chain ids 1 and 137, mainnet RPC hosts and key-shaped literals in tracked files | 29/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | d5e2db9 | feat: add v0 loan event interface and abi (#4) | feat: add v0 loan event interface and abi | 29/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | 8682853 | feat: add demo wallet pool scripts and runbook (#5) | feat: add demo wallet pool scripts with chain id guard | 29/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | f1da82e | feat: add loan request path, mock stablecoin and pinned openzeppelin (#9) | build: pin openzeppelin contracts v5.7.0 and add foundry profiles | 31/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | 51e90da | ci: add lint, coverage and ci profile gates (#10) | ci: add repo lint rules with a mutation self-test | 31/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | 4b86baf | feat: add the loan lifecycle with installments and default (#11) | feat: add fund with wallet to wallet transfer and a fixed total due | 31/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | a97a2bd | test: add reentrancy, fuzz and invariant suites for the loan book (#12) | test: add malicious receiver reentrancy and fee on transfer suites | 31/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | 698191e | feat: add deploy tooling, a local rehearsal and the amoy runbook (#13) | feat: add the cycle script and a local rehearsal in the foundry image | 31/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | 2a0ed34 | feat(deploy): record the Polygon Amoy deployment for v0.2.0 (#14) | feat(deploy): record the Polygon Amoy deployment for v0.2.0 | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | f7a8541 | Initial commit | — | 08/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | cfcfed8 | build: add spring boot skeleton, ci and gitflow kit (#1) | build: add spring boot 3.5 skeleton with postgres and spotless | 29/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 2849aac | docs: add openapi v0 draft with ci validation (#4) | docs(api): add openapi v0 skeleton with the challenge endpoint | 30/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | eb002c0 | feat: add the bdd harness and the wallet challenge endpoint (#5) | build: pin the api stack and add the bdd harness | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | b660b98 | docs: amend the openapi draft to 0.2.0 and describe the reputation formula (#6) | docs: amend the openapi draft to 0.2.0 | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | f253336 | feat: localize api errors and complete the error catalog (#7) | feat: resolve error message language from accept-language | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 274834d | feat: verify wallet signatures and issue session tokens (#8) | feat: verify wallet signatures and issue session tokens | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 7ffb709 | feat: add the wallet profile endpoints (#9) | feat: store and read the wallet profile | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 8cad6d9 | feat: add the loan schedule and the reputation score fold (#10) | test: describe the loan schedule arithmetic | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 874ed83 | feat: add the event indexer ingestion (#11) | feat: mirror contract logs into chain_event with a checkpoint | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 6f0845f | feat: make the event indexer resilient to reorgs and outages (#12) | feat: reconcile the reorg window inside the batch transaction | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 52799cc | feat: mirror loans from chain events (#13) | feat: project chain events into the loan read model | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 534516c | feat: serve the hybrid reputation score and its history (#14) | feat: derive and serve the reputation score from chain events | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | faa74af | feat: serve the loan feed and loan detail (#15) | feat: serve a mirrored loan by id | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 67ce006 | feat: add the exchange rate cache and conversion endpoints (#16) | feat: convert stablecoin amounts with cached exchange rates | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | ad55104 | feat: close the api surface with swagger, guards and the amoy replay (#17) | feat: serve swagger from the code and guard it against the contract | 09/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | bedf16e | fix: address phase 4 review findings CR-01, WR-03, WR-06, WR-07, WR-10 (#19) | fix: limit auth routes by decoded path so encoded segments cannot skip the rate limit | 09/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | b14f4e5 | Initial commit | — | 08/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 8a9a07a | build: add kotlin android skeleton, ci and gitflow kit (#1) | build: add kotlin android skeleton with compose and pinned toolchain | 29/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 70b5154 | test: add keystore envelope spike and emulator workflow (#2) | test: add keystore envelope spike for secp256k1 wallet keys | 29/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 98edda4 | build: pin the android stack, boot the app and add the apk artifact (#5) | build: pin the android stack and the jitpack groups | 09/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | ba639f0 | feat(theme): add brand tokens, fonts and copy guards (#6) | build: bundle the sora and inter variable fonts with their licenses | 09/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 579ee92 | feat(core): add loan math, money, domain models and the chain encoders (#7) | feat(core): add token amounts and the loan math of the contract | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 7ac37df | feat(nav): add the role shell, base components and the routes registry (#8) | build: import the material symbols icon set with attribution | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | f25b0f4 | feat(onboarding): add onboarding, connect, sign-in and role selection (#9) | fix(ui): give the dialog safe action its initial focus from inside the dialog | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 14abf59 | feat(profile): add the profile gate, the profile tab and language settings (#10) | feat(profile): add the profile repository, gate and validator | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 1d91f60 | feat(loans): add the borrower loan list, loan details and local currency values (#11) | feat(loans): add the loan and exchange rate interfaces with fakes | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 016bb86 | feat(home): add home and reputation with chain read and reputation interfaces (#12) | feat(chain): add the chain read interface, the fee policy and a scriptable fake | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 5f86753 | feat(feed): add the lender invest feed with filters, sort and a counter (#13) | feat(feed): map filter chips to the loan query | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 224d34c | feat(lender): add request details, the portfolio list and investment details (#14) | refactor(reputation): share the history row component | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 70dad77 | feat(tx): add the transaction coordinator, recovery and the status sheet (#15) | feat(tx): add the rpc interface, the receipt poller and a scriptable fake | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | bf24282 | feat(flows): add request, pay, fund and test coin flows with a demo chain simulator (#16) | feat(tx): build exact-amount transaction plans and guard against unlimited approvals | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 5644232 | feat(api): add the live api and rpc data layer behind the existing interfaces (#17) | feat(api): add the contract dtos, the retrofit client and the error mapping | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | a8245a7 | feat(wallet): add the live reown gateway, the sealed session and the device checklist (#18) | feat(wallet): add the appkit adapter and the wallet gateway with request ids | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 656c094 | fix: apply the phase 5 code review findings (#19) | fix(config): refuse to start a release build in demo mode | 10/11/2026 |
 
 ##### 7.2.1.4. Testing Suite Evidence for Sprint Review.
 
-_[Por completar: introducción. Explicar los Unit Tests, Integration Tests y Acceptance Tests automatizados relacionados con las user stories del sprint.]_
+En el Sprint 1 cada producto incorporó su conjunto de pruebas automatizadas, que se ejecutan en el job `ci` de GitHub Actions en cada pull request:
+
+| Producto | Tipo de prueba | Herramienta | Alcance |
+|---|---|---|---|
+| Web Services (LatiFi API) | Unit Tests | JUnit 5 | Reglas de dominio y adaptadores de cada bounded context. |
+| Web Services (LatiFi API) | Integration y Acceptance Tests (BDD) | Cucumber + Testcontainers (PostgreSQL 16) | 9 archivos `.feature` con 117 escenarios que recorren los diez endpoints contra una base de datos real y un nodo de blockchain simulado. |
+| Smart Contracts | Unit, fuzz e invariant tests | Foundry (`forge test`) | 160 pruebas sobre `LoanBook`, `MockStablecoin` y la ABI de eventos, incluidas pruebas de ataques de reentrada. |
+| Mobile Application | Unit Tests | JUnit + kotlinx-coroutines-test | 102 clases de prueba sobre ViewModels, reglas de negocio y capa de datos. |
+| Mobile Application | Instrumented UI Tests | Compose UI Test en emulador Android | 24 clases de prueba sobre las pantallas principales y su accesibilidad. |
+| Landing Page | Verificaciones automatizadas | Nu HTML Checker, Lighthouse, Chrome sin interfaz | Validez del HTML, accesibilidad, SEO, contraste, seguridad (CSP) y escenarios de navegación. |
 
 **Unit Tests**
 
-| Test | Clase relacionada | Comportamiento probado |
-|---|---|---|
-| _[...]_ | _[...]_ | _[...]_ |
+| Test | Repositorio | Clase relacionada | Comportamiento probado |
+|---|---|---|---|
+| `LoanScheduleTest` | latifi-api | `LoanSchedule` | El total adeudado coincide con el cálculo de `LoanBook`, el interés se redondea hacia abajo y no hay desbordamiento con montos grandes. |
+| `ScoreLedgerTest` | latifi-api | `ScoreLedger` | El puntaje parte del valor inicial y sigue los ejemplos de la fórmula de reputación, incluida la penalización por incumplimiento. |
+| `ReputationLevelTest` | latifi-api | `ReputationLevel` | Los umbrales de cada nivel siguen la escala definida en el informe. |
+| `Web3jSignatureVerifierTest` | latifi-api | `Web3jSignatureVerifier` | Recupera la dirección de la billetera que firmó y detecta un mensaje alterado. |
+| `LoanFolderTest` | latifi-api | `LoanFolder` | Reconstruye el estado de un préstamo a partir de sus eventos on-chain. |
+| `ConversionTest` | latifi-api | Conversión de montos (`exchangerate`) | Convierte montos en stablecoin a soles y respeta los decimales de cada moneda. |
+| `LoanBook.request.t.sol` | latifi-contracts | `LoanBook` | Límites de monto, plazo y cuotas de una solicitud de préstamo. |
+| `LoanBook.fund.t.sol` | latifi-contracts | `LoanBook` | Fondeo con transferencia directa del prestamista al prestatario y total adeudado fijo. |
+| `LoanBook.repay.t.sol` | latifi-contracts | `LoanBook` | Pago en cuotas, pagos tardíos e incumplimiento. |
+| `LoanBook.reentrancy.t.sol` | latifi-contracts | `LoanBook` | Un atacante no puede reingresar en `fund`, `repay` ni `markDefaulted`. |
+| `LoanBook.invariant.t.sol` | latifi-contracts | `LoanBook` | El contrato nunca retiene tokens, los tokens se conservan y lo pagado nunca supera lo adeudado. |
+| `LoanMathTest` | latifi-android | `LoanMath` | La app reproduce el interés, la división en cuotas y las fechas de vencimiento del contrato. |
+| `TokenAmountTest` | latifi-android | `TokenAmount` | Lectura y formato de montos con 6 decimales. |
+| `TransactionCoordinatorTest` | latifi-android | `TransactionCoordinator` | Seguimiento del estado de una transacción y su recuperación ante fallas. |
+| `NoUnlimitedApproveTest` | latifi-android | `TxPlans` | La app nunca solicita aprobaciones ilimitadas de tokens. |
+| `ProfileValidatorTest` | latifi-android | `ProfileValidator` | Validación de los datos del perfil ligero. |
 
 **Integration Tests y Acceptance Tests (BDD)**
 
-_[Código de los archivos .feature en Gherkin, indicando la user story con que se relaciona cada uno.]_
+Los archivos `.feature` de LatiFi API están en https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api/tree/develop/src/test/resources/features. Cada escenario lleva el tag `@op-<operationId>` de la operación del contrato OpenAPI que prueba.
 
-**Repositorio de testing:** _[URL]_
+| Archivo `.feature` | Escenarios | User Stories relacionadas |
+|---|---|---|
+| `auth.feature` | 18 | TS-API-05 |
+| `profiles.feature` | 12 | US-IDEN-01, US-IDEN-02 |
+| `loans.feature` | 15 | US-LEND-02, US-LEND-05, US-REP-03 |
+| `reputation.feature` | 19 | US-REP-01, US-REP-02, US-REP-04, US-API-01 |
+| `fx.feature` | 17 | US-API-02, US-LEND-06 |
+| `indexer.feature` | 17 | TS-API-03, TS-API-04 |
+| `loan_mirror.feature` | 11 | TS-API-03, US-LEND-05 |
+| `amoy_fixture.feature` | 1 | TS-API-03 |
+| `errors.feature` | 7 | Transversal: mensajes de error localizados en en-US y es-419 |
+
+A continuación se muestra un fragmento de tres de ellos.
+
+`auth.feature`:
+
+```gherkin
+@auth
+Feature: Wallet sign-in challenge
+  A wallet asks for a challenge, signs it, and later trades the signature for a session.
+  This feature covers the first half: issuing the challenge.
+
+  @op-issueChallenge
+  Scenario: A valid address receives a challenge
+    Given a wallet address generated at run time
+    When the client requests a sign-in challenge for that address
+    Then the response status is 200
+    And the challenge response conforms to the API contract
+    And the challenge message is a well formed sign-in text for that address
+    And the stored challenge matches the response
+```
+
+`profiles.feature`:
+
+```gherkin
+@profiles
+Feature: Wallet profile
+  A wallet owner stores a display name and a contact. Everybody reads the name, only the owner
+  reads the contact, and only the owner writes.
+
+  @op-upsertProfile @op-getProfile
+  Scenario: An owner creates a profile and the public sees only the name
+    Given the wallet A is generated at run time
+    And the wallet A is logged in
+    When the wallet A saves its own profile with name "Ana Quispe" and EMAIL contact "ana@example.org"
+    Then the response status is 201
+    And the profile response conforms to the API contract
+    When an anonymous client reads the profile of A
+    Then the response status is 200
+    And the profile response conforms to the API contract
+    And the profile body has the display name "Ana Quispe"
+    And the profile body has no contact key
+    When the wallet A reads the profile of A
+    Then the response status is 200
+    And the profile body has the contact EMAIL "ana@example.org"
+    And the profile row of A has the lowercase address
+
+  @op-upsertProfile
+  Scenario: Nobody writes another wallet's profile
+    Given the wallet A is generated at run time
+    And the wallet B is generated at run time
+    And the wallet A is logged in
+    When the wallet A saves the profile of B with name "Intruder" and EMAIL contact "intruder@example.org"
+    Then the response status is 403
+    And the response is an ApiError with code "FORBIDDEN_NOT_OWNER"
+```
+
+`reputation.feature`:
+
+```gherkin
+@reputation
+Feature: Reputation
+  The score of an address is derived from the indexed chain events and from the profile. Each
+  completed installment, each default and the completed profile is one entry of a ledger, and the
+  API serves the score and the entries behind it.
+
+  Scenario: An on-time installment raises the score
+    Given the wallet W is generated at run time
+    And the wallet W is logged in
+    And the node has 20 blocks
+    And loan 7 of 1000000000 units in 3 installments over 90 days is requested at block 10
+    And loan 7 is funded at the time 1800000000 at block 12
+    And a payment of 341552511 units on loan 7 is emitted at block 14 with the block time 1802500000 and the flag onTime
+    When the indexer runs once
+    And the wallet W reads the reputation of "borrower"
+    Then the response status is 200
+    And the reputation response conforms to the API contract
+    And the reputation is score 520 and level BUILDING with 1 on time, 0 late and 0 defaults
+    And the reputation has profileComplete false
+    And the reputation was updated at the timestamp of block 14
+    And the ledger row of the borrower carries the transaction hash and log index of the repayment of loan 7 and the score after 520
+```
+
+**Repositorios de testing:**
+
+- Web Services: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api (pruebas en `src/test`)
+- Smart Contracts: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-contracts (pruebas en `test`)
+- Mobile Application: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-android (pruebas en `app/src/test` y `app/src/androidTest`)
+- Landing Page: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-landing (verificaciones en `scripts`)
+
+Las pruebas se integraron junto con la funcionalidad que verifican, en el mismo pull request. La tabla muestra el subcommit de pruebas de cada uno:
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
 |---|---|---|---|---|---|
-| _[user/repositoryname]_ | _[feature/...]_ | _[...]_ | _[test: ...]_ | _[...]_ | _[DD/MM/YYYY]_ |
+| Arquitectura-de-Softwares-Emergentes/latifi-landing | develop | 0e60d14 | feat(landing): bilingual landing page (#4) | test(landing): scope header link count and wait for hash scroll | 11/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | d5e2db9 | feat: add v0 loan event interface and abi (#4) | test: pin loan event selectors and the json abi | 29/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | f1da82e | feat: add loan request path, mock stablecoin and pinned openzeppelin (#9) | test: cover request boundaries and mock stablecoin caps | 31/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | a97a2bd | test: add reentrancy, fuzz and invariant suites for the loan book (#12) | test: add malicious receiver reentrancy and fee on transfer suites | 31/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | b660b98 | docs: amend the openapi draft to 0.2.0 and describe the reputation formula (#6) | test: guard the openapi 0.2.0 invariants | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 7ffb709 | feat: add the wallet profile endpoints (#9) | test: prove profile ownership, visibility and privacy | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 8cad6d9 | feat: add the loan schedule and the reputation score fold (#10) | test: describe the loan schedule arithmetic | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 874ed83 | feat: add the event indexer ingestion (#11) | test: prove restarts, duplicates, scheduling and the abi guard | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 52799cc | feat: mirror loans from chain events (#13) | test: describe the loan fold rules | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 534516c | feat: serve the hybrid reputation score and its history (#14) | test: prove the reputation rules, history and reorg repair | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 67ce006 | feat: add the exchange rate cache and conversion endpoints (#16) | test: prove the exchange rate cache, stale fallback and provider adapter | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | ad55104 | feat: close the api surface with swagger, guards and the amoy replay (#17) | test: replay the planned amoy cycle and add the optional live smoke | 09/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 70b5154 | test: add keystore envelope spike and emulator workflow (#2) | test: add keystore envelope spike for secp256k1 wallet keys | 29/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 98edda4 | build: pin the android stack, boot the app and add the apk artifact (#5) | test: prove the stack with abi, config and launch tests | 09/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | ba639f0 | feat(theme): add brand tokens, fonts and copy guards (#6) | test(theme): assert the contrast table and the type tokens | 09/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 579ee92 | feat(core): add loan math, money, domain models and the chain encoders (#7) | test(chain): guard the deployment constants and the event signature | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 7ac37df | feat(nav): add the role shell, base components and the routes registry (#8) | test(nav): cover the tab model, large text mode and the scaffold | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | f25b0f4 | feat(onboarding): add onboarding, connect, sign-in and role selection (#9) | test(auth): cover the wait timer, sign-in, coordinator and start rules | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 14abf59 | feat(profile): add the profile gate, the profile tab and language settings (#10) | test(profile): cover the validator, the gate and the form state | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 1d91f60 | feat(loans): add the borrower loan list, loan details and local currency values (#11) | test(loans): cover the loan list and the loan details on an emulator | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 016bb86 | feat(home): add home and reputation with chain read and reputation interfaces (#12) | test(home): cover home and reputation on an emulator | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 5f86753 | feat(feed): add the lender invest feed with filters, sort and a counter (#13) | test(feed): cover the invest feed on an emulator | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 224d34c | feat(lender): add request details, the portfolio list and investment details (#14) | test(lender): cover request details, portfolio and investment details on an emulator | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 70dad77 | feat(tx): add the transaction coordinator, recovery and the status sheet (#15) | test(tx): cover the transaction status sheet on an emulator | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | bf24282 | feat(flows): add request, pay, fund and test coin flows with a demo chain simulator (#16) | test(flows): cover the coins and request screens on an emulator | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 5644232 | feat(api): add the live api and rpc data layer behind the existing interfaces (#17) | test(api): guard the contract version, the operation ids and the fixtures | 10/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | a8245a7 | feat(wallet): add the live reown gateway, the sealed session and the device checklist (#18) | test(wallet): cover the gateway events, response classification and request params | 10/11/2026 |
 
 ##### 7.2.1.5. Execution Evidence for Sprint Review.
 
