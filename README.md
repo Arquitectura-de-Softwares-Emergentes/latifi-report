@@ -3135,48 +3135,102 @@ Agrupa las vistas del puntaje de reputación on-chain, la vinculación de billet
 
 #### 6.4.4. Applications User Flow Diagrams
 
-_[Por completar: introducción. Se elabora un user flow por cada user goal, considerando los User Persona de cada aplicación. Cada user flow es consistente con el wireflow del que se deriva e incluye los mock-ups de las vistas, la ruta esperada (happy path) y las rutas alternativas (unhappy paths). Indicar la herramienta utilizada.]_
+Esta sección presenta los User Flows de la aplicación móvil LatiFi Wallet para los user goals principales de los dos User Personas: el prestatario no bancarizado (Joseph) y el prestamista con capital ocioso (Renso). Los flujos se derivan de los Wireflows y recorren las pantallas implementadas en la aplicación, con la ruta esperada (happy path) y las rutas alternativas (unhappy paths).
 
-##### User Flow 1: _[Nombre del user goal]_
+En los diagramas, los nodos en verde corresponden al happy path, los nodos en naranja a las rutas alternativas y los rombos azules a las decisiones o condiciones del flujo. Toda transacción en la blockchain pasa por la hoja de estado de transacción, que muestra los estados pendiente, confirmando, confirmada y fallida (US-AUTH-04). Cuando una transacción falla, la aplicación ofrece la acción que resuelve el motivo:
 
-**User goal:** _[Como [User Persona], quiero ... para ...]_
+| Motivo de la falla | Acción que ofrece la aplicación |
+|---|---|
+| El usuario rechaza la firma en su billetera | Reintentar |
+| La sesión de la billetera expiró o no respondió a tiempo | Reconectar la billetera |
+| No hay saldo de POL para la comisión de red | Copiar la dirección de la billetera para recibir POL de prueba |
+| No hay saldo suficiente de la stablecoin de prueba | Obtener monedas de prueba |
+| El contrato revirtió la transacción | Reintentar |
+| La solicitud ya no está abierta (otro prestamista la fondeó) | Volver a las solicitudes |
+| Error de red | Reintentar |
 
-_[Imagen del user flow]_
+##### User Flow 1: Conectar la billetera e ingresar por primera vez
 
-**Explicación de los flujos y condiciones:**
+**User goal:** Como prestatario no bancarizado (Joseph), quiero entender cómo funciona LatiFi y conectar mi billetera de forma segura, para empezar a usar la aplicación sin entregar mis llaves a nadie.
 
-- **Happy path:** _[...]_
-- **Unhappy paths:** _[...]_
+<div align="center">
+  <img src="resources/Cap6/6.4.4-user-flow-1.png" alt="User Flow 1: Conectar la billetera e ingresar por primera vez" width="60%"/>
+</div>
 
-##### User Flow 2: _[Nombre del user goal]_
+**Explicación de los flujos y condiciones:** el usuario conoce el modelo P2P antes de conectar su billetera (US-AUTH-03). La conexión se realiza con Reown AppKit y el inicio de sesión consiste en firmar un mensaje que no genera ninguna transacción ni costo (US-AUTH-01, TS-API-05). La aplicación nunca recibe la llave privada (US-AUTH-02). Si el usuario no tiene una billetera, la hoja de ayuda le explica cómo obtenerla. Si rechaza la firma, puede reintentar, y si la billetera no responde a tiempo, la aplicación le propone reconectarla.
 
-**User goal:** _[...]_
+| Onboarding | Vinculación de billetera | Selección de rol |
+|---|---|---|
+| <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516018/Captura_de_pantalla_2026-10-08_a_la_s_10.19.48_p._m._nryhpc.png" alt="Onboarding" width="180"/> | <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516334/Captura_de_pantalla_2026-10-08_a_la_s_10.25.29_p._m._wcqeoe.png" alt="Vinculación de billetera" width="180"/> | <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516356/Captura_de_pantalla_2026-10-08_a_la_s_10.25.43_p._m._gpkpo0.png" alt="Selección de rol" width="180"/> |
 
-_[Imagen del user flow]_
+##### User Flow 2: Solicitar un microcrédito
 
-**Explicación de los flujos y condiciones:**
+**User goal:** Como prestatario no bancarizado (Joseph), quiero publicar una solicitud de microcrédito con un monto y un plazo que pueda pagar, para conseguir capital de trabajo sin colateral.
 
-- **Happy path:** _[...]_
-- **Unhappy paths:** _[...]_
+<div align="center">
+  <img src="resources/Cap6/6.4.4-user-flow-2.png" alt="User Flow 2: Solicitar un microcrédito" width="60%"/>
+</div>
+
+**Explicación de los flujos y condiciones:** el prestatario configura su solicitud y ve el costo total y cada cuota en stablecoin y en su moneda local antes de confirmar (US-LEND-01, US-LEND-06). Antes de publicar, la aplicación exige el perfil ligero (US-IDEN-01); si no existe, lo solicita y luego regresa al resumen. La solicitud queda registrada como un evento en el smart contract `LoanBook`. Si la transacción falla, la hoja de estado muestra el motivo y la acción que lo resuelve.
+
+| Inicio del prestatario | Configurar solicitud | Proyección de cuotas |
+|---|---|---|
+| <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516109/Captura_de_pantalla_2026-10-08_a_la_s_10.21.36_p._m._whhzpb.png" alt="Inicio del prestatario" width="180"/> | <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516188/Captura_de_pantalla_2026-10-08_a_la_s_10.22.59_p._m._pjazye.png" alt="Configurar solicitud" width="180"/> | <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516208/Captura_de_pantalla_2026-10-08_a_la_s_10.23.23_p._m._pfht3q.png" alt="Proyección de cuotas" width="180"/> |
+
+##### User Flow 3: Pagar una cuota
+
+**User goal:** Como prestatario no bancarizado (Joseph), quiero pagar la cuota de mi préstamo desde la aplicación, para cumplir a tiempo y mejorar mi reputación.
+
+<div align="center">
+  <img src="resources/Cap6/6.4.4-user-flow-3.png" alt="User Flow 3: Pagar una cuota" width="60%"/>
+</div>
+
+**Explicación de los flujos y condiciones:** el prestatario paga cada cuota mediante el smart contract (US-LEND-04). La aplicación solicita la aprobación del monto exacto de la cuota y nunca una aprobación ilimitada de tokens. Después de la confirmación, LatiFi API indexa el evento `LoanRepaid` y recalcula la reputación (US-REP-01). Mientras eso ocurre, la aplicación espera y luego muestra el préstamo y el puntaje actualizados. Si falta saldo, la aplicación ofrece obtener monedas de prueba; si la sesión expiró, propone reconectar la billetera.
+
+| Reputación on-chain | Pasaporte y nivel |
+|---|---|
+| <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516235/Captura_de_pantalla_2026-10-08_a_la_s_10.23.42_p._m._hoflo1.png" alt="Reputación on-chain" width="180"/> | <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516238/Captura_de_pantalla_2026-10-08_a_la_s_10.23.53_p._m._et2e5b.png" alt="Pasaporte y nivel" width="180"/> |
+
+##### User Flow 4: Fondear una solicitud
+
+**User goal:** Como prestamista con capital ocioso (Renso), quiero encontrar una solicitud con buena reputación y fondearla, para obtener rentabilidad con un riesgo que puedo evaluar.
+
+<div align="center">
+  <img src="resources/Cap6/6.4.4-user-flow-4.png" alt="User Flow 4: Fondear una solicitud" width="60%"/>
+</div>
+
+**Explicación de los flujos y condiciones:** el prestamista explora el feed ordenado por reputación (US-LEND-02, US-REP-03) y revisa el historial de pagos del solicitante antes de decidir, que es la condición que planteó en la entrevista. El fondeo transfiere los fondos directamente de su billetera a la del prestatario mediante el smart contract, sin que LatiFi los custodie (US-LEND-03). Si otro prestamista fondeó la solicitud antes, la transacción no procede y la aplicación lo devuelve al feed. Si el feed no tiene resultados con los filtros elegidos, se ofrece limpiarlos.
 
 ### 6.5. Applications Prototyping
 
-_[Por completar: introducción con los principales criterios de las decisiones de interacción, y su relación con la arquitectura de información, en particular con el sistema de navegación (6.2.5) y los tipos de interacción seleccionados.]_
+El prototipo de LatiFi Wallet simula la interacción y la navegación de la aplicación móvil siguiendo los paths definidos en los User Flow Diagrams (6.4.4). Las decisiones de interacción se tomaron con los siguientes criterios:
+
+- **Navegación por rol.** De acuerdo con el sistema de navegación (6.2.5), después de elegir su rol el usuario accede a una barra de navegación inferior con cuatro destinos. El prestatario ve Inicio, Préstamos, Reputación y Perfil, y el prestamista ve Inicio, Invertir, Portafolio y Perfil. Así, cada rol encuentra en un toque las tareas de su user goal, sin opciones que no le corresponden.
+- **Una tarea por pantalla.** Solicitar un préstamo, pagar una cuota y fondear una solicitud son pantallas dedicadas que se abren desde el detalle del préstamo o de la solicitud. El usuario siempre ve el monto, el plazo y el equivalente en moneda local antes de confirmar, en línea con el principio de claridad de las guías de estilo (6.1).
+- **Hojas inferiores para lo que interrumpe el flujo.** El inicio de sesión con la billetera, el estado de una transacción, la obtención de monedas de prueba y la ayuda para conseguir una billetera se muestran como hojas inferiores (bottom sheets). El usuario no pierde la pantalla en la que estaba y vuelve a ella al cerrar la hoja.
+- **Estados explícitos y acciones de recuperación.** Toda transacción muestra los estados pendiente, confirmando, confirmada y fallida. Cuando algo falla, el prototipo ofrece la acción que lo resuelve (reintentar, reconectar la billetera u obtener monedas de prueba), en lugar de un mensaje genérico.
+- **Filtros por chips.** En el feed del prestamista, los filtros de riesgo, plazo y monto son chips de un toque con un contador de resultados, según el sistema de búsqueda definido (6.2.3).
+- **Lenguaje simple e inclusión.** Las etiquetas evitan la jerga cripto según el sistema de etiquetado (6.2.2), los botones nombran la acción que realizan, y la interfaz admite texto ampliado y el cambio de idioma entre español e inglés.
 
 ##### Prototipo: LatiFi Wallet (aplicación móvil)
 
-_[Descripción de los flujos de interacción que cubre el prototipo, según los paths de los User Flow Diagrams (6.4.4).]_
+El prototipo recorre los cuatro user flows principales:
+
+| User flow | Rol | Pantallas que recorre |
+|---|---|---|
+| Conectar la billetera e ingresar por primera vez | Prestatario | Onboarding, ¿Cómo funciona?, Conectar billetera, hoja de inicio de sesión, Elegir rol |
+| Solicitar un microcrédito | Prestatario | Inicio, Solicitar préstamo, Resumen, Formulario de perfil, hoja de estado de transacción, Detalle del préstamo |
+| Pagar una cuota | Prestatario | Mis préstamos, Detalle del préstamo, Pagar cuota, hoja de estado de transacción, Reputación |
+| Fondear una solicitud | Prestamista | Invertir, Detalle de la solicitud, Confirmar fondeo, hoja de estado de transacción, Portafolio |
 
 _[Screenshot del video del prototipo]_
 
 | Elemento | Detalle |
 |---|---|
-| Herramienta | _[...]_ |
-| Enlace al prototipo | _[URL]_ |
+| Herramienta | Figma |
+| Enlace al prototipo | _[URL del prototipo en Figma]_ |
 | Video en Microsoft Stream | _[URL]_ |
 | Duración del video | _[mm:ss]_ |
-
-<div style="page-break-after: always;"></div>
 
 ## Capítulo VII: Product Implementation, Validation & Deployment
 
@@ -3342,29 +3396,145 @@ El equipo aplica nomenclatura en inglés para todos los elementos del código (p
 | HTML5 / CSS3 / JavaScript (Landing Page) | [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html) y [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html) | HTML semántico con atributo `lang`, skip link, un solo landmark `main` y alternativas `hreflang` en cada página; sin scripts, estilos ni eventos en línea; contraste según WCAG 2.1 AA. | Nu HTML Checker, guardas de i18n/a11y y de CSP, verificación de contraste y Lighthouse (Accessibility y SEO de 90 o más). |
 | OpenAPI | [OpenAPI Specification 3.0.3](https://spec.openapis.org/oas/v3.0.3) | Rutas bajo `/api/v1` en minúsculas, `operationId` en lowerCamelCase (`issueChallenge`, `getReputation`, `listLoans`) y códigos de error en UPPER_SNAKE_CASE (`INVALID_ADDRESS`). | Pruebas que comparan el código con el contrato `openapi/latifi-api.v0.yaml`. |
 | Gherkin (archivos `.feature`) | [Gherkin Conventions for Readable Specifications](https://specflow.org/gherkin/gherkin-conventions-for-readable-specifications/) y [Gherkin Reference](https://cucumber.io/docs/gherkin/reference/) | Un archivo `.feature` por funcionalidad con una descripción breve, escenarios redactados como comportamiento observable, pasos `Given`/`When`/`Then` en tercera persona y tags `@op-<operationId>` que vinculan cada escenario con la operación del contrato OpenAPI que prueba. | `FeatureCoverageTest` falla si una operación no tiene escenario o si un tag nombra una operación inexistente. |
+
 #### 7.1.4. Software Deployment Configuration
 
-_[Por completar: configuración del despliegue y pasos necesarios para que, a partir de los repositorios de código fuente, se logre el despliegue o publicación de cada producto digital.]_
+La solución se despliega en cuatro destinos, uno por producto digital: la landing page en GitHub Pages, los smart contracts en la red de pruebas Polygon Amoy, LatiFi API en el VPS del equipo administrado con Dokploy, y la aplicación móvil como APK para teléfonos Android. En todos los casos el despliegue parte de la rama `main` del repositorio correspondiente, que solo recibe releases, y ningún secreto (llaves, contraseñas o URLs con API keys) se guarda en los repositorios.
 
 ##### Landing Page
 
-_[Pasos de despliegue.]_
+| Elemento | Configuración |
+|---|---|
+| Repositorio | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-landing |
+| Destino | GitHub Pages |
+| Disparador | Push a `main` (merge de un release) o ejecución manual del workflow |
+| Workflow | `.github/workflows/pages.yml` |
+| URL publicada | https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/ (inglés) y https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/es/ (español) |
 
-##### Web Services
+Pasos para el despliegue:
 
-_[Pasos de despliegue.]_
+1. En el repositorio, ir a **Settings > Pages** y seleccionar **GitHub Actions** como fuente de publicación (configuración única).
+2. Integrar el release en `main` mediante un pull request desde `release/<versión>`, con los checks `ci` y `commit-lint` en verde.
+3. El workflow `Deploy Pages` se ejecuta automáticamente: descarga el código, prepara Node.js 22 y copia al directorio `_site` solo los archivos permitidos (páginas HTML, `css/`, `js/`, `img/`, `robots.txt` y `sitemap.xml`) con el script `scripts/stage-site.mjs` en modo estricto, que falla si falta algún archivo esperado.
+4. El job `deploy` publica el sitio en GitHub Pages por HTTPS.
+5. Al final, el workflow comprueba que la URL publicada responda; si no responde, el despliegue se marca como fallido.
 
-##### Mobile Application
+Los pull requests nunca despliegan; solo un merge a `main` publica el sitio.
 
-_[Pasos de despliegue.]_
+##### Smart Contracts
 
-##### _[Otro producto]_
+| Elemento | Configuración |
+|---|---|
+| Repositorio | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-contracts |
+| Destino | Polygon Amoy (testnet, chain id 80002) |
+| Herramienta | Foundry v1.8.7 (`forge`, `cast`) |
+| Contratos | `MockStablecoin` (stablecoin de prueba de 6 decimales) y `LoanBook` (libro de préstamos) |
+| Release desplegado | `v0.2.0`, verificado en Sourcify con coincidencia exacta |
+| Registro del despliegue | `deployments/amoy.json`, fuente única de direcciones y ABIs para la API y la aplicación |
 
-_[Pasos de despliegue.]_
+Pasos para el despliegue (guía completa en `docs/DEPLOY-AMOY.md`):
+
+1. Instalar Foundry v1.8.7 (`foundryup --install v1.8.7`) y clonar el repositorio con sus submódulos (`git submodule update --init --recursive`).
+2. Importar la llave del deployer a un keystore cifrado de Foundry, que vive fuera del repositorio: `cast wallet import latifi-deployer --interactive`.
+3. Cargar POL de prueba en la billetera del deployer desde el faucet de Polygon (al menos 0.15 POL).
+4. Ejecutar dos simulaciones sin enviar transacciones: una en memoria y otra contra un fork de Amoy, para confirmar las direcciones y el gas estimado.
+5. Desplegar con la cuenta del keystore y las comisiones que exige Amoy:
+
+```bash
+export AMOY_RPC_URL=https://polygon-amoy-bor-rpc.publicnode.com
+forge script script/Deploy.s.sol:Deploy --rpc-url amoy --account latifi-deployer \
+  --sender 0x5577fc66c64e4749eed2e09E6Cd5A2b0e7F970D6 --broadcast --slow \
+  --priority-gas-price 30gwei --with-gas-price 35gwei
+```
+
+6. Verificar el código de ambos contratos en Sourcify:
+
+```bash
+forge verify-contract <LOANBOOK_ADDRESS> src/LoanBook.sol:LoanBook --chain 80002 --verifier sourcify --watch
+forge verify-contract <TOKEN_ADDRESS> src/MockStablecoin.sol:MockStablecoin --chain 80002 --verifier sourcify --watch
+```
+
+7. Generar el registro del despliegue y validarlo:
+
+```bash
+bash scripts/record-deployment.sh broadcast/Deploy.s.sol/80002/run-latest.json v0.2.0 > deployments/amoy.json
+bash scripts/check-deployment.sh
+```
+
+8. Ejecutar el ciclo completo de prueba (solicitud, fondeo y dos pagos) con las billeteras de demostración: `bash scripts/cycle.sh`. El resultado esperado es `cycle-ok`.
+
+Los scripts solo aceptan las redes 80002 (Amoy) y 31337 (local), y una guarda en la integración continua rechaza cualquier referencia a la red principal o a llaves en el código.
+
+##### Web Services (LatiFi API)
+
+| Elemento | Configuración |
+|---|---|
+| Repositorio | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api |
+| Destino | VPS de Hetzner administrado con Dokploy (ADR-0006) |
+| Runtime | Java 21, Spring Boot 3.5.16, construcción con Maven |
+| Base de datos | PostgreSQL 16 en el mismo servidor, con migraciones automáticas de Flyway al iniciar |
+| Disparador | Push a `main` mediante la integración de Dokploy con GitHub |
+| Health check | `GET /actuator/health` |
+| Documentación | Swagger UI en `/swagger-ui.html` y OpenAPI en `/v3/api-docs` |
+
+Pasos para el despliegue:
+
+1. En Dokploy, crear el proyecto **LatiFi** y, dentro de él, un servicio de base de datos **PostgreSQL 16** con usuario `latifi` y una contraseña generada por Dokploy.
+2. Crear una aplicación conectada al repositorio `latifi-api` en GitHub, rama `main`, con el tipo de build Nixpacks, que detecta el proyecto Maven y Java 21.
+3. Configurar las variables de entorno en la sección **Environment** de la aplicación. Los secretos se guardan solo en Dokploy:
+
+| Variable | Valor |
+|---|---|
+| `SPRING_DATASOURCE_URL` | URL JDBC interna del servicio PostgreSQL del proyecto |
+| `SPRING_DATASOURCE_USERNAME` | `latifi` |
+| `SPRING_DATASOURCE_PASSWORD` | Contraseña de la base de datos (secreto) |
+| `LATIFI_JWT_SECRET` | Secreto de firma de los tokens de sesión, de al menos 32 bytes (secreto) |
+| `LATIFI_AUTH_DOMAIN` | Dominio público de la API |
+| `LATIFI_AUTH_URI` | URL pública de la API con HTTPS |
+| `LATIFI_TRUST_FORWARDED_FOR` | `true`, porque la API corre detrás del proxy de Dokploy |
+| `LATIFI_RPC_URL` | Nodo de Polygon Amoy (por ejemplo, `https://polygon-amoy-bor-rpc.publicnode.com`) |
+| `LATIFI_LOANBOOK_ADDRESS` | `0xcCb8ad15a4954138c987a77924ceAb468A843266` (release `v0.2.0`) |
+| `LATIFI_INDEXER_START_BLOCK` | Bloque del primer evento a indexar |
+| `LATIFI_SWAGGER_ENABLED` | `true` |
+
+4. En la sección **Domains**, asignar el subdominio de la API al puerto 8080 y activar HTTPS con un certificado de Let's Encrypt.
+5. Activar el despliegue automático para que cada push a `main` construya y publique una nueva versión.
+6. Ejecutar el primer despliegue y comprobar que `GET /actuator/health` responde `UP` y que Swagger UI carga en `/swagger-ui.html`.
+
+##### Mobile Application (LatiFi Wallet)
+
+| Elemento | Configuración |
+|---|---|
+| Repositorio | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-android |
+| Destino | Teléfonos Android 8.0 o superior (minSdk 26), mediante APK |
+| Construcción | Gradle 9.6.1 con JDK 21 |
+| Integración continua | El job `ci` genera el APK de debug en cada pull request y lo publica como artefacto |
+| Distribución | APK de release adjunto a un GitHub Release y enlazado desde el botón de descarga de la landing page |
+
+Pasos para el despliegue:
+
+1. Configurar los valores del modo Live en el archivo `local.properties` (ignorado por Git) o como variables de entorno:
+
+```properties
+reown.projectId=<ID del proyecto en Reown Cloud>
+api.baseUrl=<URL pública de LatiFi API>/api/v1/
+amoy.rpcUrl=https://polygon-amoy-bor-rpc.publicnode.com
+landing.url=https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/
+```
+
+2. Generar el APK de release: `./gradlew assembleRelease`. Un build de release se niega a iniciar en modo Demo, por lo que exige el ID de Reown y la URL de la API.
+3. Firmar el APK con la llave de firma del equipo (keystore de Android guardado fuera del repositorio).
+4. Crear un GitHub Release con el tag de la versión (por ejemplo, `v0.2.0`) y adjuntar el APK firmado.
+5. Actualizar el enlace del botón **Descargar para Android** de la landing con la URL del APK, en las versiones en inglés y en español.
 
 ##### Deployment Diagram (C4 Model)
 
-_[Imagen del Deployment Diagram de C4 Model y su explicación.]_
+El siguiente diagrama muestra los nodos de despliegue de la solución. La aplicación se instala en el teléfono del usuario y se comunica con su billetera mediante Reown (WalletConnect). La llave privada nunca sale de la billetera, y el Android Keystore solo guarda la sesión cifrada. LatiFi API y PostgreSQL corren en el VPS con Dokploy, los smart contracts viven en Polygon Amoy y la landing page se publica en GitHub Pages desde GitHub Actions.
+
+<div align="center">
+  <img src="resources/Cap7/7.1.4-deployment-diagram.png" alt="Deployment Diagram de LatiFi" width="90%"/>
+</div>
+
 
 ### 7.2. Solution Implementation
 
@@ -3702,19 +3872,62 @@ _[Screenshots de las principales vistas implementadas, con su descripción.]_
 
 ##### 7.2.1.6. Services Documentation Evidence for Sprint Review.
 
-_[Por completar: introducción que resume los logros en documentación de los Web Services en este sprint (OpenAPI).]_
+En el Sprint 1 se documentaron con OpenAPI 3.0 los diez endpoints de LatiFi API, que cubren la autenticación por firma de billetera, el perfil ligero, la reputación, los préstamos y la conversión a moneda local. El contrato `openapi/latifi-api.v0.yaml` (versión 0.2.0) se escribió antes que el código y es la fuente común de la API y de la aplicación móvil: una prueba de la API falla si el código se aparta del contrato, y otra prueba de la aplicación falla si su cliente Retrofit deja de coincidir con él. La documentación se publica con Swagger UI, generada desde el código con springdoc-openapi.
+
+Todos los endpoints están bajo la ruta base `/api/v1`. Salvo los de autenticación y la lectura pública de perfiles, requieren el token de sesión en el encabezado `Authorization: Bearer <token>`. El encabezado opcional `Accept-Language` (`en_US` o `es_419`) define el idioma de los mensajes de error. Los montos y los identificadores de préstamo viajan como texto en unidades base de la stablecoin de prueba (6 decimales), para no perder precisión.
 
 | Endpoint | Acción implementada | Verbo HTTP | Sintaxis de llamada | Parámetros | Ejemplo de response y explicación | Enlace a la documentación |
 |---|---|---|---|---|---|---|
-| _[...]_ | _[...]_ | _[GET / POST / PUT / DELETE / PATCH]_ | _[...]_ | _[...]_ | _[...]_ | _[URL desplegada o local]_ |
+| `/auth/challenge` | Emitir el mensaje de inicio de sesión que firma la billetera | POST | `POST /api/v1/auth/challenge` | Body: `address` (dirección de la billetera) | `200`: `{"challengeId": "3f2b8c1e-...", "nonce": "9c1d4f7a...", "message": "latifi.example wants you to sign in...", "issuedAt": "2026-01-01T12:00:00Z", "expiresAt": "2026-01-01T12:05:00Z"}`. Devuelve un mensaje de un solo uso que vence en 5 minutos y no genera ninguna transacción. | http://localhost:8080/swagger-ui.html#/Auth/issueChallenge |
+| `/auth/verify` | Verificar la firma y emitir el token de sesión | POST | `POST /api/v1/auth/verify` | Body: `challengeId`, `address`, `signature` | `200`: `{"accessToken": "eyJhbGciOiJIUzI1NiJ9...", "tokenType": "Bearer", "expiresIn": 900, "address": "0x1111..."}`. Si la firma corresponde a la dirección, entrega un token válido por 15 minutos; si no, responde `401`. | http://localhost:8080/swagger-ui.html#/Auth/verifyChallenge |
+| `/profiles/{address}` | Consultar el perfil ligero de una dirección | GET | `GET /api/v1/profiles/0x1111...` | Path: `address`. Token opcional | `200`: `{"address": "0x1111...", "displayName": "Sample User", "contact": {"type": "EMAIL", "value": "user@example.org"}, "createdAt": "...", "updatedAt": "..."}`. Cualquiera ve el nombre; el contacto solo lo ve el dueño de la billetera. `404` si no existe. | http://localhost:8080/swagger-ui.html#/Profiles/getProfile |
+| `/profiles/{address}` | Crear o actualizar el perfil propio | PUT | `PUT /api/v1/profiles/0x1111...` | Path: `address`. Body: `displayName`, `contact` (`type`: `EMAIL` o `PHONE`, `value`) | `201` al crear y `200` al actualizar, con el perfil completo. Responde `403` si la dirección no es la del usuario autenticado. | http://localhost:8080/swagger-ui.html#/Profiles/upsertProfile |
+| `/reputation/{address}` | Consultar el puntaje de reputación | GET | `GET /api/v1/reputation/0x1111...` | Path: `address` | `200`: `{"address": "0x1111...", "score": 620, "level": "TRUSTED", "onTimeCount": 3, "lateCount": 1, "defaultCount": 0, "profileComplete": true, "updatedAt": "..."}`. Puntaje de 0 a 1000 con nivel `NEW`, `BUILDING`, `TRUSTED` o `EXCELLENT`, calculado a partir de los eventos on-chain y del perfil. | http://localhost:8080/swagger-ui.html#/Reputation/getReputation |
+| `/reputation/{address}/history` | Listar los eventos detrás del puntaje | GET | `GET /api/v1/reputation/0x1111.../history?type=REPAID_ON_TIME&page=0&size=20` | Path: `address`. Query: `type` (`PROFILE_COMPLETED`, `REPAID_ON_TIME`, `REPAID_LATE`, `DEFAULTED`), `page`, `size` | `200`: `{"items": [{"id": 41, "loanId": "7", "type": "REPAID_ON_TIME", "delta": 20, "scoreAfter": 620, "txHash": "0x2222...", "occurredAt": "..."}], "page": 0, "size": 20, "totalItems": 1}`. Cada evento indica cuánto cambió el puntaje y la transacción que lo originó. | http://localhost:8080/swagger-ui.html#/Reputation/getReputationHistory |
+| `/loans` | Listar préstamos con filtros y orden (feed del prestamista) | GET | `GET /api/v1/loans?status=OPEN&minLevel=TRUSTED&sort=reputation&page=0&size=20` | Query: `status` (`OPEN`, `ACTIVE`, `REPAID`, `DEFAULTED`), `minAmount`, `maxAmount`, `maxTermDays`, `minLevel`, `borrower`, `lender`, `sort` (`reputation`, `amount`, `term`, `rate`, `recent`, `nextDue`), `page`, `size` | `200`: `{"items": [{"loanId": "7", "borrower": "0x1111...", "principal": "250000000", "interestRateBps": 1000, "termDays": 30, "installments": 3, "status": "OPEN", "totalDue": "...", "borrowerReputation": {"score": 620, "level": "TRUSTED"}}], "page": 0, "size": 20, "totalItems": 1}`. Por defecto ordena por la reputación del prestatario. | http://localhost:8080/swagger-ui.html#/Loans/listLoans |
+| `/loans/{loanId}` | Consultar un préstamo con su estado y cronograma | GET | `GET /api/v1/loans/7` | Path: `loanId` | `200`: un préstamo con monto, tasa, cuotas pagadas, total adeudado, próxima fecha de pago y reputación del prestatario. `404` si el préstamo no existe. | http://localhost:8080/swagger-ui.html#/Loans/getLoan |
+| `/exchange-rate/convert` | Convertir un monto de stablecoin a moneda local | GET | `GET /api/v1/exchange-rate/convert?amount=250000000&currency=PEN` | Query: `amount` (unidades base), `currency` (`PEN`, `COP`, `MXN`, `ARS`, `BRL` o `CLP`) | `200`: `{"amount": "250000000", "currency": "PEN", "value": "859.51", "rate": "3.438038", "asOf": "...", "stale": false}`. Convierte 250 USD de prueba a soles. `stale: true` indica que se usó la última tasa guardada porque el proveedor no respondió. | http://localhost:8080/swagger-ui.html#/ExchangeRate/convertAmount |
+| `/exchange-rate/rates` | Listar las tasas disponibles y su antigüedad | GET | `GET /api/v1/exchange-rate/rates` | Ninguno | `200`: `[{"base": "USD", "quote": "PEN", "rate": "3.438038", "asOf": "...", "stale": false}, ...]`, con las seis monedas soportadas. `503` si no hay tasas en caché ni proveedor disponible. | http://localhost:8080/swagger-ui.html#/ExchangeRate/listRates |
 
-_[Capturas de la interacción con la documentación usando datos de muestra, con su explicación.]_
+**Interacción con la documentación**
 
-**Repositorio de Web Services:** _[URL]_
+La vista general de Swagger UI agrupa los endpoints por contexto (Auth, Profiles, Reputation, Loans y ExchangeRate) y muestra con un candado los que requieren token de sesión. El botón **Authorize** permite registrar el token obtenido en `/auth/verify` para probar los demás endpoints.
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.6-swagger-overview.png" alt="Vista general de Swagger UI de LatiFi API" width="80%"/>
+</div>
+
+Al solicitar un challenge, la documentación muestra el cuerpo esperado con una dirección de ejemplo y la respuesta con el mensaje que la billetera debe firmar:
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.6-swagger-auth-challenge.png" alt="Swagger UI: POST /auth/challenge" width="70%"/>
+</div>
+
+El feed de préstamos documenta todos sus filtros, el orden por reputación y la paginación, junto con un préstamo de ejemplo que incluye la reputación de su prestatario:
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.6-swagger-loans-list.png" alt="Swagger UI: GET /loans" width="70%"/>
+</div>
+
+La consulta de reputación muestra el puntaje, el nivel y los contadores de pagos a tiempo, tardíos e incumplidos, además de las respuestas de error con su código y mensaje localizado:
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.6-swagger-reputation.png" alt="Swagger UI: GET /reputation/{address}" width="70%"/>
+</div>
+
+La conversión de moneda muestra el monto en unidades base, la moneda de destino y el valor convertido con la tasa utilizada:
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.6-swagger-exchange-convert.png" alt="Swagger UI: GET /exchange-rate/convert" width="70%"/>
+</div>
+
+**Repositorio de Web Services:** https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
 |---|---|---|---|---|---|
-| _[user/repositoryname]_ | _[...]_ | _[...]_ | _[docs: ...]_ | _[...]_ | _[DD/MM/YYYY]_ |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 2849aac | docs: add openapi v0 draft with ci validation (#4) | docs(api): add openapi v0 skeleton with the challenge endpoint | 30/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | b660b98 | docs: amend the openapi draft to 0.2.0 and describe the reputation formula (#6) | docs: amend the openapi draft to 0.2.0 | 08/11/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | ad55104 | feat: close the api surface with swagger, guards and the amoy replay (#17) | feat: serve swagger from the code and guard it against the contract | 09/11/2026 |
 
 ##### 7.2.1.7. Software Deployment Evidence for Sprint Review.
 
@@ -3748,21 +3961,116 @@ _[Por completar: introducción. Actividades de entrevistas de validación, en la
 
 #### 7.3.1. Diseño de Entrevistas
 
-_[Por completar: por cada segmento objetivo, los elementos de la sesión de validación (landing page y aplicaciones) y los user flows que formarán parte de la validación.]_
+Las entrevistas de validación buscan comprobar si los usuarios de los dos segmentos objetivo entienden la propuesta de valor de LatiFi en la landing page y si pueden completar sus tareas principales en la aplicación móvil sin ayuda. A diferencia de las entrevistas de descubrimiento del Capítulo II, en estas sesiones el entrevistado interactúa con el producto mientras expresa en voz alta lo que piensa (técnica *think aloud*), y el equipo observa dónde duda, se equivoca o abandona.
 
-##### Segmento 1: _[Nombre del segmento]_
+**Objetivos de la validación**
 
-- **Landing page:** _[Elementos a validar]_
-- **Aplicación:** _[Elementos a validar]_
-- **User flows a validar:** _[...]_
-- **Preguntas:** _[...]_
+1. Verificar que la landing page comunica con claridad qué es LatiFi, para quién es y por qué es seguro.
+2. Medir si los usuarios completan los user flows principales de la aplicación sin asistencia.
+3. Identificar problemas de usabilidad, diseño inclusivo y arquitectura de información para la evaluación heurística (7.3.3).
+4. Contrastar las hipótesis del Lean UX Canvas sobre confianza y reputación con la reacción real de los usuarios.
 
-##### Segmento 2: _[Nombre del segmento]_
+**Modalidad de las sesiones**
 
-- **Landing page:** _[Elementos a validar]_
-- **Aplicación:** _[Elementos a validar]_
-- **User flows a validar:** _[...]_
-- **Preguntas:** _[...]_
+| Aspecto | Detalle |
+|---|---|
+| Número de entrevistas | 3 a 5 por segmento |
+| Duración | 20 a 25 minutos por sesión |
+| Modalidad | Virtual por Microsoft Teams, con pantalla compartida, o presencial con el teléfono del entrevistador |
+| Producto evaluado | Landing page publicada en GitHub Pages y aplicación LatiFi Wallet instalada en un teléfono Android |
+| Registro | Grabación en video con consentimiento del entrevistado, publicada en Microsoft Stream |
+| Roles del equipo | Un entrevistador que guía la sesión y un observador que registra tiempos, errores y comentarios |
+| Métrica de éxito | Tarea completada sin ayuda, tiempo empleado y número de errores |
+
+##### Segmento 1: Prestatario no bancarizado
+
+**Criterios de selección:** personas de 20 a 55 años que trabajan de forma independiente o tienen un pequeño negocio (comercio, delivery, transporte u oficios), que no tienen historial crediticio formal o reciben montos bajos del banco, que usan un smartphone Android y billeteras como Yape o Plin, y que no tienen experiencia previa con criptomonedas.
+
+**Elementos a validar**
+
+- **Landing page:** la sección principal con la propuesta de valor, el simulador de microcrédito, la sección "¿Cómo funciona?" y la sección de seguridad.
+- **Aplicación:** el onboarding en lenguaje simple, la conexión de la billetera, la solicitud de un microcrédito con su resumen en moneda local, la consulta del préstamo y el pago de una cuota.
+
+**User flows a validar**
+
+| Tarea | User flow (6.4.4) | Criterio de éxito |
+|---|---|---|
+| T1. Explicar con sus palabras qué ofrece LatiFi después de recorrer la landing | — | Menciona préstamos entre personas sin colateral |
+| T2. Ingresar a la aplicación y conectar la billetera | User Flow 1 | Llega al inicio del prestatario sin ayuda |
+| T3. Solicitar un préstamo de S/ 500 a 3 cuotas | User Flow 2 | Publica la solicitud y entiende el monto de cada cuota |
+| T4. Pagar la primera cuota del préstamo | User Flow 3 | Completa el pago y encuentra su reputación actualizada |
+
+**Guion de preguntas**
+
+*Introducción (2 minutos)*
+
+1. ¿A qué te dedicas y cómo manejas el dinero de tu trabajo o negocio?
+2. ¿Has pedido algún préstamo antes? ¿A quién y cómo te fue?
+
+*Landing page (5 minutos)*
+
+3. Recorre la página con calma. ¿Qué crees que ofrece LatiFi?
+4. ¿Para quién crees que es este servicio? ¿Te sientes parte de ese grupo?
+5. ¿Qué te daría confianza o desconfianza para usarlo?
+
+*Aplicación (12 minutos)*
+
+6. Realiza la tarea indicada y dime en voz alta lo que piensas mientras avanzas.
+7. ¿Hubo algún paso o palabra que no entendiste?
+8. Antes de confirmar la solicitud, ¿sabías cuánto pagarías en total y en cada cuota?
+9. ¿Qué entiendes por "reputación" en la aplicación? ¿Cómo crees que puedes mejorarla?
+10. Si una transacción fallara, ¿sabrías qué hacer con lo que muestra la pantalla?
+
+*Cierre (3 minutos)*
+
+11. Del 1 al 5, ¿qué tan fácil fue usar la aplicación? ¿Por qué?
+12. ¿Usarías LatiFi para financiar tu negocio? ¿Qué cambiarías?
+13. ¿Nos autorizas a usar un fragmento de tu opinión en el video del producto?
+
+##### Segmento 2: Prestamista con capital ocioso
+
+**Criterios de selección:** personas de 25 a 50 años con ingresos estables y excedentes de dinero, con estudios superiores, que ya han prestado dinero a conocidos o invierten en algún instrumento, y que usan o están dispuestas a usar una billetera digital.
+
+**Elementos a validar**
+
+- **Landing page:** la sección principal, la propuesta de valor para el prestamista, la sección de seguridad (modelo no custodial y reputación híbrida) y las preguntas frecuentes.
+- **Aplicación:** la conexión de la billetera, el feed de solicitudes con sus filtros, el detalle de una solicitud con la reputación del prestatario, el fondeo y el portafolio.
+
+**User flows a validar**
+
+| Tarea | User flow (6.4.4) | Criterio de éxito |
+|---|---|---|
+| T1. Explicar cómo LatiFi protege su dinero después de recorrer la landing | — | Menciona que LatiFi no custodia los fondos y que el contrato ejecuta los pagos |
+| T2. Ingresar a la aplicación como prestamista | User Flow 1 | Llega al inicio del prestamista sin ayuda |
+| T3. Encontrar la solicitud con mejor reputación de 3 meses o menos | User Flow 4 | Usa los filtros y el orden por reputación |
+| T4. Fondear esa solicitud y revisarla en su portafolio | User Flow 4 | Completa el fondeo y ubica la inversión en Portafolio |
+
+**Guion de preguntas**
+
+*Introducción (2 minutos)*
+
+1. ¿Has prestado dinero alguna vez? ¿Cómo decidiste a quién prestarle?
+2. ¿Qué haces hoy con el dinero que no usas?
+
+*Landing page (5 minutos)*
+
+3. Recorre la página. ¿Qué entiendes que ganarías al usar LatiFi?
+4. ¿Qué te dice la página sobre la seguridad de tu dinero? ¿Es suficiente?
+5. ¿Qué información te falta para animarte a probarla?
+
+*Aplicación (12 minutos)*
+
+6. Realiza la tarea indicada y dime en voz alta lo que piensas mientras avanzas.
+7. ¿La información de reputación te basta para decidir si prestar? ¿Qué agregarías?
+8. ¿Te quedó claro cuánto recibirías de vuelta y en qué plazo?
+9. ¿Fue fácil encontrar y usar los filtros del feed?
+10. Después de fondear, ¿sabías dónde seguir el estado de tu inversión?
+
+*Cierre (3 minutos)*
+
+11. Del 1 al 5, ¿qué tan fácil fue usar la aplicación? ¿Por qué?
+12. ¿Pondrías dinero real en una plataforma así? ¿Bajo qué condiciones?
+13. ¿Nos autorizas a usar un fragmento de tu opinión en el video del producto?
 
 #### 7.3.2. Registro de Entrevistas
 
@@ -3883,6 +4191,29 @@ Estos resultados provienen de cuatro entrevistas, por lo que no permiten general
 - Aave. (s.f.). *Credit Delegation*. Documentación oficial. https://aave.com/docs/aave-v3/guides/credit-delegation
 - Messari. (s.f.). *Aave announces Credit Delegation, enabling uncollateralized lending*. https://messari.io/report/aave-announces-credit-delegation-enabling-uncollateralized-lending
 - Yellow.com. (2026). *Decentralized lending 2026: Aave on-chain money markets*. https://yellow.com/research/decentralized-lending-2026-aave-on-chain-money-markets
+- Driessen, V. (2010). *A successful Git branching model*. nvie.com. https://nvie.com/posts/a-successful-git-branching-model/
+- Preston-Werner, T. (s.f.). *Semantic Versioning 2.0.0*. https://semver.org/
+- Conventional Commits. (s.f.). *Conventional Commits 1.0.0*. https://www.conventionalcommits.org/en/v1.0.0/
+- Brown, S. (s.f.). *The C4 model for visualising software architecture*. https://c4model.com/
+- JetBrains. (s.f.). *Coding conventions*. Kotlin Documentation. https://kotlinlang.org/docs/coding-conventions.html
+- Google. (s.f.). *Kotlin style guide*. Android Developers. https://developer.android.com/kotlin/style-guide
+- Google. (s.f.). *Google Java Style Guide*. https://google.github.io/styleguide/javaguide.html
+- Google. (s.f.). *Google HTML/CSS Style Guide*. https://google.github.io/styleguide/htmlcssguide.html
+- Google. (s.f.). *Google JavaScript Style Guide*. https://google.github.io/styleguide/jsguide.html
+- Solidity Team. (s.f.). *Style Guide*. Solidity Documentation. https://docs.soliditylang.org/en/latest/style-guide.html
+- SpecFlow. (s.f.). *Gherkin conventions for readable specifications*. https://specflow.org/gherkin/gherkin-conventions-for-readable-specifications/
+- Cucumber. (s.f.). *Gherkin reference*. https://cucumber.io/docs/gherkin/reference/
+- OpenAPI Initiative. (2021). *OpenAPI Specification v3.0.3*. https://spec.openapis.org/oas/v3.0.3
+- springdoc. (s.f.). *springdoc-openapi*. https://springdoc.org/
+- Spring. (s.f.). *Spring Boot reference documentation*. https://docs.spring.io/spring-boot/
+- Foundry. (s.f.). *Foundry Book*. https://getfoundry.sh/
+- OpenZeppelin. (s.f.). *OpenZeppelin Contracts documentation*. https://docs.openzeppelin.com/contracts/5.x/
+- Polygon Labs. (s.f.). *Polygon Amoy testnet*. Polygon Knowledge Layer. https://docs.polygon.technology/pos/
+- Reown. (s.f.). *AppKit for Android*. Reown Docs. https://docs.reown.com/appkit/android/core/installation
+- Google. (s.f.). *Jetpack Compose*. Android Developers. https://developer.android.com/compose
+- Dokploy. (s.f.). *Dokploy documentation*. https://docs.dokploy.com/
+- W3C. (2018). *Web Content Accessibility Guidelines (WCAG) 2.1*. https://www.w3.org/TR/WCAG21/
+- Nielsen, J. (1994). *10 usability heuristics for user interface design*. Nielsen Norman Group. https://www.nngroup.com/articles/ten-usability-heuristics/
 
 <div style="page-break-after: always;"></div>
 
