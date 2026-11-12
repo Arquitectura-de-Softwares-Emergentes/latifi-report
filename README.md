@@ -3864,12 +3864,69 @@ Las pruebas se integraron junto con la funcionalidad que verifican, en el mismo 
 
 ##### 7.2.1.5. Execution Evidence for Sprint Review.
 
-_[Por completar: resumen de lo alcanzado en el sprint.]_
+Al cierre del Sprint 1, la landing page está publicada en GitHub Pages en inglés y español, y la aplicación móvil LatiFi Wallet ejecuta los flujos completos de prestatario y prestamista: onboarding, conexión de la billetera, elección de rol, perfil ligero, solicitud de préstamo, pago de cuotas, feed de inversión, fondeo, portafolio y reputación. La aplicación funciona en dos modos: el modo Demo, que simula la red y no necesita billetera ni conexión, y el modo Live, que se conecta a la billetera real del usuario, a LatiFi API y a los smart contracts desplegados en Polygon Amoy.
 
-_[Screenshots de las principales vistas implementadas, con su descripción.]_
+**Landing Page**
 
-**Video de ejecución:** _[URL del video que ilustra y explica la visualización y navegación logradas en el sprint]_
+La sección principal presenta la propuesta de valor, los accesos para cada segmento y un ejemplo de préstamo con cifras ilustrativas. Debajo se resumen los cuatro diferenciadores: el usuario guarda sus llaves, la reputación es visible para los prestamistas, las reglas están escritas en un contrato y los montos se muestran también en soles.
 
+<div align="center">
+  <img src="resources/Cap7/7.2.1.5-landing-es-top.png" alt="Landing page: sección principal" width="80%"/>
+</div>
+
+La sección "¿Cómo funciona?" explica el ciclo del préstamo en pasos, y la sección de beneficios muestra que las condiciones son claras desde la primera pantalla:
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.5-landing-es-como-funciona.png" alt="Landing page: cómo funciona" width="80%"/>
+  <br/><br/>
+  <img src="resources/Cap7/7.2.1.5-landing-es-beneficios.png" alt="Landing page: beneficios" width="80%"/>
+</div>
+
+La sección de seguridad explica el modelo no custodial, y las preguntas frecuentes resuelven las dudas más comunes de ambos segmentos:
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.5-landing-es-seguridad.png" alt="Landing page: seguridad" width="80%"/>
+  <br/><br/>
+  <img src="resources/Cap7/7.2.1.5-landing-es-faq.png" alt="Landing page: preguntas frecuentes" width="80%"/>
+</div>
+
+La sección de descarga dirige al visitante a la aplicación para Android:
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.5-landing-es-descarga.png" alt="Landing page: descarga" width="80%"/>
+</div>
+
+La página está disponible en inglés (en_US) y se adapta a pantallas de teléfono, con el menú de navegación agrupado en un botón:
+
+| Versión en inglés | Versión móvil |
+|---|---|
+| <img src="resources/Cap7/7.2.1.5-landing-en-hero.png" alt="Landing page en inglés" width="420"/> | <img src="resources/Cap7/7.2.1.5-landing-es-movil.png" alt="Landing page en móvil" width="200"/> |
+
+**URL de la landing page:** https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/
+
+**Mobile Application (LatiFi Wallet)**
+
+El prestatario conoce el modelo P2P en el onboarding, conecta su billetera, elige su rol y completa su perfil ligero:
+
+| Onboarding | Conectar billetera | Elegir rol | Perfil ligero |
+|---|---|---|---|
+| <img src="resources/Cap7/7.2.1.5-app-01-onboarding.png" alt="Onboarding" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-02-conectar.png" alt="Conectar billetera" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-03-rol.png" alt="Elegir rol" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-04-perfil.png" alt="Perfil ligero" width="180"/> |
+
+Desde su inicio, el prestatario solicita un préstamo con el resumen de cuotas en moneda local, sigue el estado de la transacción y consulta su reputación:
+
+| Inicio del prestatario | Solicitar préstamo | Estado de la transacción | Reputación |
+|---|---|---|---|
+| <img src="resources/Cap7/7.2.1.5-app-05-inicio-prestatario.png" alt="Inicio del prestatario" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-06-solicitar.png" alt="Solicitar préstamo" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-07-estado-tx.png" alt="Estado de la transacción" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-08-reputacion.png" alt="Reputación" width="180"/> |
+
+El prestamista explora el feed ordenado por reputación, revisa el detalle de una solicitud, la fondea y sigue su inversión en el portafolio:
+
+| Feed de inversión | Detalle de la solicitud | Confirmar fondeo | Portafolio |
+|---|---|---|---|
+| <img src="resources/Cap7/7.2.1.5-app-09-feed.png" alt="Feed de inversión" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-10-detalle-solicitud.png" alt="Detalle de la solicitud" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-11-fondear.png" alt="Confirmar fondeo" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-12-portafolio.png" alt="Portafolio" width="180"/> |
+
+**Video de ejecución del Sprint 1:** [FALTA VIDEO](URL_DEL_VIDEO)
+
+El video recorre la landing page en ambos idiomas y los user flows de la aplicación: conectar la billetera, solicitar un préstamo y pagar una cuota como prestatario, y fondear una solicitud como prestamista.
 ##### 7.2.1.6. Services Documentation Evidence for Sprint Review.
 
 En el Sprint 1 se documentaron con OpenAPI 3.0 los diez endpoints de LatiFi API, que cubren la autenticación por firma de billetera, el perfil ligero, la reputación, los préstamos y la conversión a moneda local. El contrato `openapi/latifi-api.v0.yaml` (versión 0.2.0) se escribió antes que el código y es la fuente común de la API y de la aplicación móvil: una prueba de la API falla si el código se aparta del contrato, y otra prueba de la aplicación falla si su cliente Retrofit deja de coincidir con él. La documentación se publica con Swagger UI, generada desde el código con springdoc-openapi.
