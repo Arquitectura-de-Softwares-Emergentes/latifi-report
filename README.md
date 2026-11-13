@@ -52,6 +52,7 @@
 | 2.8 | 30/10/2026 | Juan Angulo | Swift y iOS reformulados como trabajo futuro en 1.2, 4.1 y 4.2, con Android como única plataforma que construye el equipo. |
 | 2.9 | 30/10/2026 | Juan Angulo | Numeración de la arquitectura de software del Capítulo IV como 4.3, 4.3.1, 4.3.2 y 4.3.3, según el enunciado, y confirmación de 2.2.3 (análisis de entrevistas), 4.3.1 y el diagrama de despliegue agregado en la versión 1.6. |
 | 3.0 | 30/10/2026 | Juan Angulo | Reparación de la tabla de contenido: sección 4.3 y sus subsecciones agregadas, todas las secciones numeradas listadas hasta tres niveles (Capítulo V hasta 5.X) y niveles de encabezado de 6.1.1 y 6.1.2 normalizados. Versión del avance TP1. |
+| 3.1 | 12/11/2026 | Juan Angulo | Alineación de los diagramas C4 de 4.3.1 a 4.3.3 con el sistema construido (billetera externa con Reown, indexador embebido, GitHub Pages, Dokploy, GHCR y Firebase App Distribution), tabla de despliegue y carpeta docs/evidence con los hechos verificados. |
 
 # Project Report Collaboration Insights
 
@@ -1255,7 +1256,9 @@ El flujo de mensajes del happy path entre bounded contexts es el siguiente. El *
 
 **System Landscape Diagram (C4)**
 
-El panorama de sistemas reúne todo lo que el equipo construye y todo lo que LatiFi usa sin construirlo. Cuatro sistemas propios sirven a tres tipos de persona: la aplicación LatiFi Wallet para el prestatario y el prestamista, la LatiFi API que guarda perfiles y reputación, los Smart Contracts que ejecutan el préstamo y la Landing Page que atiende al visitante. Dos sistemas externos completan el panorama: la red Polygon Amoy, donde viven los contratos, y la API de tasas de cambio que alimenta la conversión a moneda local.
+El panorama de sistemas reúne todo lo que el equipo construye y todo lo que LatiFi usa sin construirlo. Cuatro sistemas propios sirven a tres tipos de persona: la aplicación LatiFi Wallet para el prestatario y el prestamista, la LatiFi API que guarda perfiles, reputación y tasas, los Smart Contracts LoanBook y MockStablecoin que ejecutan el préstamo, y la Landing Page que atiende al visitante. Cinco sistemas externos completan el panorama: la red Polygon Amoy, donde viven los contratos; el proveedor de tasas de cambio (open.er-api.com, de ExchangeRate-API); la billetera propia del usuario, que puede ser MetaMask u otra compatible con WalletConnect; el relay de Reown, que lleva las solicitudes de firma; y Firebase App Distribution, el canal por el que la app Android llega a los testers.
+
+La app no guarda ninguna llave privada. Cada firma se pide a la billetera del usuario a través de Reown, y la billetera firma y envía la transacción a Polygon Amoy. Esta decisión reemplaza el modelo de llave propia del ADR-0001, que se tomó en la Fase 5; la nota que lo deja escrito en el propio ADR queda para la Fase 8.
 
 ```mermaid
 graph TD
@@ -1264,53 +1267,76 @@ graph TD
     Visitante["Visitante Web"]
 
     subgraph "Sistemas de LatiFi"
-        Wallet["LatiFi Wallet<br/>[Sistema de Software]<br/>App móvil Android"]
-        API["LatiFi API<br/>[Sistema de Software]<br/>Perfil, reputación y tasas"]
-        SC["Smart Contracts<br/>[Sistema de Software]<br/>Ciclo del préstamo"]
+        Wallet["LatiFi Wallet<br/>[Sistema de Software]<br/>App móvil Android, sin llaves"]
+        API["LatiFi API<br/>[Sistema de Software]<br/>Perfil, reputación, tasas e indexador"]
+        SC["Smart Contracts<br/>[Sistema de Software]<br/>LoanBook y MockStablecoin"]
         Landing["Landing Page<br/>[Sistema de Software]<br/>Sitio institucional"]
     end
 
+    UserWallet["Billetera del usuario<br/>[Sistema Externo]<br/>MetaMask u otra con WalletConnect"]
+    Reown["Relay de Reown<br/>[Sistema Externo]"]
+    Firebase["Firebase App Distribution<br/>[Sistema Externo]"]
     Polygon["Polygon Amoy<br/>[Sistema Externo]"]
-    FXApi["API de Tasas de Cambio<br/>[Sistema Externo]"]
+    FXApi["Proveedor de tasas de cambio<br/>[Sistema Externo]<br/>open.er-api.com"]
 
     Prestatario --> Wallet
     Prestamista --> Wallet
+    Prestatario -->|"Aprueba cada firma"| UserWallet
+    Prestamista -->|"Aprueba cada firma"| UserWallet
     Visitante --> Landing
     Wallet -->|"REST/HTTPS"| API
-    Wallet -->|"Transacciones firmadas"| SC
+    Wallet -->|"Solicita la firma"| Reown
+    Reown -->|"Entrega la solicitud"| UserWallet
+    UserWallet -->|"Firma y envía la transacción"| Polygon
     SC -->|"Se ejecuta en"| Polygon
     API -->|"Lee eventos"| Polygon
     API -->|"Consulta cotizaciones"| FXApi
-    Landing -.->|"Enlaza a la descarga"| Wallet
+    Landing -.->|"Enlaza a la descarga"| Firebase
+    Firebase -.->|"Entrega la app a los testers"| Wallet
 
     style Wallet fill:#1168bd,color:#fff
     style API fill:#1168bd,color:#fff
     style SC fill:#1168bd,color:#fff
     style Landing fill:#1168bd,color:#fff
+    style UserWallet fill:#999,color:#fff
+    style Reown fill:#999,color:#fff
+    style Firebase fill:#999,color:#fff
     style Polygon fill:#999,color:#fff
     style FXApi fill:#999,color:#fff
 ```
 
 **Context Level Diagram (C4, Nivel 1)**
 
-El sistema LatiFi se representa como una única caja negra ("LatiFi Platform") rodeada de cuatro actores externos. El **Prestatario** y el **Prestamista** interactúan con el sistema a través de la app móvil LatiFi Wallet para solicitar, fondear, pagar y consultar préstamos. La **red blockchain Polygon Amoy** es un sistema externo con el que LatiFi Platform intercambia transacciones firmadas y eventos on-chain, actuando como el libro mayor inmutable del ciclo de préstamo. La **API externa de tasas de cambio** es otro sistema externo, consumido unidireccionalmente por LatiFi Platform para obtener cotizaciones de stablecoin a moneda local, sin que LatiFi le exponga nada a cambio. Un quinto actor, el **Visitante web**, interactúa únicamente con la porción pública de LatiFi Platform (la Landing Page) sin necesidad de wallet ni cuenta.
+El sistema LatiFi se representa como una única caja negra ("LatiFi Platform") rodeada de personas y de sistemas externos. El **Prestatario** y el **Prestamista** usan la app móvil LatiFi Wallet para solicitar, fondear, pagar y consultar préstamos, y aprueban cada firma en su propia billetera. La **billetera del usuario** y el **relay de Reown** son sistemas externos: LatiFi Platform les pide una firma y la billetera envía la transacción a **Polygon Amoy**, la red externa que actúa como libro mayor inmutable del ciclo de préstamo y de la que LatiFi Platform también lee eventos. El **proveedor de tasas de cambio** es otro sistema externo, que LatiFi Platform consume en un solo sentido para obtener cotizaciones de stablecoin a moneda local. **Firebase App Distribution** entrega la app a los testers. El **Visitante web** solo usa la porción pública de LatiFi Platform, la Landing Page, y no necesita billetera ni cuenta.
 
 ```mermaid
 graph TD
     Prestatario["Prestatario<br/>(no bancarizado)"]
     Prestamista["Prestamista<br/>(capital ocioso)"]
     Visitante["Visitante Web<br/>(prestatario/prestamista potencial)"]
-    LatiFi["LatiFi Platform<br/>[Sistema de Software]<br/>Plataforma de microcréditos P2P<br/>descentralizada basada en reputación"]
+    LatiFi["LatiFi Platform<br/>[Sistema de Software]<br/>Plataforma de microcréditos P2P<br/>basada en reputación, sin llaves en la app"]
+    UserWallet["Billetera del usuario<br/>[Sistema Externo]<br/>Firma y envía las transacciones"]
+    Reown["Relay de Reown<br/>[Sistema Externo]<br/>Transporta las solicitudes de firma"]
+    Firebase["Firebase App Distribution<br/>[Sistema Externo]<br/>Canal de instalación para testers"]
     Polygon["Polygon Amoy<br/>[Sistema Externo]<br/>Red blockchain testnet"]
-    FXApi["API de Tasas de Cambio<br/>[Sistema Externo]<br/>Proveedor de cotizaciones FX"]
+    FXApi["Proveedor de tasas de cambio<br/>[Sistema Externo]<br/>Cotizaciones FX"]
 
     Prestatario -->|"Solicita, paga préstamos"| LatiFi
     Prestamista -->|"Explora feed, fondea préstamos"| LatiFi
+    Prestatario -->|"Aprueba firmas"| UserWallet
+    Prestamista -->|"Aprueba firmas"| UserWallet
     Visitante -->|"Consulta propuesta de valor"| LatiFi
-    LatiFi -->|"Envía transacciones firmadas /<br/>lee eventos on-chain"| Polygon
+    LatiFi -->|"Pide cada firma"| Reown
+    Reown -->|"Entrega la solicitud"| UserWallet
+    UserWallet -->|"Envía la transacción firmada"| Polygon
+    LatiFi -->|"Lee eventos on-chain"| Polygon
     LatiFi -->|"Consulta cotizaciones"| FXApi
+    Firebase -.->|"Entrega la app"| LatiFi
 
     style LatiFi fill:#1168bd,color:#fff
+    style UserWallet fill:#999,color:#fff
+    style Reown fill:#999,color:#fff
+    style Firebase fill:#999,color:#fff
     style Polygon fill:#999,color:#fff
     style FXApi fill:#999,color:#fff
 ```
@@ -1319,7 +1345,9 @@ graph TD
 
 **Container Level Diagram (C4, Nivel 2)**
 
-Al abrir la caja negra "LatiFi Platform", se distinguen seis contenedores. **LatiFi Wallet (mobile)**, app nativa Kotlin para Android, es el punto de entrada de Prestatario y Prestamista; se comunica directamente con los **Smart Contracts** vía JSON-RPC (para acciones que el usuario inicia: conectar, fondear, pagar) y con la **LatiFi API** vía REST/HTTPS (para perfil, reputación, feed y conversión de moneda). Los **Smart Contracts**, desplegados en Polygon Amoy, son la fuente de verdad del ciclo de préstamo y emiten eventos que el **Event Indexer** consume vía RPC. El Event Indexer traduce esos eventos y escribe en la **LatiFi DB** (PostgreSQL) a través de la propia LatiFi API, de la cual puede considerarse un proceso embebido para el alcance del curso. La **LatiFi API** (Spring Boot/NestJS/ASP.NET Core) expone los endpoints REST de perfil, reputación e historial, y de conversión de moneda (consumiendo a su vez la API externa de FX), persistiendo todo en la LatiFi DB. La **Landing Page**, contenedor estático independiente, no se comunica con ningún otro contenedor salvo, opcionalmente, un enlace de descarga hacia las tiendas de aplicaciones.
+Al abrir la caja negra "LatiFi Platform" se distinguen seis contenedores, cada uno con su repositorio. **LatiFi Wallet (mobile)**, en el repositorio latifi-android, es una app nativa Android escrita en Kotlin con Jetpack Compose y Reown AppKit. Es el punto de entrada de Prestatario y Prestamista. Se comunica con la **LatiFi API** por REST sobre HTTPS para perfil, reputación, feed y conversión de moneda, y lee Polygon Amoy por JSON-RPC, solo para consultas. Cada firma sale por otro camino: la app la pide a la billetera del usuario a través del relay de Reown, y la billetera firma y envía la transacción al contrato.
+
+Los **Smart Contracts**, en el repositorio latifi-contracts, están escritos en Solidity 0.8.35 y desplegados en Polygon Amoy. LoanBook ejecuta el ciclo del préstamo y MockStablecoin es la moneda de prueba. Son la fuente de verdad del préstamo y emiten eventos. La **LatiFi API**, en el repositorio latifi-api, usa Spring Boot 3.5 sobre Java 21 y expone los endpoints de perfil, reputación e historial y de conversión de moneda, para lo cual consulta a su vez al proveedor externo de tasas. El **Event Indexer** corre dentro del mismo proceso que la API. Lee los eventos con web3j mediante consultas periódicas de eth_getLogs a través de una llave RPC dedicada, y los escribe directamente en la **LatiFi DB** (PostgreSQL) por JDBC. Es idempotente por hash de transacción e índice del evento, así que releer un bloque no duplica filas. La **Landing Page**, en el repositorio latifi-landing, es un contenedor estático independiente que solo enlaza a la descarga de la app.
 
 ```mermaid
 graph TD
@@ -1330,27 +1358,32 @@ graph TD
     end
 
     subgraph "LatiFi Platform"
-        Mobile["LatiFi Wallet (Mobile)<br/>[Container: Kotlin, Android]<br/>Auth, feed, solicitud,<br/>fondeo, repago, perfil"]
-        SC["Smart Contracts<br/>[Container: Solidity]<br/>LoanFactory / LoanAgreement<br/>escrow, disbursement, repayment"]
-        Indexer["Event Indexer<br/>[Container: Java/TS,<br/>embebido en LatiFi API]<br/>Traduce eventos on-chain"]
-        API["LatiFi API<br/>[Container: Spring Boot /<br/>NestJS / ASP.NET Core]<br/>Profile, Reputation,<br/>Exchange Rate"]
-        DB[("LatiFi DB<br/>[Container: PostgreSQL]<br/>Perfiles, reputación,<br/>caché FX")]
-        Landing["Landing Page<br/>[Container: HTML5/CSS3/JS<br/>+ Material Design]"]
+        Mobile["LatiFi Wallet (Mobile)<br/>[Container: Kotlin, Jetpack Compose,<br/>Reown AppKit, Android nativo]<br/>Repositorio latifi-android"]
+        SC["Smart Contracts<br/>[Container: Solidity 0.8.35]<br/>LoanBook y MockStablecoin<br/>Repositorio latifi-contracts"]
+        API["LatiFi API<br/>[Container: Spring Boot 3.5, Java 21]<br/>Profile, Reputation, Exchange Rate<br/>Repositorio latifi-api"]
+        Indexer["Event Indexer<br/>[Container: web3j, embebido en<br/>el proceso de LatiFi API]<br/>Traduce eventos on-chain"]
+        DB[("LatiFi DB<br/>[Container: PostgreSQL]<br/>Perfiles, reputación,<br/>eventos indexados, caché FX")]
+        Landing["Landing Page<br/>[Container: HTML5, CSS3, JavaScript]<br/>Repositorio latifi-landing"]
     end
 
+    UserWallet["Billetera del usuario<br/>[Sistema Externo]"]
+    Reown["Relay de Reown<br/>[Sistema Externo]"]
     Polygon["Polygon Amoy<br/>[Sistema Externo]"]
-    FXApi["API de Tasas de Cambio<br/>[Sistema Externo]"]
+    FXApi["Proveedor de tasas de cambio<br/>[Sistema Externo]"]
 
     Prestatario --> Mobile
     Prestamista --> Mobile
     Visitante --> Landing
 
-    Mobile -->|"JSON-RPC<br/>(firma de transacciones)"| SC
     Mobile -->|"REST/HTTPS"| API
-    SC -->|"emite eventos"| Polygon
-    Indexer -->|"eth_getLogs /<br/>ethLogFlowable"| Polygon
-    Indexer -->|"escribe eventos<br/>traducidos"| API
-    API -->|"lee/escribe"| DB
+    Mobile -->|"JSON-RPC, solo lecturas"| Polygon
+    Mobile -->|"Pide cada firma"| Reown
+    Reown -->|"Entrega la solicitud"| UserWallet
+    UserWallet -->|"Firma y envía la transacción"| SC
+    SC -->|"emite eventos en"| Polygon
+    Indexer -->|"eth_getLogs con llave RPC dedicada"| Polygon
+    Indexer -->|"escribe eventos por JDBC"| DB
+    API -->|"JDBC, lee y escribe"| DB
     API -->|"consulta cotizaciones"| FXApi
 
     style Mobile fill:#1168bd,color:#fff
@@ -1359,6 +1392,8 @@ graph TD
     style API fill:#1168bd,color:#fff
     style DB fill:#1168bd,color:#fff
     style Landing fill:#1168bd,color:#fff
+    style UserWallet fill:#999,color:#fff
+    style Reown fill:#999,color:#fff
     style Polygon fill:#999,color:#fff
     style FXApi fill:#999,color:#fff
 ```
@@ -1367,48 +1402,103 @@ graph TD
 
 **Deployment Diagram (C4)**
 
-El despliegue distribuye el sistema en cuatro nodos. La aplicación se instala en el teléfono Android del usuario, donde la clave de su billetera queda protegida en el Android Keystore y nunca sale del dispositivo. Los Smart Contracts viven en la red de pruebas Polygon Amoy. LatiFi API, el indexador de eventos, la base de datos PostgreSQL y la landing page corren en un servidor privado virtual (VPS) de Hetzner administrado con Dokploy, que construye y publica cada servicio desde su repositorio de GitHub. El visitante accede a la landing desde su navegador.
+El despliegue distribuye el sistema en los nodos que usa el equipo. La app se instala en el teléfono Android desde Firebase App Distribution, y allí el Android Keystore sella la sesión (dirección y token), no una llave de billetera. La landing page se publica como sitio estático en GitHub Pages y el visitante la abre desde su navegador. Los Smart Contracts viven en Polygon Amoy. El código de la API pasa por GitHub Actions, que construye y prueba la imagen y la publica en GHCR. El servidor privado virtual (VPS) de Hetzner administrado con Dokploy construye el contenedor latifi-api desde el Dockerfile del repositorio con la integración Git, y Traefik publica el servicio por HTTPS con certificados de Let's Encrypt. En el mismo VPS corre una instancia compartida de PostgreSQL con una base de datos para LatiFi. El indexador lee Polygon Amoy a través de un proveedor RPC con llave dedicada, y la app pide sus firmas por el relay de Reown. Tres datos dependen del despliegue en vivo y siguen marcados como pendientes hasta que existan: la URL base de la API, la URL de Swagger UI y el enlace de invitación de Firebase.
 
 ```mermaid
 graph TD
     subgraph "Teléfono Android"
-        App["LatiFi Wallet<br/>[App Kotlin]"]
-        KS["Android Keystore<br/>[Clave de la billetera]"]
+        App["LatiFi Wallet<br/>[App Kotlin]<br/>Paquete com.latifi.wallet"]
+        KS["Android Keystore<br/>[Sesión sellada: dirección y token]"]
     end
+
+    UserWallet["Billetera del usuario<br/>[MetaMask u otra con WalletConnect]"]
 
     subgraph "Navegador"
         Browser["Landing Page<br/>[HTML5 / CSS3 / JS]"]
     end
 
+    Firebase["Firebase App Distribution<br/>[Canal de testers]<br/>Enlace de invitación de Firebase App Distribution: PENDIENTE"]
+
+    subgraph "GitHub Pages"
+        Pages["Landing Page<br/>[Sitio estático]<br/>https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/"]
+    end
+
+    subgraph "GitHub"
+        Repo["Repositorio latifi-api"]
+        CI["GitHub Actions<br/>[Construye y prueba la imagen]"]
+        GHCR["GHCR<br/>[Registro de imágenes]<br/>ghcr.io/arquitectura-de-softwares-emergentes/latifi-api"]
+    end
+
     subgraph "VPS Hetzner con Dokploy"
-        APIsrv["LatiFi API + Event Indexer<br/>[Servicio REST]"]
-        PG[("PostgreSQL<br/>[Base de datos]")]
-        Static["Landing Page<br/>[Sitio estático]"]
+        Dokploy["Dokploy<br/>[Integración Git]<br/>Construye con el Dockerfile"]
+        Traefik["Traefik<br/>[HTTPS con Let's Encrypt]"]
+        APIsrv["latifi-api<br/>[Contenedor Spring Boot con el Event Indexer]<br/>URL base de la API: PENDIENTE<br/>URL de Swagger UI: PENDIENTE"]
+        PG[("PostgreSQL compartido<br/>[Base de datos de LatiFi]")]
     end
 
-    subgraph "Polygon Amoy (testnet)"
-        Contracts["Smart Contracts<br/>[Solidity]<br/>Préstamo y stablecoin de prueba"]
+    subgraph "Polygon Amoy (testnet, cadena 80002)"
+        Contracts["Smart Contracts<br/>[Solidity]<br/>LoanBook 0xccb8ad15a4954138c987a77924ceab468a843266<br/>MockStablecoin 0x66757f1cc66b278bfc0eefad7e3cac1d70fd4f8b"]
     end
 
-    FX["API de Tasas de Cambio<br/>[Sistema Externo]"]
+    RPC["Proveedor RPC<br/>[Sistema Externo]<br/>Llave dedicada"]
+    Reown["Relay de Reown<br/>[Sistema Externo]"]
+    FX["Proveedor de tasas de cambio<br/>[Sistema Externo]<br/>https://open.er-api.com/v6/latest/USD"]
 
+    Firebase -->|"Entrega el APK"| App
     App --> KS
-    App -->|"HTTPS"| APIsrv
-    App -->|"JSON-RPC: transacciones firmadas"| Contracts
-    Browser -->|"HTTPS"| Static
+    App -->|"HTTPS"| Traefik
+    Traefik --> APIsrv
+    App -->|"JSON-RPC, solo lecturas"| Contracts
+    App -->|"Pide cada firma"| Reown
+    Reown -->|"Entrega la solicitud"| UserWallet
+    UserWallet -->|"Firma y envía la transacción"| Contracts
+    Browser -->|"HTTPS"| Pages
+    Pages -.->|"Enlaza a la descarga"| Firebase
+    Repo --> CI
+    CI -->|"Publica la imagen probada"| GHCR
+    Dokploy -->|"Clona el repositorio"| Repo
+    Dokploy -->|"Despliega"| APIsrv
     APIsrv --> PG
-    APIsrv -->|"eth_getLogs"| Contracts
+    APIsrv -->|"eth_getLogs"| RPC
+    RPC -->|"Consulta la cadena"| Contracts
     APIsrv -->|"HTTPS"| FX
 
     style App fill:#1168bd,color:#fff
     style KS fill:#1168bd,color:#fff
+    style Browser fill:#1168bd,color:#fff
+    style Pages fill:#1168bd,color:#fff
+    style Repo fill:#1168bd,color:#fff
+    style CI fill:#1168bd,color:#fff
+    style GHCR fill:#1168bd,color:#fff
+    style Dokploy fill:#1168bd,color:#fff
+    style Traefik fill:#1168bd,color:#fff
     style APIsrv fill:#1168bd,color:#fff
     style PG fill:#1168bd,color:#fff
-    style Static fill:#1168bd,color:#fff
-    style Browser fill:#1168bd,color:#fff
     style Contracts fill:#1168bd,color:#fff
+    style UserWallet fill:#999,color:#fff
+    style Firebase fill:#999,color:#fff
+    style RPC fill:#999,color:#fff
+    style Reown fill:#999,color:#fff
     style FX fill:#999,color:#fff
 ```
+
+**Tabla de despliegue**
+
+| Componente | Plataforma | Origen | URL o dirección | Cómo se despliega |
+|---|---|---|---|---|
+| LatiFi Wallet (app Android) | Teléfono Android | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-android | Paquete com.latifi.wallet | Build de release firmado, subido a Firebase App Distribution e instalado desde el enlace de invitación |
+| Firebase App Distribution | Servicio externo | Build de release de latifi-android | Enlace de invitación de Firebase App Distribution: PENDIENTE | El equipo sube el build y envía la invitación a los testers |
+| Landing Page | GitHub Pages | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-landing | https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/ | Un workflow de GitHub Actions publica el sitio estático |
+| Navegador del visitante | Equipo del visitante | Sin código propio | https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/ | Abre la landing por HTTPS |
+| Billetera del usuario | Dispositivo del usuario | Billetera de terceros | Sin URL de LatiFi | La instala el usuario; firma y envía cada transacción |
+| CI e imágenes | GitHub Actions y GHCR | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api | ghcr.io/arquitectura-de-softwares-emergentes/latifi-api | El workflow ci construye y prueba la imagen y publish-image la publica en main y en las etiquetas v* |
+| Dokploy y Traefik | VPS Hetzner | Instancia propia del equipo | Sin URL pública de administración | Dokploy construye desde el repositorio con la integración Git; Traefik sirve HTTPS con Let's Encrypt |
+| LatiFi API con Event Indexer | VPS Hetzner con Dokploy | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api | URL base de la API: PENDIENTE y URL de Swagger UI: PENDIENTE | Contenedor construido desde el Dockerfile del repositorio; los secretos van en la configuración de Dokploy |
+| PostgreSQL | VPS Hetzner con Dokploy | Instancia compartida de Dokploy | Sin URL pública | Base de datos propia de LatiFi con un usuario de mínimos privilegios |
+| Smart Contracts | Polygon Amoy, cadena 80002 | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-contracts | LoanBook 0xccb8ad15a4954138c987a77924ceab468a843266, MockStablecoin 0x66757f1cc66b278bfc0eefad7e3cac1d70fd4f8b, explorador https://amoy.polygonscan.com/address/0xccb8ad15a4954138c987a77924ceab468a843266 | Despliegue desde el repositorio, con las direcciones registradas en deployments/amoy.json |
+| Proveedor RPC | Servicio externo | Cuenta del equipo | No se publica, la URL lleva una llave | La llave dedicada se guarda como secreto en Dokploy |
+| Relay de Reown | Servicio externo | Proyecto de Reown del equipo | Sin URL de LatiFi | El proyecto de Reown debe admitir el paquete com.latifi.wallet |
+| Proveedor de tasas de cambio | Servicio externo | ExchangeRate-API | https://open.er-api.com/v6/latest/USD | La API lo consulta y guarda las cotizaciones en PostgreSQL |
 
 ## Capítulo V: Tactical-Level Software Design
 

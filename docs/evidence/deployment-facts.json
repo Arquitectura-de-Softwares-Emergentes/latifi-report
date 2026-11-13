@@ -1,0 +1,168 @@
+{
+  "description": "Hechos verificables del sistema desplegado. Cada hecho vivo se comprueba contra su fuente de verdad con check-evidence.py. Los hechos pendientes esperan un despliegue real y nunca llevan un valor inventado.",
+  "facts": [
+    {
+      "id": "repo-android",
+      "label": "Repositorio de la app Android",
+      "value": "https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-android",
+      "status": "live",
+      "diagram": true,
+      "source": "git remote origin de latifi-android",
+      "verify": { "type": "git-remote", "repo": "latifi-android" }
+    },
+    {
+      "id": "repo-api",
+      "label": "Repositorio de la LatiFi API",
+      "value": "https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api",
+      "status": "live",
+      "diagram": true,
+      "source": "git remote origin de latifi-api",
+      "verify": { "type": "git-remote", "repo": "latifi-api" }
+    },
+    {
+      "id": "repo-contracts",
+      "label": "Repositorio de los Smart Contracts",
+      "value": "https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-contracts",
+      "status": "live",
+      "diagram": true,
+      "source": "git remote origin de latifi-contracts",
+      "verify": { "type": "git-remote", "repo": "latifi-contracts" }
+    },
+    {
+      "id": "repo-landing",
+      "label": "Repositorio de la Landing Page",
+      "value": "https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-landing",
+      "status": "live",
+      "diagram": true,
+      "source": "git remote origin de latifi-landing",
+      "verify": { "type": "git-remote", "repo": "latifi-landing" }
+    },
+    {
+      "id": "repo-report",
+      "label": "Repositorio del informe",
+      "value": "https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-report",
+      "status": "live",
+      "diagram": false,
+      "source": "git remote origin de latifi-report",
+      "verify": { "type": "git-remote", "repo": "latifi-report" }
+    },
+    {
+      "id": "landing-url",
+      "label": "URL de la Landing Page",
+      "value": "https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/",
+      "status": "live",
+      "diagram": true,
+      "source": "latifi-landing/scripts/site-url.txt",
+      "verify": { "type": "text", "file": "latifi-landing/scripts/site-url.txt" }
+    },
+    {
+      "id": "amoy-chain-id",
+      "label": "Identificador de cadena de Polygon Amoy",
+      "value": "80002",
+      "status": "live",
+      "diagram": true,
+      "source": "latifi-contracts/deployments/amoy.json",
+      "verify": { "type": "json", "file": "latifi-contracts/deployments/amoy.json", "path": "chainId" }
+    },
+    {
+      "id": "loanbook-address",
+      "label": "Dirección del contrato LoanBook",
+      "value": "0xccb8ad15a4954138c987a77924ceab468a843266",
+      "status": "live",
+      "diagram": true,
+      "source": "latifi-contracts/deployments/amoy.json",
+      "verify": {
+        "type": "json",
+        "file": "latifi-contracts/deployments/amoy.json",
+        "path": "contracts.LoanBook.address",
+        "case_insensitive": true
+      }
+    },
+    {
+      "id": "token-address",
+      "label": "Dirección del contrato MockStablecoin",
+      "value": "0x66757f1cc66b278bfc0eefad7e3cac1d70fd4f8b",
+      "status": "live",
+      "diagram": true,
+      "source": "latifi-contracts/deployments/amoy.json",
+      "verify": {
+        "type": "json",
+        "file": "latifi-contracts/deployments/amoy.json",
+        "path": "contracts.MockStablecoin.address",
+        "case_insensitive": true
+      }
+    },
+    {
+      "id": "explorer-loanbook",
+      "label": "Explorador de bloques del contrato LoanBook",
+      "value": "https://amoy.polygonscan.com/address/0xccb8ad15a4954138c987a77924ceab468a843266",
+      "status": "live",
+      "diagram": true,
+      "source": "derivado de loanbook-address",
+      "verify": { "type": "compose", "template": "https://amoy.polygonscan.com/address/{loanbook-address}" }
+    },
+    {
+      "id": "ghcr-image",
+      "label": "Imagen de contenedor de la API en GHCR",
+      "value": "ghcr.io/arquitectura-de-softwares-emergentes/latifi-api",
+      "status": "live",
+      "diagram": true,
+      "source": "latifi-api/scripts/image-tags.sh",
+      "verify": {
+        "type": "contains",
+        "file": "latifi-api/scripts/image-tags.sh",
+        "text": "ghcr.io/arquitectura-de-softwares-emergentes/latifi-api"
+      }
+    },
+    {
+      "id": "android-package",
+      "label": "Paquete de la app Android",
+      "value": "com.latifi.wallet",
+      "status": "live",
+      "diagram": true,
+      "source": "latifi-android/app/build.gradle.kts",
+      "verify": {
+        "type": "contains",
+        "file": "latifi-android/app/build.gradle.kts",
+        "text": "applicationId = \"com.latifi.wallet\""
+      }
+    },
+    {
+      "id": "fx-provider",
+      "label": "Proveedor de tasas de cambio",
+      "value": "https://open.er-api.com/v6/latest/USD",
+      "status": "live",
+      "diagram": true,
+      "source": "latifi-api/src/main/resources/application.yml",
+      "verify": {
+        "type": "contains",
+        "file": "latifi-api/src/main/resources/application.yml",
+        "text": "https://open.er-api.com/v6/latest/USD"
+      }
+    },
+    {
+      "id": "api-base-url",
+      "label": "URL base de la API",
+      "value": null,
+      "status": "pending",
+      "diagram": true,
+      "source": "plan 07-07 (despliegue de la API en Dokploy)"
+    },
+    {
+      "id": "swagger-url",
+      "label": "URL de Swagger UI",
+      "value": null,
+      "status": "pending",
+      "diagram": true,
+      "source": "plan 07-07 (despliegue de la API en Dokploy)"
+    },
+    {
+      "id": "firebase-invite-url",
+      "label": "Enlace de invitación de Firebase App Distribution",
+      "value": null,
+      "status": "pending",
+      "diagram": true,
+      "source": "plan 07-09 (distribución de la app Android)"
+    }
+  ]
+}
