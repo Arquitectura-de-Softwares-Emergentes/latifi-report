@@ -151,6 +151,7 @@ Las capturas siguientes muestran los analíticos del repositorio del informe en 
   - [6.4. Mobile Applications UX/UI Design](#64-mobile-applications-uxui-design)
     - [6.4.1. Mobile Applications Wireframes](#641-mobile-applications-wireframes)
     - [6.4.2. Mobile Applications Wireflow](#642-mobile-applications-wireflow)
+  - [6.5. Applications Prototyping](#65-applications-prototyping)
 - [Avance de Conclusiones](#avance-de-conclusiones)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
