@@ -3233,77 +3233,187 @@ Esta última sección muestra los estándares de seguridad criptográfica de gra
 | LatiFi Landing Page Parte 2 | Desktop Web Browser | Cómo funciona (tres pasos por segmento), Finanzas justas con cuatro tarjetas y bloque de impacto con fotografía | US-LAND-01 | Muestra los títulos de #como-funciona y #beneficios. | Cumple: las tarjetas combinan ícono, título y texto, y el bloque de impacto mantiene la jerarquía. Difiere: la tarjeta de doble denominación habla de "respaldadas 1:1 en USDC", y la conversión a soles es solo de referencia (US-LEND-06). La cifra "menos de 3 min de aprobación" no corresponde al modelo de fondeo. La fotografía necesita texto alternativo, que se verifica al implementar. |
 | LatiFi Landing Page Parte 3 | Desktop Web Browser | Seguridad, preguntas frecuentes, llamado final y pie de página | US-LAND-01, US-LAND-02 | Muestra los títulos de #seguridad y #faq. El llamado final dice "Conectar Wallet Web3" y no lleva a una descarga (#descarga). | Cumple: el pie reúne Términos y condiciones y Política de privacidad, y el acordeón usa un chevron junto al texto. Difiere: la tarjeta de protección menciona oráculos de tasa auditados y el alcance no usa oráculos. Los íconos de redes sociales no llevan texto visible, por lo que necesitan un nombre accesible (se verifica al implementar). El selector de idioma no aparece en el pie. |
 
-### 6.4. Mobile Applications UX/UI Design
+### 6.4. Applications UX/UI Design
 
-Las pantallas móviles traducen el modelo de información de 6.2 en dos barras de navegación por rol, filtros por chips y flujos de varios pasos sin barra inferior. La guía de 6.1 fija la paleta Navy 900 y Green 600, las fuentes Sora e Inter, los objetivos táctiles de 48 dp y los chips con ícono y texto. A11Y.md añade el contraste mínimo, las etiquetas visibles en los campos y el anuncio de los cambios de estado. La tabla de 6.4.1 relaciona cada imagen con las historias que atiende, con su zona de 6.2.3 o su destino de 6.2.5 y con una nota de coherencia. Cuando una imagen contradice el alcance vigente, por ejemplo porque ADR-0001 define la firma con la billetera como forma de entrar, la nota lo dice y la pantalla pasa a la lista de pantallas por rehacer que recibe el equipo.
+Esta sección presenta el diseño de la aplicación móvil LatiFi Wallet para Android en tres niveles: los wireframes de cada pantalla (6.4.1), los wireflows que encadenan esas pantallas según el objetivo de cada persona (6.4.2) y el prototipo navegable con su video de recorrido (6.5). Las tres piezas salen de una misma fuente, el prototipo, de modo que cada pantalla tiene un solo código y se ve igual en las tres secciones.
 
-#### 6.4.1. Mobile Applications Wireframes
+Las pantallas siguen las guías de 6.1 (Navy 900, Lime 400, Green 600, Sora e Inter, objetivos táctiles de 48 dp y botones totalmente redondeados), la navegación de 6.2.5 (dos barras inferiores por rol y flujos de varios pasos sin barra inferior) y el etiquetado de 6.2.2 (Billetera, Comisión de red, Comprobante, En mora). Los textos son los de la versión es_419 de la app en el repositorio `latifi-android`, y el comportamiento sigue las decisiones vigentes: el usuario conecta su propia billetera y firma un desafío para entrar (ADR-0001 y TS-API-05), los préstamos se pagan en 1 a 6 cuotas con interés simple anual (ADR-0004) y los montos están en tUSD, la moneda de prueba del proyecto, con su equivalente en soles (ADR-0003 y US-LEND-06). La reputación se muestra de 0 a 1000 con los niveles Nuevo, En construcción, Confiable y Excelente, como la calculan la LatiFi API y la app.
 
-> **Trazabilidad:** Las interfaces móviles responden a las historias de usuario del flujo transaccional y de gestión de microcréditos de la aplicación.
+#### 6.4.1. Applications Wireframes
 
-La tabla describe lo que muestra cada imagen. Los nombres de las imágenes Firma Criptográfica, Dashboard Principal, Configurar Solicitud Parte 1, Configurar Solicitud Parte 2 y Reputación On-Chain están desplazados un lugar respecto de su contenido, y las filas lo indican. Lo que solo el código puede cumplir (contraste medido, tamaño de los objetivos táctiles, nombres accesibles de los íconos, anuncio de los estados y escalado al 200 %) se verifica al implementar.
+Los wireframes muestran la estructura de 45 pantallas y estados de la aplicación en baja fidelidad: escala de grises, sin color de marca y con las ilustraciones reemplazadas por una caja con aspa. Cada pantalla lleva un código (A para el ingreso, B y C para el prestatario, L para el prestamista y P para los estados del pago) que se repite en los wireflows de 6.4.2 y en el prototipo de 6.5. Las hojas inferiores (ayuda, firma, estado de la transacción, orden y niveles) se muestran sobre la pantalla desde la que se abren, porque así las ve el usuario.
 
-| Frame | Pantalla | Historias | Zona de 6.2.3 o destino de 6.2.5 | Coherencia con 6.1, 6.2.3 y A11Y.md |
-|---|---|---|---|---|
-| Onboarding LatiFi | Bienvenida, paso 1 de 3: titular, tres beneficios, aviso de contratos auditados, tasa "desde 2.8 % APR", botón Empezar ahora y enlace Recuperar sesión | US-AUTH-03 | Autenticación y bienvenida, sin barra inferior, como pide la regla 4 de 6.2.5 | Cumple: el avance "Paso 1 de 3" va en texto, los beneficios llevan ícono y texto y el botón ocupa todo el ancho. Difiere: el botón principal es verde menta y 6.1 define Navy 900 con texto blanco en modo claro. El contenido contradice el alcance en tres puntos. Cita Polygon zkEVM y la red es Polygon Amoy. Presenta la tasa como APR cuando el prestatario la fija (US-LEND-01). Promete desembolso en soles por transferencia local. La pantalla queda en la lista por rehacer. |
-| Inicio de Sesión | Inicio de sesión con correo o teléfono, contraseña o PIN, Face ID, acceso alternativo con billetera externa y aviso de procesamiento | US-AUTH-01 | Autenticación, sin barra inferior, como pide la regla 4 de 6.2.5 | Cumple: cada campo tiene etiqueta visible y el placeholder solo da un ejemplo (SC 3.3.2). Difiere: US-AUTH-01 pide conectar la billetera sin usuario ni contraseña, y ADR-0001 hace de la firma con la billetera el inicio de sesión, por lo que la pantalla se rehace. Menciona Base Network y usa el término "Gas", mientras 6.2.2 pide "Comisión de red". El aviso "Procesando solicitud" tapa el enlace Regístrate gratis aquí y un texto aparece cortado, lo que afecta a SC 1.4.4 y 1.4.10. El botón es lima sobre fondo claro, y 6.1 reserva el lima para el modo oscuro. |
-| Registro de Cuenta | Registro, paso 1 de 2: nombre o negocio, celular de WhatsApp, correo, contraseña con confirmación, medidor de fuerza y aceptación de términos | US-IDEN-01 | Autenticación, sin barra inferior | Cumple: etiquetas visibles, marca "Requerido" en texto y casilla con enlaces a Términos y Privacidad. Difiere: US-IDEN-01 pide solo nombre y contacto después de conectar la billetera, y la pantalla agrega contraseña, correo y verificación por mensajería. Promete "aprobación en minutos" y la cifra "18k emprendedores ya financiados" no tiene respaldo en el informe. El medidor de fuerza usa tres tramos y su significado debe ir también en texto (se verifica al implementar). |
-| Autorización Segura | Autorización de ingreso con dos métodos: código de 6 dígitos enviado por WhatsApp y firma criptográfica de un desafío (nonce, marca de tiempo, Sign-In With Ethereum) | US-AUTH-01, US-AUTH-02 | Autenticación, sin barra inferior | Cumple: la tarjeta de firma describe un desafío que no mueve fondos, como en el flujo challenge y verify de la API (ADR-0001). Difiere: el código por WhatsApp y la mención de "2FA" quedan fuera del alcance, y la pantalla conserva solo la firma al rehacerse. El temporizador "00:00" y el botón Reenviar código van en texto. La tarjeta dice "Sin costo de gas" y 6.2.2 pide "Comisión de red". |
-| Firma Criptográfica | La imagen muestra el Dashboard del prestatario (pantalla 1.4): línea de crédito con equivalente en soles, préstamo #LND-4381 con 2 de 4 cuotas pagadas, próxima cuota con botón Pagar, acceso a pedir un nuevo crédito, score y actividad reciente. La firma aparece en la imagen Autorización Segura. | US-LEND-04, US-LEND-05, US-LEND-06, US-REP-01 | Inicio del prestatario, con la barra inferior Inicio, Préstamos, Reputación y Perfil. Zona Préstamos de 6.2.3 | Cumple: la barra trae los cuatro destinos de 6.2.5, el estado "Vigente al día" lleva punto y texto, la barra de cuotas suma el texto "2 de 4 cuotas pagadas" y las cuotas aparecen en dólares y en soles (US-LEND-06). Difiere: ofrece una "línea de crédito aprobada" y un oráculo de tipo de cambio, y el alcance usa solicitudes publicadas y una conversión de referencia de la API. El score marca 785 puntos y la escala va de 0 a 100. "Vigente al día" no está entre los estados de 6.2.2 (Abierta, Pendiente, Pagado, En mora). Usa el término "Gas". |
-| Dashboard Principal | La imagen muestra el paso 1 de 3 de la solicitud (pantalla 1.5): monto con atajos, plazo de 30, 45 o 60 días en 2, 3 o 4 cuotas quincenales y equivalente en soles | US-LEND-01, US-LEND-06 | Préstamos, pasos de solicitud de 6.2.5 (Monto y plazo, Destino, Firma) | Cumple: el avance "Paso 1 de 3" lleva porcentaje y las etiquetas de paso llevan ícono y texto, y las cuotas respetan el rango de 1 a 6 de ADR-0004. Difiere: pide monto y plazo pero no la tasa que US-LEND-01 asigna al prestatario. Habla de "línea pre-aprobada" y "aprobación algorítmica", y el monto usa una tipografía monoespaciada en vez de Sora. |
-| Configurar Solicitud Parte 1 | La imagen muestra la proyección de la solicitud (continúa el paso 1): cuota quincenal con su equivalente en soles, TEA estimada, interés total, comisión de protocolo, total a devolver y botón Continuar al paso 2 | US-LEND-01, US-LEND-06 | Préstamos, pasos de solicitud de 6.2.5 | Cumple: muestra el costo total antes de continuar y las cuotas en dos monedas. Difiere: la barra inferior aparece dentro de un flujo de varios pasos y la regla 1 de 6.2.5 la oculta. Expresa el costo como TEA anual. Incluye una comisión de protocolo de 4.50 que el total a devolver (456.84) no suma. Habla de un pool P2P, y US-LEND-03 define el fondeo de una solicitud por un prestamista. |
-| Configurar Solicitud Parte 2 | La imagen muestra la parte superior de Reputación (pantalla 1.8): score 785 sobre 1000 en un anillo, nivel, cupo máximo, tasa preferente y cuatro pilares con su peso (pagos 40 %, antigüedad de billetera 25 %, verificación de negocio 20 %, avales 15 %) | US-REP-01, US-REP-02 | Reputación del prestatario, zona de 6.2.3. No muestra el filtro por resultado ni la lista de eventos | Cumple: cada pilar muestra su valor, su peso y una barra, así que el dato no depende del color, y mezcla señales on-chain y de perfil (US-REP-02). Difiere: usa una escala de 0 a 1000 y niveles numéricos, mientras el informe usa 0 a 100 con NEW, BUILDING, TRUSTED y EXCELLENT. El cupo máximo y la tasa preferente sugieren un crédito preaprobado. Los avales comunitarios y la verificación con foto quedan fuera del alcance. |
-| Reputación On-Chain | La imagen muestra la parte inferior de Reputación: pasaporte financiero Soulbound con enlace a la credencial, consejos para subir de nivel con botones Pagar e Invitar y marca del último bloque sincronizado | US-REP-01, US-REP-02, US-REP-04 | Reputación del prestatario, con la barra inferior Reputación activa. Zona de 6.2.3 sin filtro por resultado | Cumple: la barra marca la pestaña activa y los consejos muestran los puntos que suma cada acción (US-REP-04). Difiere: no muestra el historial de eventos de GET /reputation/{address}/history (US-API-01). El pasaporte Soulbound y el aval de un colega no figuran en el alcance ni en las ADR. "Faltan 65 pts" usa la escala de 1000. |
-| Vinculación de Billetera | Paso 2 de 3 del onboarding (pantalla 1.2): elección de proveedor (MetaMask, WalletConnect, Coinbase, Phantom), billetera detectada en la app, perfil ligero con nombre, WhatsApp con código OTP y documento DNI o RUC opcional, y botón Firmar y continuar | US-AUTH-01, US-IDEN-01 | Autenticación e identidad, antes de elegir el rol | Cumple: los campos tienen etiqueta visible y el documento lleva la marca "Opcional" en texto. Difiere: ADR-0001 hace de la billetera creada en la app, con frase de recuperación, el camino principal y deja las billeteras externas como importación opcional. Pide código OTP y documento, y ofrece más cupo por verificar identidad, mientras US-IDEN-01 pide nombre y contacto. Muestra la barra inferior, que la regla 4 de 6.2.5 omite en autenticación. El teléfono aparece recortado. La pantalla se rehace. |
-| Selección de Rol | Paso 3 de 3 del onboarding (pantalla 1.3): dos tarjetas, Quiero pedir un microcrédito y Quiero invertir mi capital, cada una con beneficios y botón | US-LEND-01, US-LEND-02 | Elección de rol de 6.2.5, tras la autenticación. No existe una historia propia para esta pantalla | Cumple: la tarjeta elegida muestra marca de verificación junto al texto, y el aviso explica que el rol se cambia desde Perfil. Difiere: anuncia un "rendimiento estimado de 14 % a 22 % APY" y cifras de actividad que el informe no respalda. Muestra la barra inferior del prestatario antes de elegir el rol. Menciona el pasaporte Soulbound. |
-| Perfil de Usuario Parte 1 | Perfil (pantalla 1.9): foto, nombre y negocio, score, dirección acortada con botón Copiar, KYC nivel 2, RUC, teléfono, credencial SBT y seguridad (Face ID, 2FA, sesión SIWE de 24 horas, tope de aprobación) | US-IDEN-01, US-IDEN-02, US-REP-02 | Perfil del prestatario, con barra inferior. Navegación suplementaria de 6.2.5 (ayuda y cerrar sesión) sin mostrar en esta parte | Cumple: la dirección se acorta y el botón Copiar lleva texto, y los estados "Activo" y "Activado" van en texto. Difiere: KYC nivel 2 con vigencia, verificación SUNAT, doble factor y Face ID quedan fuera del alcance, porque US-IDEN-01 pide nombre y contacto. La sesión por firma (SIWE) sí corresponde al desafío de la API. El score vuelve a usar 785 puntos. |
+Los wireframes se generaron a partir del prototipo navegable en modo de baja fidelidad, con el mismo contenido y la misma disposición, para que el equipo no mantenga dos versiones de cada pantalla. Las capturas tienen el ancho de un teléfono Android compacto (360 dp) y muestran la pantalla completa, incluido el contenido que en el teléfono queda bajo el desplazamiento.
 
-Los filtros de 6.2.3 (chips de riesgo, plazo y monto en Invertir, estados en Préstamos y Portafolio, resultado en Reputación) todavía no tienen una imagen que los muestre. Las pantallas faltantes y las que se rehacen figuran en la lista que recibe el equipo.
+##### Ingreso y autenticación
 
-##### Onboarding y autenticación
-Esta primera sección comprende la pantalla de bienvenida (Splash/Onboarding), el inicio de sesión, el flujo de registro de cuenta nueva y la verificación o autorización segura.
+| Código | Pantalla | Qué muestra | Historias |
+|---|---|---|---|
+| A01 | Bienvenida: Pide un préstamo | Primer paso de la bienvenida: qué es pedir un préstamo y qué es una billetera, en lenguaje simple. | US-AUTH-03 |
+| A02 | Bienvenida: Construye tu reputación | Último paso de la bienvenida: cómo se construye la reputación y el aviso de que LatiFi nunca guarda el dinero ni la llave. | US-AUTH-03, US-AUTH-02 |
+| A03 | Conectar billetera | Conectar billetera, con la explicación de qué es una billetera, la opción "No tengo una billetera" y la aceptación de términos. | US-AUTH-01 |
+| A04 | Cómo obtener una billetera | Hoja de ayuda para obtener una billetera y guardar la frase de recuperación, con la advertencia de que nadie en LatiFi la pedirá. | US-AUTH-01, US-AUTH-03 |
+| A05 | Confirma que eres tú | Hoja de inicio de sesión: firmar un mensaje corto que no mueve dinero y no tiene costo. | US-AUTH-01, TS-API-05 |
+| A06 | Firma pendiente en la billetera | Hoja de estado Pendiente mientras el usuario aprueba la firma en su billetera. | US-AUTH-02, US-AUTH-04 |
+| A07 | Elegir rol | Elección del rol (pedir un préstamo o invertir), que luego se cambia en Perfil. | US-LEND-01, US-LEND-02 |
 
-* **Pantalla de Bienvenida / Onboarding:**
-  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516018/Captura_de_pantalla_2026-10-08_a_la_s_10.19.48_p._m._nryhpc.png" alt="Onboarding LatiFi" width="40%"/></div>
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/A01.png" alt="Wireframe A01: Bienvenida: Pide un préstamo" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/A02.png" alt="Wireframe A02: Bienvenida: Construye tu reputación" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/A03.png" alt="Wireframe A03: Conectar billetera" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/A04.png" alt="Wireframe A04: Cómo obtener una billetera" width="23%"/>
+</p>
+<p align="center"><sub><b>A01</b> Bienvenida: Pide un préstamo · <b>A02</b> Bienvenida: Construye tu reputación · <b>A03</b> Conectar billetera · <b>A04</b> Cómo obtener una billetera</sub></p>
 
-* **Inicio de Sesión:**
-  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516046/Captura_de_pantalla_2026-10-08_a_la_s_10.20.32_p._m._yte1du.png" alt="Inicio de Sesión" width="40%"/></div>
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/A05.png" alt="Wireframe A05: Confirma que eres tú" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/A06.png" alt="Wireframe A06: Firma pendiente en la billetera" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/A07.png" alt="Wireframe A07: Elegir rol" width="23%"/>
+</p>
+<p align="center"><sub><b>A05</b> Confirma que eres tú · <b>A06</b> Firma pendiente en la billetera · <b>A07</b> Elegir rol</sub></p>
 
-* **Formulario de Registro:**
-  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516048/Captura_de_pantalla_2026-10-08_a_la_s_10.20.44_p._m._tgfuyt.png" alt="Registro de Cuenta" width="40%"/></div>
+##### Prestatario: inicio y solicitud de préstamo
 
-* **Autorización Segura (WhatsApp):**
-  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516077/Captura_de_pantalla_2026-10-08_a_la_s_10.21.13_p._m._jhhduj.png" alt="Autorización Segura" width="40%"/></div>
+| Código | Pantalla | Qué muestra | Historias |
+|---|---|---|---|
+| B01 | Inicio del prestatario | Inicio del prestatario: saldo en tUSD y en soles, reputación, próxima cuota y la acción principal Solicitar préstamo. | US-LEND-06, US-REP-01, US-LEND-05 |
+| B02 | Solicitar préstamo: monto y condiciones | Paso 1 de 2 de la solicitud: monto con atajos, tasa anual que fija el prestatario, plazo y de 1 a 6 cuotas (ADR-0004). | US-LEND-01, US-LEND-06 |
+| B03 | Revisa tu solicitud | Paso 2 de 2: cada cuota y el total a devolver en tUSD y en soles antes de publicar. | US-LEND-01, US-LEND-06 |
+| B04 | Transacción pendiente | Hoja de estado Pendiente de la publicación, con el aviso de la comisión de red. | US-AUTH-04 |
+| B05 | Transacción confirmando | Hoja de estado Confirmando, mientras la red procesa la acción. | US-AUTH-04 |
+| B06 | Transacción fallida | Hoja de estado Fallida, con la causa y las salidas Reintentar, Reconectar billetera y Cancelar. | US-AUTH-04 |
+| B07 | Tu solicitud está abierta | Confirmación: la solicitud queda Abierta y se entrega el comprobante. | US-LEND-01, US-AUTH-04 |
+| C01 | Primero agrega tus datos | Aviso previo a publicar: el prestatario debe agregar su nombre y un contacto. | US-IDEN-01 |
+| C02 | Tus datos (perfil ligero) | Perfil ligero: nombre completo y un medio de contacto, con la nota de privacidad. | US-IDEN-01, US-IDEN-02 |
 
-* **Firma Criptográfica:**
-  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516109/Captura_de_pantalla_2026-10-08_a_la_s_10.21.36_p._m._whhzpb.png" alt="Firma Criptográfica" width="40%"/></div>
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/B01.png" alt="Wireframe B01: Inicio del prestatario" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/B02.png" alt="Wireframe B02: Solicitar préstamo: monto y condiciones" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/B03.png" alt="Wireframe B03: Revisa tu solicitud" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/B04.png" alt="Wireframe B04: Transacción pendiente" width="23%"/>
+</p>
+<p align="center"><sub><b>B01</b> Inicio del prestatario · <b>B02</b> Solicitar préstamo: monto y condiciones · <b>B03</b> Revisa tu solicitud · <b>B04</b> Transacción pendiente</sub></p>
 
-##### Panel principal y solicitud de microcrédito
-Muestra el panel de control principal del usuario con la línea de crédito aprobada, el estado de actividad y la configuración de solicitudes.
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/B05.png" alt="Wireframe B05: Transacción confirmando" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/B06.png" alt="Wireframe B06: Transacción fallida" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/B07.png" alt="Wireframe B07: Tu solicitud está abierta" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/C01.png" alt="Wireframe C01: Primero agrega tus datos" width="23%"/>
+</p>
+<p align="center"><sub><b>B05</b> Transacción confirmando · <b>B06</b> Transacción fallida · <b>B07</b> Tu solicitud está abierta · <b>C01</b> Primero agrega tus datos</sub></p>
 
-* **Dashboard General / Resumen:**
-  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516188/Captura_de_pantalla_2026-10-08_a_la_s_10.22.59_p._m._pjazye.png" alt="Dashboard Principal" width="40%"/></div>
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/C02.png" alt="Wireframe C02: Tus datos (perfil ligero)" width="23%"/>
+</p>
+<p align="center"><sub><b>C02</b> Tus datos (perfil ligero)</sub></p>
 
-* **Configuración y Solicitud de Microcrédito (Parte 1):**
-  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516208/Captura_de_pantalla_2026-10-08_a_la_s_10.23.23_p._m._pfht3q.png" alt="Configurar Solicitud Parte 1" width="40%"/></div>
+##### Prestatario: préstamos, pagos, reputación y perfil
 
-* **Configuración y Solicitud de Microcrédito (Parte 2):**
-  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516235/Captura_de_pantalla_2026-10-08_a_la_s_10.23.42_p._m._hoflo1.png" alt="Configurar Solicitud Parte 2" width="40%"/></div>
+| Código | Pantalla | Qué muestra | Historias |
+|---|---|---|---|
+| B08 | Préstamos | Préstamos con chips de estado (Todos, Abierta, Pendiente, Pagado, En mora) y progreso de cuotas. | US-LEND-05, US-LEND-06 |
+| C03 | Préstamos sin solicitudes | Estado vacío de Préstamos para un prestatario nuevo. | US-LEND-05 |
+| B09 | Detalle del préstamo | Detalle del préstamo: condiciones, total a devolver, lista de cuotas con su estado y botón Pagar cuota. | US-LEND-05, US-LEND-06 |
+| B10 | Pagar cuota | Pago de una cuota: monto, fecha, saldo después del pago y aviso de que el usuario paga desde su billetera. | US-LEND-04, US-AUTH-02 |
+| P01 | Pago pendiente | Hoja de estado Pendiente del pago. | US-AUTH-04 |
+| P03 | Pago confirmando | Hoja de estado Confirmando del pago. | US-AUTH-04 |
+| P02 | Pago fallido | Hoja de estado Fallida del pago. | US-AUTH-04 |
+| B11 | Cuota pagada | Cuota pagada, progreso actualizado y comprobante. | US-LEND-04, US-REP-01 |
+| B12 | Reputación | Reputación: puntaje de 0 a 1000, nivel, contadores e historial filtrable por resultado. | US-REP-01, US-REP-02, US-REP-04 |
+| B13 | Niveles de reputación | Hoja de niveles: Nuevo, En construcción, Confiable y Excelente con sus rangos. | US-REP-01 |
+| B14 | Perfil | Perfil: datos personales, dirección de la billetera, rol, idioma, moneda local, ayuda y desconexión. | US-IDEN-02 |
+| B15 | Obtener monedas de prueba | Hoja para obtener monedas de prueba (tUSD sin valor real, ADR-0003). | US-LEND-06 |
 
-##### Reputación, billetera y perfil
-Agrupa las vistas del puntaje de reputación on-chain, la vinculación de billeteras, la selección de rol y la configuración completa del perfil.
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/B08.png" alt="Wireframe B08: Préstamos" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/C03.png" alt="Wireframe C03: Préstamos sin solicitudes" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/B09.png" alt="Wireframe B09: Detalle del préstamo" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/B10.png" alt="Wireframe B10: Pagar cuota" width="23%"/>
+</p>
+<p align="center"><sub><b>B08</b> Préstamos · <b>C03</b> Préstamos sin solicitudes · <b>B09</b> Detalle del préstamo · <b>B10</b> Pagar cuota</sub></p>
 
-* **Reputación Financiera On-Chain:**
-  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516238/Captura_de_pantalla_2026-10-08_a_la_s_10.23.53_p._m._et2e5b.png" alt="Reputación On-Chain" width="40%"/></div>
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/P01.png" alt="Wireframe P01: Pago pendiente" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/P03.png" alt="Wireframe P03: Pago confirmando" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/P02.png" alt="Wireframe P02: Pago fallido" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/B11.png" alt="Wireframe B11: Cuota pagada" width="23%"/>
+</p>
+<p align="center"><sub><b>P01</b> Pago pendiente · <b>P03</b> Pago confirmando · <b>P02</b> Pago fallido · <b>B11</b> Cuota pagada</sub></p>
 
-* **Vinculación de Billetera y Perfil Ligero:**
-  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516334/Captura_de_pantalla_2026-10-08_a_la_s_10.25.29_p._m._wcqeoe.png" alt="Vinculación de Billetera" width="40%"/></div>
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/B12.png" alt="Wireframe B12: Reputación" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/B13.png" alt="Wireframe B13: Niveles de reputación" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/B14.png" alt="Wireframe B14: Perfil" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/B15.png" alt="Wireframe B15: Obtener monedas de prueba" width="23%"/>
+</p>
+<p align="center"><sub><b>B12</b> Reputación · <b>B13</b> Niveles de reputación · <b>B14</b> Perfil · <b>B15</b> Obtener monedas de prueba</sub></p>
 
-* **Selección de Rol (Prestamista / Inversionista):**
-  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516356/Captura_de_pantalla_2026-10-08_a_la_s_10.25.43_p._m._gpkpo0.png" alt="Selección de Rol" width="40%"/></div>
+##### Prestamista: búsqueda de solicitudes
 
-* **Perfil de Usuario y Configuración General (Parte 1):**
-  <div align="center"><img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1791516367/Captura_de_pantalla_2026-10-08_a_la_s_10.25.55_p._m._g0dx1t.png" alt="Perfil de Usuario Parte 1" width="40%"/></div>
+| Código | Pantalla | Qué muestra | Historias |
+|---|---|---|---|
+| L01 | Inicio del prestamista | Inicio del prestamista: saldo, solicitudes abiertas y próximo pago que recibe. | US-LEND-02, US-LEND-06 |
+| L02 | Invertir | Invertir: solicitudes abiertas ordenadas por reputación, con monto, tasa, plazo y ganancia. | US-LEND-02, US-REP-03 |
+| L05 | Ordenar solicitudes | Hoja de orden: reputación, tasa, plazo y más recientes. | US-REP-03 |
+| L03 | Invertir con filtros | Panel de filtros por riesgo, plazo y monto, con contador de resultados y Limpiar filtros. | US-REP-03 |
+| L04 | Invertir sin resultados | Estado vacío cuando ninguna solicitud cumple los filtros. | US-REP-03 |
+| L06 | Detalle de la solicitud | Detalle de la solicitud con la reputación y el historial reciente de pagos del prestatario. | US-API-01, US-REP-02, US-LEND-06 |
+| L07 | Detalle de un prestatario nuevo | Detalle de un prestatario sin historial: el puntaje inicial viene de su perfil. | US-REP-02 |
+
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/L01.png" alt="Wireframe L01: Inicio del prestamista" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/L02.png" alt="Wireframe L02: Invertir" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/L05.png" alt="Wireframe L05: Ordenar solicitudes" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/L03.png" alt="Wireframe L03: Invertir con filtros" width="23%"/>
+</p>
+<p align="center"><sub><b>L01</b> Inicio del prestamista · <b>L02</b> Invertir · <b>L05</b> Ordenar solicitudes · <b>L03</b> Invertir con filtros</sub></p>
+
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/L04.png" alt="Wireframe L04: Invertir sin resultados" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/L06.png" alt="Wireframe L06: Detalle de la solicitud" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/L07.png" alt="Wireframe L07: Detalle de un prestatario nuevo" width="23%"/>
+</p>
+<p align="center"><sub><b>L04</b> Invertir sin resultados · <b>L06</b> Detalle de la solicitud · <b>L07</b> Detalle de un prestatario nuevo</sub></p>
+
+##### Prestamista: fondeo y portafolio
+
+| Código | Pantalla | Qué muestra | Historias |
+|---|---|---|---|
+| L08 | Primero agrega tus datos (prestamista) | Aviso previo a fondear: el prestamista debe agregar su nombre y un contacto. | US-IDEN-01 |
+| L16 | Tus datos (prestamista) | Perfil ligero del prestamista, antes de fondear. | US-IDEN-01 |
+| L09 | Confirmar fondeo | Confirmar fondeo: condiciones que quedan fijas al firmar, total a recibir y saldo después. | US-LEND-03, US-LEND-06 |
+| L10 | Fondeo pendiente | Hoja de estado Pendiente del fondeo. | US-AUTH-04 |
+| L17 | Fondeo confirmando | Hoja de estado Confirmando del fondeo. | US-AUTH-04 |
+| L11 | Fondeo fallido | Fondeo fallido porque otro prestamista ya fondeó la solicitud. | US-AUTH-04 |
+| L12 | Solicitud fondeada | Solicitud fondeada con comprobante y acceso al portafolio. | US-LEND-03 |
+| L13 | Portafolio | Portafolio: total prestado, chips de estado y tarjetas con retorno esperado y cuotas recibidas. | US-LEND-05, US-LEND-06 |
+| L14 | Detalle de la inversión | Detalle de la inversión con la lista de cuotas recibidas y por recibir. | US-LEND-05 |
+| L15 | Inversión en mora | Inversión En mora: una cuota con más de 7 días de atraso (ADR-0004). | US-LEND-05, US-REP-01 |
+
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/L08.png" alt="Wireframe L08: Primero agrega tus datos (prestamista)" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/L16.png" alt="Wireframe L16: Tus datos (prestamista)" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/L09.png" alt="Wireframe L09: Confirmar fondeo" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/L10.png" alt="Wireframe L10: Fondeo pendiente" width="23%"/>
+</p>
+<p align="center"><sub><b>L08</b> Primero agrega tus datos (prestamista) · <b>L16</b> Tus datos (prestamista) · <b>L09</b> Confirmar fondeo · <b>L10</b> Fondeo pendiente</sub></p>
+
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/L17.png" alt="Wireframe L17: Fondeo confirmando" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/L11.png" alt="Wireframe L11: Fondeo fallido" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/L12.png" alt="Wireframe L12: Solicitud fondeada" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/L13.png" alt="Wireframe L13: Portafolio" width="23%"/>
+</p>
+<p align="center"><sub><b>L17</b> Fondeo confirmando · <b>L11</b> Fondeo fallido · <b>L12</b> Solicitud fondeada · <b>L13</b> Portafolio</sub></p>
+
+<p align="center">
+  <img src="resources/Cap6/6.4.1-wireframes/L14.png" alt="Wireframe L14: Detalle de la inversión" width="23%"/>
+  <img src="resources/Cap6/6.4.1-wireframes/L15.png" alt="Wireframe L15: Inversión en mora" width="23%"/>
+</p>
+<p align="center"><sub><b>L14</b> Detalle de la inversión · <b>L15</b> Inversión en mora</sub></p>
+
+Los filtros de 6.2.3 quedan cubiertos así: chips de estado en Préstamos (B08) y Portafolio (L13), chips de resultado en Reputación (B12) y chips de riesgo, plazo y monto con orden por reputación en Invertir (L02 a L05). Los estados vacíos (C03 y L04) explican la causa y ofrecen una salida, como pide 6.2.3.
+
 
 #### 6.4.2. Mobile Applications Wireflow
 
