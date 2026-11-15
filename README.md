@@ -3415,82 +3415,43 @@ Los wireframes se generaron a partir del prototipo navegable en modo de baja fid
 Los filtros de 6.2.3 quedan cubiertos así: chips de estado en Préstamos (B08) y Portafolio (L13), chips de resultado en Reputación (B12) y chips de riesgo, plazo y monto con orden por reputación en Invertir (L02 a L05). Los estados vacíos (C03 y L04) explican la causa y ofrecen una salida, como pide 6.2.3.
 
 
-#### 6.4.2. Mobile Applications Wireflow
+#### 6.4.2. Applications Wireflow Diagrams
 
-Cada wireflow sigue el objetivo de un usuario concreto, de una persona concreta, y usa los wireframes de 6.4.1 como pasos. Cuando una pantalla cambia de estado, el diagrama añade un paso nuevo para ese estado. Los siete flujos cubren cuatro objetivos del prestatario y tres del prestamista, y cada uno cita las historias de 3.2 que cumple. Los nombres de algunas imágenes de 6.4.1 no coinciden con su contenido, así que cada explicación dice qué muestra la imagen en ese paso.
+Cada wireflow sigue el objetivo de una persona de 2.3.1 y usa los wireframes de 6.4.1 como pasos. Los diagramas usan cuatro elementos: pantallas con su código de 6.4.1, rombos para las decisiones, óvalos para las acciones del usuario que no cambian de pantalla y flechas con la acción que lleva de un paso al siguiente. Los siete flujos cubren cuatro objetivos del prestatario y tres del prestamista. Los flujos que firman una transacción incluyen los estados Pendiente, Confirmando y Fallida, porque US-AUTH-04 exige que el usuario los vea sin consultar un explorador de bloques.
 
-Cada nodo de pantalla lleva una etiqueta de texto, y esa etiqueta, no el color, dice en qué estado está la pantalla. `Frame: NOMBRE` indica que el wireframe existe en 6.4.1 y sirve tal como está. `Ajuste: NOMBRE` indica que el wireframe existe y la tabla de 6.4.1 marca cambios. `Pendiente: TÍTULO` indica que todavía no hay imagen y que la pantalla figura en la lista de pantallas faltantes que recibe el equipo. Hoy las doce imágenes de 6.4.1 llevan al menos una diferencia con el alcance, así que ningún nodo usa Frame todavía. Los rombos son decisiones y los óvalos son acciones del usuario, y ninguno representa una pantalla. Los nodos Pendiente llevan además un borde punteado, un refuerzo visual que no sustituye al texto.
+##### W-B1. Conectar la billetera y entrar
 
-##### W-B1. Crear la billetera y entrar
+**Objetivo del usuario:** Conectar una billetera propia, demostrar que es suya y llegar al inicio del prestatario sin conocer términos de blockchain.
 
-**Objetivo del usuario:** Crear una billetera propia, entrar a LatiFi con ella y llegar al inicio del prestatario sin conocer términos de blockchain.
+**Persona:** Prestatario no bancarizado (2.3.1).
 
-**Persona:** Prestatario no bancarizado (sección 2.3.1, construido a partir de la entrevista con Joseph Falcón).
+![Wireflow W-B1: Conectar la billetera y entrar](resources/Cap6/6.4.2-wireflows/W-B1.png)
 
-```mermaid
-flowchart TD
-    A(["Prestatario abre la app"]) --> B["Ajuste: Onboarding LatiFi"]
-    B --> C{"¿Billetera nueva o existente?"}
-    C -->|Nueva| D["Pendiente: Creación de billetera con paso de frase de recuperación"]
-    C -->|Existente| E["Ajuste: Vinculación de Billetera"]
-    D --> F["Ajuste: Autorización Segura"]
-    E --> F
-    F --> G["Pendiente: Perfil ligero con solo nombre y contacto"]
-    G --> H["Ajuste: Selección de Rol"]
-    H --> I["Ajuste: Firma Criptográfica"]
-    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
-    class D,G pendiente
-```
+**Explicación del flujo:** La bienvenida explica en cuatro pasos qué hace LatiFi y qué es una billetera (A01 y A02). En Conectar billetera (A03), quien no tiene una abre la ayuda (A04), que explica cómo instalarla y cómo guardar la frase de recuperación, y vuelve. Con la billetera conectada, la app pide firmar un mensaje corto que no mueve dinero (A05) y muestra el estado Pendiente hasta que el usuario lo aprueba (A06). Si rechaza la firma o la conexión se cae, puede reintentar o reconectar. Con la firma aprobada, elige su rol (A07) y llega al inicio del prestatario (B01).
 
-**Explicación del flujo:** El prestatario abre la app y ve la bienvenida de tres pasos en lenguaje sencillo (Onboarding LatiFi), sin jerga de blockchain. Después elige crear una billetera, que es el camino principal, o importar una que ya tiene (Vinculación de Billetera). Al crear la billetera, la app muestra la frase de recuperación una sola vez, pide confirmarla y explica con palabras simples que sirve de respaldo. La frase y la llave nunca salen del dispositivo, y este informe no incluye ninguna de las dos como ejemplo. Luego el usuario firma el desafío de inicio de sesión en la tarjeta de firma de Autorización Segura, que no mueve fondos, y la app abre la sesión con esa firma, sin usuario ni contraseña. Completa su nombre y su contacto en el perfil ligero, elige el rol de prestatario en Selección de Rol y llega al inicio del prestatario, que es el Dashboard que muestra la imagen enlazada como Firma Criptográfica.
-
-**Historias:** US-AUTH-01, US-AUTH-02, US-AUTH-03, US-IDEN-01, TS-API-05
+**Historias:** US-AUTH-01, US-AUTH-02, US-AUTH-03, TS-API-05
 
 ##### W-B2. Pedir un préstamo
 
-**Objetivo del usuario:** Publicar una solicitud de préstamo con el monto, la tasa, el plazo y las cuotas que el prestatario elige, y ver que quedó abierta.
+**Objetivo del usuario:** Publicar una solicitud con el monto, la tasa, el plazo y las cuotas que el prestatario elige, y ver que quedó abierta.
 
-**Persona:** Prestatario no bancarizado (sección 2.3.1, construido a partir de la entrevista con Joseph Falcón).
+**Persona:** Prestatario no bancarizado (2.3.1).
 
-```mermaid
-flowchart TD
-    A["Ajuste: Firma Criptográfica"] --> B["Ajuste: Dashboard Principal"]
-    B --> C["Ajuste: Configurar Solicitud Parte 1"]
-    C --> D["Pendiente: Solicitud de préstamo en tres pasos"]
-    D --> E["Pendiente: Hoja de estado de la transacción del prestatario"]
-    E --> F{"¿Transacción confirmada?"}
-    F -->|Falló| G(["Reintentar o reconectar la billetera"])
-    G --> D
-    F -->|Confirmada| H["Pendiente: Lista de préstamos del prestatario con chips de estado"]
-    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
-    class D,E,H pendiente
-```
+![Wireflow W-B2: Pedir un préstamo](resources/Cap6/6.4.2-wireflows/W-B2.png)
 
-**Explicación del flujo:** Desde el inicio (la imagen Firma Criptográfica), el prestatario toca el acceso para pedir un nuevo crédito. El primer paso (la imagen Dashboard Principal) pide el monto, el plazo y de 1 a 6 cuotas, y debe sumar el campo de la tasa que US-LEND-01 asigna al prestatario. El resumen (la imagen Configurar Solicitud Parte 1) muestra la cuota y el total a devolver con su equivalente en soles, como pide US-LEND-06, y oculta la barra inferior porque el flujo tiene varios pasos. Los pasos de destino y de firma todavía no tienen imagen. Al firmar, la hoja de estado recorre los cuatro estados de US-AUTH-04, pendiente, confirmando, confirmada y fallida, y el lector de pantalla anuncia cada cambio. Si la transacción falla, el usuario reintenta o reconecta la billetera sin perder lo que escribió, y si se confirma, la solicitud aparece como Abierta en la lista de préstamos con su chip de estado.
+**Explicación del flujo:** Desde el inicio (B01) toca Solicitar préstamo. Si todavía no agregó su nombre y un contacto, la app se lo pide antes de seguir (C01 y C02). En el paso 1 (B02) elige monto, tasa anual, plazo y de 1 a 6 cuotas, y en el paso 2 (B03) revisa cada cuota y el total a devolver en tUSD y en soles. Al publicar, la hoja de estado pasa por Pendiente (B04) y Confirmando (B05). Si la transacción falla (B06), reintenta sin perder lo escrito. Si se confirma, ve la solicitud Abierta con su comprobante (B07) y la encuentra en Préstamos (B08).
 
-**Historias:** US-LEND-01, US-LEND-06, US-AUTH-04, US-IDEN-01
+**Historias:** US-LEND-01, US-LEND-06, US-IDEN-01, US-AUTH-04
 
 ##### W-B3. Pagar una cuota
 
 **Objetivo del usuario:** Pagar la próxima cuota de un préstamo vigente y recibir el comprobante.
 
-**Persona:** Prestatario no bancarizado (sección 2.3.1, construido a partir de la entrevista con Joseph Falcón).
+**Persona:** Prestatario no bancarizado (2.3.1).
 
-```mermaid
-flowchart TD
-    A["Pendiente: Lista de préstamos del prestatario con chips de estado"] --> B["Pendiente: Detalle del préstamo con progreso de cuotas"]
-    B --> C["Pendiente: Pagar cuota con pantalla de confirmación"]
-    C --> D["Pendiente: Hoja de estado de la transacción del prestatario"]
-    D --> E{"¿Transacción confirmada?"}
-    E -->|Falló| F(["Reintentar o reconectar la billetera"])
-    F --> C
-    E -->|Confirmada| G["Pendiente: Comprobante de la cuota pagada"]
-    G --> H["Ajuste: Configurar Solicitud Parte 2"]
-    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
-    class A,B,C,D,G pendiente
-```
+![Wireflow W-B3: Pagar una cuota](resources/Cap6/6.4.2-wireflows/W-B3.png)
 
-**Explicación del flujo:** El prestatario abre la lista de préstamos y filtra por los chips de estado, que llevan ícono y texto. En el detalle ve el progreso de cuotas y la fecha de la próxima, con los montos en dólares y en soles (US-LEND-06). Al tocar Pagar cuota, una pantalla de confirmación repite el monto y el usuario firma el pago con su billetera. La hoja de estado muestra los estados pendiente, confirmando, confirmada y fallida de US-AUTH-04. Si falla, el usuario vuelve a la confirmación para reintentar, y si se confirma, recibe el comprobante. La reputación se actualiza sola tras el pago (US-REP-01), y la imagen Configurar Solicitud Parte 2, que muestra la parte superior de Reputación, es el punto de llegada.
+**Explicación del flujo:** El prestatario llega al detalle del préstamo (B09) desde la tarjeta Próxima cuota del inicio (B01) o desde la lista de Préstamos (B08). El detalle muestra el progreso y la fecha de cada cuota. Pagar cuota abre la confirmación (B10) con el monto, la fecha y el saldo que le quedará. Al confirmar, la hoja pasa por Pendiente (P01) y Confirmando (P03), y si falla (P02) puede reintentar. Con el pago confirmado ve la cuota pagada y su comprobante (B11) y puede abrir su reputación (B12), que sube con el pago a tiempo.
 
 **Historias:** US-LEND-04, US-LEND-05, US-LEND-06, US-AUTH-04, US-REP-01
 
@@ -3498,95 +3459,49 @@ flowchart TD
 
 **Objetivo del usuario:** Entender de dónde sale su puntaje y revisar cada evento que lo compone.
 
-**Persona:** Prestatario no bancarizado (sección 2.3.1, construido a partir de la entrevista con Joseph Falcón).
+**Persona:** Prestatario no bancarizado (2.3.1).
 
-```mermaid
-flowchart TD
-    S(["Prestatario abre la pestaña Reputación"]) --> A["Ajuste: Configurar Solicitud Parte 2"]
-    A --> B["Ajuste: Reputación On-Chain"]
-    B --> C["Pendiente: Historial de reputación con filtro por resultado"]
-    C --> E(["Filtra por A tiempo, Tardío o Incumplido"])
-    E --> C
-    C --> D["Pendiente: Detalle del evento de reputación con su referencia de transacción"]
-    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
-    class C,D pendiente
-```
+![Wireflow W-B4: Revisar mi reputación](resources/Cap6/6.4.2-wireflows/W-B4.png)
 
-**Explicación del flujo:** El prestatario abre Reputación y ve el score de 0 a 100, su nivel (NEW, BUILDING, TRUSTED o EXCELLENT) y los contadores de pagos a tiempo, tardíos e incumplidos. Hoy la imagen Configurar Solicitud Parte 2 muestra esa parte superior con una escala de 0 a 1000. Debajo, la imagen Reputación On-Chain muestra los consejos para subir de nivel y los puntos que suma cada acción (US-REP-04). El historial de eventos viene de `GET /reputation/{address}/history` (US-API-01) y aún no tiene imagen. En él, el usuario filtra por resultado y ordena por fecha. Al abrir un evento ve su resultado y la referencia de la transacción que lo originó.
+**Explicación del flujo:** El prestatario abre Reputación desde la tarjeta del inicio (B01) o después de pagar una cuota (B11). La pantalla (B12) muestra el puntaje de 0 a 1000, el nivel, los contadores de pagos a tiempo, tardíos e incumplidos y el historial de eventos. Los chips filtran el historial por resultado, y el ícono de información abre los niveles con sus rangos (B13).
 
-**Historias:** US-REP-01, US-REP-02, US-REP-04, US-API-01
+**Historias:** US-REP-01, US-REP-02, US-REP-04
 
 ##### W-L1. Encontrar una solicitud para fondear
 
-**Objetivo del usuario:** Encontrar entre las solicitudes abiertas una que encaje con su riesgo, plazo y monto, y revisar la reputación del solicitante antes de decidir.
+**Objetivo del usuario:** Encontrar una solicitud que encaje con su riesgo, plazo y monto, y revisar la reputación del solicitante antes de decidir.
 
-**Persona:** Prestamista con capital ocioso (sección 2.3.1, construido a partir de la entrevista con Renso Julca).
+**Persona:** Prestamista con capital ocioso (2.3.1).
 
-```mermaid
-flowchart TD
-    S(["Prestamista elige invertir"]) --> A["Ajuste: Selección de Rol"]
-    A --> B["Pendiente: Feed Invertir con chips de riesgo, plazo y monto"]
-    B --> C{"¿Hay resultados?"}
-    C -->|No| D["Pendiente: Feed Invertir en estado vacío con Limpiar filtros"]
-    D --> B
-    C -->|Sí| E["Pendiente: Detalle de la solicitud con el historial de reputación del prestatario"]
-    E --> F(["Decide fondear: sigue W-L2"])
-    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
-    class B,D,E pendiente
-```
+![Wireflow W-L1: Encontrar una solicitud para fondear](resources/Cap6/6.4.2-wireflows/W-L1.png)
 
-**Explicación del flujo:** El prestamista elige su rol en Selección de Rol y llega a Invertir. El feed muestra las solicitudes abiertas con la reputación de cada solicitante (US-LEND-02), y los montos aparecen en la stablecoin y en soles (US-LEND-06). Arriba hay chips de riesgo, plazo y monto, y un orden por reputación, tasa, plazo o más recientes (US-REP-03). Cada cambio de filtro actualiza el contador de resultados y el lector de pantalla lo anuncia. Si ninguna solicitud cumple los filtros, el estado vacío ofrece el botón Limpiar filtros. Con resultados, el prestamista abre el detalle y revisa el historial de eventos del prestatario (US-API-01) antes de decidir.
+**Explicación del flujo:** Desde el inicio (L01) el prestamista abre Invertir (L02), donde las solicitudes aparecen ordenadas por reputación. Puede cambiar el orden (L05) o abrir los filtros de riesgo, plazo y monto (L03). Si ninguna solicitud cumple los filtros, el estado vacío ofrece Limpiar filtros (L04). Con resultados, abre el detalle de la solicitud (L06), que muestra la reputación y el historial reciente de pagos del prestatario. Si el prestatario es nuevo, el detalle (L07) explica que su puntaje inicial viene del perfil.
 
-**Historias:** US-LEND-02, US-REP-03, US-API-01, US-LEND-06
+**Historias:** US-LEND-02, US-REP-02, US-REP-03, US-API-01, US-LEND-06
 
 ##### W-L2. Fondear una solicitud
 
 **Objetivo del usuario:** Fondear una solicitud conociendo las condiciones que quedan fijas y ver la inversión en su portafolio.
 
-**Persona:** Prestamista con capital ocioso (sección 2.3.1, construido a partir de la entrevista con Renso Julca).
+**Persona:** Prestamista con capital ocioso (2.3.1).
 
-```mermaid
-flowchart TD
-    A["Pendiente: Detalle de la solicitud con el historial de reputación del prestatario"] --> B{"¿Perfil completo?"}
-    B -->|No| C["Pendiente: Aviso de perfil incompleto antes de fondear"]
-    C --> D["Pendiente: Perfil ligero con solo nombre y contacto"]
-    D --> A
-    B -->|Sí| E["Pendiente: Confirmación de fondeo"]
-    E --> F["Pendiente: Hoja de estado de la transacción"]
-    F --> G{"¿Transacción confirmada?"}
-    G -->|Falló| H(["Reintentar o reconectar la billetera"])
-    H --> E
-    G -->|Confirmada| I["Pendiente: Portafolio del prestamista con chips de estado"]
-    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
-    class A,C,D,E,F,I pendiente
-```
+![Wireflow W-L2: Fondear una solicitud](resources/Cap6/6.4.2-wireflows/W-L2.png)
 
-**Explicación del flujo:** En el detalle de la solicitud, el prestamista toca Fondear. Si su perfil está incompleto (US-IDEN-01), un aviso lo lleva al perfil ligero y lo devuelve al detalle cuando termina. Con el perfil completo, la pantalla de confirmación repite el monto en la stablecoin y en soles (US-LEND-06), la tasa, el plazo y las cuotas que quedan fijas al firmar. La hoja de estado recorre los cuatro estados de US-AUTH-04, pendiente, confirmando, confirmada y fallida, y el lector de pantalla anuncia cada uno. Si la transacción falla, el usuario reintenta o reconecta la billetera, y si se confirma, la inversión aparece en el portafolio con el estado Pendiente.
+**Explicación del flujo:** En el detalle (L06) el prestamista toca Fondear solicitud. Si todavía no agregó sus datos, la app se lo pide (L08 y L16) y luego lo lleva a la confirmación. La confirmación (L09) repite el monto, la tasa, el plazo, las cuotas y el total a recibir, y avisa que las condiciones quedan fijas al firmar. La hoja de estado pasa por Pendiente (L10) y Confirmando (L17). Si otro prestamista fondeó antes, la transacción falla con esa explicación (L11). Si se confirma, ve la solicitud fondeada con su comprobante (L12) y la encuentra en Portafolio (L13).
 
-**Historias:** US-LEND-03, US-AUTH-04, US-LEND-06, US-IDEN-01
+**Historias:** US-LEND-03, US-LEND-06, US-IDEN-01, US-AUTH-04
 
 ##### W-L3. Seguir mi portafolio
 
 **Objetivo del usuario:** Saber qué inversiones tiene, cuál vence primero y si cada una recibe sus cuotas.
 
-**Persona:** Prestamista con capital ocioso (sección 2.3.1, construido a partir de la entrevista con Renso Julca).
+**Persona:** Prestamista con capital ocioso (2.3.1).
 
-```mermaid
-flowchart TD
-    S(["Prestamista abre Portafolio"]) --> A["Pendiente: Portafolio del prestamista con chips de estado"]
-    A --> B(["Elige Todos, Pendiente, Pagado o En mora"])
-    B --> A
-    A --> C["Pendiente: Detalle de la inversión con cuotas recibidas y estado"]
-    C --> D{"¿Estado de la inversión?"}
-    D -->|Pendiente| A
-    D -->|Pagado o En mora| E(["El chip del portafolio refleja el estado final"])
-    classDef pendiente stroke-dasharray:5 5,stroke-width:2px
-    class A,C pendiente
-```
+![Wireflow W-L3: Seguir mi portafolio](resources/Cap6/6.4.2-wireflows/W-L3.png)
 
-**Explicación del flujo:** El prestamista abre Portafolio y ve sus inversiones con el próximo vencimiento primero. Los chips Todos, Pendiente, Pagado y En mora filtran la lista, y cada chip lleva ícono y texto. Al abrir una inversión, el detalle muestra las cuotas recibidas y el estado actual. Si la inversión sigue Pendiente, el prestamista vuelve al portafolio a esperar la siguiente cuota. Cuando pasa a Pagado o a En mora, el chip del portafolio lo refleja sin que el usuario tenga que buscarlo.
+**Explicación del flujo:** El prestamista abre Portafolio (L13) y ve lo prestado en total y sus inversiones con el próximo vencimiento primero. Los chips filtran por Pendiente, Pagado o En mora. Al abrir una inversión, el detalle muestra las cuotas recibidas y por recibir (L14). Si una cuota lleva más de 7 días de atraso, el préstamo aparece En mora y el detalle lo explica (L15).
 
-**Historias:** US-LEND-05
+**Historias:** US-LEND-05, US-LEND-06, US-REP-01
 
 
 <div style="page-break-after: always;"></div>
