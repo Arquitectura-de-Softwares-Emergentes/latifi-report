@@ -1457,7 +1457,7 @@ graph TD
     subgraph "VPS Hetzner con Dokploy"
         Dokploy["Dokploy<br/>[Integración Git]<br/>Construye con el Dockerfile"]
         Traefik["Traefik<br/>[HTTPS con Let's Encrypt]"]
-        APIsrv["latifi-api<br/>[Contenedor Spring Boot con el Event Indexer]<br/>URL base de la API: PENDIENTE<br/>URL de Swagger UI: PENDIENTE"]
+        APIsrv["latifi-api<br/>[Contenedor Spring Boot con el Event Indexer]<br/>URL base de la API: https://latifi-api.juan-tech.com<br/>URL de Swagger UI: https://latifi-api.juan-tech.com/swagger-ui/index.html"]
         PG[("PostgreSQL compartido<br/>[Base de datos de LatiFi]")]
     end
 
@@ -1518,7 +1518,7 @@ graph TD
 | Billetera del usuario | Dispositivo del usuario | Billetera de terceros | Sin URL de LatiFi | La instala el usuario; firma y envía cada transacción |
 | CI e imágenes | GitHub Actions y GHCR | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api | ghcr.io/arquitectura-de-softwares-emergentes/latifi-api | El workflow ci construye y prueba la imagen y publish-image la publica en main y en las etiquetas v* |
 | Dokploy y Traefik | VPS Hetzner | Instancia propia del equipo | Sin URL pública de administración | Dokploy construye desde el repositorio con la integración Git; Traefik sirve HTTPS con Let's Encrypt |
-| LatiFi API con Event Indexer | VPS Hetzner con Dokploy | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api | URL base de la API: PENDIENTE y URL de Swagger UI: PENDIENTE | Contenedor construido desde el Dockerfile del repositorio; los secretos van en la configuración de Dokploy |
+| LatiFi API con Event Indexer | VPS Hetzner con Dokploy | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api | URL base de la API: https://latifi-api.juan-tech.com y URL de Swagger UI: https://latifi-api.juan-tech.com/swagger-ui/index.html | Contenedor construido desde el Dockerfile del repositorio; los secretos van en la configuración de Dokploy |
 | PostgreSQL | VPS Hetzner con Dokploy | Instancia compartida de Dokploy | Sin URL pública | Base de datos propia de LatiFi con un usuario de mínimos privilegios |
 | Smart Contracts | Polygon Amoy, cadena 80002 | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-contracts | LoanBook 0xccb8ad15a4954138c987a77924ceab468a843266, MockStablecoin 0x66757f1cc66b278bfc0eefad7e3cac1d70fd4f8b, explorador https://amoy.polygonscan.com/address/0xccb8ad15a4954138c987a77924ceab468a843266 | Despliegue desde el repositorio, con las direcciones registradas en deployments/amoy.json |
 | Proveedor RPC | Servicio externo | Cuenta del equipo | No se publica, la URL lleva una llave | La llave dedicada se guarda como secreto en Dokploy |
@@ -4463,29 +4463,65 @@ La conversión de moneda muestra el monto en unidades base, la moneda de destino
 
 ##### 7.2.1.7. Software Deployment Evidence for Sprint Review.
 
-_[Por completar: introducción sobre lo realizado en despliegue durante el sprint: creación de cuentas, configuración de recursos en proveedores cloud y configuración de proyectos para integración o automatización del despliegue, para todos los productos digitales.]_
+Durante el Sprint 1 el equipo dejó cada producto digital con su propio camino de integración y despliegue automatizado, desde la creación de las cuentas hasta la verificación en producción. Todo el código vive en la organización de GitHub del equipo, y cada repositorio ejecuta GitHub Actions con dos controles en cada pull request: `ci`, que compila y prueba, y `commit-lint`, que rechaza mensajes fuera de Conventional Commits. Las cuentas y los recursos creados en proveedores externos son estos:
+
+| Proveedor | Para qué lo usa el equipo | Producto |
+|---|---|---|
+| GitHub (organización, Actions, Pages y GHCR) | Repositorios, integración continua, alojamiento de la landing y registro de la imagen de contenedor | Todos |
+| Cloudflare DNS | Registro `latifi-api.juan-tech.com`, solo DNS, hacia el servidor | Web Services |
+| Hetzner con Dokploy | Servidor que construye y ejecuta la API con HTTPS | Web Services |
+| Let's Encrypt | Certificado HTTPS de la API, emitido desde Dokploy | Web Services |
+| Alchemy (plan gratuito) | Nodo RPC de Polygon Amoy que lee el indexador | Web Services y Smart Contracts |
+| Polygon Amoy | Red de pruebas donde viven los contratos | Smart Contracts |
+| Firebase App Distribution | Canal de testers de la app Android | Mobile Application |
+
+Las llaves de acceso, las contraseñas y los tokens viven en variables de entorno de Dokploy y de GitHub Actions. Ninguno aparece en un repositorio ni en este informe.
 
 ##### Landing Page
 
-_[Capturas y explicación de los pasos realizados.]_
+1. El equipo activó GitHub Pages en el repositorio `latifi-landing` con origen en GitHub Actions.
+2. El workflow `pages.yml` se ejecuta en cada push a `main`: instala las dependencias, corre las verificaciones de accesibilidad, SEO, i18n y contraste, y publica el sitio.
+3. La rama `develop` recibe los cambios por pull request y solo llega a `main` mediante una rama `release/*`, con la etiqueta de versión. La landing lleva las versiones `v0.1.0` a `v0.5.1`.
+4. La última ejecución de Deploy Pages sobre `main` terminó en `success`: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-landing/actions/runs/43630621531
+5. Verificación: el sitio responde `200` en https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/ y muestra la versión en inglés y en español (capturas en 7.2.1.5).
 
 ##### Web Services
 
-_[Capturas y explicación de los pasos realizados.]_
+1. El equipo creó el registro DNS `latifi-api.juan-tech.com` en Cloudflare, en modo solo DNS, apuntando al servidor de Hetzner.
+2. En Dokploy creó el proyecto `latifi`, con una base de datos PostgreSQL 17 administrada por Dokploy y la aplicación `latifi-api`, con origen en la rama `main` del repositorio, construcción con el `Dockerfile` y un dominio con HTTPS y certificado de Let's Encrypt.
+3. Configuró las variables de entorno de la aplicación en Dokploy: conexión a la base de datos, secreto de firma de los tokens de sesión, URL del nodo RPC de Alchemy, dirección del contrato `LoanBook` y bloque de inicio del indexador.
+4. Publicó la versión `v0.2.0` con el flujo GitFlow: pull request de `feature/deployment` a `develop` (#20), rama `release/0.2.0` hacia `main` (#21) y etiqueta anotada `v0.2.0`. El workflow `publish-image.yml` construyó y publicó la imagen `ghcr.io/arquitectura-de-softwares-emergentes/latifi-api` con las etiquetas `0.2.0`, `0.2` y `latest`.
+5. Dokploy construyó el commit de la etiqueta y arrancó el contenedor con el indexador de eventos embebido.
+6. Verificación desde un equipo externo al servidor y sin token, registrada en [docs/evidence/live-checks.txt](docs/evidence/live-checks.txt): `GET /actuator/health` devuelve `200` con `{"status":"UP"}`, la Swagger UI responde `200` en https://latifi-api.juan-tech.com/swagger-ui/index.html y `/v3/api-docs` devuelve la versión `0.2.0` con la URL pública como servidor. Las capturas de la Swagger UI están en 7.2.1.6.
 
 ##### Mobile Application
 
-_[Capturas y explicación de los pasos realizados.]_
+1. El repositorio `latifi-android` ejecuta tres workflows por pull request: `ci` (compilación y pruebas unitarias), `android-instrumented` (pruebas instrumentadas en un emulador) y `android-instrumented-api30` (las mismas pruebas sobre Android 11). La última ejecución sobre `develop` de los tres terminó en `success`.
+2. El paquete de la aplicación es `com.latifi.wallet`, con `minSdk` 26 y `compileSdk` 37, y la conexión no custodial con la billetera usa Reown AppKit.
+3. El equipo compiló la versión debug en modo Demo y la instaló en un Pixel 9a para grabar las capturas de 7.2.1.5 y los videos del prototipo de 6.5.
+4. Pendiente: la distribución del build a los testers con Firebase App Distribution. El enlace de invitación sigue en `pending` en [docs/evidence/deployment-facts.json](docs/evidence/deployment-facts.json) y el equipo lo completa cuando suba el build.
 
-##### _[Otro producto]_
+##### Smart Contracts
 
-_[Capturas y explicación de los pasos realizados.]_
+1. El repositorio `latifi-contracts` compila y prueba con Foundry y rechaza en CI las cadenas principales y las llaves escritas en el código (`check-testnet-only.sh`).
+2. El equipo desplegó `LoanBook` y `MockStablecoin` en Polygon Amoy (chain id 80002) con la release `v0.2.0` y guardó las direcciones en `deployments/amoy.json`.
+3. Verificación: `LoanBook` en https://amoy.polygonscan.com/address/0xccb8ad15a4954138c987a77924ceab468a843266 y `MockStablecoin` en la dirección `0x66757f1cc66b278bfc0eefad7e3cac1d70fd4f8b`.
 
 ##### 7.2.1.8. Team Collaboration Insights during Sprint.
 
-_[Por completar: explicación de cómo se desarrollaron las actividades de implementación. Todos los integrantes deben participar en la implementación de cada producto del sprint.]_
+El Sprint 1 empezó con el Sprint Planning del 28/10/2026 y sus commits llegan hasta el 15/11/2026. El equipo organizó el trabajo en cinco repositorios, y cada integrante registra su aporte con commits firmados con su cuenta de GitHub. En el código de los productos, el trabajo del sprint quedó en una sola cuenta, la de Juan Angulo: los 37 ítems del Sprint Backlog 1 llevan su nombre como responsable. Los demás integrantes aportaron en el repositorio del informe: el diseño de la aplicación, el Capítulo VII, las entrevistas y las secciones de UX.
 
-_[Capturas de los analíticos de colaboración y commits en GitHub de cada repositorio (Landing Page, Web Services, Mobile Application y otros).]_
+| Repositorio | Commits en `develop` | Pull requests integrados | Contribuidores |
+|---|---|---|---|
+| latifi-landing | 13 | 12 | Juan Angulo (13) |
+| latifi-api | 19 | 20 | Juan Angulo (19) |
+| latifi-contracts | 13 | 14 | Juan Angulo (13) |
+| latifi-android | 21 | 21 | Juan Angulo (21) |
+| latifi-report | 79 | 10 | Juan Angulo (55), Anaely Burga (10), Fabrizio Quiroz (10), Fiorella Vilca (4) |
+
+Los pull requests se integran por squash en `develop`, por eso un commit equivale a un pull request. Las cifras salen de `git shortlog` y de `gh pr list` al 15/11/2026.
+
+En el repositorio del informe, Anaely Burga subió los 45 wireframes de 6.4.1, Fabrizio Quiroz redactó el borrador del Capítulo VII y Fiorella Vilca mantuvo el perfil del equipo y la entrevista del prestamista. Los analíticos de colaboración de GitHub de cada repositorio están en https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-landing/graphs/contributors, https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-api/graphs/contributors, https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-contracts/graphs/contributors, https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-android/graphs/contributors y https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-report/graphs/contributors.
 
 ### 7.3. Validation Interviews
 
