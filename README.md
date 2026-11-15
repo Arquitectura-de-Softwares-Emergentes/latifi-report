@@ -3503,6 +3503,65 @@ Cada wireflow sigue el objetivo de una persona de 2.3.1 y usa los wireframes de 
 
 **Historias:** US-LEND-05, US-LEND-06, US-REP-01
 
+### 6.5. Applications Prototyping
+
+El prototipo de LatiFi Wallet es una aplicación web navegable que reproduce la app Android en un marco de teléfono de 360 dp. Se construyó en HTML, CSS y JavaScript sin dependencias externas, con las fuentes Sora e Inter y los íconos Material Symbols Rounded de la app, y con los textos es_419 del repositorio `latifi-android`. Usa datos de demostración en tUSD, la moneda de prueba sin valor real, y simula la billetera, por lo que no firma nada en la red.
+
+**Enlaces del prototipo:**
+
+- Prototipo: [`docs/prototype/index.html`](docs/prototype/index.html). Se descarga y se abre en cualquier navegador, sin instalar nada.
+- Video del recorrido: [`resources/Cap6/6.5-prototyping/latifi-prototyping.mp4`](resources/Cap6/6.5-prototyping/latifi-prototyping.mp4) (2 min 14 s).
+
+**Cómo se usa.** El usuario toca los botones dentro del teléfono como lo haría en la app. Un panel lateral permite elegir un escenario (prestatario con historial, prestatario nuevo, prestamista nuevo y prestamista con inversiones), saltar a cualquier pantalla y simular que la próxima transacción falla, para revisar los caminos de error sin repetir todo el recorrido.
+
+**Qué se puede probar.** Cada interacción tiene un resultado visible en el prototipo:
+
+| Interacción | Resultado en el prototipo | Historias |
+|---|---|---|
+| Recorrer la bienvenida, conectar la billetera y firmar | Avanza por los cuatro pasos, abre la ayuda, muestra la hoja de firma y el estado Pendiente, y lleva a elegir el rol | US-AUTH-01, US-AUTH-02, US-AUTH-03 |
+| Pedir un préstamo | Calcula cada cuota y el total con interés simple anual, muestra los montos en soles, publica la solicitud y la agrega a Préstamos | US-LEND-01, US-LEND-06 |
+| Agregar el perfil ligero | Valida el nombre y el contacto, y después continúa con la acción que el usuario había empezado | US-IDEN-01, US-IDEN-02 |
+| Pagar una cuota | Descuenta el saldo, avanza el progreso del préstamo, suma el evento a la reputación y entrega el comprobante | US-LEND-04, US-REP-01 |
+| Filtrar y ordenar | Filtra Préstamos, Portafolio, Reputación e Invertir con chips, actualiza el contador y muestra el estado vacío cuando no hay resultados | US-LEND-05, US-REP-03 |
+| Fondear una solicitud | Muestra las condiciones fijas, descuenta el saldo y agrega la inversión al portafolio | US-LEND-03, US-LEND-06 |
+| Simular un fallo | La hoja de estado muestra Fallida con su causa y permite reintentar o reconectar la billetera | US-AUTH-04 |
+
+Las imágenes siguientes muestran las pantallas del prototipo en alta fidelidad, agrupadas por wireflow.
+
+**W-B1. Conectar la billetera y entrar**
+
+![Prototipo W-B1: Conectar la billetera y entrar](resources/Cap6/6.5-prototyping/W-B1-hifi.jpg)
+
+**W-B2. Pedir un préstamo**
+
+![Prototipo W-B2: Pedir un préstamo](resources/Cap6/6.5-prototyping/W-B2-hifi.jpg)
+
+**W-B3. Pagar una cuota**
+
+![Prototipo W-B3: Pagar una cuota](resources/Cap6/6.5-prototyping/W-B3-hifi.jpg)
+
+**W-B4. Revisar mi reputación**
+
+![Prototipo W-B4: Revisar mi reputación](resources/Cap6/6.5-prototyping/W-B4-hifi.jpg)
+
+**W-L1. Encontrar una solicitud para fondear**
+
+![Prototipo W-L1: Encontrar una solicitud para fondear](resources/Cap6/6.5-prototyping/W-L1-hifi.jpg)
+
+**W-L2. Fondear una solicitud**
+
+![Prototipo W-L2: Fondear una solicitud](resources/Cap6/6.5-prototyping/W-L2-hifi.jpg)
+
+**W-L3. Seguir mi portafolio**
+
+![Prototipo W-L3: Seguir mi portafolio](resources/Cap6/6.5-prototyping/W-L3-hifi.jpg)
+
+**Video del prototyping.** El video recorre el prototipo en el orden de los wireflows: conectar la billetera (W-B1), pedir un préstamo (W-B2), pagar una cuota (W-B3), revisar la reputación (W-B4) y, como prestamista nuevo, encontrar una solicitud (W-L1), agregar los datos y fondearla, con un fallo simulado y su reintento (W-L2), y seguir el portafolio (W-L3). Cada escena lleva un subtítulo con lo que muestra y las historias que cubre.
+
+| Video | Duración | Archivo |
+|---|---|---|
+| Recorrido del prototipo de LatiFi Wallet | 2 min 14 s | [`latifi-prototyping.mp4`](resources/Cap6/6.5-prototyping/latifi-prototyping.mp4) |
+
 
 <div style="page-break-after: always;"></div>
 
