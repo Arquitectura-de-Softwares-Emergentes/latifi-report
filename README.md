@@ -53,7 +53,10 @@
 | 2.9 | 30/10/2026 | Juan Angulo | Numeración de la arquitectura de software del Capítulo IV como 4.3, 4.3.1, 4.3.2 y 4.3.3, según el enunciado, y confirmación de 2.2.3 (análisis de entrevistas), 4.3.1 y el diagrama de despliegue agregado en la versión 1.6. |
 | 3.0 | 30/10/2026 | Juan Angulo | Reparación de la tabla de contenido: sección 4.3 y sus subsecciones agregadas, todas las secciones numeradas listadas hasta tres niveles (Capítulo V hasta 5.X) y niveles de encabezado de 6.1.1 y 6.1.2 normalizados. Versión del avance TP1. |
 | 3.1 | 12/11/2026 | Juan Angulo | Alineación de los diagramas C4 de 4.3.1 a 4.3.3 con el sistema construido (billetera externa con Reown, indexador embebido, GitHub Pages, Dokploy, GHCR y Firebase App Distribution), tabla de despliegue y carpeta docs/evidence con los hechos verificados. |
+<<<<<<< HEAD
 | 3.2 | 15/11/2026 | Juan Angulo | Integración de `main` en `develop`: borrador de 6.4.3 a 6.5 y del Capítulo VII de Fabrizio Quiroz, con la numeración 6.4.1 a 6.4.4 y las secciones pendientes de mock-ups, entrevistas y heurísticas marcadas. |
+=======
+>>>>>>> origin/develop
 
 # Project Report Collaboration Insights
 
