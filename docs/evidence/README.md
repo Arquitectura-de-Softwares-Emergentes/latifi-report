@@ -8,12 +8,13 @@ Esta carpeta guarda las pruebas de que el informe describe el sistema que el equ
 |---|---|
 | [deployment-facts.json](deployment-facts.json) | Lista de hechos del despliegue: repositorios, URL, direcciones de contratos, imagen, paquete y proveedor de tasas. Cada hecho vivo trae la regla para comprobarlo contra su fuente. |
 | [traceability-matrix.md](traceability-matrix.md) | Matriz de los 21 requisitos v1 con sus pruebas automatizadas, sus clips y su estado. |
+| [live-checks.txt](live-checks.txt) | Comprobación de la API desplegada desde un equipo externo, con la fecha y los códigos de respuesta. |
 | [clips.md](clips.md) | Índice de los clips de la demostración, con enlace y huella sha256 cuando existan. |
 | `gate-runs/` | Registro de las ejecuciones de las compuertas A y B. Esta carpeta se crea en un plan posterior de la Fase 7. |
 
 ## Hechos pendientes
 
-Tres hechos dependen de un despliegue en vivo y todavía no tienen valor: la URL base de la API, la URL de Swagger UI y el enlace de invitación de Firebase App Distribution. En el archivo de hechos llevan el estado `pending` y el valor `null`, y en los diagramas del Capítulo IV aparecen marcados como pendientes. Nadie los llena con un valor supuesto: se completan cuando el servicio existe y se puede comprobar.
+Un hecho depende de un paso manual y todavía no tiene valor: el enlace de invitación de Firebase App Distribution. En el archivo de hechos lleva el estado `pending` y el valor `null`, y en los diagramas del Capítulo IV aparece marcado como pendiente. Nadie lo llena con un valor supuesto: se completa cuando el equipo sube el build y se puede comprobar. La URL base de la API y la URL de Swagger UI pasaron a `live` con la comprobación de [live-checks.txt](live-checks.txt).
 
 ## Regla de datos públicos
 

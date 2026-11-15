@@ -54,6 +54,8 @@
 | 3.0 | 30/10/2026 | Juan Angulo | Reparación de la tabla de contenido: sección 4.3 y sus subsecciones agregadas, todas las secciones numeradas listadas hasta tres niveles (Capítulo V hasta 5.X) y niveles de encabezado de 6.1.1 y 6.1.2 normalizados. Versión del avance TP1. |
 | 3.1 | 12/11/2026 | Juan Angulo | Alineación de los diagramas C4 de 4.3.1 a 4.3.3 con el sistema construido (billetera externa con Reown, indexador embebido, GitHub Pages, Dokploy, GHCR y Firebase App Distribution), tabla de despliegue y carpeta docs/evidence con los hechos verificados. |
 | 3.2 | 15/11/2026 | Juan Angulo | Integración de `main` en `develop`: borrador de 6.4.3 a 6.5 y del Capítulo VII de Fabrizio Quiroz, con la numeración 6.4.1 a 6.4.4 y las secciones pendientes de mock-ups, entrevistas y heurísticas marcadas. |
+| 3.3 | 15/11/2026 | Juan Angulo | Wireframes de la aplicación (6.4.1, 45 pantallas de Anaely Burga), wireflows rehechos sobre esos wireframes (6.4.2) y mock-ups del diseño final (6.4.3, 38 pantallas). |
+| 3.4 | 15/11/2026 | Juan Angulo | Prototipo en modo Demo (6.5), evidencia de despliegue de los cuatro productos (7.2.1.7), analíticos de colaboración del Sprint 1 (7.2.1.8), introducción de 7.3, URL de la API y de Swagger en los diagramas C4, conclusiones del Sprint 1 y Anexo A con la entrega TB2. |
 
 # Project Report Collaboration Insights
 
@@ -64,6 +66,8 @@ El Project Report se redacta en Markdown, con `README.md` como archivo principal
 **TB1.** Juan Angulo redactó el avance de los Capítulos I a IV y mantiene el flujo de ramas. Fabrizio Quiroz registró las entrevistas 1, 2 y 3 del segmento prestatario y elaboró su User Persona y su Empathy Map. Anaely Burga elaboró los As-Is y To-Be Scenario Mapping y los diagramas de dominio del Capítulo IV. Fiorella Vilca registró la entrevista del segmento prestamista y elaboró su User Persona, el User Task Matrix y el Empathy Map correspondiente. Cada aporte queda registrado por commit y es coherente con el Registro de Versiones.
 
 **TP1.** Fabrizio Quiroz redactó las Style Guidelines (6.1) y los Navigation Systems (6.2.5). Juan Angulo elaboró el Capítulo V completo y los Organization Systems, Labeling Systems, Searching Systems y SEO Tags and Meta Tags (6.2.1 a 6.2.4). Anaely Burga elaboró el Wireframe y el Mock-up de la landing page (6.3). Cada aporte queda registrado por commit y es coherente con el Registro de Versiones.
+
+**TB2.** Juan Angulo implementó los cuatro productos digitales, la landing page, LatiFi API, los smart contracts y la aplicación Android, y los desplegó (7.2.1). Anaely Burga elaboró los 45 wireframes de la aplicación (6.4.1). Fabrizio Quiroz redactó el borrador de los user flows (6.4.4), del prototipo (6.5) y del Capítulo VII. Fiorella Vilca mantuvo el perfil del equipo en el repositorio. Los commits de cada integrante están en los analíticos de 7.2.1.8.
 
 Las capturas siguientes muestran los analíticos del repositorio del informe en GitHub al 8 de octubre de 2026. En ellas aparecen los cuatro integrantes del equipo como contribuidores: Sve-nnN (Juan Angulo), Relycloud (Fabrizio Quiroz), userxx1000 (Anaely Burga) y fiore-prac (Fiorella Vilca).
 
@@ -3687,14 +3691,24 @@ El prototipo recorre los cuatro user flows principales:
 | Pagar una cuota | Prestatario | Mis préstamos, Detalle del préstamo, Pagar cuota, hoja de estado de transacción, Reputación |
 | Fondear una solicitud | Prestamista | Invertir, Detalle de la solicitud, Confirmar fondeo, hoja de estado de transacción, Portafolio |
 
-_[Screenshot del video del prototipo]_
+El prototipo es la aplicación Android real compilada en modo Demo, no una maqueta aparte. En ese modo la billetera es simulada y los datos son de ejemplo (tUSD de prueba y nombres ficticios), de modo que cada pantalla de 6.4.3 responde al toque como lo hará la aplicación final. El equipo grabó un video por cada recorrido principal, sin audio y a 1080 x 2294 px.
+
+| Video | User flow | Pantallas que recorre | Duración |
+|---|---|---|---|
+| Prestatario solicita un préstamo | User Flow 2 | M09 a M16 (6.4.3) | 01:53 |
+| Prestamista fondea una solicitud | User Flow 4 | M24 a M34 (6.4.3) | 01:22 |
+| Prestatario paga una cuota y ve su reputación | User Flow 3 | M35 a M38 (6.4.3) | 01:02 |
+
+| Prestatario solicita un préstamo | Prestamista fondea una solicitud | Prestatario paga una cuota |
+|---|---|---|
+| <img src="resources/Cap6/6.5-prototype/prototipo-1.png" alt="Cuadro del video del prototipo: el prestatario solicita un préstamo" width="180"/> | <img src="resources/Cap6/6.5-prototype/prototipo-2.png" alt="Cuadro del video del prototipo: el prestamista fondea una solicitud" width="180"/> | <img src="resources/Cap6/6.5-prototype/prototipo-3.png" alt="Cuadro del video del prototipo: el prestatario paga una cuota" width="180"/> |
 
 | Elemento | Detalle |
 |---|---|
-| Herramienta | Figma |
-| Enlace al prototipo | _[URL del prototipo en Figma]_ |
-| Video en Microsoft Stream | _[URL]_ |
-| Duración del video | _[mm:ss]_ |
+| Herramienta | Aplicación `latifi-android` en modo Demo, compilación debug sobre un Pixel 9a |
+| Videos en Microsoft Stream | _[URL de cada video: Juan Angulo los sube a Stream]_ |
+
+El User Flow 1 (conectar la billetera) no tiene video propio, porque en modo Demo la billetera simulada omite la firma real. Lo cubren las capturas M01 a M08.
 
 ## Capítulo VII: Product Implementation, Validation & Deployment
 
@@ -3712,7 +3726,7 @@ Para colaborar en el ciclo de vida de LatiFi, los integrantes del equipo utiliza
 
 | Producto              | Propósito de uso en el proyecto                                                                                             | Ruta de referencia / descarga |
 |-----------------------|-----------------------------------------------------------------------------------------------------------------------------|---|
-| Trello                     | Gestión del backlog y de los sprints. Cada pull request se vincula con su issue mediante la clave del proyecto LatiFi en Trello. | https://www.atlassian.com/software/jira |
+| Trello                     | Gestión del backlog y de los sprints. Cada pull request se vincula con su issue mediante la clave del proyecto LatiFi en Trello. | https://trello.com/b/YDJ16JNs/latifi |
 | GitHub (Organization) | Alojamiento de los repositorios del equipo, revisión de cambios mediante pull requests y analíticos de colaboración.        | https://github.com/Arquitectura-de-Softwares-Emergentes |
 
 **Requirements Management**
@@ -3727,7 +3741,8 @@ Para colaborar en el ciclo de vida de LatiFi, los integrantes del equipo utiliza
 
 | Producto | Propósito de uso en el proyecto | Ruta de referencia / descarga |
 |---|---|---|
-| _[Herramienta de diseño de wireframes y mock-ups]_ | _[Diseño de wireframes, mock-ups y prototipo de la landing page y de la aplicación móvil]_ | _[URL]_ |
+| Jetpack Compose y Android Studio | Implementación del diseño final de la aplicación: mock-ups de 6.4.3 y prototipo en modo Demo de 6.5, grabados en un Pixel 9a. | https://developer.android.com/compose |
+| _[Herramienta de los wireframes de 6.4.1: Anaely Burga confirma el nombre]_ | Diseño de los 45 wireframes de la aplicación móvil. | _[URL]_ |
 | Google Fonts | Fuentes Sora e Inter del sistema de diseño. | https://fonts.google.com |
 | Material Symbols | Íconos de la aplicación móvil. | https://fonts.google.com/icons |
 
@@ -3735,35 +3750,35 @@ Para colaborar en el ciclo de vida de LatiFi, los integrantes del equipo utiliza
 
 | Producto | Versión | Propósito de uso en el proyecto | Ruta de referencia / descarga |
 |---|---|---|---|
-| Git | — | Control de versiones local. | https://git-scm.com/downloads |
+| Git | n/a | Control de versiones local. | https://git-scm.com/downloads |
 | JDK (Java Development Kit) | 21 | Compilación y ejecución de LatiFi API y de la aplicación Android. | https://adoptium.net |
 | Android Studio / Android SDK | compileSdk 37, minSdk 26 | Desarrollo y emulación de la aplicación móvil nativa. | https://developer.android.com/studio |
 | Kotlin + Jetpack Compose | Kotlin 2.4.21, Compose BOM 2026.09.00 | Lenguaje y toolkit de interfaz de la aplicación móvil. | https://kotlinlang.org / https://developer.android.com/compose |
 | Gradle (wrapper) | 9.6.1 | Construcción de la aplicación Android. | https://gradle.org |
 | Reown AppKit | 1.6.17 | Conexión no custodial de la aplicación con la billetera del usuario (WalletConnect). | https://reown.com |
 | Spring Boot | 3.5.16 | Framework de LatiFi API. | https://spring.io/projects/spring-boot |
-| Apache Maven (wrapper) | — | Construcción de LatiFi API. | https://maven.apache.org |
+| Apache Maven (wrapper) | n/a | Construcción de LatiFi API. | https://maven.apache.org |
 | web3j | 5.0.2 | Lectura de eventos de la blockchain y verificación de firmas en LatiFi API. | https://docs.web3j.io |
 | PostgreSQL | 16 | Base de datos de LatiFi API. | https://www.postgresql.org/download |
-| Docker | — | Ejecución de PostgreSQL en las pruebas mediante Testcontainers. | https://www.docker.com/products/docker-desktop |
-| Foundry (forge, cast, anvil) | — | Compilación, pruebas y despliegue de los smart contracts. | https://getfoundry.sh |
+| Docker | n/a | Ejecución de PostgreSQL en las pruebas mediante Testcontainers. | https://www.docker.com/products/docker-desktop |
+| Foundry (forge, cast, anvil) | n/a | Compilación, pruebas y despliegue de los smart contracts. | https://getfoundry.sh |
 | Solidity | 0.8.35 | Lenguaje de los smart contracts. | https://soliditylang.org |
 | OpenZeppelin Contracts | 5.7.0 | Librería base de seguridad para los smart contracts. | https://www.openzeppelin.com/solidity-contracts |
 | Polygon Amoy | chain id 80002 | Red de pruebas donde se despliegan los smart contracts. | https://polygon.technology |
 | Node.js | 22 | Herramientas de verificación de la landing page. | https://nodejs.org |
-| Visual Studio Code | — | Edición de la landing page, los smart contracts y el informe en Markdown. | https://code.visualstudio.com |
+| Visual Studio Code | n/a | Edición de la landing page, los smart contracts y el informe en Markdown. | https://code.visualstudio.com |
 
 **Software Testing**
 
 | Producto | Versión | Propósito de uso en el proyecto | Ruta de referencia / descarga |
 |---|---|---|---|
-| JUnit 5 | — | Unit tests de LatiFi API y de la aplicación Android. | https://junit.org/junit5 |
+| JUnit 5 | n/a | Unit tests de LatiFi API y de la aplicación Android. | https://junit.org/junit5 |
 | Cucumber | 7.23.0 | Acceptance tests en Gherkin (archivos `.feature`) de LatiFi API. | https://cucumber.io |
-| Testcontainers | — | Integration tests de LatiFi API con PostgreSQL real en contenedores. | https://testcontainers.com |
-| Foundry (forge test) | — | Unit, fuzz, invariant y reentrancy tests de los smart contracts. | https://getfoundry.sh |
-| Compose UI Test | — | Pruebas instrumentadas de las pantallas en un emulador Android. | https://developer.android.com/develop/ui/compose/testing |
+| Testcontainers | n/a | Integration tests de LatiFi API con PostgreSQL real en contenedores. | https://testcontainers.com |
+| Foundry (forge test) | n/a | Unit, fuzz, invariant y reentrancy tests de los smart contracts. | https://getfoundry.sh |
+| Compose UI Test | n/a | Pruebas instrumentadas de las pantallas en un emulador Android. | https://developer.android.com/develop/ui/compose/testing |
 | Lighthouse | 13.6.0 | Auditoría de accesibilidad y SEO de la landing page. | https://developer.chrome.com/docs/lighthouse |
-| Nu HTML Checker | — | Validación del HTML de la landing page. | https://validator.github.io/validator |
+| Nu HTML Checker | n/a | Validación del HTML de la landing page. | https://validator.github.io/validator |
 
 **Software Deployment**
 
@@ -3803,8 +3818,8 @@ El equipo implementa GitFlow según el modelo de Vincent Driessen ("A successful
 
 | Rama | Propósito | Nace de | Se integra en | Método de merge | Convención de nombre |
 |---|---|---|---|---|---|
-| `main` | Versiones liberadas. Cada commit es un release o un hotfix. | — | — | — | `main` |
-| `develop` | Integración del trabajo diario. | `main` | — | — | `develop` |
+| `main` | Versiones liberadas. Cada commit es un release o un hotfix. | n/a | n/a | n/a | `main` |
+| `develop` | Integración del trabajo diario. | `main` | n/a | n/a | `develop` |
 | Feature branches | Desarrollo de una funcionalidad. | `develop` | `develop` | Squash | `feature/<slug>` |
 | Release branches | Preparación de una versión. | `develop` | `main` | Merge commit | `release/<versión>` |
 | Hotfix branches | Corrección urgente de una versión liberada. | `main` | `main` y luego `develop` | Merge commit | `hotfix/<versión>` |
@@ -4073,23 +4088,23 @@ El Sprint Planning Meeting del Sprint 1 se realizó de forma virtual con los cua
 | US-API-01 | Endpoint de historial de reputación | T-35 | Historial de reputación | Endpoint con los eventos detrás del puntaje, filtrable y paginado (latifi-api, PR #14). | 4 | Juan Angulo | Done |
 | US-REP-03 | Feed ordenado/destacado por reputación | T-36 | Orden del feed por reputación | Orden por defecto del feed según la reputación del prestatario (latifi-api, PR #15; latifi-android, PR #13). | 4 | Juan Angulo (implementación) / Fiorella Vilca (hallazgo H9 de las entrevistas, 2.2.3) | Done |
 | US-REP-04 | Decaimiento/recuperación gradual de reputación | T-37 | Reglas de penalización y recuperación | Penalización por pagos tardíos e incumplimiento, y recuperación gradual con pagos puntuales (latifi-api, PR #10 y PR #14). | 6 | Juan Angulo | Done |
-| — | Tarea técnica | T-38 | Configuración del repositorio de contratos | Esqueleto de Foundry, CI, commit-lint y guía de contribución (latifi-contracts, PR #1 y PR #2). | 4 | Juan Angulo | Done |
-| — | Tarea técnica | T-39 | Guarda de red de pruebas | Bloqueo de redes principales y de secretos en el repositorio (latifi-contracts, PR #3). | 3 | Juan Angulo | Done |
-| — | Tarea técnica | T-40 | Billeteras de demostración | Scripts y runbook del pool de billeteras de prueba (latifi-contracts, PR #5). | 4 | Juan Angulo | Done |
-| — | Tarea técnica | T-41 | Lint y cobertura de contratos | Reglas de lint propias y perfiles de CI (latifi-contracts, PR #10). | 4 | Juan Angulo | Done |
-| — | Tarea técnica | T-42 | Suites de seguridad del contrato | Pruebas de reentrancy, fuzz e invariantes de `LoanBook` (latifi-contracts, PR #12). | 10 | Juan Angulo | Done |
-| — | Tarea técnica | T-43 | Despliegue en Polygon Amoy | Herramientas de despliegue, ensayo local y registro del despliegue `v0.2.0` (latifi-contracts, PR #13 y PR #14). | 8 | Juan Angulo | Done |
-| — | Tarea técnica | T-44 | Configuración del repositorio de la API | Esqueleto de Spring Boot, CI y commit-lint (latifi-api, PR #1). | 4 | Juan Angulo | Done |
-| — | Tarea técnica | T-45 | Contrato OpenAPI | Borrador OpenAPI v0 y su actualización a 0.2.0 con la fórmula de reputación (latifi-api, PR #4 y PR #6). | 6 | Juan Angulo | Done |
-| — | Tarea técnica | T-46 | Errores localizados | Catálogo de errores en en-US y es-419 según el encabezado Accept-Language (latifi-api, PR #7). | 4 | Juan Angulo | Done |
-| — | Tarea técnica | T-47 | Swagger y cierre de la API | Swagger generado desde el código, guardas de seguridad y réplica del ciclo en Amoy (latifi-api, PR #17). | 6 | Juan Angulo | Done |
-| — | Tarea técnica | T-48 | Correcciones de revisión de la API | Correcciones de la revisión de código de la fase 4 (latifi-api, PR #19). | 4 | Juan Angulo | Done |
-| — | Tarea técnica | T-49 | Configuración del repositorio Android | Esqueleto Kotlin con Compose, CI y commit-lint (latifi-android, PR #1). | 4 | Juan Angulo | Done |
-| — | Tarea técnica | T-50 | Stack Android y APK | Fijado de dependencias, arranque de la app y artefacto APK en CI (latifi-android, PR #5). | 6 | Juan Angulo | Done |
-| — | Tarea técnica | T-51 | Núcleo de dominio de la app | Montos, cálculo del préstamo, modelos de dominio y codificadores de la cadena (latifi-android, PR #7). | 8 | Juan Angulo | Done |
-| — | Tarea técnica | T-52 | Navegación por rol | Estructura de navegación por rol, componentes base y registro de rutas (latifi-android, PR #8). | 8 | Juan Angulo (implementación) / Fabrizio Quiroz (sistema de navegación, 6.2.5) | Done |
-| — | Tarea técnica | T-53 | Capa de datos en vivo | Cliente de la API y del nodo RPC detrás de las interfaces existentes (latifi-android, PR #17). | 10 | Juan Angulo | Done |
-| — | Tarea técnica | T-54 | Correcciones de revisión de la app | Correcciones de la revisión de código de la fase 5 (latifi-android, PR #19). | 4 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-38 | Configuración del repositorio de contratos | Esqueleto de Foundry, CI, commit-lint y guía de contribución (latifi-contracts, PR #1 y PR #2). | 4 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-39 | Guarda de red de pruebas | Bloqueo de redes principales y de secretos en el repositorio (latifi-contracts, PR #3). | 3 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-40 | Billeteras de demostración | Scripts y runbook del pool de billeteras de prueba (latifi-contracts, PR #5). | 4 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-41 | Lint y cobertura de contratos | Reglas de lint propias y perfiles de CI (latifi-contracts, PR #10). | 4 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-42 | Suites de seguridad del contrato | Pruebas de reentrancy, fuzz e invariantes de `LoanBook` (latifi-contracts, PR #12). | 10 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-43 | Despliegue en Polygon Amoy | Herramientas de despliegue, ensayo local y registro del despliegue `v0.2.0` (latifi-contracts, PR #13 y PR #14). | 8 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-44 | Configuración del repositorio de la API | Esqueleto de Spring Boot, CI y commit-lint (latifi-api, PR #1). | 4 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-45 | Contrato OpenAPI | Borrador OpenAPI v0 y su actualización a 0.2.0 con la fórmula de reputación (latifi-api, PR #4 y PR #6). | 6 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-46 | Errores localizados | Catálogo de errores en en-US y es-419 según el encabezado Accept-Language (latifi-api, PR #7). | 4 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-47 | Swagger y cierre de la API | Swagger generado desde el código, guardas de seguridad y réplica del ciclo en Amoy (latifi-api, PR #17). | 6 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-48 | Correcciones de revisión de la API | Correcciones de la revisión de código de la fase 4 (latifi-api, PR #19). | 4 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-49 | Configuración del repositorio Android | Esqueleto Kotlin con Compose, CI y commit-lint (latifi-android, PR #1). | 4 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-50 | Stack Android y APK | Fijado de dependencias, arranque de la app y artefacto APK en CI (latifi-android, PR #5). | 6 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-51 | Núcleo de dominio de la app | Montos, cálculo del préstamo, modelos de dominio y codificadores de la cadena (latifi-android, PR #7). | 8 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-52 | Navegación por rol | Estructura de navegación por rol, componentes base y registro de rutas (latifi-android, PR #8). | 8 | Juan Angulo (implementación) / Fabrizio Quiroz (sistema de navegación, 6.2.5) | Done |
+| n/a | Tarea técnica | T-53 | Capa de datos en vivo | Cliente de la API y del nodo RPC detrás de las interfaces existentes (latifi-android, PR #17). | 10 | Juan Angulo | Done |
+| n/a | Tarea técnica | T-54 | Correcciones de revisión de la app | Correcciones de la revisión de código de la fase 5 (latifi-android, PR #19). | 4 | Juan Angulo | Done |
 
 
 ##### 7.2.1.3. Development Evidence for Sprint Review.
@@ -4105,10 +4120,10 @@ Los feature branches se integran en `develop` por squash, por lo que cada commit
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
 |---|---|---|---|---|---|
-| Arquitectura-de-Softwares-Emergentes/latifi-landing | develop | 7881351 | Initial commit | — | 08/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-landing | develop | 7881351 | Initial commit | n/a | 08/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-landing | develop | 10b368e | build: add bilingual html skeleton, ci and gitflow kit (#1) | feat: add bilingual html skeleton with i18n and aria guard | 29/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-landing | develop | 0e60d14 | feat(landing): bilingual landing page (#4) | feat(landing): add bilingual tracer slice with language persistence | 11/11/2026 |
-| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | cf9f019 | Initial commit | — | 08/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | cf9f019 | Initial commit | n/a | 08/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | f55041a | ci: add foundry skeleton, ci workflow and commit-lint (#1) | build: add foundry skeleton with solc 0.8.35 pinned | 29/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | e41a887 | docs: add contributing guide, pr template and commit-lint fixtures (#2) | docs: add contributing guide and pull request template | 29/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | 5940d03 | ci: add testnet-only and secret guard (#3) | check-testnet-only.sh rejects chain ids 1 and 137, mainnet RPC hosts and key-shaped literals in tracked files | 29/10/2026 |
@@ -4120,7 +4135,7 @@ Los feature branches se integran en `develop` por squash, por lo que cada commit
 | Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | a97a2bd | test: add reentrancy, fuzz and invariant suites for the loan book (#12) | test: add malicious receiver reentrancy and fee on transfer suites | 31/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | 698191e | feat: add deploy tooling, a local rehearsal and the amoy runbook (#13) | feat: add the cycle script and a local rehearsal in the foundry image | 31/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-contracts | develop | 2a0ed34 | feat(deploy): record the Polygon Amoy deployment for v0.2.0 (#14) | feat(deploy): record the Polygon Amoy deployment for v0.2.0 | 08/11/2026 |
-| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | f7a8541 | Initial commit | — | 08/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-api | develop | f7a8541 | Initial commit | n/a | 08/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-api | develop | cfcfed8 | build: add spring boot skeleton, ci and gitflow kit (#1) | build: add spring boot 3.5 skeleton with postgres and spotless | 29/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 2849aac | docs: add openapi v0 draft with ci validation (#4) | docs(api): add openapi v0 skeleton with the challenge endpoint | 30/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-api | develop | eb002c0 | feat: add the bdd harness and the wallet challenge endpoint (#5) | build: pin the api stack and add the bdd harness | 08/11/2026 |
@@ -4137,7 +4152,7 @@ Los feature branches se integran en `develop` por squash, por lo que cada commit
 | Arquitectura-de-Softwares-Emergentes/latifi-api | develop | 67ce006 | feat: add the exchange rate cache and conversion endpoints (#16) | feat: convert stablecoin amounts with cached exchange rates | 08/11/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-api | develop | ad55104 | feat: close the api surface with swagger, guards and the amoy replay (#17) | feat: serve swagger from the code and guard it against the contract | 09/11/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-api | develop | bedf16e | fix: address phase 4 review findings CR-01, WR-03, WR-06, WR-07, WR-10 (#19) | fix: limit auth routes by decoded path so encoded segments cannot skip the rate limit | 09/11/2026 |
-| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | b14f4e5 | Initial commit | — | 08/10/2026 |
+| Arquitectura-de-Softwares-Emergentes/latifi-android | develop | b14f4e5 | Initial commit | n/a | 08/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 8a9a07a | build: add kotlin android skeleton, ci and gitflow kit (#1) | build: add kotlin android skeleton with compose and pinned toolchain | 29/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 70b5154 | test: add keystore envelope spike and emulator workflow (#2) | test: add keystore envelope spike for secp256k1 wallet keys | 29/10/2026 |
 | Arquitectura-de-Softwares-Emergentes/latifi-android | develop | 98edda4 | build: pin the android stack, boot the app and add the apk artifact (#5) | build: pin the android stack and the jitpack groups | 09/11/2026 |
@@ -4480,7 +4495,7 @@ Las llaves de acceso, las contraseñas y los tokens viven en variables de entorn
 ##### Landing Page
 
 1. El equipo activó GitHub Pages en el repositorio `latifi-landing` con origen en GitHub Actions.
-2. El workflow `pages.yml` se ejecuta en cada push a `main`: instala las dependencias, corre las verificaciones de accesibilidad, SEO, i18n y contraste, y publica el sitio.
+2. El workflow `pages.yml` se ejecuta en cada push a `main`: copia solo los archivos permitidos del sitio (páginas, estilos, scripts, imágenes, `robots.txt` y `sitemap.xml`), falla si falta alguno, publica el sitio en GitHub Pages y comprueba con `curl` que la URL responde. El workflow `ci.yml` corre aparte las verificaciones de accesibilidad, SEO, i18n y contraste en cada pull request.
 3. La rama `develop` recibe los cambios por pull request y solo llega a `main` mediante una rama `release/*`, con la etiqueta de versión. La landing lleva las versiones `v0.1.0` a `v0.5.1`.
 4. La última ejecución de Deploy Pages sobre `main` terminó en `success`: https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-landing/actions/runs/43630621531
 5. Verificación: el sitio responde `200` en https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/ y muestra la versión en inglés y en español (capturas en 7.2.1.5).
@@ -4489,14 +4504,14 @@ Las llaves de acceso, las contraseñas y los tokens viven en variables de entorn
 
 1. El equipo creó el registro DNS `latifi-api.juan-tech.com` en Cloudflare, en modo solo DNS, apuntando al servidor de Hetzner.
 2. En Dokploy creó el proyecto `latifi`, con una base de datos PostgreSQL 17 administrada por Dokploy y la aplicación `latifi-api`, con origen en la rama `main` del repositorio, construcción con el `Dockerfile` y un dominio con HTTPS y certificado de Let's Encrypt.
-3. Configuró las variables de entorno de la aplicación en Dokploy: conexión a la base de datos, secreto de firma de los tokens de sesión, URL del nodo RPC de Alchemy, dirección del contrato `LoanBook` y bloque de inicio del indexador.
+3. Configuró las variables de entorno de la aplicación en Dokploy a partir de `deploy/dokploy/app.env.example`: conexión a la base de datos (`SPRING_DATASOURCE_*`), secreto de firma de los tokens de sesión (`LATIFI_JWT_SECRET`), dominio de autenticación, URL del nodo RPC de Alchemy (`LATIFI_RPC_URL`), dirección del contrato (`LATIFI_LOANBOOK_ADDRESS`), bloque de inicio del indexador (`LATIFI_INDEXER_START_BLOCK`) y Swagger habilitado (`LATIFI_SWAGGER_ENABLED`).
 4. Publicó la versión `v0.2.0` con el flujo GitFlow: pull request de `feature/deployment` a `develop` (#20), rama `release/0.2.0` hacia `main` (#21) y etiqueta anotada `v0.2.0`. El workflow `publish-image.yml` construyó y publicó la imagen `ghcr.io/arquitectura-de-softwares-emergentes/latifi-api` con las etiquetas `0.2.0`, `0.2` y `latest`.
 5. Dokploy construyó el commit de la etiqueta y arrancó el contenedor con el indexador de eventos embebido.
 6. Verificación desde un equipo externo al servidor y sin token, registrada en [docs/evidence/live-checks.txt](docs/evidence/live-checks.txt): `GET /actuator/health` devuelve `200` con `{"status":"UP"}`, la Swagger UI responde `200` en https://latifi-api.juan-tech.com/swagger-ui/index.html y `/v3/api-docs` devuelve la versión `0.2.0` con la URL pública como servidor. Las capturas de la Swagger UI están en 7.2.1.6.
 
 ##### Mobile Application
 
-1. El repositorio `latifi-android` ejecuta tres workflows por pull request: `ci` (compilación y pruebas unitarias), `android-instrumented` (pruebas instrumentadas en un emulador) y `android-instrumented-api30` (las mismas pruebas sobre Android 11). La última ejecución sobre `develop` de los tres terminó en `success`.
+1. El repositorio `latifi-android` ejecuta tres workflows por pull request: `ci` (lint, pruebas unitarias y compilación de la app y de las pruebas instrumentadas), `android-instrumented` (pruebas instrumentadas en un emulador) y `android-instrumented-api30` (las mismas pruebas sobre Android 11). La última ejecución sobre `develop` de los tres terminó en `success`.
 2. El paquete de la aplicación es `com.latifi.wallet`, con `minSdk` 26 y `compileSdk` 37, y la conexión no custodial con la billetera usa Reown AppKit.
 3. El equipo compiló la versión debug en modo Demo y la instaló en un Pixel 9a para grabar las capturas de 7.2.1.5 y los videos del prototipo de 6.5.
 4. Pendiente: la distribución del build a los testers con Firebase App Distribution. El enlace de invitación sigue en `pending` en [docs/evidence/deployment-facts.json](docs/evidence/deployment-facts.json) y el equipo lo completa cuando suba el build.
@@ -4525,7 +4540,7 @@ En el repositorio del informe, Anaely Burga subió los 45 wireframes de 6.4.1, F
 
 ### 7.3. Validation Interviews
 
-_[Por completar: introducción. Actividades de entrevistas de validación, en las que usuarios de los segmentos objetivo interactúan con la landing page y con las aplicaciones.]_
+Las entrevistas de validación ponen la landing page publicada y la aplicación LatiFi Wallet frente a personas de los dos segmentos objetivo, el prestatario no bancarizado y el prestamista con capital ocioso. Cada persona recorre la landing, ejecuta las tareas de sus user flows y comenta en voz alta lo que entiende y lo que no. El equipo graba cada sesión en video, con consentimiento, y usa las observaciones de dos maneras: corrige los problemas de usabilidad que detecta y los clasifica con las heurísticas de 7.3.3. Esta sección diseña las sesiones (7.3.1), registra cada entrevista con su video (7.3.2) y evalúa el producto según heurísticas (7.3.3).
 
 #### 7.3.1. Diseño de Entrevistas
 
@@ -4563,7 +4578,7 @@ Las entrevistas de validación buscan comprobar si los usuarios de los dos segme
 
 | Tarea | User flow (6.4.4) | Criterio de éxito |
 |---|---|---|
-| T1. Explicar con sus palabras qué ofrece LatiFi después de recorrer la landing | — | Menciona préstamos entre personas sin colateral |
+| T1. Explicar con sus palabras qué ofrece LatiFi después de recorrer la landing | n/a | Menciona préstamos entre personas sin colateral |
 | T2. Ingresar a la aplicación y conectar la billetera | User Flow 1 | Llega al inicio del prestatario sin ayuda |
 | T3. Solicitar un préstamo de S/ 500 a 3 cuotas | User Flow 2 | Publica la solicitud y entiende el monto de cada cuota |
 | T4. Pagar la primera cuota del préstamo | User Flow 3 | Completa el pago y encuentra su reputación actualizada |
@@ -4608,7 +4623,7 @@ Las entrevistas de validación buscan comprobar si los usuarios de los dos segme
 
 | Tarea | User flow (6.4.4) | Criterio de éxito |
 |---|---|---|
-| T1. Explicar cómo LatiFi protege su dinero después de recorrer la landing | — | Menciona que LatiFi no custodia los fondos y que el contrato ejecuta los pagos |
+| T1. Explicar cómo LatiFi protege su dinero después de recorrer la landing | n/a | Menciona que LatiFi no custodia los fondos y que el contrato ejecuta los pagos |
 | T2. Ingresar a la aplicación como prestamista | User Flow 1 | Llega al inicio del prestamista sin ayuda |
 | T3. Encontrar la solicitud con mejor reputación de 3 meses o menos | User Flow 4 | Usa los filtros y el orden por reputación |
 | T4. Fondear esa solicitud y revisarla en su portafolio | User Flow 4 | Completa el fondeo y ubica la inversión en Portafolio |
@@ -4742,6 +4757,10 @@ Ambos segmentos coinciden en un punto que sustenta la propuesta de valor: la con
 
 Estos resultados provienen de cuatro entrevistas, por lo que no permiten generalizar. Como siguientes pasos, el equipo completará el registro de entrevistas hasta el mínimo por segmento, con prioridad en el segmento prestamista, y validará el modelo de reputación con prototipos para contrastar el resto de las hipótesis del Lean UX Canvas.
 
+Con el Sprint 1, el equipo pasó del diseño a un producto en funcionamiento. Los contratos `LoanBook` y `MockStablecoin` están desplegados en Polygon Amoy, LatiFi API responde en https://latifi-api.juan-tech.com con el indexador de eventos activo, la landing page está publicada en GitHub Pages y la aplicación Android recorre el ciclo de solicitud, fondeo, pago y reputación en modo Demo. Las 37 tareas del Sprint Backlog 1 figuran como terminadas. El principal aprendizaje es de proceso: el código de los cuatro productos quedó en una sola cuenta de GitHub, y la implementación debe repartirse entre todos los integrantes en el siguiente sprint, para que los analíticos de colaboración reflejen a todo el equipo.
+
+Aún faltan tres evidencias para cerrar la validación. El equipo no ha registrado las entrevistas de validación de 7.3.2 ni la evaluación heurística de 7.3.3, y falta el enlace de Firebase App Distribution para que los testers instalen la aplicación. Hasta tener esas sesiones, las conclusiones sobre usabilidad y confianza siguen siendo hipótesis.
+
 <div style="page-break-after: always;"></div>
 
 # Bibliografía
@@ -4795,4 +4814,5 @@ Estos resultados provienen de cuatro entrevistas, por lo que no permiten general
 
 | Entrega | Enlace privado en Microsoft Stream | Archivo |
 |---|---|---|
-| TB1 | _Pendiente de agregar: el enlace se obtiene al publicar el video de exposición en Microsoft Stream_ | upc-pre-202401-si728-2620-9046-latifi-expo-tb1.mp4 |
+| TB1 | _Pendiente de agregar: el enlace se obtiene al publicar el video de exposición en Microsoft Stream_ | upc-pre-202602-si728-2620-9046-latifi-expo-tb1.mp4 |
+| TB2 | _Pendiente de agregar: el enlace se obtiene al publicar el video de exposición en Microsoft Stream_ | upc-pre-202602-si728-2620-9046-latifi-expo-tb2.mp4 |
