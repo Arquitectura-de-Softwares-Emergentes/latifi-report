@@ -3246,17 +3246,17 @@ Para colaborar en el ciclo de vida de LatiFi, los integrantes del equipo utiliza
 
 **Project Management**
 
-| Producto | Propósito de uso en el proyecto | Ruta de referencia / descarga |
-|---|---|---|
-| Jira | Gestión del backlog y de los sprints. Cada pull request se vincula con su issue mediante la clave del proyecto LatiFi en Jira. | https://www.atlassian.com/software/jira |
-| GitHub (Organization) | Alojamiento de los repositorios del equipo, revisión de cambios mediante pull requests y analíticos de colaboración. | https://github.com/Arquitectura-de-Softwares-Emergentes |
+| Producto              | Propósito de uso en el proyecto                                                                                             | Ruta de referencia / descarga |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------|---|
+| Trello                     | Gestión del backlog y de los sprints. Cada pull request se vincula con su issue mediante la clave del proyecto LatiFi en Trello. | https://www.atlassian.com/software/jira |
+| GitHub (Organization) | Alojamiento de los repositorios del equipo, revisión de cambios mediante pull requests y analíticos de colaboración.        | https://github.com/Arquitectura-de-Softwares-Emergentes |
 
 **Requirements Management**
 
-| Producto | Propósito de uso en el proyecto | Ruta de referencia / descarga |
-|---|---|---|
-| Jira | Registro de las épicas, user stories y technical stories del Product Backlog. | https://www.atlassian.com/software/jira |
-| UXPressia | Elaboración de los User Personas y Empathy Maps a partir de las entrevistas. | https://uxpressia.com |
+| Producto          | Propósito de uso en el proyecto | Ruta de referencia / descarga |
+|-------------------|---|---|
+| Trello            | Registro de las épicas, user stories y technical stories del Product Backlog. | https://trello.com/ |
+| UXPressia         | Elaboración de los User Personas y Empathy Maps a partir de las entrevistas. | https://uxpressia.com |
 | Miro / LucidChart | Sesiones de EventStorming y modelado de escenarios As-Is y To-Be. | https://miro.com / https://www.lucidchart.com |
 
 **Product UX/UI Design**
@@ -3546,27 +3546,28 @@ El Sprint 1 abarcó la primera versión funcional de los cuatro productos digita
 
 El Sprint Planning Meeting del Sprint 1 se realizó de forma virtual con los cuatro integrantes del equipo. En la reunión se revisaron los resultados de las entregas anteriores (TB1 y TP1), se acordó el objetivo del sprint y se seleccionaron las user stories del Product Backlog según su prioridad. Como el objetivo del proyecto es demostrar el ciclo completo del microcrédito, el equipo decidió incluir las 23 historias del backlog, organizadas por producto digital: smart contracts, LatiFi API, aplicación móvil y landing page.
 
-| Sprint # | Sprint 1 |
-|---|---|
-| **Sprint Planning Background** | |
-| Date | 2026-10-28 |
-| Time | 08:00 PM |
-| Location | Reunión virtual en Microsoft Teams |
-| Prepared By | Angulo Abud, Juan Carlos |
-| Attendees (to planning meeting) | Angulo Abud, Juan Carlos / Quiroz Zambrano, Fabrizio Javier / Burga Loarte, Anaely / Vilca Valverde, Fiorella Angela |
+| Sprint # | Sprint 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|---|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Sprint Planning Background** |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Date | 2026-10-28                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Time | 08:00 PM                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Location | Reunión virtual en Microsoft Teams                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Prepared By | Angulo Abud, Juan Carlos                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Attendees (to planning meeting) | Angulo Abud, Juan Carlos / Quiroz Zambrano, Fabrizio Javier / Burga Loarte, Anaely / Vilca Valverde, Fiorella Angela                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | Sprint 0 Review Summary | En las entregas TB1 y TP1 el equipo completó la investigación y el diseño de la solución: entrevistas a prestatarios y prestamistas, User Personas, Empathy Maps, escenarios As-Is y To-Be, Product Backlog con 23 historias (103 story points), diseño estratégico y táctico con cinco bounded contexts y diagramas C4, y la guía de estilos, arquitectura de información y mock-ups de la landing page y la aplicación. El feedback recibido destacó la claridad del problema y pidió pasar del diseño a una implementación demostrable. |
-| Sprint 0 Retrospective Summary | Como aciertos, el equipo resaltó el uso de GitFlow y Conventional Commits en el repositorio del informe y la trazabilidad entre entrevistas, historias y diseño. Como oportunidades de mejora, acordó repartir mejor las tareas entre los integrantes, registrar cada tarea en Jira y vincularla a su pull request, y adelantar la revisión de los entregables para no concentrar el trabajo al final. |
-| **Sprint Goal & User Stories** | |
-| Sprint 1 Goal | Nuestro foco está en implementar el ciclo completo del microcrédito P2P en Polygon Amoy. Creemos que esto permite que un prestatario no bancarizado solicite un préstamo sin colateral y que un prestamista lo fondee con información de reputación verificable. Esto se confirmará cuando un prestatario conecte su billetera, publique una solicitud, un prestamista la fondee, el prestatario pague sus cuotas y su reputación se actualice automáticamente a partir de los eventos on-chain, todo desde la aplicación móvil. |
-| Sprint 1 Velocity | 105 story points |
-| Sum of Story Points | 103 story points |
+| Sprint 0 Retrospective Summary | Como aciertos, el equipo resaltó el uso de GitFlow y Conventional Commits en el repositorio del informe y la trazabilidad entre entrevistas, historias y diseño. Como oportunidades de mejora, acordó repartir mejor las tareas entre los integrantes, registrar cada tarea en Trello y vincularla a su pull request, y adelantar la revisión de los entregables para no concentrar el trabajo al final.                                                                                                                                   |
+| **Sprint Goal & User Stories** |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Sprint 1 Goal | Nuestro foco está en implementar el ciclo completo del microcrédito P2P en Polygon Amoy. Creemos que esto permite que un prestatario no bancarizado solicite un préstamo sin colateral y que un prestamista lo fondee con información de reputación verificable. Esto se confirmará cuando un prestatario conecte su billetera, publique una solicitud, un prestamista la fondee, el prestatario pague sus cuotas y su reputación se actualice automáticamente a partir de los eventos on-chain, todo desde la aplicación móvil.           |
+| Sprint 1 Velocity | 105 story points                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Sum of Story Points | 103 story points                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 ##### 7.2.1.2. Sprint Backlog 1.
 
 
-_[Screenshot del board del sprint (por ejemplo, Trello)]_
+  <img src="resources/Cap7/TrelloSCREEN.png" alt="Trello Screenshot" width="90%"/>
 
-**URL pública del board:** https://latifi.atlassian.net/jira/software/projects/LAT/boards/1
+
+**URL pública del board:** https://trello.com/b/YDJ16JNs/latifi
 
 | Sprint # | Sprint 1 | | | | | | |
 |---|---|---|---|---|---|---|---|
@@ -3905,27 +3906,38 @@ La página está disponible en inglés (en_US) y se adapta a pantallas de teléf
 
 **Mobile Application (LatiFi Wallet)**
 
-El prestatario conoce el modelo P2P en el onboarding, conecta su billetera, elige su rol y completa su perfil ligero:
+Las capturas se tomaron en un Pixel 9a con la compilación debug de la rama `develop`, en modo Demo. En ese modo la billetera es simulada y los datos son de ejemplo: los montos están en tUSD, dólares de prueba sin valor real, y los nombres son ficticios.
 
-| Onboarding | Conectar billetera | Elegir rol | Perfil ligero |
+El usuario conoce el modelo P2P en el onboarding, conecta su billetera, confirma que es el dueño firmando un mensaje (sin costo y sin mover dinero) y elige su rol:
+
+| Onboarding | Conectar billetera | Firmar para entrar | Elegir rol |
 |---|---|---|---|
-| <img src="resources/Cap7/7.2.1.5-app-01-onboarding.png" alt="Onboarding" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-02-conectar.png" alt="Conectar billetera" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-03-rol.png" alt="Elegir rol" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-04-perfil.png" alt="Perfil ligero" width="180"/> |
+| <img src="resources/Cap7/7.2.1.5-app-01-onboarding.png" alt="Onboarding" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-02-conectar.png" alt="Conectar billetera" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-03-firma.png" alt="Firmar para entrar" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-04-rol.png" alt="Elegir rol" width="180"/> |
 
-Desde su inicio, el prestatario solicita un préstamo con el resumen de cuotas en moneda local, sigue el estado de la transacción y consulta su reputación:
+El prestatario completa su perfil ligero y, desde su inicio, ve su saldo, su reputación y su próxima cuota. Para solicitar un préstamo elige el monto, la tasa, el plazo y las cuotas, y revisa el total a devolver en tUSD y en soles antes de publicar:
 
-| Inicio del prestatario | Solicitar préstamo | Estado de la transacción | Reputación |
+| Perfil ligero | Inicio del prestatario | Solicitar préstamo | Revisar solicitud |
 |---|---|---|---|
-| <img src="resources/Cap7/7.2.1.5-app-05-inicio-prestatario.png" alt="Inicio del prestatario" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-06-solicitar.png" alt="Solicitar préstamo" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-07-estado-tx.png" alt="Estado de la transacción" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-08-reputacion.png" alt="Reputación" width="180"/> |
+| <img src="resources/Cap7/7.2.1.5-app-05-perfil.png" alt="Perfil ligero" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-06-inicio-prestatario.png" alt="Inicio del prestatario" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-07-solicitar.png" alt="Solicitar préstamo" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-08-revisar-solicitud.png" alt="Revisar solicitud" width="180"/> |
 
-El prestamista explora el feed ordenado por reputación, revisa el detalle de una solicitud, la fondea y sigue su inversión en el portafolio:
+Cuando la red confirma la transacción, la solicitud queda abierta para los prestamistas. Después, el prestatario paga sus cuotas desde su propia billetera, y cada pago a tiempo sube su puntaje de reputación:
 
-| Feed de inversión | Detalle de la solicitud | Confirmar fondeo | Portafolio |
+| Solicitud publicada | Pagar cuota | Cuota pagada | Reputación |
 |---|---|---|---|
-| <img src="resources/Cap7/7.2.1.5-app-09-feed.png" alt="Feed de inversión" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-10-detalle-solicitud.png" alt="Detalle de la solicitud" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-11-fondear.png" alt="Confirmar fondeo" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-12-portafolio.png" alt="Portafolio" width="180"/> |
+| <img src="resources/Cap7/7.2.1.5-app-09-solicitud-publicada.png" alt="Solicitud publicada" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-10-pagar-cuota.png" alt="Pagar cuota" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-11-cuota-pagada.png" alt="Cuota pagada" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-12-reputacion.png" alt="Reputación" width="180"/> |
 
-**Video de ejecución del Sprint 1:** [FALTA VIDEO](URL_DEL_VIDEO)
+El prestamista ve en su inicio las solicitudes abiertas y el próximo pago que recibirá. En el feed puede ordenar y filtrar por riesgo, plazo y monto, y en el detalle de cada solicitud revisa el historial de pagos del prestatario antes de fondear:
 
-El video recorre la landing page en ambos idiomas y los user flows de la aplicación: conectar la billetera, solicitar un préstamo y pagar una cuota como prestatario, y fondear una solicitud como prestamista.
+| Inicio del prestamista | Feed de inversión | Detalle de la solicitud | Confirmar fondeo |
+|---|---|---|---|
+| <img src="resources/Cap7/7.2.1.5-app-13-inicio-prestamista.png" alt="Inicio del prestamista" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-14-feed.png" alt="Feed de inversión" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-15-detalle-solicitud.png" alt="Detalle de la solicitud" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-16-fondear.png" alt="Confirmar fondeo" width="180"/> |
+
+El fondeo se hace en dos pasos: primero se autoriza el monto exacto y luego se fondea la solicitud. La inversión aparece en el portafolio con su retorno esperado y el calendario de cuotas. Desde el perfil, cualquier usuario puede pedir monedas de prueba para probar la aplicación:
+
+| Fondeo confirmado | Portafolio | Detalle de la inversión | Monedas de prueba |
+|---|---|---|---|
+| <img src="resources/Cap7/7.2.1.5-app-17-fondeo-confirmado.png" alt="Fondeo confirmado" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-18-portafolio.png" alt="Portafolio" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-19-detalle-inversion.png" alt="Detalle de la inversión" width="180"/> | <img src="resources/Cap7/7.2.1.5-app-20-monedas-prueba.png" alt="Monedas de prueba" width="180"/> |
+
 ##### 7.2.1.6. Services Documentation Evidence for Sprint Review.
 
 En el Sprint 1 se documentaron con OpenAPI 3.0 los diez endpoints de LatiFi API, que cubren la autenticación por firma de billetera, el perfil ligero, la reputación, los préstamos y la conversión a moneda local. El contrato `openapi/latifi-api.v0.yaml` (versión 0.2.0) se escribió antes que el código y es la fuente común de la API y de la aplicación móvil: una prueba de la API falla si el código se aparta del contrato, y otra prueba de la aplicación falla si su cliente Retrofit deja de coincidir con él. La documentación se publica con Swagger UI, generada desde el código con springdoc-openapi.
@@ -4208,16 +4220,20 @@ No están incluidas en esta versión de la evaluación las siguientes tareas:
 
 ### 7.4. Video About-the-Product
 
-_[Por completar: introducción y descripción del contenido del video, dirigido a los visitantes de la landing page y a los usuarios de las aplicaciones. El tono debe ser consistente con el del producto e incluir al menos un testimonio positivo de un usuario de las entrevistas de validación.]_
+El video About-the-Product presenta LatiFi Wallet a los visitantes de la landing page y a los futuros usuarios de la aplicación. Muestra el problema que resuelve: emprendedores y trabajadores independientes que no acceden al crédito formal por falta de historial bancario, y personas con dinero ahorrado que no tienen una forma segura de prestarlo. Luego explica la propuesta de LatiFi: préstamos entre personas con reglas escritas en un smart contract, montos mostrados también en soles y una reputación que crece con cada pago puntual.
 
-_[Screenshot del video]_
+El video recorre la aplicación desde los dos roles. El prestatario conecta su billetera, solicita un préstamo y paga sus cuotas, y el prestamista revisa las solicitudes, compara la reputación de cada prestatario y fondea la que prefiere. Mantiene el mismo tono cercano y claro de la landing page y de la aplicación, sin tecnicismos, e incluye el testimonio de un usuario de las entrevistas de validación. Al final invita a descargar la aplicación desde la landing page.
 
-| Elemento | Detalle |
-|---|---|
-| Video en Microsoft Stream | _[URL]_ |
-| Video en YouTube (incrustado en la landing page) | _[URL]_ |
-| Duración | _[mm:ss]_ |
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=e3YCgq88J7c">
+    <img src="https://img.youtube.com/vi/e3YCgq88J7c/maxresdefault.jpg" alt="Video About-the-Product de LatiFi Wallet" width="80%"/>
+  </a>
+</div>
 
+| Elemento | Detalle                                     |
+|---|---------------------------------------------|
+| Video en YouTube (incrustado en la landing page) | https://www.youtube.com/watch?v=e3YCgq88J7c |
+| Duración | 01:42                                       |
 # Avance de Conclusiones
 
 Con las cuatro entrevistas realizadas, tres del segmento prestatario y una del prestamista, el equipo contrasta de forma preliminar los supuestos del Capítulo I. Los tres prestatarios confirman que el crédito formal les ofrece montos bajos o les exige documentos que no tienen, y que en esos casos recurren a su familia, a juntas o a un prestamista del barrio que, en un caso, cobra cerca de 10% semanal. Eso respalda el problema de acceso al crédito formal. En el segmento prestamista, el entrevistado ya presta excedentes a conocidos con una tasa base desde el 5% mensual y ahorra en stablecoins, lo que respalda la existencia de capital ocioso dispuesto a colocarse.
