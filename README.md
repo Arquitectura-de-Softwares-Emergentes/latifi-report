@@ -226,6 +226,12 @@ El alcance de LatiFi en este informe es acotado: se trata del proyecto final del
 | **Burga Loarte, Anaely - U202118264**                                                                                                       | Estudiante de Ingeniería de Software enfocado en la experiencia de usuario y la lógica de negocio en la interfaz. Contribuye en la interfaz de usuario y la coordinación general de la app. |
 | **Vilca Valverde, Fiorella Angela - U20211e417**                                                                                            | Estudiante de Ingeniería de Software, con interés en el análisis de datos. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
 
+El video About-the-Team presenta a cada integrante del equipo y las responsabilidades que asumió en el proyecto.
+
+| Elemento | Detalle |
+|---|---|
+| Video en YouTube | https://youtu.be/A3Tgz6EGEcs |
+
 ### 1.2. Solution Profile
 
 #### 1.2.1. Antecedentes y problemática
