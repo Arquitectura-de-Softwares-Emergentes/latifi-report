@@ -14,7 +14,7 @@ Esta carpeta guarda las pruebas de que el informe describe el sistema que el equ
 
 ## Hechos pendientes
 
-Un hecho depende de un paso manual y todavía no tiene valor: el enlace de invitación de Firebase App Distribution. En el archivo de hechos lleva el estado `pending` y el valor `null`, y en los diagramas del Capítulo IV aparece marcado como pendiente. Nadie lo llena con un valor supuesto: se completa cuando el equipo sube el build y se puede comprobar. La URL base de la API y la URL de Swagger UI pasaron a `live` con la comprobación de [live-checks.txt](live-checks.txt).
+No quedan hechos pendientes. La URL base de la API y la URL de Swagger UI pasaron a `live` con la comprobación de [live-checks.txt](live-checks.txt), y el enlace de invitación de Firebase App Distribution pasó a `live` con la release 0.2.1 (build 26) del grupo `latifi-demo`.
 
 ## Regla de datos públicos
 

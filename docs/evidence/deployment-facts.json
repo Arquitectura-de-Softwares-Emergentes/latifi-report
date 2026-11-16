@@ -194,10 +194,15 @@
     {
       "id": "firebase-invite-url",
       "label": "Enlace de invitación de Firebase App Distribution",
-      "value": null,
-      "status": "pending",
+      "value": "https://appdistribution.firebase.dev/i/da5da06563fcdd45",
+      "status": "live",
       "diagram": true,
-      "source": "plan 07-09 (distribución de la app Android)"
+      "source": "latifi-report/docs/evidence/live-checks.txt",
+      "verify": {
+        "type": "contains",
+        "file": "latifi-report/docs/evidence/live-checks.txt",
+        "text": "Enlace de invitación de Firebase: https://appdistribution.firebase.dev/i/da5da06563fcdd45"
+      }
     }
   ]
 }
