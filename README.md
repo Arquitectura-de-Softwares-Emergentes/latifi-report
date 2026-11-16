@@ -231,7 +231,7 @@ El video About-the-Team presenta a cada integrante del equipo y las responsabili
 | Elemento | Detalle |
 |---|---|
 | Video en YouTube | https://youtu.be/A3Tgz6EGEcs |
-| Video en Microsoft Stream | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQAB-iQoQimyTognPKABU9pTAUzZHhTUotatSgX81WNf3Gg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=AREUhX) |
+| Video en Microsoft Stream | https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQAB-iQoQimyTognPKABU9pTAUzZHhTUotatSgX81WNf3Gg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=AREUhX |
 
 ### 1.2. Solution Profile
 
@@ -543,9 +543,9 @@ Cada entrevista se orientará primero a entender la situación actual del partic
 
 | # | Entrevistado | Edad | Ocupación             | Bancarización | Fecha     | Video |
 |---|---|---|-----------------------|---|-----------|---|
-| 1 | Joseph Falcón | 21 | Ingeniero de Software | Cuenta bancaria, crédito limitado | 18/09/2026 | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQCHK_iltITcS6NM7HjVMQ2YAbWi4_rouRZw5XHK93iajko?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=J79Rt5) |
-| 2 | Rafael Chui | 24 | Repartidor independiente (delivery) | Cuenta de ahorros en caja, crédito limitado | 4/10/2026 | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQAV70dTUnwjTb6dBn95hr5iAXZVc30kSbCMiMb09Yx5PSQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=I2NLfL) |
-| 3 | Gonzalo Contreras | 22 | Comerciante de mercado | Sin cuenta bancaria, solo Yape | 4/10/2026  | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQC0ybY5Ls4pQ6Qw5eC4GupXAWf9-JjDwupdcTAFsZYLOjQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=iv4HO3) |
+| 1 | Joseph Falcón | 21 | Ingeniero de Software | Cuenta bancaria, crédito limitado | 18/09/2026 | https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQCHK_iltITcS6NM7HjVMQ2YAbWi4_rouRZw5XHK93iajko?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=J79Rt5 |
+| 2 | Rafael Chui | 24 | Repartidor independiente (delivery) | Cuenta de ahorros en caja, crédito limitado | 4/10/2026 | https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQAV70dTUnwjTb6dBn95hr5iAXZVc30kSbCMiMb09Yx5PSQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=I2NLfL |
+| 3 | Gonzalo Contreras | 22 | Comerciante de mercado | Sin cuenta bancaria, solo Yape | 4/10/2026  | https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQC0ybY5Ls4pQ6Qw5eC4GupXAWf9-JjDwupdcTAFsZYLOjQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=iv4HO3 |
 ---
 
 ##### Entrevista 1: Joseph Falcón
@@ -560,7 +560,7 @@ Cada entrevista se orientará primero a entender la situación actual del partic
 | Ocupación | Ingeniero de Software                                                                                   |
 | Nivel de bancarización | Cuenta de ahorros en banco; acceso limitado a crédito formal (montos bajos, tasas altas)               |
 | Familiaridad con billeteras digitales/cripto | Baja: usa app de su banco y Yape, sin experiencia en criptomonedas                                    |
-| Video | [Ver grabación](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQCHK_iltITcS6NM7HjVMQ2YAbWi4_rouRZw5XHK93iajko?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=J79Rt5) |
+| Video | https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQCHK_iltITcS6NM7HjVMQ2YAbWi4_rouRZw5XHK93iajko?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=J79Rt5 |
 
 **Screenshot de la entrevista**
 
@@ -600,7 +600,7 @@ Joseph financia sus gastos principalmente con ahorros propios y, cuando necesita
 | Ocupación | Repartidor independiente (delivery) |
 | Nivel de bancarización | Cuenta de ahorros en caja municipal; acceso limitado a crédito formal (montos bajos por ingresos no fijos) |
 | Familiaridad con billeteras digitales/cripto | Baja: usa Yape, Plin y la app de su caja; conoce las criptomonedas solo por redes sociales, sin experiencia de uso |
-| Video | [Ver grabación](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQAV70dTUnwjTb6dBn95hr5iAXZVc30kSbCMiMb09Yx5PSQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=I2NLfL) |
+| Video | https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQAV70dTUnwjTb6dBn95hr5iAXZVc30kSbCMiMb09Yx5PSQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=I2NLfL |
 
 **Screenshot de la entrevista**
 
@@ -640,7 +640,7 @@ Rafael financia sus gastos con lo que gana durante la semana y, ante un gasto gr
 | Ocupación | Comerciante de mercado (puesto propio) |
 | Nivel de bancarización | Sin cuenta bancaria; sin acceso a crédito formal (le exigieron boletas, aval y documentos que no posee) |
 | Familiaridad con billeteras digitales/cripto | Muy baja: solo usa Yape con el número de su celular; no conoce las criptomonedas |
-| Video | [Ver grabación](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQC0ybY5Ls4pQ6Qw5eC4GupXAWf9-JjDwupdcTAFsZYLOjQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ptaozv) |
+| Video | https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQC0ybY5Ls4pQ6Qw5eC4GupXAWf9-JjDwupdcTAFsZYLOjQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ptaozv |
 
 **Screenshot de la entrevista**
 
@@ -3713,7 +3713,7 @@ El prototipo es la propia aplicación Android compilada en modo Demo, no una maq
 | Elemento | Detalle |
 |---|---|
 | Herramienta | Aplicación `latifi-android` en modo Demo, compilación debug sobre un Pixel 9a |
-| Videos en Microsoft Stream | [Video 1: solicitar un préstamo](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQBoYWylp2PZQJlouYxmLn5qAeV80xYqljFQ-srwKDnmirw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=hJb0Mw)<br>[Video 2: fondear una solicitud](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQCJjfyCwhLIQovEHxcrHM8oAdRew_udVgnldsiRIviYr_M?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=2zARQX)<br>[Video 3: pagar una cuota y reputación](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQBqKuFsrCATTblNBU1_XcKyASG0Q-0VXVvoiAUnrN9ikkE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ncE2ky) |
+| Videos en Microsoft Stream | Video 1: solicitar un préstamo: https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQBoYWylp2PZQJlouYxmLn5qAeV80xYqljFQ-srwKDnmirw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=hJb0Mw<br>Video 2: fondear una solicitud: https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQCJjfyCwhLIQovEHxcrHM8oAdRew_udVgnldsiRIviYr_M?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=2zARQX<br>Video 3: pagar una cuota y reputación: https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQBqKuFsrCATTblNBU1_XcKyASG0Q-0VXVvoiAUnrN9ikkE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ncE2ky |
 
 El User Flow 1 (conectar la billetera) no tiene video propio, porque en modo Demo la billetera simulada omite la firma real. Lo cubren las capturas M01 a M08.
 
@@ -4691,7 +4691,7 @@ Las entrevistas de validación buscan comprobar si los usuarios de los dos segme
 
 | Nombres y apellidos | Edad | Distrito | Video (Microsoft Stream) | Inicio | Duración |
 |---------------------|------|----------|---|--------|----------|
-| Sebastián Delgado   | 21   | Lince    | [ENTREVISTA-SEBASTIAN-LATIFI.mp4](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQC06h1rjUeKT5dWYpuRThwmATaNwXGxjaRnsnPBUXXk-0E?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=WReQCb) | 00:01  | 03:57    |
+| Sebastián Delgado   | 21   | Lince    | ENTREVISTA-SEBASTIAN-LATIFI.mp4: https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQC06h1rjUeKT5dWYpuRThwmATaNwXGxjaRnsnPBUXXk-0E?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=WReQCb | 00:01  | 03:57    |
 
 <div align="center">
   <img src="resources/Cap7/7.3.2-entrevista-sebastian.png" alt="Entrevista a Sebastián" width="70%"/>
@@ -4840,7 +4840,7 @@ El video recorre la aplicación desde los dos roles. El prestatario conecta su b
 | Elemento | Detalle                                     |
 |---|---------------------------------------------|
 | Video en YouTube (incrustado en la landing page) | https://www.youtube.com/watch?v=e3YCgq88J7c |
-| Video en Microsoft Stream | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQCWvvnKyTrYSqy4m8m8B7mZAeuBkeMfVYiNqZe-cEHl4-k?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=3TPOwW) |
+| Video en Microsoft Stream | https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQCWvvnKyTrYSqy4m8m8B7mZAeuBkeMfVYiNqZe-cEHl4-k?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=3TPOwW |
 | Duración | 01:42                                       |
 # Avance de Conclusiones
 
