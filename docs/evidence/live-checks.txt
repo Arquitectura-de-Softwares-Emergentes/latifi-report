@@ -9,3 +9,10 @@ GET /swagger-ui/index.html -> 200
 GET /v3/api-docs -> 200
 GET /actuator/health cuerpo: {"status":"UP"}
 OpenAPI info.version: 0.2.0
+
+Distribución de la app Android, comprobada el 2026-11-15.
+Enlace de invitación de Firebase: https://appdistribution.firebase.dev/i/da5da06563fcdd45
+GET del enlace -> redirige al inicio de sesión de Google con destino appdistribution.firebase.google.com/i/da5da06563fcdd45 (200)
+Release subida al grupo latifi-demo: versión 0.2.1, build 26
+SHA-256 del APK: 1d79568fd3b1d1e113a8aba0da3032aeb288599ebdf259c08764c278cb39a662
+SHA-256 del certificado de firma: 63b692c7edaec5843f2f96fa2eb1a26f79b5ecfe516ef26a37a8b0918a6de350
