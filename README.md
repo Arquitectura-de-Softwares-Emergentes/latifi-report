@@ -4840,6 +4840,7 @@ El video recorre la aplicación desde los dos roles. El prestatario conecta su b
 | Elemento | Detalle                                     |
 |---|---------------------------------------------|
 | Video en YouTube (incrustado en la landing page) | https://www.youtube.com/watch?v=e3YCgq88J7c |
+| Video en Microsoft Stream | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQCWvvnKyTrYSqy4m8m8B7mZAeuBkeMfVYiNqZe-cEHl4-k?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=3TPOwW) |
 | Duración | 01:42                                       |
 # Avance de Conclusiones
 
