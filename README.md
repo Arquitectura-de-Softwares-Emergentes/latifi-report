@@ -1432,7 +1432,7 @@ graph TD
 
 **Deployment Diagram (C4)**
 
-El despliegue distribuye el sistema en los nodos que usa el equipo. La app se instala en el teléfono Android desde Firebase App Distribution, y allí el Android Keystore sella la sesión (dirección y token), no una llave de billetera. La landing page se publica como sitio estático en GitHub Pages y el visitante la abre desde su navegador. Los Smart Contracts viven en Polygon Amoy. El código de la API pasa por GitHub Actions, que construye y prueba la imagen y la publica en GHCR. El servidor privado virtual (VPS) de Hetzner administrado con Dokploy construye el contenedor latifi-api desde el Dockerfile del repositorio con la integración Git, y Traefik publica el servicio por HTTPS con certificados de Let's Encrypt. En el mismo VPS corre una instancia compartida de PostgreSQL con una base de datos para LatiFi. El indexador lee Polygon Amoy a través de un proveedor RPC con llave dedicada, y la app pide sus firmas por el relay de Reown. Tres datos dependen del despliegue en vivo y siguen marcados como pendientes hasta que existan: la URL base de la API, la URL de Swagger UI y el enlace de invitación de Firebase.
+El despliegue distribuye el sistema en los nodos que usa el equipo. La app se instala en el teléfono Android desde Firebase App Distribution, y allí el Android Keystore sella la sesión (dirección y token), no una llave de billetera. La landing page se publica como sitio estático en GitHub Pages y el visitante la abre desde su navegador. Los Smart Contracts viven en Polygon Amoy. El código de la API pasa por GitHub Actions, que construye y prueba la imagen y la publica en GHCR. El servidor privado virtual (VPS) de Hetzner administrado con Dokploy construye el contenedor latifi-api desde el Dockerfile del repositorio con la integración Git, y Traefik publica el servicio por HTTPS con certificados de Let's Encrypt. En el mismo VPS corre una instancia compartida de PostgreSQL con una base de datos para LatiFi. El indexador lee Polygon Amoy a través de un proveedor RPC con llave dedicada, y la app pide sus firmas por el relay de Reown. Tres datos salen del despliegue en vivo y están comprobados: la URL base de la API, la URL de Swagger UI y el enlace de invitación de Firebase.
 
 ```mermaid
 graph TD
@@ -1447,7 +1447,7 @@ graph TD
         Browser["Landing Page<br/>[HTML5 / CSS3 / JS]"]
     end
 
-    Firebase["Firebase App Distribution<br/>[Canal de testers]<br/>Enlace de invitación de Firebase App Distribution: PENDIENTE"]
+    Firebase["Firebase App Distribution<br/>[Canal de testers]<br/>Enlace de invitación: https://appdistribution.firebase.dev/i/da5da06563fcdd45"]
 
     subgraph "GitHub Pages"
         Pages["Landing Page<br/>[Sitio estático]<br/>https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/"]
@@ -1517,7 +1517,7 @@ graph TD
 | Componente | Plataforma | Origen | URL o dirección | Cómo se despliega |
 |---|---|---|---|---|
 | LatiFi Wallet (app Android) | Teléfono Android | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-android | Paquete com.latifi.wallet | Build de release firmado, subido a Firebase App Distribution e instalado desde el enlace de invitación |
-| Firebase App Distribution | Servicio externo | Build de release de latifi-android | Enlace de invitación de Firebase App Distribution: PENDIENTE | El equipo sube el build y envía la invitación a los testers |
+| Firebase App Distribution | Servicio externo | Build de release de latifi-android | Enlace de invitación: https://appdistribution.firebase.dev/i/da5da06563fcdd45 | El equipo sube el build y los testers lo instalan con el enlace de invitación |
 | Landing Page | GitHub Pages | https://github.com/Arquitectura-de-Softwares-Emergentes/latifi-landing | https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/ | Un workflow de GitHub Actions publica el sitio estático |
 | Navegador del visitante | Equipo del visitante | Sin código propio | https://arquitectura-de-softwares-emergentes.github.io/latifi-landing/ | Abre la landing por HTTPS |
 | Billetera del usuario | Dispositivo del usuario | Billetera de terceros | Sin URL de LatiFi | La instala el usuario; firma y envía cada transacción |
