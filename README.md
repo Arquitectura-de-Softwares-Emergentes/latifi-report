@@ -4678,20 +4678,25 @@ Las entrevistas de validación buscan comprobar si los usuarios de los dos segme
 
 #### 7.3.2. Registro de Entrevistas
 
-_[Por completar: de 3 a 5 entrevistas por segmento, registradas en video.]_
-
-##### Segmento 1: _[Nombre del segmento]_
+##### Segmento 1: Prestatario, emprendedor o independiente no bancarizado
 
 ###### Entrevista 1
 
 | Nombres y apellidos | Edad | Distrito | Video (Microsoft Stream) | Inicio | Duración |
-|---|---|---|---|---|---|
-| _[...]_ | _[...]_ | _[...]_ | _[URL]_ | _[mm:ss]_ | _[mm:ss]_ |
+|---------------------|------|----------|---|--------|----------|
+| Sebastián Delgado   | 21   | Lince    | [ENTREVISTA-SEBASTIAN-LATIFI.mp4](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202213406_upc_edu_pe/IQC06h1rjUeKT5dWYpuRThwmATaNwXGxjaRnsnPBUXXk-0E?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=WReQCb) | 00:01  | 03:57    |
 
-_[Screenshot de un cuadro del video]_
+<div align="center">
+  <img src="resources/Cap7/7.3.2-entrevista-sebastian.png" alt="Entrevista a Sebastián" width="70%"/>
+</div>
 
-**Resumen:** _[Principales apreciaciones del entrevistado sobre las tareas asignadas.]_
+**Resumen:** A Sebastián se le mostró el video del flujo del prestatario: el onboarding, la conexión de la billetera, la elección del rol, el perfil ligero, la solicitud de 100 tUSD en 3 cuotas a 60 días y la publicación de la solicitud. Después del video respondió cinco preguntas.
 
+- **Comprensión de la propuesta:** describió LatiFi como una app para pedir préstamos a otras personas en lugar de a un banco, pagarlos en cuotas y mejorar su calificación pagando a tiempo. Entendió el modelo P2P y el rol de la reputación sin ayuda.
+- **Lo más confuso:** la billetera. No le quedó claro si es otra app que debe descargar, y el mensaje de firmar le generó temor de estar aceptando algo. Tampoco entendió el término "tUSD" y se guió por el monto en soles.
+- **Claridad del costo:** identificó que devolvería 101.64 tUSD, unos S/ 381, en 3 cuotas de unos S/ 127. Valoró ver el total antes de publicar y en soles, porque con los prestamistas informales nunca sabe cuánto terminará pagando.
+- **Confianza:** le da confianza que LatiFi no toque su dinero, que se muestre un comprobante y que la reputación premie pagar puntual. Le genera desconfianza no saber quién le presta ni qué pasa si no puede pagar una cuota.
+- **Facilidad y adopción:** calificó la facilidad con 4 de 5. Pedir el préstamo le pareció rápido, pero conectar la billetera la primera vez le costó. Usaría LatiFi en lugar de su opción actual, un prestamista que cobra cerca de 10 % semanal, porque la tasa de 10 % anual le resulta mucho mejor.
 ##### Segmento 2: _[Nombre del segmento]_
 
 ###### Entrevista 1
@@ -4709,26 +4714,28 @@ _[Screenshot de un cuadro del video]_
 **UX Heuristics & Principles Evaluation**
 **Usability – Inclusive Design – Information Architecture**
 
-| Campo | Detalle |
-|---|---|
-| Carrera | Ingeniería de Software |
-| Curso | Arquitecturas de Software Emergentes |
-| Sección | _[Código de la sección]_ |
-| Profesores | _[...]_ |
-| Auditor | _[Nombre del grupo que ejecuta la sesión de evaluación]_ |
-| Cliente(s) | _[Nombres de las personas que participan en la sesión]_ |
+| Campo | Detalle                                                                                                                       |
+|---|-------------------------------------------------------------------------------------------------------------------------------|
+| Carrera | Ingeniería de Software                                                                                                        |
+| Curso | Arquitecturas de Software Emergentes                                                                                          |
+| Auditor | LatiFi (Angulo Abud, Juan Carlos · Quiroz Zambrano, Fabrizio Javier · Burga Loarte, Anaely · Vilca Valverde, Fiorella Angela) |
+| Cliente(s) | Sebastián Delgado (segmento prestatario)                                                                                            |
 
-**SITE o APP A EVALUAR:** _[Nombre de la app]_
+**SITE o APP A EVALUAR:** LatiFi Wallet (aplicación Android, modo Demo)
 
 **TAREAS A EVALUAR:** el alcance de esta evaluación incluye la revisión de la usabilidad de las siguientes tareas:
 
-1. _[...]_
-2. _[...]_
+1. Conocer la propuesta de LatiFi en el onboarding.
+2. Conectar la billetera y confirmar la identidad con una firma.
+3. Elegir el rol de prestatario y completar el perfil ligero.
+4. Solicitar un microcrédito: monto, tasa, plazo y cuotas.
+5. Revisar y publicar la solicitud.
 
 No están incluidas en esta versión de la evaluación las siguientes tareas:
 
-1. _[...]_
-2. _[...]_
+1. Pagar una cuota y consultar la reputación.
+2. Explorar el feed y fondear una solicitud como prestamista.
+3. Navegar la landing page.
 
 **ESCALA DE SEVERIDAD:**
 
@@ -4743,16 +4750,73 @@ No están incluidas en esta versión de la evaluación las siguientes tareas:
 
 | # | Problema | Escala de severidad | Heurística / Principio violado(a) |
 |---|---|---|---|
-| 1 | _[...]_ | _[1-4]_ | _[Usability / Inclusive Design / Information Architecture: ...]_ |
+| 1 | No se explica si la billetera es otra app que hay que descargar | 3 | Usability: Ayuda y documentación |
+| 2 | Lo que pasa si no se paga una cuota no se informa antes de publicar | 3 | Information Architecture: Is it findable? |
+| 3 | El mensaje de firma genera temor de estar aceptando algo | 2 | Usability: Coincidencia entre el sistema y el mundo real |
+| 4 | El término "tUSD" no se entiende | 2 | Usability: Coincidencia entre el sistema y el mundo real |
+| 5 | El prestatario no sabe quién le prestará | 2 | Usability: Visibilidad del estado del sistema |
 
 **DESCRIPCIÓN DE PROBLEMAS:**
 
-**PROBLEMA #1:** _[Título del problema]_
+**PROBLEMA #1:** No se explica si la billetera es otra app que hay que descargar
 
-- **Severidad:** _[1-4]_
-- **Heurística violada:** _[...]_
-- **Problema:** _[Descripción, con captura de pantalla que ilustre el problema.]_
-- **Recomendación:** _[...]_
+- **Severidad:** 3
+- **Heurística violada:** Usability: Ayuda y documentación
+- **Problema:** En la pantalla *Conecta tu billetera*, el usuario lee que una billetera es "una app de tu teléfono", pero no sabe si ya la tiene, si viene con LatiFi o si debe descargarla. El enlace *No tengo una billetera* no anticipa qué hará. Para un usuario sin experiencia en blockchain, este es el paso donde es más probable que abandone el registro.
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.5-app-02-conectar.png" alt="Conecta tu billetera" width="220"/>
+</div>
+
+- **Recomendación:** Añadir debajo del botón una explicación en una línea ("Si no tienes una, te ayudamos a crearla en 2 minutos") y que *No tengo una billetera* abra una guía paso a paso con la billetera recomendada.
+
+**PROBLEMA #2:** Lo que pasa si no se paga una cuota no se informa antes de publicar
+
+- **Severidad:** 3
+- **Heurística violada:** Information Architecture: Is it findable?
+- **Problema:** La pantalla *Revisa tu solicitud* muestra el total a devolver y cada cuota, pero no dice qué ocurre si el prestatario se atrasa o no paga. El entrevistado señaló esta falta de información como su principal motivo de desconfianza.
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.5-app-08-revisar-solicitud.png" alt="Revisa tu solicitud" width="220"/>
+</div>
+
+- **Recomendación:** Agregar antes de *Publicar solicitud* un bloque "¿Y si me atraso?" que explique en lenguaje simple el efecto en la reputación (pago tardío o incumplimiento) y enlace a las condiciones completas.
+
+**PROBLEMA #3:** El mensaje de firma genera temor de estar aceptando algo
+
+- **Severidad:** 2
+- **Heurística violada:** Usability: Coincidencia entre el sistema y el mundo real
+- **Problema:** Al confirmar la identidad, la billetera pide "firmar un mensaje". Aunque la app aclara que no mueve dinero ni tiene costo, la palabra *firmar* se asocia a aceptar un contrato y genera temor en usuarios no técnicos.
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.5-app-03-firma.png" alt="Confirma que eres tú" width="220"/>
+</div>
+
+- **Recomendación:** Reemplazar "firmar" por "confirmar que eres tú" en el texto principal, destacar visualmente "No mueve dinero y no tiene costo" y comparar la acción con algo conocido, como ingresar con la huella.
+
+**PROBLEMA #4:** El término "tUSD" no se entiende
+
+- **Severidad:** 2
+- **Heurística violada:** Usability: Coincidencia entre el sistema y el mundo real
+- **Problema:** Los montos se muestran primero en tUSD y después, en letra más pequeña, en soles. El entrevistado no supo qué es tUSD y se guió solo por el monto en soles.
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.5-app-07-solicitar.png" alt="Solicitar préstamo" width="220"/>
+</div>
+
+- **Recomendación:** Mostrar una ayuda la primera vez que aparece tUSD ("dólares de prueba: 1 tUSD ≈ S/ 3.75") y dar más peso visual al equivalente en soles.
+
+**PROBLEMA #5:** El prestatario no sabe quién le prestará
+
+- **Severidad:** 2
+- **Heurística violada:** Usability: Visibilidad del estado del sistema
+- **Problema:** Después de publicar, la app indica que la solicitud está abierta, pero no explica qué tipo de persona puede fondearla ni cuándo recibirá el dinero. El entrevistado expresó desconfianza por no saber quién le presta.
+
+<div align="center">
+  <img src="resources/Cap7/7.2.1.5-app-09-solicitud-publicada.png" alt="Solicitud publicada" width="220"/>
+</div>
+
+- **Recomendación:** Añadir en la confirmación un texto que explique que la fondeará un prestamista verificado por su billetera, que el dinero llega directo a su billetera cuando eso ocurra y que recibirá una notificación.
 
 ### 7.4. Video About-the-Product
 
