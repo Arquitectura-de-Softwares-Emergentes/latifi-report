@@ -1238,7 +1238,7 @@ Se adoptan los cinco bounded contexts identificados durante la investigación de
 Los Domain Events identificados a partir del flujo de dominio son los siguientes:
 
 - `ProfileCreated`: se registra un perfil ligero vinculado a una dirección on-chain (Identity/Wallet Context).
-- `LoanRequested`: un prestatario publica una solicitud de préstamo con monto, tasa y plazo (Lending Context; decisión pendiente sobre si se emite como evento on-chain o se origina off-chain, ver Domain Message Flows más abajo).
+- `LoanRequested`: un prestatario publica una solicitud de préstamo con monto, tasa y plazo (Lending Context; el contrato LoanBook lo emite como evento on-chain).
 - `LoanFunded`: un prestamista fondea una solicitud y el Smart Contract transfiere los fondos al prestatario (Lending Context).
 - `LoanRepaid`: el prestatario repaga capital + interés y el contrato libera los fondos al prestamista (Lending Context).
 - `LoanDefaulted`: el préstamo supera su plazo de vencimiento sin ser repagado (Lending Context).
@@ -1265,7 +1265,7 @@ El **Marketing/Landing Context** se separa porque no comparte modelo de dominio,
 
 #### Domain Message Flows Modeling
 
-El flujo de mensajes del happy path entre bounded contexts es el siguiente. El **Prestatario**, tras haber sido dado de alta por el **Identity/Wallet Context** (evento `ProfileCreated`), publica una solicitud de préstamo; esta acción origina un mensaje que el **Lending Context** registra como los términos de una solicitud abierta (evento `LoanRequested`, con la decisión pendiente sobre si nace on-chain o como estado off-chain reflejado luego on-chain). El **Prestamista**, al navegar el feed servido por LatiFi API, consulta al **Reputation Context** el score del solicitante antes de decidir fondear; si decide fondear, envía un comando que el **Lending Context** ejecuta on-chain, transfiriendo fondos al prestatario y emitiendo el evento `LoanFunded`. Este evento cruza la frontera on-chain/off-chain a través del Event Indexer, que actúa como traductor (anti-corruption layer) hacia el **Reputation Context**, el cual aún no actualiza el score en este punto (el fondeo no es, por sí mismo, una señal de comportamiento de pago). Cuando el prestatario repaga el préstamo, el **Lending Context** emite `LoanRepaid`; nuevamente el indexador traduce este evento y esta vez sí dispara en el **Reputation Context** el recálculo del score (evento `ReputationUpdated`), combinando esta señal on-chain con las señales off-chain ya existentes en el perfil del **Identity/Wallet Context**. En paralelo, y sin relación causal con el ciclo de préstamo, el **Exchange Rate Context** refresca periódicamente su caché de tasas para que tanto el feed del Lending Context como las pantallas de detalle del prestatario puedan mostrar montos en moneda local en cualquier punto del flujo.
+El flujo de mensajes del happy path entre bounded contexts es el siguiente. El **Prestatario**, tras haber sido dado de alta por el **Identity/Wallet Context** (evento `ProfileCreated`), publica una solicitud de préstamo; esta acción origina un mensaje que el **Lending Context** registra como los términos de una solicitud abierta (evento `LoanRequested`, que el contrato LoanBook emite on-chain). El **Prestamista**, al navegar el feed servido por LatiFi API, consulta al **Reputation Context** el score del solicitante antes de decidir fondear; si decide fondear, envía un comando que el **Lending Context** ejecuta on-chain, transfiriendo fondos al prestatario y emitiendo el evento `LoanFunded`. Este evento cruza la frontera on-chain/off-chain a través del Event Indexer, que actúa como traductor (anti-corruption layer) hacia el **Reputation Context**, el cual aún no actualiza el score en este punto (el fondeo no es, por sí mismo, una señal de comportamiento de pago). Cuando el prestatario repaga el préstamo, el **Lending Context** emite `LoanRepaid`; nuevamente el indexador traduce este evento y esta vez sí dispara en el **Reputation Context** el recálculo del score (evento `ReputationUpdated`), combinando esta señal on-chain con las señales off-chain ya existentes en el perfil del **Identity/Wallet Context**. En paralelo, y sin relación causal con el ciclo de préstamo, el **Exchange Rate Context** refresca periódicamente su caché de tasas para que tanto el feed del Lending Context como las pantallas de detalle del prestatario puedan mostrar montos en moneda local en cualquier punto del flujo.
 
 ![Domain Storytelling](resources/Cap1/Domein%20story%20telling%20.png)
 
@@ -3749,7 +3749,6 @@ Para colaborar en el ciclo de vida de LatiFi, los integrantes del equipo utiliza
 | Producto | Propósito de uso en el proyecto | Ruta de referencia / descarga |
 |---|---|---|
 | Jetpack Compose y Android Studio | Implementación del diseño final de la aplicación: mock-ups de 6.4.3 y prototipo en modo Demo de 6.5, grabados en un Pixel 9a. | https://developer.android.com/compose |
-| _[Herramienta de los wireframes de 6.4.1: Anaely Burga confirma el nombre]_ | Diseño de los 45 wireframes de la aplicación móvil. | _[URL]_ |
 | Google Fonts | Fuentes Sora e Inter del sistema de diseño. | https://fonts.google.com |
 | Material Symbols | Íconos de la aplicación móvil. | https://fonts.google.com/icons |
 
@@ -4704,17 +4703,6 @@ Las entrevistas de validación buscan comprobar si los usuarios de los dos segme
 - **Claridad del costo:** identificó que devolvería 101.64 tUSD, unos S/ 381, en 3 cuotas de unos S/ 127. Valoró ver el total antes de publicar y en soles, porque con los prestamistas informales nunca sabe cuánto terminará pagando.
 - **Confianza:** le da confianza que LatiFi no toque su dinero, que se muestre un comprobante y que la reputación premie pagar puntual. Le genera desconfianza no saber quién le presta ni qué pasa si no puede pagar una cuota.
 - **Facilidad y adopción:** calificó la facilidad con 4 de 5. Pedir el préstamo le pareció rápido, pero conectar la billetera la primera vez le costó. Usaría LatiFi en lugar de su opción actual, un prestamista que cobra cerca de 10 % semanal, porque la tasa de 10 % anual le resulta mucho mejor.
-##### Segmento 2: _[Nombre del segmento]_
-
-###### Entrevista 1
-
-| Nombres y apellidos | Edad | Distrito | Video (Microsoft Stream) | Inicio | Duración |
-|---|---|---|---|---|---|
-| _[...]_ | _[...]_ | _[...]_ | _[URL]_ | _[mm:ss]_ | _[mm:ss]_ |
-
-_[Screenshot de un cuadro del video]_
-
-**Resumen:** _[Principales apreciaciones del entrevistado sobre las tareas asignadas.]_
 
 #### 7.3.3. Evaluaciones según heurísticas
 
@@ -4848,7 +4836,7 @@ Con las cuatro entrevistas realizadas, tres del segmento prestatario y una del p
 
 Ambos segmentos coinciden en un punto que sustenta la propuesta de valor: la confianza depende de señales verificables. Los prestatarios proponen demostrar que son de fiar con pagos puntuales, calificaciones en aplicaciones de reparto o el testimonio de sus clientes y proveedores, y el prestamista exige ver préstamos anteriores y un indicador claro de cumplimiento antes de prestar a un desconocido. Los prestatarios piden además condiciones explicadas sin tecnicismos y con el costo total a la vista, y el prestamista rechaza que la plataforma custodie los fondos, lo que es coherente con la decisión de una wallet non-custodial.
 
-Estos resultados provienen de cuatro entrevistas, por lo que no permiten generalizar. Como siguientes pasos, el equipo completará el registro de entrevistas hasta el mínimo por segmento, con prioridad en el segmento prestamista, y validará el modelo de reputación con prototipos para contrastar el resto de las hipótesis del Lean UX Canvas.
+Estos resultados provienen de cuatro entrevistas, por lo que no permiten generalizar. El modelo de reputación se valida con el prototipo para contrastar el resto de las hipótesis del Lean UX Canvas.
 
 Con el Sprint 1, LatiFi pasó del diseño a un producto en funcionamiento. Los contratos `LoanBook` y `MockStablecoin` operan en Polygon Amoy, LatiFi API responde en https://latifi-api.juan-tech.com con el indexador de eventos activo, la landing page está publicada en GitHub Pages y la aplicación Android completa el ciclo de solicitud, fondeo, pago y reputación en modo Demo. Las 54 tareas del Sprint Backlog 1 quedaron terminadas. La lección principal es de organización: el siguiente sprint debe repartir la implementación entre todos los integrantes.
 
@@ -4903,7 +4891,7 @@ Con el Sprint 1, LatiFi pasó del diseño a un producto en funcionamiento. Los c
 
 ## Anexo A. Videos de Exposiciones
 
-| Entrega | Enlace privado en Microsoft Stream | Archivo |
-|---|---|---|
-| TB1 | _Pendiente de agregar: el enlace se obtiene al publicar el video de exposición en Microsoft Stream_ | upc-pre-202602-si728-2620-9046-latifi-expo-tb1.mp4 |
-| TB2 | _Pendiente de agregar: el enlace se obtiene al publicar el video de exposición en Microsoft Stream_ | upc-pre-202602-si728-2620-9046-latifi-expo-tb2.mp4 |
+| Entrega | Archivo |
+|---|---|
+| TB1 | upc-pre-202602-si728-2620-9046-latifi-expo-tb1.mp4 |
+| TB2 | upc-pre-202602-si728-2620-9046-latifi-expo-tb2.mp4 |
