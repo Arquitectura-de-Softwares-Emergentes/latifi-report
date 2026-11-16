@@ -219,13 +219,12 @@ El alcance de LatiFi en este informe es acotado: se trata del proyecto final del
 
 #### 1.1.2. Perfiles de integrantes del equipo
 
-| Miembro                                                                                                                                     | Descripción|
-|---------------------------------------------------------------------------------------------------------------------------------------------|---|
-| <img src="docs/assets/members/juan-angulo.jpg" alt="Foto de Juan Carlos Angulo" width="110"/><br>**Angulo, Juan Carlos - U202317692**       | Estudiante de Ingeniería de Software en séptimo ciclo. Le apasiona aprender tecnologías nuevas y construir soluciones aplicadas a problemas reales, y en este curso le entusiasma especialmente trabajar con blockchain. |
-| <img src="docs/assets/members/fabrizio.jpg" alt="Foto de FabrizioQuiroz" width="110"/><br>**Quiroz Zambrano, Fabrizio Javier - U202213406** | Estudiante de Ingeniería de Software, con interés en el desarrollo de aplicaciones móviles y en arquitectura de software. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
-| **Burga Loarte, Anaely - U202118264**                                                                                                       | Estudiante de Ingeniería de Software enfocado en la experiencia de usuario y la lógica de negocio en la interfaz. Contribuye en la interfaz de usuario y la coordinación general de la app. |
-| **Vilca Valverde, Fiorella Angela - U20211e417**                                                                                            | Estudiante de Ingeniería de Software, con interés en el análisis de datos. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
-
+| Miembro | Descripción |
+|---|---|
+| <img src="docs/assets/members/juan-angulo.jpg" alt="Foto de Juan Carlos Angulo" width="110"/><br>**Angulo, Juan Carlos - U202317692** | Estudiante de Ingeniería de Software en séptimo ciclo. Le apasiona aprender tecnologías nuevas y construir soluciones aplicadas a problemas reales, y en este curso le entusiasma especialmente trabajar con blockchain. |
+| <img src="docs/assets/members/fabrizio.jpg" alt="Foto de Fabrizio Quiroz" width="110"/><br>**Quiroz Zambrano, Fabrizio Javier - U202213406** | Estudiante de Ingeniería de Software, con interés en el desarrollo de aplicaciones móviles y en arquitectura de software. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
+| <img src="https://res.cloudinary.com/dx0i2vioe/image/upload/v1794789773/photo_zqbigd.png" alt="Foto de Anaely Burga" width="110"/><br>**Burga Loarte, Anaely - U202118264** | Estudiante de Ingeniería de Software enfocada en la experiencia de usuario y la lógica de negocio en la interfaz. Contribuye en la interfaz de usuario y la coordinación general de la app. |
+| <img src="docs/assets/members/fiorella.jpg" alt="Foto de Fiorella Vilca" width="110"/><br>**Vilca Valverde, Fiorella Angela - U20211E417** | Estudiante de Ingeniería de Software, con interés en el análisis de datos. Contribuye al proyecto en el desarrollo técnico y la documentación del informe. |
 El video About-the-Team presenta a cada integrante del equipo y las responsabilidades que asumió en el proyecto.
 
 | Elemento | Detalle |
