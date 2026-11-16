@@ -231,6 +231,7 @@ El video About-the-Team presenta a cada integrante del equipo y las responsabili
 | Elemento | Detalle |
 |---|---|
 | Video en YouTube | https://youtu.be/A3Tgz6EGEcs |
+| Video en Microsoft Stream | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQAB-iQoQimyTognPKABU9pTAUzZHhTUotatSgX81WNf3Gg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=AREUhX) |
 
 ### 1.2. Solution Profile
 
@@ -3712,7 +3713,7 @@ El prototipo es la propia aplicación Android compilada en modo Demo, no una maq
 | Elemento | Detalle |
 |---|---|
 | Herramienta | Aplicación `latifi-android` en modo Demo, compilación debug sobre un Pixel 9a |
-| Videos en Microsoft Stream | _[URL de cada video: Juan Angulo los sube a Stream]_ |
+| Videos en Microsoft Stream | [Video 1: solicitar un préstamo](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQBoYWylp2PZQJlouYxmLn5qAeV80xYqljFQ-srwKDnmirw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=hJb0Mw)<br>[Video 2: fondear una solicitud](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQCJjfyCwhLIQovEHxcrHM8oAdRew_udVgnldsiRIviYr_M?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=2zARQX)<br>[Video 3: pagar una cuota y reputación](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202317692_upc_edu_pe/IQBqKuFsrCATTblNBU1_XcKyASG0Q-0VXVvoiAUnrN9ikkE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ncE2ky) |
 
 El User Flow 1 (conectar la billetera) no tiene video propio, porque en modo Demo la billetera simulada omite la firma real. Lo cubren las capturas M01 a M08.
 
